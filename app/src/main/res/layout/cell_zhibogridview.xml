@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:background="@drawable/layer4_r5_p12_00_06">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        app:riv_corner_radius_top_left="5dp"
+        app:riv_corner_radius_top_right="5dp"
+        android:scaleType="centerCrop" />
+    <TextView
+        android:id="@+id/shop_name"
+        android:textSize="13sp"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/suscribe"
+        android:textSize="12sp"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_style7"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="+订阅"
+        android:textColor="@color/white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/name"
+            android:textSize="13sp"
+            android:layout_width="0dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:gravity="center|start"
+            android:text="敬请期待"
+            android:textColor="@color/blackLight" />
+        <TextView
+            android:id="@+id/watch_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:textColor="@color/blackLight"
+            android:textSize="12sp" />
+    </LinearLayout>
+</RelativeLayout>

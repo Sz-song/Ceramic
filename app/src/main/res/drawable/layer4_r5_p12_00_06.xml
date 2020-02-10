@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 边 -->
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="1.2dp"
+                android:left="1.2dp"
+                android:right="1.2dp"
+                android:top="1.2dp" />
+            <solid android:color="#01000000" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="1.2dp"
+                android:left="1.2dp"
+                android:right="1.2dp"
+                android:top="1.2dp" />
+            <solid android:color="#03000000" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="1.2dp"
+                android:left="1.2dp"
+                android:right="1.2dp"
+                android:top="1.2dp" />
+            <solid android:color="#05000000" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:bottom="1.2dp"
+                android:left="1.2dp"
+                android:right="1.2dp"
+                android:top="1.2dp" />
+            <solid android:color="#06000000" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+    <!-- 中心背景 -->
+    <item>
+        <shape android:shape="rectangle"
+            android:useLevel="false">
+            <!-- 实心 -->
+            <solid android:color="#ffffff" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+</layer-list>
