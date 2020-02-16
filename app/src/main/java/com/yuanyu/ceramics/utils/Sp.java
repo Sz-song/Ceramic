@@ -20,8 +20,7 @@ public class Sp {
     public static String getString(Context context, String strKey,String strDefault) {
         SharedPreferences setPreferences = context.getSharedPreferences(
                 spFileName, Context.MODE_PRIVATE);
-        String result = setPreferences.getString(strKey, strDefault);
-        return result;
+        return setPreferences.getString(strKey, strDefault);
     }
 
     public static void putString(Context context, String strKey, String strData) {

@@ -5,15 +5,15 @@ import com.yuanyu.ceramics.utils.ExceptionHandler;
 
 import io.reactivex.Observable;
 
-public interface HomepageConstract {
-    interface IHomepageModel{
+public interface FaxianConstract {
+    interface IFaxianModel{
         Observable<BaseResponse<HomepageBean>> initData(String useraccountid);
     }
-    interface IHomepageView{
+    interface IFaxianView{
         void initDataSuccess(HomepageBean bean);
         void initDataFail(ExceptionHandler.ResponeThrowable e);
     }
-    interface IHomepagePresenter{
+    interface IFaxianPresenter{
         void initData(String useraccountid);
     }
 }

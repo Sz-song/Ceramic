@@ -53,10 +53,24 @@
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:background="@color/white_drak"
+    <com.androidkun.xtablayout.XTabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:xTabTextSize="13.5sp"
+        app:xTabSelectedTextSize="15sp"
+        app:xTabIndicatorColor="@color/white"
+        app:xTabIndicatorHeight="2.5dp"
+        app:xTabMode="fixed"
+        app:xTabDividerWidthWidthText="true"
+        app:xTabSelectedTextColor="@color/white"
+        android:background="@color/colorPrimary"
+        app:xTabTextColor="@color/lineGray">
+    </com.androidkun.xtablayout.XTabLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
+    </androidx.viewpager.widget.ViewPager>
 </LinearLayout>

@@ -13,9 +13,9 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
-public class HomepageModel implements HomepageConstract.IHomepageModel {
+public class FaxianModel implements FaxianConstract.IFaxianModel {
     private HttpService httpService;
-    HomepageModel(){
+    FaxianModel(){
         httpService = HttpServiceInstance.getInstance();
     }
     @Override

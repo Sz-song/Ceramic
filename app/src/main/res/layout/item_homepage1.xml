@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/r8_sowhite"
-    android:layout_margin="8dp"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/layer6_r5_p05_00_06"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp">
     <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/item_img"
-        android:layout_width="match_parent"
-        app:riv_corner_radius_top_left="10dp"
-        app:riv_corner_radius_top_right="10dp"
-        android:layout_height="160dp"
-        android:scaleType="centerCrop" />
+        android:id="@+id/avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:riv_corner_radius="25dp"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        />
     <TextView
-        android:id="@+id/item_name"
-        android:textColor="@color/blackLight"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/avatar"
+        android:layout_marginTop="12dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/blackLight"/>
+    <TextView
+        android:id="@+id/slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/name"
+        android:maxLines="1"
         android:ellipsize="end"
-        android:maxLines="2"
-        android:minHeight="35dp"
-        android:textSize="14sp"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:textSize="13sp"
+        android:layout_below="@id/name"
+        android:text="和田玉专营，传承手艺"/>
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginStart="10dp"
+        android:layout_below="@id/avatar"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="10dp"/>
+    <ImageView
+        android:id="@+id/img2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:layout_toEndOf="@id/img1"
+        android:layout_alignTop="@id/img1"/>
+    <ImageView
+        android:id="@+id/img3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp">
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"/>
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/price"
-            android:ellipsize="end"
-            android:gravity="end"
-            android:singleLine="true"
-            android:textSize="13sp"/>
-    </RelativeLayout>
-</LinearLayout>
+        android:layout_alignStart="@id/img2"
+        android:scaleType="centerCrop"
+        android:layout_below="@id/img2"
+        android:layout_marginTop="10dp"
+        android:layout_alignBottom="@id/img1"/>
+</RelativeLayout>

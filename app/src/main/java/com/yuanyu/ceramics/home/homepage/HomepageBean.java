@@ -6,13 +6,13 @@ import java.util.List;
 
 public class HomepageBean {
     private List<String> bannerList;
-    private List<ItemBean> list;
+    private List<HomeShopBean> list;
 
     public List<String> getBannerList() {
         return bannerList;
     }
 
-    public List<ItemBean> getList() {
+    public List<HomeShopBean> getList() {
         return list;
     }
 }

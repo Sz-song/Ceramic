@@ -1,6 +1,8 @@
 package com.yuanyu.ceramics.base;
 
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,7 +20,7 @@ public abstract class BaseFragment<P extends BasePresenter>extends Fragment {
     protected boolean isAlive;
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         isAlive = true;
         if (null == rootView){
             rootView = initView(inflater, container);//让子类实现初始化视图

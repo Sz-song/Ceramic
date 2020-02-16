@@ -1,5 +1,6 @@
 package com.yuanyu.ceramics.broadcast;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,8 +22,6 @@ import java.util.List;
 import butterknife.BindView;
 
 public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> implements BroadcastFragmentConstract.IBroadcastFragmentView {
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerview;
     @BindView(R.id.swipe)
@@ -51,7 +50,7 @@ public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> 
                 else return 1;
             }
         });
-        recyclerview.setLayoutManager(gridLayoutManager);
+        recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setAdapter(adapter);
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setOnRefreshListener(() -> {

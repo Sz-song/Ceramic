@@ -8,11 +8,11 @@ import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomepagePresenter extends BasePresenter<HomepageConstract.IHomepageView> implements HomepageConstract.IHomepagePresenter {
-    private HomepageConstract.IHomepageModel model;
+public class FaxianPresenter extends BasePresenter<FaxianConstract.IFaxianView> implements FaxianConstract.IFaxianPresenter {
+    private FaxianConstract.IFaxianModel model;
 
-    HomepagePresenter() {
-        model=new HomepageModel();
+    FaxianPresenter() {
+        model=new FaxianModel();
     }
 
     @Override
@@ -33,3 +33,4 @@ public class HomepagePresenter extends BasePresenter<HomepageConstract.IHomepage
                 });
     }
 }
+

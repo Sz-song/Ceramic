@@ -1,18 +1,20 @@
 package com.yuanyu.ceramics.home.homepage;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.donkingliang.banner.CustomBanner;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.common.ItemBean;
+import com.yuanyu.ceramics.common.view.custombanner.CustomBanner;
 import com.yuanyu.ceramics.global.GlideApp;
 
 import java.util.List;
@@ -22,16 +24,18 @@ import butterknife.ButterKnife;
 
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 
-public class HomepageAdapter extends RecyclerView.Adapter{
+public class HomepageAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<String> bannerList;
-    private List<ItemBean> list;
+    private List<HomeShopBean> list;
+    private int width,margin;
 
-
-    public HomepageAdapter(Context context, List<String> bannerList, List<ItemBean> list) {
+    HomepageAdapter(Context context, List<String> bannerList, List<HomeShopBean> list, int width, int margin) {
         this.context = context;
         this.bannerList = bannerList;
         this.list = list;
+        this.width = width;
+        this.margin = margin;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class HomepageAdapter extends RecyclerView.Adapter{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0) {
-            return new ViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_homepage, viewGroup, false));
+            return new ViewHolder0(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_homepage, viewGroup, false));
         } else {
             return new ViewHolder1(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_homepage1, viewGroup, false));
         }
@@ -55,15 +59,16 @@ public class HomepageAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ViewHolder){
+        if (holder instanceof ViewHolder0) {
             if (bannerList != null) {
-                ((ViewHolder) holder).banner.setPages(new CustomBanner.ViewCreator<String>() {
+                ((ViewHolder0) holder).banner.setPages(new CustomBanner.ViewCreator<String>() {
                     @Override
                     public View createView(Context context, int position) {
                         ImageView imageView = new ImageView(context);
                         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                         return imageView;
                     }
+
                     @Override
                     public void updateUI(Context context, View view, int position, String image) {
                         GlideApp.with(context)
@@ -74,45 +79,103 @@ public class HomepageAdapter extends RecyclerView.Adapter{
                     }
                 }, bannerList).startTurning(5000);
             }
-        }else if(holder instanceof ViewHolder1){
-            GlideApp.with(context)
-                    .load(BASE_URL + list.get(position - 1).getImage())
-                    .placeholder(R.drawable.image_default)
-                    .into(((ViewHolder1) holder).itemImg);
-            ((ViewHolder1) holder).itemName.setText(list.get(position - 1).getName());
-            ((ViewHolder1) holder).location.setText(list.get(position - 1).getLocation());
-            ((ViewHolder1) holder).price.setText("¥" + list.get(position - 1).getPrice());
-//            holder.itemView.setOnClickListener(view -> ItemDetailActivity.actionStart(context, adsCellList.get(position - (goodsList.size() + 2)).getId()));
+        } else if (holder instanceof ViewHolder1) {
+            RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) ((ViewHolder1) holder).img1.getLayoutParams();
+            params1.width = 2*width+margin;
+            params1.height = 2*width+margin;
+            ((ViewHolder1) holder).img1.setLayoutParams(params1);
+            RelativeLayout.LayoutParams params2 = (RelativeLayout.LayoutParams) ((ViewHolder1) holder).img2.getLayoutParams();
+            params2.width = width;
+            params2.height = width;
+            ((ViewHolder1) holder).img2.setLayoutParams(params2);
+            RelativeLayout.LayoutParams params3 = (RelativeLayout.LayoutParams) ((ViewHolder1) holder).img3.getLayoutParams();
+            params3.width = width;
+            params3.height = width;
+            ((ViewHolder1) holder).img3.setLayoutParams(params3);
 
+            ((ViewHolder1) holder).name.setText(list.get(position-1).getShop_name());
+            ((ViewHolder1) holder).slogan.setText(list.get(position-1).getShop_slogan());
+            GlideApp.with(context).load(BASE_URL+list.get(position-1).getShop_avatar()).override(50,50).into(((ViewHolder1) holder).avatar);
+            ((ViewHolder1) holder).avatar.setOnClickListener(v -> {
+
+            });
+            switch (list.get(position-1).getItem().size()){
+                case 0:
+                    GlideApp.with(context).load(R.drawable.img_default).override(200,200).into(((ViewHolder1) holder).img1);
+                    GlideApp.with(context).load(R.drawable.img_default).override(100,100).into(((ViewHolder1) holder).img2);
+                    GlideApp.with(context).load(R.drawable.img_default).override(100,100).into(((ViewHolder1) holder).img3);
+                    ((ViewHolder1) holder).img1.setOnClickListener(null);
+                    ((ViewHolder1) holder).img2.setOnClickListener(null);
+                    ((ViewHolder1) holder).img3.setOnClickListener(null);
+                    break;
+                case 1:
+                    GlideApp.with(context).load(BASE_URL+list.get(position-1).getItem().get(0).getItem_img()).override(200,200).into(((ViewHolder1) holder).img1);
+                    GlideApp.with(context).load(R.drawable.img_default).override(100,100).into(((ViewHolder1) holder).img2);
+                    GlideApp.with(context).load(R.drawable.img_default).override(100,100).into(((ViewHolder1) holder).img3);
+                    ((ViewHolder1) holder).img1.setOnClickListener(view -> {
+
+                    });
+                    ((ViewHolder1) holder).img2.setOnClickListener(null);
+                    ((ViewHolder1) holder).img3.setOnClickListener(null);
+                    break;
+                case 2:
+                    GlideApp.with(context).load(BASE_URL+list.get(position-1).getItem().get(0).getItem_img()).override(200,200).into(((ViewHolder1) holder).img1);
+                    GlideApp.with(context).load(BASE_URL+list.get(position-1).getItem().get(1).getItem_img()).override(100,100).into(((ViewHolder1) holder).img2);
+                    ((ViewHolder1) holder).img1.setOnClickListener(view -> {
+
+                    });
+                    ((ViewHolder1) holder).img2.setOnClickListener(view -> {
+
+                    });
+                    ((ViewHolder1) holder).img3.setOnClickListener(null);
+                    break;
+                case 3:
+                    GlideApp.with(context).load(BASE_URL+list.get(position-1).getItem().get(0).getItem_img()).override(200,200).into(((ViewHolder1) holder).img1);
+                    GlideApp.with(context).load(BASE_URL+list.get(position-1).getItem().get(1).getItem_img()).override(100,100).into(((ViewHolder1) holder).img2);
+                    GlideApp.with(context).load(BASE_URL+list.get(position-1).getItem().get(2).getItem_img()).override(100,100).into(((ViewHolder1) holder).img3);
+                    ((ViewHolder1) holder).img1.setOnClickListener(view -> {
+
+                    });
+                    ((ViewHolder1) holder).img2.setOnClickListener(view -> {
+
+                    });
+                    ((ViewHolder1) holder).img3.setOnClickListener(view -> {
+
+                    });
+                    break;
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return list.size()+1;
+        return list.size() + 1;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+
+    static class ViewHolder0 extends RecyclerView.ViewHolder {
         @BindView(R.id.banner)
         CustomBanner banner;
-        @BindView(R.id.cooperate)
-        ImageView cooperate;
 
-        ViewHolder(View view) {
+        ViewHolder0(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
     }
 
-    static class ViewHolder1 extends RecyclerView.ViewHolder  {
-        @BindView(R.id.item_img)
-        RoundedImageView itemImg;
-        @BindView(R.id.item_name)
-        TextView itemName;
-        @BindView(R.id.price)
-        TextView price;
-        @BindView(R.id.location)
-        TextView location;
+    static class ViewHolder1 extends RecyclerView.ViewHolder {
+        @BindView(R.id.avatar)
+        RoundedImageView avatar;
+        @BindView(R.id.name)
+        TextView name;
+        @BindView(R.id.slogan)
+        TextView slogan;
+        @BindView(R.id.img1)
+        ImageView img1;
+        @BindView(R.id.img2)
+        ImageView img2;
+        @BindView(R.id.img3)
+        ImageView img3;
 
         ViewHolder1(View view) {
             super(view);

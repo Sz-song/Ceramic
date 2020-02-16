@@ -43,4 +43,8 @@
     <string name="master_approve">申请大师</string>
     <string name="application_in">商家入驻</string>
     <string name="system_settting">系统设置</string>
+    <string name="customization">定制</string>
+    <string name="store_center">集市</string>
+    <string name="meet_master">遇见大师</string>
+    <string name="cooperation">合作机构</string>
 </resources>
