@@ -8,4 +8,5 @@
     <color name="blackLight">#4c4c4c</color>
     <color name="lineGray">#dddddd</color>
     <color name="transparent">#00000000</color>
+    <color name="background_gray">#f8f8f8</color>
 </resources>

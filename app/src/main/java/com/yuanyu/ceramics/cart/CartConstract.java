@@ -9,8 +9,8 @@ import io.reactivex.Observable;
 
 public interface CartConstract {
     interface ICartModel{
-        Observable<BaseResponse<List<GoodsBean>>> getGoodsdata(int useraccountid);
-        Observable<BaseResponse<String[]>> deleteCartItem(int useraccountid, String itemid);
+        Observable<BaseResponse<List<GoodsBean>>> getGoodsdata(String useraccountid);
+        Observable<BaseResponse<String[]>> deleteCartItem(String useraccountid, String itemid);
     }
     interface ICartView{
         void getGoodsdataSuccess(List<GoodsBean> beans);
@@ -20,9 +20,9 @@ public interface CartConstract {
         void deleteCartItemFail(ExceptionHandler.ResponeThrowable e);
     }
     interface ICartPresenter{
-        void getGoodsdata(int useraccountid);
+        void getGoodsdata(String useraccountid);
         void initList(List<CartBean> list,List<GoodsBean>goodsBeans);
-        void deleteCartItem(int useraccountid,String id);
+        void deleteCartItem(String useraccountid,String id);
         void initpayList(List<CartBean> list,List<GoodsBean> payList);
     }
 }

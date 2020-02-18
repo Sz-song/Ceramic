@@ -1,5 +1,6 @@
 package com.yuanyu.ceramics.home;
 
+import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -10,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.yuanyu.ceramics.R;
-import com.yuanyu.ceramics.broadcast.BroadcastFragment;
+import com.yuanyu.ceramics.cart.CartFragment;
 import com.yuanyu.ceramics.home.homepage.HomepageFragment;
 import com.yuanyu.ceramics.master.MasterFragment;
 import com.yuanyu.ceramics.message.MessageFragment;
@@ -47,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.navigation_wujia)
     RelativeLayout navigationWujia;
     private HomepageFragment homepageFragment;
-    private BroadcastFragment broadcastFragment;
+    private CartFragment cartFragment;
     private MasterFragment masterFragment;
     private MessageFragment messageFragment;
     private MineFragment mineFragment;
@@ -58,6 +59,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         ButterKnife.bind(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//状态栏黑色字体
+            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         homepageFragment = new HomepageFragment();
@@ -79,8 +83,8 @@ public class HomeActivity extends AppCompatActivity {
         if (homepageFragment != null && homepageFragment.isVisible()) {
             fragmentTransaction.hide(homepageFragment);
         }
-        if (broadcastFragment != null && broadcastFragment.isVisible()) {
-            fragmentTransaction.hide(broadcastFragment);
+        if (cartFragment != null && cartFragment.isVisible()) {
+            fragmentTransaction.hide(cartFragment);
         }
         if (masterFragment != null && masterFragment.isVisible()) {
             fragmentTransaction.hide(masterFragment);
@@ -105,10 +109,10 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.navigation_broadcast:
                 setPicDark();
                 picBroadcast.setImageResource(R.drawable.navigation_zhibo_focus);
-                if (broadcastFragment == null) {
-                    broadcastFragment = new BroadcastFragment();
-                    fragmentTransaction.add(R.id.fragment_container, broadcastFragment);
-                } else fragmentTransaction.show(broadcastFragment);
+                if (cartFragment == null) {
+                    cartFragment = new CartFragment();
+                    fragmentTransaction.add(R.id.fragment_container, cartFragment);
+                } else fragmentTransaction.show(cartFragment);
                 fragmentTransaction.commit();
                 break;
             case R.id.navigation_yuba:

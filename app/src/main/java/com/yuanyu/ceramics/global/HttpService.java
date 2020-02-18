@@ -11,16 +11,24 @@ import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 
 public interface HttpService {
     //用户登录
     @POST("app_api/login.php")
     Observable<BaseResponse<LoginBean>> login(@Body RequestBody body);
+    //第三方登陆
+    @POST("app_api/third_login.php")
+    Observable<BaseResponse<LoginBean>> thirdLogin(@Body RequestBody body);
     //首页初始化
     @POST("app_api/ceramics/homepage.php")
     Observable<BaseResponse<HomepageBean>> homepage(@Body RequestBody body);
@@ -38,9 +46,11 @@ public interface HttpService {
     Observable<BaseResponse<List<MasterItemBean>>> master_list(@Body RequestBody body);
 
     //购物车
-    @POST("app_api/home_page/shoppingcart.php")
+    @POST("app_api/ceramics/shoppingcart.php")
     Observable<BaseResponse<List<GoodsBean>>> getGoods(@Body RequestBody body);
     //删除购物车
     @POST("app_api/home_page/cart_delete.php")
     Observable<BaseResponse<String[]>> deleteCart(@Body RequestBody body);
+    @GET("users/show.json")
+    Call<ResponseBody> getWeiboData(@QueryMap Map<String,String> params);
 }

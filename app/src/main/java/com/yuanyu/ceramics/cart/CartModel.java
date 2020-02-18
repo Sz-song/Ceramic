@@ -20,7 +20,7 @@ public class CartModel implements CartConstract.ICartModel{
     CartModel(){httpService = HttpServiceInstance.getInstance();}
 
     @Override
-    public Observable<BaseResponse<List<GoodsBean>>> getGoodsdata(int useraccountid) {
+    public Observable<BaseResponse<List<GoodsBean>>> getGoodsdata(String useraccountid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -39,7 +39,7 @@ public class CartModel implements CartConstract.ICartModel{
     }
 
     @Override
-    public Observable<BaseResponse<String[]>> deleteCartItem(int useraccountid, String itemid) {
+    public Observable<BaseResponse<String[]>> deleteCartItem(String useraccountid, String itemid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

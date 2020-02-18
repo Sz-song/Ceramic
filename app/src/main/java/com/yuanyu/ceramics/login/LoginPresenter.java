@@ -1,9 +1,16 @@
 package com.yuanyu.ceramics.login;
+import com.tencent.connect.UserInfo;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.UiError;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
+import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
+
+import org.json.JSONObject;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -76,6 +83,49 @@ public class LoginPresenter extends BasePresenter<LoginContract.ILoginView> impl
                             L.e("error is "+e.status+e.message);
                             view.getValidCodeFail(e);
                         }
+                    }
+                });
+    }
+
+    @Override
+    public void getUnionId(UserInfo userInfo, String openId) {
+        userInfo.getUserInfo(new IUiListener() {
+            @Override
+            public void onComplete(Object o) {
+                try {
+                    L.e(o.toString());
+                    thirdLogin("1",((JSONObject) o).getString("figureurl"), ((JSONObject) o).getString("nickname"),openId);
+                }catch (Exception e){
+                    L.e(e.getMessage());
+                    if(view!=null){view.showToast(e.getMessage());}
+                }
+            }
+            @Override
+            public void onError(UiError uiError) {
+                if(view!=null){
+                    L.e(uiError.errorMessage+"");
+                    view.showToast(uiError.errorMessage);
+                }
+            }
+            @Override
+            public void onCancel() {if(view!=null){view.showToast("登录取消");}}
+        });
+    }
+
+    @Override
+    public void thirdLogin(String status, String portrait, String nickname, String openid) {
+        model.thirdLogin(status, portrait, nickname, openid)
+                .subscribeOn(Schedulers.io())
+                .compose(new HttpServiceInstance.ErrorTransformer<BaseResponse<LoginBean>>())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<LoginBean>() {
+                    @Override
+                    public void onNext(LoginBean bean) {
+                        view.loginSuccess(bean);
+                    }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        if(view!=null){view.loginFail(e);}
                     }
                 });
     }

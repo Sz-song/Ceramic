@@ -15,7 +15,7 @@ public class CartPresenter extends BasePresenter<CartConstract.ICartView> implem
     private CartConstract.ICartModel model;
     CartPresenter() {model=new CartModel(); }
     @Override
-    public void getGoodsdata(int useraccountid) {
+    public void getGoodsdata(String useraccountid) {
         model.getGoodsdata(useraccountid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -53,7 +53,7 @@ public class CartPresenter extends BasePresenter<CartConstract.ICartView> implem
     }
 
     @Override
-    public void deleteCartItem(int useraccountid, String id) {
+    public void deleteCartItem(String useraccountid, String id) {
         model.deleteCartItem(useraccountid,id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

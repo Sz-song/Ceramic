@@ -20,10 +20,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    signingConfigs {
+        debug {
+            storeFile file("ceramic.jks")
+            storePassword 'yuanyu123'
+            keyAlias 'key0'
+            keyPassword 'yuanyu123'
+        }
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.google.android.material:material:1.1.0'
@@ -33,7 +41,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     //Design support 库
     implementation 'com.google.android.material:material:1.1.0'
-//    butterknife
+    //    butterknife
     implementation 'com.jakewharton:butterknife:10.2.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.0'
     //okhttp3
@@ -41,7 +49,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.13.1'
     //Rxjava
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation "io.reactivex.rxjava2:rxjava:2.2.5"
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
@@ -62,4 +70,9 @@ dependencies {
     implementation 'top.zibin:Luban:1.1.8'
     //图片处理（毛玻璃）
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
+    implementation files('libs/open_sdk_r2973327_lite.jar')
+    //微信开发包
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    //微博开发包
+    implementation 'com.sina.weibo.sdk:core:4.4.3:openDefaultRelease@aar'
 }

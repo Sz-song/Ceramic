@@ -10,18 +10,47 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sina.weibo.sdk.WbSdk;
+import com.sina.weibo.sdk.auth.AccessTokenKeeper;
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WbAuthListener;
+import com.sina.weibo.sdk.auth.WbConnectErrorMessage;
+import com.sina.weibo.sdk.auth.sso.SsoHandler;
+import com.tencent.connect.UserInfo;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.yuanyu.ceramics.AppConstant;
+import com.yuanyu.ceramics.MyApplication;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
+import com.yuanyu.ceramics.global.HttpService;
 import com.yuanyu.ceramics.home.HomeActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.yuanyu.ceramics.AppConstant.QQ_APP_ID;
 
 
 public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.ILoginView {
@@ -58,7 +87,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     private int type = 4;
     private CountDownTimer timer;
     private LoadingDialog dialog;
-
+    private Tencent mTencent;
+    private QQCallBack qqCallBack;
+    private IWXAPI wx_api;
+    private SsoHandler mSsoHandler;
+    private Oauth2AccessToken mAccessToken;
     @Override
     protected int getLayout() {return R.layout.activity_login;}
 
@@ -68,7 +101,13 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     protected void initEvent() {
         ButterKnife.bind(this);
+        WbSdk.install(this,new AuthInfo(this, AppConstant.APP_KEY, AppConstant.REDIRECT_URL,AppConstant.SCOPE));
+        mTencent = Tencent.createInstance(QQ_APP_ID, MyApplication.getContext());
+        wx_api = WXAPIFactory.createWXAPI(this,AppConstant.WECHAT_APP_ID,false);
+        wx_api.registerApp(AppConstant.WECHAT_APP_ID);
         dialog=new LoadingDialog(this);
+        qqCallBack=new QQCallBack();
+        mSsoHandler = new SsoHandler(this);
         account.setText(Sp.getString(this, AppConstant.MOBILE, ""));
         loginPassword.setText(Sp.getString(this, AppConstant.PASSWORD, ""));
     }
@@ -98,13 +137,21 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 startActivity(intent);
                 break;
             case R.id.login_qq:
-                Toast.makeText(this, "敬请期待", Toast.LENGTH_SHORT).show();
+                mTencent.login(LoginActivity.this, "all",qqCallBack);
                 break;
             case R.id.login_wechat:
-                Toast.makeText(this, "敬请期待", Toast.LENGTH_SHORT).show();
+                if (!wx_api.isWXAppInstalled()) {
+                    Toast.makeText(this, "您尚未安装微信客户端", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                final SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                long timeStamp = System.currentTimeMillis();
+                req.state = timeStamp + "0";
+                wx_api.sendReq(req);
                 break;
             case R.id.login_weibo:
-                Toast.makeText(this, "敬请期待", Toast.LENGTH_SHORT).show();
+                mSsoHandler.authorize(new SelfWbAuthListener());
                 break;
             case R.id.login_duanxin:
                 AnimationSet aset = new AnimationSet(true);
@@ -192,4 +239,91 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        L.e("requestCode is " + requestCode);
+        L.e("resultCode is " + resultCode);
+        if (mSsoHandler != null) {
+            mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
+        }
+        if (requestCode == 11101)
+            Tencent.onActivityResultData(requestCode, resultCode, data,qqCallBack);
+    }
+
+    class QQCallBack implements IUiListener {
+        @Override
+        public void onComplete(Object response) {
+            try {
+                L.e(response.toString());
+                String openidString = ((JSONObject) response).getString("openid");
+                mTencent.setOpenId(openidString);
+                mTencent.setAccessToken(((JSONObject) response).getString("access_token"), ((JSONObject) response).getString("expires_in"));
+                UserInfo userInfo = new UserInfo(LoginActivity.this, mTencent.getQQToken());
+                L.e(userInfo.toString());
+                presenter.getUnionId(userInfo,openidString);
+            } catch (JSONException e) {
+                L.e(e.getMessage());
+            }
+        }
+        @Override
+        public void onError(UiError uiError) {
+            Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
+        }
+        @Override
+        public void onCancel() {
+            Toast.makeText(LoginActivity.this, "登陆取消", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private class SelfWbAuthListener implements WbAuthListener {
+        @Override
+        public void onSuccess(final Oauth2AccessToken token) {
+            LoginActivity.this.runOnUiThread(() -> {
+                mAccessToken = token;
+                if (mAccessToken.isSessionValid()) {
+                    AccessTokenKeeper.writeAccessToken(LoginActivity.this, mAccessToken);
+                    String token1 = mAccessToken.getToken();
+                    final String uid = mAccessToken.getUid();
+                    L.e("token is " + token1);
+                    L.e("uid is " + uid);
+                    HashMap<String, String> params = new HashMap<>();
+                    params.put("access_token", token1);
+                    params.put("uid", uid);
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("https://api.weibo.com/2/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    HttpService httpService = retrofit.create(HttpService.class);
+                    Call<ResponseBody> call = httpService.getWeiboData(params);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            try {
+                                String json = response.body().string();
+                                L.e("json is " + json);
+                                JSONObject object = new JSONObject(json);
+                                presenter.thirdLogin("3",object.getString("profile_image_url"), object.getString("name"), uid);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            dialog.dismiss();
+                        }
+                    });
+                }
+            });
+        }
+        @Override
+        public void cancel() {
+            Toast.makeText(LoginActivity.this, "cancel", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
+        @Override
+        public void onFailure(WbConnectErrorMessage errorMessage) {
+            dialog.dismiss();
+            Toast.makeText(LoginActivity.this, errorMessage.getErrorMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
 }
