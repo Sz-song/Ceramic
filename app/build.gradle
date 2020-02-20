@@ -62,8 +62,6 @@ dependencies {
     //图片圆形化控件
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
-    //正方形控件
-    implementation 'com.github.donkingliang:ImageSelector:1.6.8'
     //XTableLayout
     implementation 'com.androidkun:XTabLayout:1.1.4'
     //鲁班压缩

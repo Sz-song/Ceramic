@@ -42,7 +42,7 @@ public class FaxianFragment extends BaseFragment<FaxianPresenter> implements Fax
     FrameLayout frame;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
-    private HomepageAdapter adapter;
+    private FaxianAdapter adapter;
     private List<String> bannerList;
     private List<HomeShopBean> list;
     @Override
@@ -75,8 +75,15 @@ public class FaxianFragment extends BaseFragment<FaxianPresenter> implements Fax
         int screenWidth = outMetrics.widthPixels;
         int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, this.getResources().getDisplayMetrics());
         int width = (screenWidth - margin * 6) / 3;
-        adapter = new HomepageAdapter(getContext(), bannerList, list, width, margin);
+        adapter = new FaxianAdapter(getContext(), bannerList, list, width, margin);
         recyclerview.setAdapter(adapter);
+        swipe.setColorSchemeResources(R.color.colorPrimary);
+        swipe.setOnRefreshListener(() -> {
+            presenter.initData(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID));
+            bannerList.clear();
+            list.clear();
+            adapter.notifyDataSetChanged();
+        });
     }
 
     @Override
@@ -86,6 +93,7 @@ public class FaxianFragment extends BaseFragment<FaxianPresenter> implements Fax
 
     @Override
     public void initDataSuccess(HomepageBean bean) {
+        swipe.setRefreshing(false);
         bannerList.addAll(bean.getBannerList());
         list.addAll(bean.getList());
         adapter.notifyDataSetChanged();
@@ -93,11 +101,9 @@ public class FaxianFragment extends BaseFragment<FaxianPresenter> implements Fax
 
     @Override
     public void initDataFail(ExceptionHandler.ResponeThrowable e) {
+        swipe.setRefreshing(false);
         L.e(e.message + " " + e.status);
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.nodata_img)
-    public void onViewClicked() {
-    }
 }

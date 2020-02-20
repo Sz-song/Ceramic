@@ -2,6 +2,8 @@ package com.yuanyu.ceramics.global;
 
 
 import com.yuanyu.ceramics.base.BaseResponse;
+import com.yuanyu.ceramics.bazaar.MasterWorkBean;
+import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
 import com.yuanyu.ceramics.home.homepage.HomepageBean;
@@ -44,13 +46,19 @@ public interface HttpService {
     //大师列表
     @POST("app_api/ceramics/master_list.php")
     Observable<BaseResponse<List<MasterItemBean>>> master_list(@Body RequestBody body);
-
     //购物车
     @POST("app_api/ceramics/shoppingcart.php")
     Observable<BaseResponse<List<GoodsBean>>> getGoods(@Body RequestBody body);
     //删除购物车
     @POST("app_api/home_page/cart_delete.php")
     Observable<BaseResponse<String[]>> deleteCart(@Body RequestBody body);
+    //微博登陆验证
     @GET("users/show.json")
     Call<ResponseBody> getWeiboData(@QueryMap Map<String,String> params);
+    //获取集市大师作品
+    @POST("app_api/ceramics/master_works.php")
+    Observable<BaseResponse<List<MasterWorkBean>>> getMasterWorkList(@Body RequestBody body);
+    //获取集市商铺
+    @POST("app_api/ceramics/store_center.php")
+    Observable<BaseResponse<List<StoreCenterBean>>> getStoreCenterList(@Body RequestBody body);
 }

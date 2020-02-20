@@ -50,5 +50,6 @@
             android:exported="true"
             android:taskAffinity="com.taijie.yuanyu"
             android:launchMode="singleTop"/>
+        <activity android:name=".bazaar.BazaarActivity" />
     </application>
 </manifest>
