@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
 import java.util.List;
@@ -49,7 +51,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.conversation_icon)
-        CircleImageView conversationIcon;
+        RoundedImageView conversationIcon;
         @BindView(R.id.title)
         TextView title;
         @BindView(R.id.time)

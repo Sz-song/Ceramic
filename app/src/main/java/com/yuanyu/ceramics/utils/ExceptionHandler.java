@@ -61,7 +61,7 @@ public class ExceptionHandler {
             return ex;
         } else if (e instanceof javax.net.ssl.SSLHandshakeException) {
             ex = new ResponeThrowable(e, ERROR.SSL_ERROR);
-            ex.message = "证书验证失败";
+            ex.message = "网络错误";
             return ex;
         } else if (e instanceof ConnectTimeoutException){
             ex = new ResponeThrowable(e, ERROR.TIMEOUT_ERROR);
