@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp">
+    <Button
+        android:id="@+id/recybtn"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:background="@drawable/recy_btn_selector"
+        android:textColor="@drawable/recy_btn_text_selector"
+        android:textSize="12sp" />
+</LinearLayout>

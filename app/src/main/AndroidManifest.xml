@@ -51,5 +51,9 @@
             android:taskAffinity="com.taijie.yuanyu"
             android:launchMode="singleTop"/>
         <activity android:name=".bazaar.BazaarActivity" />
+        <activity android:name=".dingzhi.SelectDashiActivity" />
+        <activity android:name=".dingzhi.MyDingzhiActivity" />
+        <activity android:name=".dingzhi.ShopDingzhiActivity" />
+        <activity android:name=".common.ScanActivity" />
     </application>
 </manifest>

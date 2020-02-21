@@ -48,4 +48,273 @@
     <string name="meet_master">遇见大师</string>
     <string name="cooperation">合作机构</string>
     <string name="view_works">臻品抢购</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+
+    <string name="title_activity_dingzhi">DingzhiActivity</string>
+    <string name="title_activity_qiugou_detail">QiugouDetailActivity</string>
+    <string name="title_activity_qiugou_publish">QiugouPublishActivity</string>
+
+    <string name="cancle">取消</string>
+    <string name="title">请选择时间</string>
+    <string name="commit">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+
+    <!-- time -->
+    <string name="time_yesterday">昨天</string>
+    <string name="time_day">日</string>
+    <string name="time_month">月</string>
+    <string name="time_year">年</string>
+
+
+    // 新朋友
+
+    <!-- IMSDK -->
+    <string name="agree">同意</string>
+    <string name="agreed">已同意</string>
+    <string name="downloading">正在下载，请稍候</string>
+
+
+    <!-- chat activity -->
+    <string name="chat_image">图片</string>
+    <string name="chat_file">文件</string>
+    <string name="chat_photo">拍摄</string>
+    <string name="chat_video">小视频</string>
+    <string name="chat_press_talk">按住 说话</string>
+    <string name="chat_release_send">松开 结束</string>
+
+
+    <!-- message -->
+    <string name="summary_me">我</string>
+    <string name="summary_group_apply">申请加群</string>
+    <string name="summary_group_invite">邀请</string>
+    <string name="summary_group_add">加入群</string>
+    <string name="summary_invite_person">邀请人</string>
+
+    <!--publicgroup-->
+
+
+    <!--chatroom-->
+
+
+    <!--privategroup-->
+
+
+    <!--creategroup-->
+
+    <!-- conversation fragment -->
+
+    <!-- contact fragment -->
+
+    <!-- group profile activity -->
+
+    <!-- profile activity -->
+    <string name="profile_detail">详细资料</string>
+
+    <!-- group member profile activity -->
+    <string name="group_member_already">已经是群成员</string>
+
+    <!-- edit activity -->
+
+    <!-- ic_search group activity -->
+
+    <!-- Add newfriend activity -->
+    <string name="search_cancel">取消</string>
+    <string name="search_no_result">很抱歉，没有找到符合内容</string>
+
+
+    <!--直播-->
+    <!-- permission check-->
+    <string name="float_window_not_allow">悬浮窗权限未开启 请在应用-权限中打开悬浮窗权限</string>
+    <!-- msgadapter -->
+    <!--timepicker-->
+
+    <string name="timepicker_year">年</string>
+    <string name="timepicker_month">月</string>
+    <string name="timepicker_day">日</string>
+    <string name="timepicker_finish">确认</string>
+    <!--视频选择器-->
+
+    <!--welfare_mid-->
+    <!--b-->
+    <string name="save">保存</string>
+    <!--c-->
+    <string name="view_more">查看更多 ></string>
+    <string name="view_detail">查看详情</string>
+    <string name="bad_pinglun">差评</string>
+    <string name="poor_quality">产品质量有问题</string>
+    <string name="describe_discrepancy">产品描述不符</string>
+    <string name="cancel_apply">撤销申请</string>
+    <string name="offer">出价</string>
+    <!--d-->
+    <string name="master_studio">大师工作室</string>
+    <string name="price_now">当前价</string>
+    <string name="order_manage">订单管理</string>
+
+    <!--f-->
+    <string name="sent_message">发送</string>
+    <string name="realease">发布</string>
+    <string name="bid">发布竞标</string>
+    <string name="release_article">发布文章</string>
+    <!--g-->
+    <string name="close">关闭</string>
+
+    <!--h-->
+    <string name="nice_pinlun">好评</string>
+    <string name="reply">回复</string>
+    <!--j-->
+    <string name="jijiangjiepai">即将结拍</string>
+    <string name="add_focus">+ 关注</string>
+    <string name="yuanyu_values">建业朝阳、百年源玉</string>
+    <string name="enter_personal_index">进入个人主页</string>
+    <string name="until_bid_end">距竞标结束</string>
+    <string name="reject">拒绝</string>
+    <!--k-->
+    <string name="logistics_num">快递单号</string>
+    <string name="select_logistics">快递选择</string>
+    <!--l-->
+    <string name="add_blacklist">拉黑</string>
+    <string name="offer_immediately">立即出价</string>
+    <string name="contact_shop">联系店家</string>
+    <string name="contact_user">联系客户</string>
+
+    <!--m-->
+    <!--p-->
+    <string name="yuanyu_master">平台大师</string>
+    <!--q-->
+    <string name="price_start_auction">起拍价</string>
+    <string name="no_reason_in7day">7天无理由</string>
+    <string name="please_input_pinglun">请输入您的评论</string>
+    <string name="plz_input_your_view">请输入您的看法...</string>
+    <string name="plz_input_note">请输入说明</string>
+    <string name="plz_input_your_logistics_num">请填写快递单号</string>
+    <string name="plz_select_logistics">请选择物流公司</string>
+    <string name="block_chain">区块链溯源</string>
+    <string name="all">全部</string>
+
+    <!--r-->
+    <string name="hot_paipin">人气拍品</string>
+    <!--s-->
+    <string name="goods_num">商品编号</string>
+    <string name="contact_TA">私信TA</string>
+    <string name="search">搜索</string>
+    <!--t-->
+    <string name="remind">提醒</string>
+    <string name="refund_reason">退款原因</string>
+    <string name="report">投诉</string>
+    <!--w-->
+    <string name="my_qiugou">我的求购</string>
+    <string name="my_dingzhi">我的定制</string>
+    <string name="my_auction">我的拍卖</string>
+
+    <!--x-->
+    <string name="false_delivery">虚假发货</string>
+    <!--y-->
+    <string name="yuanyu_kefu">源玉介入</string>
+    <string name="yuanyu_boastcast">源玉直播</string>
+    <!--z-->
+    <string name="mid_pinglun">中评</string>
+    <string name="qurey_certificate">证书查询</string>
+    <string name="lowest_add_price_auction">最低加价</string>
+    <string name="homepage_hint">和田籽料</string>
+    <string name="newest_auction">最新开拍</string>
+    <!--#-->
+    <string name="view_more_works"><![CDATA[查看更多作品>>>]]></string>
+    <string name="yuanyu_article">玉石文章</string>
+    <string name="qiugou">求购竞标</string>
+    <string name="block_chain_hint">搜索区块链编号</string>
+    <string name="search_recent">最近搜索</string>
+    <string name="search_hot">热门搜索</string>
+    <string name="kinds_of_auction">拍卖类型</string>
+    <string name="plz_select">请选择</string>
+    <string name="add_auction">添加拍品</string>
+    <string name="auction_apply_price_notice">起拍价为10的倍数(或0),加价幅度为5的倍数</string>
+    <string name="please_input">请输入</string>
+    <string name="money" tools:ignore="ExtraTranslation">¥</string>
+    <string name="apply_auction">申请拍卖</string>
+    <string name="special_name">专场名称</string>
+    <string name="jateall">和田玉</string>
+    <string name="auction_strart_time">开拍时间</string>
+    <string name="auction_end_time">结拍时间</string>
+    <string name="deposit_setting">保证金设置</string>
+    <string name="plz_input">请输入</string>
+    <string name="pay_bond">支付保证金</string>
+    <string name="special_auction">专场拍品</string>
+    <string name="auction_detail">拍卖详情</string>
+    <string name="select_pay_type">选择支付方式</string>
+    <string name="apply_again">重新申请</string>
+    <string name="reset">重置</string>
+    <string name="appoint_master">指定大师</string>
+    <string name="usage_scenarios">使用场景</string>
+    <string name="personal_use">自用</string>
+    <string name="friend">亲朋好友</string>
+    <string name="gift">礼品</string>
+    <string name="user_birthday">使用者生辰八字</string>
+    <string name="about_price">大概价位</string>
+    <string name="top_50000">50000以上</string>
+    <string name="mid_5000_50000">5001-50000</string>
+    <string name="low_5000">1000-5000</string>
+    <string name="chanzhuang">产状</string>
+    <string name="fenlei">分类</string>
+    <string name="ticai">题材</string>
+    <string name="shanliao">山料</string>
+    <string name="order_info">订单信息</string>
+    <string name="negotiation_history">协商历史</string>
+    <string name="go_to_view"><![CDATA[前往查看>>]]></string>
+    <string name="cancel_order">取消订单</string>
+    <string name="confirm_order">确认接单</string>
+    <string name="money_sum_dingzhi">定制金额</string>
+    <string name="completion_time">完成时间</string>
+    <string name="adventure">研学探宝</string>
+    <string name="office_sale">品牌直营</string>
+    <string name="sign_up">我要报名</string>
+    <string name="address">地址</string>
+    <string name="name">姓名</string>
+    <string name="telphone">手机号</string>
+    <string name="unit">单位</string>
+    <string name="immediate_use">立即使用</string>
+    <string name="rushing">疯抢进行中</string>
+    <string name="burst_rob">已爆抢</string>
+    <string name="hot_events">优惠推荐</string>
+    <string name="just_for_new">新人专享</string>
+    <string name="immediate_get">立即领取</string>
+    <string name="publish_dingzhi">发布定制</string>
+    <string name="complete">完成</string>
+    <string name="dont_use">不使用</string>
+    <string name="coupons">优惠券</string>
+    <string name="select_coupons">选择优惠券</string>
+    <string name="base_info">基本信息</string>
+    <string name="live_title">直播标题</string>
+    <string name="live_time">直播时间</string>
+    <string name="live_type">直播类型</string>
+    <string name="live_goods">直播商品</string>
+    <string name="mei_yu_live">美玉直播</string>
+    <string name="taoshi_live">淘石开料</string>
+    <string name="yushuo_live">玉说天下</string>
+    <string name="immediate_pay">立即支付</string>
+    <string name="copy">复制</string>
+    <string name="pay_ordernum">支付订单</string>
+    <string name="personal_info">个人信息</string>
+    <string name="true_name">真实姓名</string>
+    <string name="shop_info">店铺信息</string>
+    <string name="shop_name">店铺命名</string>
+    <string name="main_products">主营产品</string>
+    <string name="jade">和田玉</string>
+    <string name="location">所在地</string>
+    <string name="authentication">实名认证</string>
+    <string name="address_detail">详细地址</string>
+    <string name="shop_card">营业执照</string>
+    <string name="id_card_num">身份证号</string>
+    <string name="my_coins">我的金豆</string>
+    <string name="save_image">保存图片</string>
+    <string name="sure_exchange">确认兑换</string>
+    <string name="wechat_monment">朋友圈</string>
+    <string name="hot_dynamic">热门动态</string>
+    <string name="invite_newer">邀请有礼</string>
+    <string name="modify_price">修改价格</string>
+    <string name="sure">确定</string>
 </resources>

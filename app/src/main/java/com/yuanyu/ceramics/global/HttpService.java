@@ -6,6 +6,10 @@ import com.yuanyu.ceramics.bazaar.MasterWorkBean;
 import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
+import com.yuanyu.ceramics.dingzhi.DashiCellBean;
+import com.yuanyu.ceramics.dingzhi.DingzhiDetailBean;
+import com.yuanyu.ceramics.dingzhi.GenerateOrdersBean;
+import com.yuanyu.ceramics.dingzhi.MyDingzhiBean;
 import com.yuanyu.ceramics.home.homepage.HomepageBean;
 import com.yuanyu.ceramics.login.LoginBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
@@ -61,4 +65,39 @@ public interface HttpService {
     //获取集市商铺
     @POST("app_api/ceramics/store_center.php")
     Observable<BaseResponse<List<StoreCenterBean>>> getStoreCenterList(@Body RequestBody body);
+    @POST("app_api/grounding/generate_bond_orders.php")
+    Observable<BaseResponse<GenerateOrdersBean>> generateUserBondOrder(@Body RequestBody body);
+    //店铺定制列表
+    @POST("app_api/shangjia/seller_getdingzhi.php")
+    Observable<BaseResponse<List<MyDingzhiBean>>> getShopDingzhiList(@Body RequestBody body);
+    //定制详情
+    @POST("app_api/home_page/dingzhi.php")
+    Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(@Body RequestBody body);
+    //生成定制保证金(尾款)订单
+    @POST("app_api/home_page/generate_dingzhi_orders.php")
+    Observable<BaseResponse<String>> generateDingzhiBondOrder(@Body RequestBody body);
+    //用户保证金支付
+    @POST("app_api/home_page/dingzhi_bondpay.php")
+    Observable<BaseResponse<Boolean>> dingzhiBondPay(@Body RequestBody body);
+    //商家接受定制订单
+    @POST("app_api/home_page/confirm_order.php")
+    Observable<BaseResponse<Boolean>> confirmDingzhiOrder(@Body  RequestBody body);
+    //商家接受定制订单
+    @POST("app_api/home_page/cancel_dingzhi_order.php")
+    Observable<BaseResponse<Boolean>> cancelDingzhiOrder(@Body  RequestBody body);
+    //定制发货
+    @POST("app_api/home_page/dingzhi_courier.php")
+    Observable<BaseResponse<Boolean>> dingzhiCourier(@Body  RequestBody body);
+    //定制确认收货
+    @POST("app_api/home_page/dingzhi_receive.php")
+    Observable<BaseResponse<Boolean>> dingzhiConfirmReceipt(@Body RequestBody body);
+    //发布定制需求
+    @POST("app_api/home_page/dingzhi.php")
+    Observable<BaseResponse<String[]>> publishDingzhi(@Body RequestBody body);
+    //获取我的定制
+    @POST("app_api/home_page/dingzhi.php")
+    Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(@Body RequestBody body);
+    //获取指定大师
+    @POST("app_api/home_page/dingzhi.php")
+    Observable<BaseResponse<List<DashiCellBean>>> ChooseDashi(@Body RequestBody body);
 }

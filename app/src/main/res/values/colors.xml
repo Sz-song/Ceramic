@@ -9,4 +9,7 @@
     <color name="lineGray">#dddddd</color>
     <color name="transparent">#00000000</color>
     <color name="background_gray">#f8f8f8</color>
+    <color name="dividerGray">#f2f2f2</color>
+    <color name="gray">#808080</color>
+    <color name="lightGray">#cccccc</color>
 </resources>

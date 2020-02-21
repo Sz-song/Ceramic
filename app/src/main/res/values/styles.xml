@@ -42,4 +42,37 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!--dialog动画-->
+    <style name="dialogAnimStyle">
+        <item name="android:windowEnterAnimation">@anim/photo_dialog_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/photo_dialog_out_anim</item>
+    </style>
+
+    <!--设置tabLayout字体大小-->
+    <style name="MyCustomTabTextAppearance">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <!--timepicker-->
+    <style name="Theme.Light.NoTitle.Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
+    <style name="Theme.Light.NoTitle.NoShadow.Dialog" parent="Theme.Light.NoTitle.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <style name="Animation.Bottom.Rising" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+    <style name="time_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
 </resources>
