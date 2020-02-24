@@ -19,6 +19,7 @@ import com.yuanyu.ceramics.bazaar.BazaarActivity;
 import com.yuanyu.ceramics.common.view.custombanner.CustomBanner;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.meet_master.MeetMasterActivity;
 import com.yuanyu.ceramics.utils.L;
 
 import java.util.List;
@@ -94,6 +95,8 @@ public class FaxianAdapter extends RecyclerView.Adapter {
             });
             ((ViewHolder0) holder).meetMaster.setOnClickListener(v -> {
                 L.e("123");
+                Intent intent = new Intent(context, MeetMasterActivity.class);
+                context.startActivity(intent);
             });
             ((ViewHolder0) holder).cooperation.setOnClickListener(v -> {
                 L.e("123");
