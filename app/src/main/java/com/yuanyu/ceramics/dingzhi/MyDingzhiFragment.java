@@ -49,7 +49,7 @@ public class MyDingzhiFragment extends BaseFragment<MyDingzhiPresenter> implemen
 
     @Override
     public void initData() {
-        presenter.getMyDingzhi(page, status, Sp.getInt(getContext(), AppConstant.USER_ACCOUNT_ID));
+        presenter.getMyDingzhi(page, status, Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class MyDingzhiFragment extends BaseFragment<MyDingzhiPresenter> implemen
             page = 0;
             list.clear();
             adapter.notifyDataSetChanged();
-            presenter.getMyDingzhi(page, status, Sp.getInt(getContext(), AppConstant.USER_ACCOUNT_ID));
+            presenter.getMyDingzhi(page, status, Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID));
         });
         LinearLayoutManager lm = new LinearLayoutManager(getContext());
         lm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -91,7 +91,7 @@ public class MyDingzhiFragment extends BaseFragment<MyDingzhiPresenter> implemen
                     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
                     lastPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
                     if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1&&lastPosition>7) {
-                        presenter.getMyDingzhi(page, status, Sp.getInt(getContext(), AppConstant.USER_ACCOUNT_ID));
+                        presenter.getMyDingzhi(page, status, Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID));
                     }
                 }
             }

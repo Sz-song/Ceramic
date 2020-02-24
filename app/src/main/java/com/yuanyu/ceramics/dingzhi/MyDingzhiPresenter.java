@@ -17,7 +17,7 @@ public class MyDingzhiPresenter extends BasePresenter<MyDingzhiConstract.IMyDing
 
     MyDingzhiPresenter() {model=new MyDingzhiModel();}
     @Override
-    public void getMyDingzhi(int page, int status, int id) {
+    public void getMyDingzhi(int page, int status, String id) {
         model.getMyDingzhi(page,status,id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

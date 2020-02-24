@@ -17,6 +17,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.bazaar.BazaarActivity;
 import com.yuanyu.ceramics.common.view.custombanner.CustomBanner;
+import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.L;
 
@@ -83,7 +84,8 @@ public class FaxianAdapter extends RecyclerView.Adapter {
                 }, bannerList).startTurning(5000);
             }
             ((ViewHolder0) holder).customization.setOnClickListener(v -> {
-                L.e("123");
+                Intent intent = new Intent(context, MyDingzhiActivity.class);
+                context.startActivity(intent);
             });
             ((ViewHolder0) holder).storeCenter.setOnClickListener(v -> {
                 L.e("123");

@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 
 public interface MyDingzhiConstract {
     interface IMyDingzhiModel {
-        Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(int page, int status, int id);
+        Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(int page, int status, String id);
     }
     interface IMyDingzhiView {
         void getMyDingzhiSuccess(List<MyDingzhiBean> list);
@@ -18,6 +18,6 @@ public interface MyDingzhiConstract {
     }
 
     interface IMyDingzhiPresenter {
-        void getMyDingzhi(int page, int status, int id);
+        void getMyDingzhi(int page, int status, String id);
     }
 }

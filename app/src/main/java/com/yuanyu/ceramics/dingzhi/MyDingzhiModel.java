@@ -20,7 +20,7 @@ public class MyDingzhiModel implements MyDingzhiConstract.IMyDingzhiModel {
     private HttpService httpService;
     MyDingzhiModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(int page, int status, int id) {
+    public Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(int page, int status, String id) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

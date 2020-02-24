@@ -55,5 +55,8 @@
         <activity android:name=".dingzhi.MyDingzhiActivity" />
         <activity android:name=".dingzhi.ShopDingzhiActivity" />
         <activity android:name=".common.ScanActivity" />
+        <activity android:name=".dingzhi.DingzhiPublishDetailActivity" />
+        <activity android:name=".dingzhi.ShopDingzhiDetailActivity" />
+        <activity android:name=".dingzhi.DingzhiDetailUserActivity" />
     </application>
 </manifest>

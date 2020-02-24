@@ -1,21 +1,15 @@
 package com.yuanyu.ceramics.dingzhi;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -28,18 +22,11 @@ import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 import com.yuanyu.ceramics.utils.TimeUtils;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 import static com.yuanyu.ceramics.AppConstant.WECHAT_APP_ID;
 
 
