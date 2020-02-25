@@ -27,13 +27,13 @@ import java.util.List;
 
 public class AddressPickerView extends RelativeLayout implements View.OnClickListener {
     // recyclerView 选中Item 的颜色
-    private int defaultSelectedColor = Color.parseColor("#e03939");
+    private int defaultSelectedColor = Color.parseColor("#2d6abf");
     // recyclerView 未选中Item 的颜色
     private int defaultUnSelectedColor = Color.parseColor("#262626");
     // 确定字体不可以点击时候的颜色
     private int defaultSureUnClickColor = Color.parseColor("#7F7F7F");
     // 确定字体可以点击时候的颜色
-    private int defaultSureCanClickColor = Color.parseColor("#e03939");
+    private int defaultSureCanClickColor = Color.parseColor("#2d6abf");
 
     private Context mContext;
     private int defaultTabCount = 3; //tab 的数量
