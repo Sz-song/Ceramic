@@ -61,7 +61,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:taskAffinity="com.taijie.yuanyu"
+            android:taskAffinity="com.yuanyu.ceramics"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".bazaar.BazaarActivity" />
         <activity android:name=".dingzhi.SelectDashiActivity" />
