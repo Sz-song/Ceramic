@@ -13,8 +13,8 @@
             android:id="@+id/tv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left"
-            android:layout_marginLeft="22dip"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="22dip"
             android:text="取消"
             android:textColor="#5677ee"
             android:textSize="15sp" />
@@ -23,7 +23,7 @@
             android:id="@+id/tx_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|right"
+            android:layout_gravity="center_vertical|end"
             android:paddingBottom="10dip"
             android:paddingLeft="15dip"
             android:paddingRight="15dip"
@@ -59,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="40dip"
+                    android:layout_marginStart="40dip"
                     android:text="@string/timepicker_year"
                     android:textColor="#B3B3B3" />
             </FrameLayout>
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="40dip"
+                    android:layout_marginStart="40dip"
                     android:text="@string/timepicker_month"
                     android:textColor="#B3B3B3" />
             </FrameLayout>
@@ -97,8 +97,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:layout_marginRight="15dip"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="15dip"
                     android:text="@string/timepicker_day"
                     android:textColor="#B3B3B3" />
             </FrameLayout>
