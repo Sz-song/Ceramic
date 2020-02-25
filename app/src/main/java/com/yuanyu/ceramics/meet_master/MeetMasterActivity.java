@@ -45,8 +45,8 @@ public class MeetMasterActivity extends NormalActivity {
 //            adapter.notifyDataSetChanged();
 //            loadData();
         });
-        MeetMasterBean mb1=new MeetMasterBean(1,"1","黄建宏工作室","1",6,80,"1111");
-        MeetMasterBean mb2=new MeetMasterBean(2,"2","王锡良工作室","1",6,80,"1111");
+        MeetMasterBean mb1=new MeetMasterBean(1,"1","黄建宏工作室","img/banner1.jpg",6,80,"做瓷艺是个辛苦活，真正是需要“工匠精神”");
+        MeetMasterBean mb2=new MeetMasterBean(2,"2","王锡良工作室","img/banner1.jpg",6,80,"做瓷艺是个辛苦活，真正是需要“工匠精神”");
 
         mList.add(mb1);
         mList.add(mb2);
