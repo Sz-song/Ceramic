@@ -17,6 +17,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.bazaar.BazaarActivity;
 import com.yuanyu.ceramics.common.view.custombanner.CustomBanner;
+import com.yuanyu.ceramics.cooperation.CooperationActivity;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.meet_master.MeetMasterActivity;
@@ -100,6 +101,8 @@ public class FaxianAdapter extends RecyclerView.Adapter {
             });
             ((ViewHolder0) holder).cooperation.setOnClickListener(v -> {
                 L.e("123");
+                Intent intent = new Intent(context, CooperationActivity.class);
+                context.startActivity(intent);
             });
         } else if (holder instanceof ViewHolder1) {
             RelativeLayout.LayoutParams params1 = (RelativeLayout.LayoutParams) ((ViewHolder1) holder).img1.getLayoutParams();
