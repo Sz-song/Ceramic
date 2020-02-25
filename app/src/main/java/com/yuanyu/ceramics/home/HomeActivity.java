@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.base.NormalActivity;
 import com.yuanyu.ceramics.cart.CartFragment;
 import com.yuanyu.ceramics.home.homepage.HomepageFragment;
 import com.yuanyu.ceramics.master.MasterFragment;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends NormalActivity {
 
 
     @BindView(R.id.fragment_container)
@@ -59,9 +60,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         ButterKnife.bind(this);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//状态栏黑色字体
-            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         homepageFragment = new HomepageFragment();

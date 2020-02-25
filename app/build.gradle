@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 29
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.yuanyu.ceramics"
         minSdkVersion 21
@@ -75,4 +76,6 @@ dependencies {
     implementation 'com.sina.weibo.sdk:core:4.4.3:openDefaultRelease@aar'
     //条形码扫码
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    //视频播放器
+    implementation 'cn.jzvd:jiaozivideoplayer:7.1.0'
 }

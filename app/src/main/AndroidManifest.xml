@@ -68,6 +68,8 @@
         <activity android:name=".dingzhi.DingzhiPublishDetailActivity" />
         <activity android:name=".dingzhi.ShopDingzhiDetailActivity" />
         <activity android:name=".dingzhi.DingzhiDetailUserActivity" />
+        <activity android:name=".personal_index.PersonalIndexActivity" />
+        <activity android:name=".shop_index.ShopIndexActivity" />
     </application>
 
 </manifest>

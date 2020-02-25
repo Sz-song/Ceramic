@@ -80,7 +80,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_marginStart="20dp"
-                            android:background="@drawable/r2_sored"
+                            android:background="@drawable/r2_soblue"
                             android:text="@string/contact_TA"
                             android:visibility="gone"
                             android:textSize="11.5sp"/>
@@ -142,7 +142,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_marginStart="20dp"
-                            android:background="@drawable/r2_sored"
+                            android:background="@drawable/r2_soblue"
                             android:textSize="11.5sp"/>
                     </LinearLayout>
                     <LinearLayout
@@ -170,7 +170,7 @@
                             android:textColor="@color/white"
                             android:textStyle="bold"
                             android:layout_marginStart="20dp"
-                            android:background="@drawable/r2_sored"
+                            android:background="@drawable/r2_soblue"
                             android:textSize="11.5sp"/>
                     </LinearLayout>
                     <LinearLayout
@@ -410,7 +410,7 @@
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="30dp"
                     android:textStyle="bold"
-                    android:background="@drawable/r2_sored"/>
+                    android:background="@drawable/r2_soblue"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

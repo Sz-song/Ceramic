@@ -40,7 +40,7 @@ public class BroadcastAdapter extends RecyclerView.Adapter<BroadcastAdapter.View
         holder.name.setText(list.get(position).getName());
         GlideApp.with(context)
                 .load(AppConstant.BASE_URL+list.get(position).getImage())
-                .placeholder(R.drawable.image_default)
+                .placeholder(R.drawable.img_default)
                 .into(holder.image);
     }
 

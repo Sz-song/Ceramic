@@ -12,4 +12,5 @@
     <color name="dividerGray">#f2f2f2</color>
     <color name="gray">#808080</color>
     <color name="lightGray">#cccccc</color>
+    <color name="transparent_20">#20000000</color>
 </resources>

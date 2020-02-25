@@ -114,13 +114,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     public void initDataSuccess(MineBean bean) {
         swipe.setRefreshing(false);
         GlideApp.with(getContext())
-                .load(BASE_URL + bean.getPortrait()).placeholder(R.drawable.image_default)
+                .load(BASE_URL + bean.getPortrait()).placeholder(R.drawable.img_default)
                 .override(100, 100)
                 .into(protrait);
         GlideApp.with(getContext())
                 .load(BASE_URL + bean.getPortrait())
                 .optionalTransform(new BlurTransformation(20))
-                .placeholder(R.drawable.image_default)
+                .placeholder(R.drawable.img_default)
                 .into(background);
         name.setText(bean.getName());
         fansNum.setText(bean.getFans_num());

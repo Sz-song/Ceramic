@@ -6,6 +6,8 @@ import com.yuanyu.ceramics.bazaar.MasterWorkBean;
 import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
+import com.yuanyu.ceramics.common.DynamicBean;
+import com.yuanyu.ceramics.common.ResultBean;
 import com.yuanyu.ceramics.dingzhi.DashiCellBean;
 import com.yuanyu.ceramics.dingzhi.DingzhiDetailBean;
 import com.yuanyu.ceramics.dingzhi.GenerateOrdersBean;
@@ -15,6 +17,10 @@ import com.yuanyu.ceramics.login.LoginBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
 import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
+import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
+import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
+import com.yuanyu.ceramics.shop_index.ShopIndexBean;
+import com.yuanyu.ceramics.shop_index.ShopPinglunBean;
 
 import java.util.List;
 import java.util.Map;
@@ -100,4 +106,53 @@ public interface HttpService {
     //获取指定大师
     @POST("app_api/home_page/dingzhi.php")
     Observable<BaseResponse<List<DashiCellBean>>> ChooseDashi(@Body RequestBody body);
+    //个人主页初始化
+    @POST("app_api/yuba/personal_index.php")
+    Observable<BaseResponse<PersonalIndexBean>> PersonalIndex(@Body RequestBody body);
+    //关注与取关
+    @POST("app_api/yuba/focusandchancel_new.php")
+    Observable<BaseResponse<Boolean>>Focus(@Body RequestBody body);
+    //添加黑名单
+    @POST("app_api/home_page/add_blacklist.php")
+    Observable<BaseResponse<Boolean>>addBlacklist(@Body RequestBody body);
+    //个人动态文章
+    @POST("app_api/yuba/personal_dynamic_article.php")
+    Observable<BaseResponse<List<DynamicBean>>> getPersonalDynamicArticle(@Body RequestBody body);
+    //点赞
+    @POST("app_api/yuba/dianzan.php")
+    Observable<BaseResponse<String []>>dianZan(@Body RequestBody body);
+
+    //评论
+    @POST("app_api/yuba/releasepinglun.php")
+    Observable<BaseResponse<String>>pingLun(@Body RequestBody body);
+    //删除动态
+    @POST("app_api/yuba/delete_dynamic.php")
+    Observable<BaseResponse<String[]>> DeleteDynamic(@Body RequestBody body);
+    //删除文章
+    @POST("app_api/yuba/delete_article.php")
+    Observable<BaseResponse<String[]>> DeleteArticle(@Body RequestBody body);
+    //屏蔽
+    @POST("app_api/yuba/shield.php")
+    Observable<BaseResponse<String[]>> shield(@Body RequestBody body);
+    //店铺动态
+    @POST("app_api/commodity/shop_dynamic.php")
+    Observable<BaseResponse<List<DynamicBean>>> getShopDynamic(@Body RequestBody body);
+    //店铺内分类搜索
+    @POST("app_api/home_page/shop_fenlei.php")
+    Observable<BaseResponse<List<ResultBean>>> getShopFenleiData(@Body RequestBody body);
+    //用户访问店铺首页
+    @POST("app_api/shangjia/shophead.php")
+    Observable<BaseResponse<ShopIndexBean>>getUserShopIndexResult(@Body RequestBody body);
+    //收藏商品collectItem
+    @POST("app_api/shangjia/add_collection.php")
+    Observable<BaseResponse<Boolean>> collectItem(@Body RequestBody body);
+    //分享店铺
+    @POST("app_api/wujia/share_shop.php")
+    Observable<BaseResponse<Boolean>> shareShop(@Body RequestBody body);
+    //店铺首页 店铺评论
+    @POST("app_api/commodity/shop_pinglun.php")
+    Observable<BaseResponse<ShopPinglunBean>> getShopPinglun(@Body RequestBody body);
+    //店铺首页 新品和全部1商品
+    @POST("app_api/shangjia/shopcommodity.php")
+    Observable<BaseResponse<List<ShopGoodsBean>>> getShopCommodity(@Body RequestBody body);
 }

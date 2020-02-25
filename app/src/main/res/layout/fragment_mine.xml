@@ -23,7 +23,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="175dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image_default"/>
+                    android:src="@drawable/img_default"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

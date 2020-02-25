@@ -78,7 +78,7 @@ public class FaxianAdapter extends RecyclerView.Adapter {
                     public void updateUI(Context context, View view, int position, String image) {
                         GlideApp.with(context)
                                 .load(BASE_URL + image)
-                                .placeholder(R.drawable.image_default)
+                                .placeholder(R.drawable.img_default)
                                 .override(800, 400)
                                 .into((ImageView) view);
                     }

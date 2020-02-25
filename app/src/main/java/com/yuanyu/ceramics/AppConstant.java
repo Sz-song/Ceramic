@@ -1,5 +1,7 @@
 package com.yuanyu.ceramics;
 
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+
 public class AppConstant {
     public static String BASE_URL="http://101.132.128.125/song/";
     public static String QQ_APP_ID="1107922776";
@@ -14,4 +16,5 @@ public class AppConstant {
     public static final String APP_KEY = "173905193";
     public static final String REDIRECT_URL = "https://api.weibo.com/oauth2/default.html";
     public static final String SCOPE = "";
+    public static IWXAPI wx_api; //全局的微信api对象
 }

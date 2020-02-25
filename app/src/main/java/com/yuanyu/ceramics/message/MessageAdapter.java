@@ -40,7 +40,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         holder.lastMsg.setText(list.get(position).getLastMsg());
         GlideApp.with(context)
                 .load(BASE_URL+list.get(position).getIcon())
-                .placeholder(R.drawable.image_default)
+                .placeholder(R.drawable.img_default)
                 .into(holder.conversationIcon);
     }
 

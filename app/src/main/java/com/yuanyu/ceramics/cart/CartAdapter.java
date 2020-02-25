@@ -55,7 +55,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.shopName.setText(list.get(position).getShopname());
         Glide.with(context)
                 .load(AppConstant.BASE_URL+list.get(position).getShoplogo())
-                .placeholder(R.drawable.image_default)
+                .placeholder(R.drawable.img_default)
                 .override(50,50)
                 .into(holder.shopPortrait);
         holder.shopName.setOnClickListener(v -> {

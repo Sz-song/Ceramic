@@ -37,7 +37,7 @@ public class MasterFragmentAdapter extends RecyclerView.Adapter<MasterFragmentAd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GlideApp.with(context)
                 .load(AppConstant.BASE_URL + list.get(position).getPortrait())
-                .placeholder(R.drawable.image_default)
+                .placeholder(R.drawable.img_default)
                 .override(300, 300)
                 .into(holder.portrait);
         holder.name.setText(list.get(position).getName());
