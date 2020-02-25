@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".cooperation.CooperationActivity"></activity>
+        <activity android:name=".address_manage.AddOrEditAddressActivity"></activity>
+        <activity android:name=".address_manage.AddressManageActivity" />
+        <activity android:name=".cooperation.CooperationActivity" />
         <activity android:name=".meet_master.MeetMasterActivity" />
 
         <uses-library

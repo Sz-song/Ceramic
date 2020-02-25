@@ -2,6 +2,8 @@ package com.yuanyu.ceramics.mine;
 
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,16 @@ import android.widget.TextView;
 
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseFragment;
+import com.yuanyu.ceramics.bazaar.BazaarActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
@@ -133,5 +138,15 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     public void initDataFail(ExceptionHandler.ResponeThrowable e) {
         L.e(e.status + e.message);
         swipe.setRefreshing(false);
+    }
+    @OnClick(R.id.address)
+    public  void  onViewClicked(View view){
+        Intent intent;
+        switch (view.getId()){
+            case R.id.address:
+                intent = new Intent(getContext(), AddressManageActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
