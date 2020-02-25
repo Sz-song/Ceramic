@@ -53,7 +53,7 @@ public class MeetMasterAdapter extends RecyclerView.Adapter<MeetMasterAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GlideApp.with(context).load(BASE_URL+list.get(position).getShop_avatar()).override(200,200).into(holder.avatar);
         holder.fans.setText(list.get(position).getFansnum()+"");
-        holder.fans.setText(list.get(position).getFocusnum()+"");
+        holder.focus.setText(list.get(position).getFocusnum()+"");
         holder.name.setText(list.get(position).getShop_name());
         if (!list.get(position).getShop_slogan().equals("")) holder.intro.setText(list.get(position).getShop_slogan());
     }
