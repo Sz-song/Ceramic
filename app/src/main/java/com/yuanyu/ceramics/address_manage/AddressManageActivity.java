@@ -23,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AddressManageActivity extends BaseActivity<AddressManagePresenter> implements AddressManageConstract {
 
@@ -90,12 +91,12 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
         adapter = new AddressManageAdapter(AddressManageActivity.this, list);
         recyclerview.setAdapter(adapter);
         adapter.setOnItemClickListener(position -> {
-//            if(getIntent().getStringExtra("finish")!=null){
-//                Intent intent=new Intent();
-//                intent.putExtra("addressbean",list.get(position));
-//                setResult(RESULT_OK,intent);
-//                finish();
-//            }
+            if(getIntent().getStringExtra("finish")!=null){
+                Intent intent=new Intent();
+                intent.putExtra("addressbean",list.get(position));
+                setResult(RESULT_OK,intent);
+                finish();
+            }
         });
         adapter.setOnDefaultClickListener(position -> {
             loaddialog.show();
@@ -106,10 +107,10 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
 //            presenter.deleteAddress(SpUtils.getInt(AddressManageActivity.this,"useraccountid"),list.get(position).getAddressid(),position);
         });
         adapter.setOnEditClickListener(position -> {
-//            Intent intent = new Intent(AddressManageActivity.this, AddressManageActivity.class);
-//            intent.putExtra("type","1");
-//            intent.putExtra("addressbean",list.get(position));
-//            startActivityForResult(intent, 1001);
+            Intent intent = new Intent(AddressManageActivity.this, AddOrEditAddressActivity.class);
+            intent.putExtra("type","1");
+            intent.putExtra("addressbean",list.get(position));
+            startActivityForResult(intent, 1001);
         });
         swipe.setOnRefreshListener(() -> {
 //            list.clear();
@@ -132,5 +133,29 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+    @OnClick({R.id.nodata_img, R.id.nodata, R.id.add_address})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.nodata_img:
+                list.clear();
+                adapter.notifyDataSetChanged();
+                swipe.setRefreshing(true);
+                loaddialog.show();
+//                presenter.getAddressData(SpUtils.getInt(this, "useraccountid"));
+                break;
+            case R.id.nodata:
+//                list.clear();
+//                adapter.notifyDataSetChanged();
+//                swipe.setRefreshing(true);
+//                loaddialog.show();
+//                presenter.getAddressData(SpUtils.getInt(this, "useraccountid"));
+                break;
+            case R.id.add_address:
+                Intent intent = new Intent(AddressManageActivity.this, AddOrEditAddressActivity.class);
+                intent.putExtra("type","0");
+                startActivityForResult(intent, 1002);
+                break;
+        }
     }
 }
