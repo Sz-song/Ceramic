@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/touxiang"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"/>
+        <LinearLayout
+            android:id="@+id/relat"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="105dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/blackLight"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/jindian_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/recy_btn_selected_shape"
+                    android:paddingStart="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="2dp"
+                    android:text="@string/view_works"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_height="28dp"
+                    android:text="已售："/>
+                <TextView
+                    android:id="@+id/yishou_num"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:layout_height="28dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:layout_height="28dp"
+                    android:text="好评："/>
+                <TextView
+                    android:id="@+id/haopin_num"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:layout_height="28dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="粉丝："
+                    android:layout_height="28dp" />
+                <TextView
+                    android:id="@+id/fensi_num"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"
+                    android:layout_height="28dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:gravity=""
+                android:background="@color/lineGray"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+</LinearLayout>

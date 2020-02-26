@@ -75,4 +75,8 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/white</item>
     </style>
+    <style name="style_titlebar_normal">
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:textSize">23sp</item>
+    </style>
 </resources>

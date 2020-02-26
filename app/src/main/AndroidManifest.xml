@@ -17,7 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".address_manage.AddOrEditAddressActivity"></activity>
+        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".fenlei.FenLeiResActivity" />
+        <activity android:name=".fenlei.FenLeiActivity" />
+        <activity android:name=".address_manage.AddOrEditAddressActivity" />
         <activity android:name=".address_manage.AddressManageActivity" />
         <activity android:name=".cooperation.CooperationActivity" />
         <activity android:name=".meet_master.MeetMasterActivity" />
