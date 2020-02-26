@@ -205,7 +205,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:textColor="@color/white"
-            android:background="@drawable/button_round_corner_5dp_gray"
+            android:background="@drawable/btn_gray_blue"
             />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
