@@ -1,10 +1,9 @@
 package com.yuanyu.ceramics.home;
 
-import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -13,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.NormalActivity;
 import com.yuanyu.ceramics.cart.CartFragment;
+import com.yuanyu.ceramics.center_circle.CenterCircleFragment;
 import com.yuanyu.ceramics.home.homepage.HomepageFragment;
 import com.yuanyu.ceramics.master.MasterFragment;
 import com.yuanyu.ceramics.message.MessageFragment;
@@ -50,7 +50,7 @@ public class HomeActivity extends NormalActivity {
     RelativeLayout navigationWujia;
     private HomepageFragment homepageFragment;
     private CartFragment cartFragment;
-    private MasterFragment masterFragment;
+    private CenterCircleFragment centerCircleFragment;
     private MessageFragment messageFragment;
     private MineFragment mineFragment;
     private FragmentManager fragmentManager;
@@ -84,8 +84,8 @@ public class HomeActivity extends NormalActivity {
         if (cartFragment != null && cartFragment.isVisible()) {
             fragmentTransaction.hide(cartFragment);
         }
-        if (masterFragment != null && masterFragment.isVisible()) {
-            fragmentTransaction.hide(masterFragment);
+        if (centerCircleFragment != null && centerCircleFragment.isVisible()) {
+            fragmentTransaction.hide(centerCircleFragment);
         }
         if (messageFragment != null && messageFragment.isVisible()) {
             fragmentTransaction.hide(messageFragment);
@@ -116,10 +116,10 @@ public class HomeActivity extends NormalActivity {
             case R.id.navigation_yuba:
                 setPicDark();
                 picYuba.setImageResource(R.drawable.navigation_yuba_focus);
-                if (masterFragment == null) {
-                    masterFragment = new MasterFragment();
-                    fragmentTransaction.add(R.id.fragment_container, masterFragment);
-                } else fragmentTransaction.show(masterFragment);
+                if (centerCircleFragment == null) {
+                    centerCircleFragment = new CenterCircleFragment();
+                    fragmentTransaction.add(R.id.fragment_container, centerCircleFragment);
+                } else fragmentTransaction.show(centerCircleFragment);
                 fragmentTransaction.commit();
                 break;
             case R.id.navigation_message:

@@ -155,4 +155,7 @@ public interface HttpService {
     //店铺首页 新品和全部1商品
     @POST("app_api/shangjia/shopcommodity.php")
     Observable<BaseResponse<List<ShopGoodsBean>>> getShopCommodity(@Body RequestBody body);
+    //广场动态和文章
+    @POST("app_api/yuba/square_dynamic_article.php")
+    Observable<BaseResponse<List<DynamicBean>>> getSquareDynamicArticle(@Body RequestBody body);
 }
