@@ -70,7 +70,7 @@ public class HomeActivity extends NormalActivity {
 
     private void setPicDark() {
         picHomepage.setImageResource(R.drawable.navigation_homepage);
-        picBroadcast.setImageResource(R.drawable.navigation_zhibo);
+        picBroadcast.setImageResource(R.drawable.navigation_cart);
         picYuba.setImageResource(R.drawable.navigation_yuba);
         picMessage.setImageResource(R.drawable.navigation_message);
         picWujia.setImageResource(R.drawable.navigation_wujia);
@@ -106,7 +106,7 @@ public class HomeActivity extends NormalActivity {
                 break;
             case R.id.navigation_broadcast:
                 setPicDark();
-                picBroadcast.setImageResource(R.drawable.navigation_zhibo_focus);
+                picBroadcast.setImageResource(R.drawable.navigation_cart_focus);
                 if (cartFragment == null) {
                     cartFragment = new CartFragment();
                     fragmentTransaction.add(R.id.fragment_container, cartFragment);
