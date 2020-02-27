@@ -15,9 +15,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".search.SearchActivity"></activity>
+        android:theme="@style/AppTheme">
+        <activity android:name=".search.SearchResultActivity"/>
         <activity android:name=".fenlei.FenLeiResActivity" />
         <activity android:name=".fenlei.FenLeiActivity" />
         <activity android:name=".address_manage.AddOrEditAddressActivity" />
@@ -47,10 +46,8 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="1107922776" />
             </intent-filter>
         </activity>
@@ -76,6 +73,7 @@
         <activity android:name=".dingzhi.DingzhiDetailUserActivity" />
         <activity android:name=".personal_index.PersonalIndexActivity" />
         <activity android:name=".shop_index.ShopIndexActivity" />
+        <activity android:name=".search.SearchActivity" />
     </application>
 
 </manifest>

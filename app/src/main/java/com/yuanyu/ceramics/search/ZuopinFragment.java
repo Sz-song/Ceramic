@@ -96,8 +96,8 @@ public class ZuopinFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter initPresent() {
-        return null;
+    protected SearchMasterPresenter initPresent() {
+        return new SearchMasterPresenter();
     }
 
     @Override
@@ -116,6 +116,10 @@ public class ZuopinFragment extends BaseFragment {
             zuopinList.clear();
             adapter.notifyDataSetChanged();
         }
+        Zuopin zp1=new Zuopin("1","img/banner1.jpg","元代青花山水瓷仿制","南昌市",88880,"1");
+        Zuopin zp2=new Zuopin("2","img/banner1.jpg","元代青花山水瓷仿制","南昌市",88880,"1");
+        zuopinList.add(zp1);
+        zuopinList.add(zp2);
 //        model.getSearchZuopinResult(p, Sp.getInt(mContext,"useraccountid"), 1, search, 1)
 //                .subscribeOn(Schedulers.io())
 //                .compose(new HttpServiceInstance.ErrorTransformer<SearchBean>())

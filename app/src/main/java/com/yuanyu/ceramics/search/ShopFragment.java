@@ -57,8 +57,8 @@ public class ShopFragment extends BaseFragment {
     }
 
     @Override
-    protected BasePresenter initPresent() {
-        return null;
+    protected SearchMasterPresenter initPresent() {
+        return new SearchMasterPresenter();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ShopFragment extends BaseFragment {
             page = 0;
             shopList.clear();
             adapter.notifyDataSetChanged();
-            LoadShopData(page,keyword,1);
+//            LoadShopData(page,keyword,1);
             ToastUtils.showToast(context, "刷新成功");
             refreshLayout.setRefreshing(false);
         });
@@ -117,6 +117,11 @@ public class ShopFragment extends BaseFragment {
             shopList.clear();
             adapter.notifyDataSetChanged();
         }
+        Shop sp1=new Shop("img/banner1.jpg","黄建宏工作室","60","7","25","1");
+        Shop sp2=new Shop("img/banner1.jpg","王锡良工作室","60","7","25","1");
+        shopList.add(sp1);
+        shopList.add(sp2);
+
 //        model.getSearchShopResult(p, SpUtils.getInt(context, "useraccountid"), 3, search, 3)
 //                .subscribeOn(Schedulers.io())
 //                .compose(new HttpServiceInstance.ErrorTransformer<SearchBean>())
