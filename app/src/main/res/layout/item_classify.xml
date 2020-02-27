@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white_drak"
+    android:layout_height="55dp">
+    <View
+        android:id="@+id/vertical_bar"
+        android:layout_width="3dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/colorPrimary"/>
+    <TextView
+        android:id="@+id/classify"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="@color/blackLight"/>
+</FrameLayout>

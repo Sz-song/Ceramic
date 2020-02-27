@@ -1,5 +1,6 @@
 package com.yuanyu.ceramics.home.homepage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.fenlei.FenLeiActivity;
+import com.yuanyu.ceramics.search.SearchActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,8 +49,12 @@ public class HomepageFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.home_fenlei:
+                Intent intent1 = new Intent(getActivity(), FenLeiActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.home_search:
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                startActivity(intent);
                 break;
         }
     }
