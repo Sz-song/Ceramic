@@ -1,8 +1,5 @@
 package com.yuanyu.ceramics.mine;
 
-import androidx.annotation.Nullable;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseFragment;
-import com.yuanyu.ceramics.bazaar.BazaarActivity;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -139,13 +139,48 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         L.e(e.status + e.message);
         swipe.setRefreshing(false);
     }
-    @OnClick(R.id.address)
-    public  void  onViewClicked(View view){
+    @OnClick({R.id.cart, R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_coupon, R.id.mycollect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting})
+    public void onViewClicked(View view) {
         Intent intent;
-        switch (view.getId()){
+        switch (view.getId()) {
+            case R.id.cart:
+                break;
+            case R.id.fans:
+                break;
+            case R.id.focus:
+                break;
+            case R.id.dynamic:
+                break;
+            case R.id.protrait:
+                intent = new Intent(getContext(), PersonalIndexActivity.class);
+                intent.putExtra("userid",Sp.getString(getContext(), "useraccountid"));
+                startActivity(intent);
+                break;
+            case R.id.all_order:
+                break;
+            case R.id.daifukuan:
+                break;
+            case R.id.daifahuo:
+                break;
+            case R.id.daishouhuo:
+                break;
+            case R.id.daipingjia:
+                break;
+            case R.id.refund:
+                break;
             case R.id.address:
                 intent = new Intent(getContext(), AddressManageActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.my_coupon:
+                break;
+            case R.id.mycollect:
+                break;
+            case R.id.dashiattesta:
+                break;
+            case R.id.applyenter:
+                break;
+            case R.id.system_setting:
                 break;
         }
     }
