@@ -17,6 +17,8 @@ import com.yuanyu.ceramics.login.LoginBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
 import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
+import com.yuanyu.ceramics.order.MyOrderFragmentBean;
+import com.yuanyu.ceramics.order.OrderDetailBean;
 import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
 import com.yuanyu.ceramics.shop_index.ShopIndexBean;
@@ -158,4 +160,23 @@ public interface HttpService {
     //广场动态和文章
     @POST("app_api/yuba/square_dynamic_article.php")
     Observable<BaseResponse<List<DynamicBean>>> getSquareDynamicArticle(@Body RequestBody body);
+    //订单详情
+    @POST("app_api/wujia/ordermoremsg.php")
+    Observable<BaseResponse<OrderDetailBean>>getOrderDetailData(@Body RequestBody body);
+    //取消订单
+    @POST("app_api/home_page/cancelorder.php")
+    Observable<BaseResponse<String[]>>cancelOrder(@Body RequestBody body);
+    //删除订单
+    @POST("app_api/home_page/deleteorder.php")
+    Observable<BaseResponse<String[]>>deleteOrder(@Body RequestBody body);
+    //确认收货
+    @POST("app_api/home_page/receivedelivery.php")
+    Observable<BaseResponse<String[]>>confirmReceived(@Body RequestBody body);
+//    我的订单
+    @POST("app_api/wujia/waitpay.php")
+    Observable<BaseResponse<List<MyOrderFragmentBean>>>getOrderList(@Body RequestBody body);
+    //提醒发货
+    @POST("app_api/wujia/reminddelivery.php")
+    Observable<BaseResponse<String[]>>remindDelivery(@Body RequestBody body);
+
 }

@@ -17,6 +17,7 @@ import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseFragment;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
@@ -28,6 +29,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
+import static com.yuanyu.ceramics.AppConstant.DAIFAHUO;
+import static com.yuanyu.ceramics.AppConstant.DAIFUKUAN;
+import static com.yuanyu.ceramics.AppConstant.DAIPINGJIA;
+import static com.yuanyu.ceramics.AppConstant.DAISHOUHUO;
 
 public class MineFragment extends BaseFragment<MinePresenter> implements MineConstract.IMineView {
     @BindView(R.id.background)
@@ -157,14 +162,29 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 startActivity(intent);
                 break;
             case R.id.all_order:
+                intent = new Intent(getContext(), MyOrderActivity.class);
+                intent.putExtra("status",0);
+                startActivity(intent);
                 break;
             case R.id.daifukuan:
+                intent = new Intent(getContext(), MyOrderActivity.class);
+                intent.putExtra("status",DAIFUKUAN);
+                startActivity(intent);
                 break;
             case R.id.daifahuo:
+                intent = new Intent(getContext(), MyOrderActivity.class);
+                intent.putExtra("status",DAIFAHUO);
+                startActivity(intent);
                 break;
             case R.id.daishouhuo:
+                intent = new Intent(getContext(), MyOrderActivity.class);
+                intent.putExtra("status",DAISHOUHUO);
+                startActivity(intent);
                 break;
             case R.id.daipingjia:
+                intent = new Intent(getContext(), MyOrderActivity.class);
+                intent.putExtra("status",DAIPINGJIA);
+                startActivity(intent);
                 break;
             case R.id.refund:
                 break;
