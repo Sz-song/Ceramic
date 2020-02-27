@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.yuanyu.ceramics.utils.L;
 
 public class MyFragmentAdapter extends FragmentPagerAdapter {
-    private String[] mTitles = new String[]{"作品","大师","店铺"};
+    private String[] mTitles = new String[]{"作品","店铺","大师"};
     private String string;
     private String outsidetype;
     ZuopinFragment fragment = new ZuopinFragment() ;
@@ -49,15 +49,15 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
             Bundle bundle = new Bundle();
             bundle.putString("str",string);
             bundle.putString("outtype",outsidetype);
-//            fragment_dashi.setArguments(bundle);
-//            return fragment_dashi;
+            fragment_dashi.setArguments(bundle);
+            return fragment_dashi;
         }
         else if(position == 2){
             Bundle bundle = new Bundle();
             bundle.putString("str",string);
             bundle.putString("outtype",outsidetype);
-//            fragment_shop.setArguments(bundle);
-//            return fragment_shop;
+            fragment_shop.setArguments(bundle);
+            return fragment_shop;
         }
 
 

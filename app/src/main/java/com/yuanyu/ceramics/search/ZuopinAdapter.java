@@ -43,7 +43,7 @@ public class ZuopinAdapter extends RecyclerView.Adapter<ZuopinAdapter.ViewHolder
                 .placeholder(R.drawable.img_default)
                 .into(holder.itemImg);
         holder.itemName.setText(zuopin.getName());
-        holder.price.setText(zuopin.getPrice() + "");
+        holder.price.setText("￥"+zuopin.getPrice() + "");
         holder.location.setText(zuopin.getLocation());
 //        holder.itemView.setOnClickListener(view -> ItemDetailActivity.actionStart(mContext, mZuopinList.get(position).getId()));
     }
