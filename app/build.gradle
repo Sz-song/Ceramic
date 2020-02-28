@@ -78,4 +78,7 @@ dependencies {
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     //视频播放器
     implementation 'cn.jzvd:jiaozivideoplayer:7.1.0'
+    //image selector
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.2'
+
 }

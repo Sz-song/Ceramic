@@ -19,6 +19,8 @@ import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
 import com.yuanyu.ceramics.order.MyOrderFragmentBean;
 import com.yuanyu.ceramics.order.OrderDetailBean;
+import com.yuanyu.ceramics.order.refund.RefundDetailBean;
+import com.yuanyu.ceramics.order.refund.RefundListBean;
 import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
 import com.yuanyu.ceramics.shop_index.ShopIndexBean;
@@ -28,12 +30,15 @@ import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.QueryMap;
 
 public interface HttpService {
@@ -178,5 +183,23 @@ public interface HttpService {
     //提醒发货
     @POST("app_api/wujia/reminddelivery.php")
     Observable<BaseResponse<String[]>>remindDelivery(@Body RequestBody body);
-
+    //上传图片
+    @POST("app_api/upload/upload.php")
+    @Multipart
+    Observable<BaseResponse<List<String>>> uploadImage(@Part("data")RequestBody body, @Part MultipartBody.Part[] part);
+    //申请退款
+    @POST("app_api/wujia/submitrefund.php")
+    Observable<BaseResponse> submitRefund(@Body RequestBody body);
+    //吾家退款订单
+    @POST("app_api/wujia/refundwujia.php")
+    Observable<BaseResponse<List<RefundListBean>>>getWujiaRefundData(@Body RequestBody body);
+    //退款详情
+    @POST("app_api/wujia/refundwujiamoremsg.php")
+    Observable<BaseResponse<RefundDetailBean>>refundDetail(@Body RequestBody body);
+    //取消退款/售后申请
+    @POST("app_api/wujia/cancel_refund.php")
+    Observable<BaseResponse<String[]>> CancelRefund(@Body RequestBody body);
+    //退货退款填写退款物流单号
+    @POST("app_api/wujia/add_refund_logistics.php")
+    Observable<BaseResponse<String[]>> InputLogistics(@Body RequestBody body);
 }
