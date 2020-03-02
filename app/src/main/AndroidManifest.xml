@@ -78,6 +78,15 @@
         <activity android:name=".cooperation.CooperationActivity" />
         <activity android:name=".meet_master.MeetMasterActivity" />
         <activity android:name=".personal_index.fans_focus.FocusAndFansActicity" />
+        <activity android:name=".mine.applyenter.EnterProtocolActivity" />
+        <activity android:name=".mine.applyenter.UploadEnterImageActivity" />
+        <activity android:name=".mine.applyenter.ApplyEnterActivity" />
+        <activity android:name=".mine.systemsetting.AccountSecurityActivity" />
+        <activity android:name=".mine.systemsetting.AboutYuanyuActivity" />
+        <activity android:name=".mine.systemsetting.BlackListActivity" />
+        <activity android:name=".mine.systemsetting.ModifyPasswardActivity" />
+        <activity android:name=".mine.systemsetting.OpinionOfYouActivity" />
+        <activity android:name=".mine.systemsetting.SystemSettingActivity" />
     </application>
 
 </manifest>

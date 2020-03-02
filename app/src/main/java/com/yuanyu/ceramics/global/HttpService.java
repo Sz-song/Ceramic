@@ -17,6 +17,7 @@ import com.yuanyu.ceramics.login.LoginBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
 import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
+import com.yuanyu.ceramics.mine.systemsetting.BlackListBean;
 import com.yuanyu.ceramics.order.MyOrderFragmentBean;
 import com.yuanyu.ceramics.order.OrderDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundDetailBean;
@@ -206,4 +207,25 @@ public interface HttpService {
     //关注和粉丝列表
     @POST("app_api/wujia/add_refund_logistics.php")
     Observable<BaseResponse<List<FocusAndFansBean>>> getFocusandFansList(@Body RequestBody body);
+    //申请入驻
+    @POST("app_api/home_page/applyenter.php")
+    Observable<BaseResponse<String[]>> ApplyEnter(@Body RequestBody body);
+    //移除黑名单
+    @POST("app_api/home_page/remove_blacklist.php")
+    Observable<BaseResponse>removeBlacklist(@Body RequestBody body);
+    //黑名单初始化
+    @POST("app_api/home_page/blacklist.php")
+    Observable<BaseResponse<List<BlackListBean>>>getBlacklist(@Body RequestBody body);
+    //获取版本信息
+    @POST("app_api/home_page/get_version.php")
+    Observable<BaseResponse<Integer>> getVersion(@Body RequestBody body);
+    //获取验证码
+    @POST("app_api/app_login/login_module.php")
+    Observable<BaseResponse<String[]>> getValidCode(@Body RequestBody body);
+    //重置密码
+    @POST("app_api/app_login/login_module.php")
+    Observable<BaseResponse<String[]>> resetPwd(@Body RequestBody body);
+    //用户反馈
+    @POST("app_api/home_page/usersopinion.php")
+    Observable<BaseResponse<String[]>> usersOpinion(@Body RequestBody body);
 }

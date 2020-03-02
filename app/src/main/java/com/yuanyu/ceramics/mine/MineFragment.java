@@ -17,6 +17,7 @@ import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseFragment;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
@@ -201,6 +202,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case R.id.applyenter:
                 break;
             case R.id.system_setting:
+                intent = new Intent(getContext(), SystemSettingActivity.class);
+                startActivity(intent);
                 break;
         }
     }
