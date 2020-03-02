@@ -22,6 +22,7 @@ import com.yuanyu.ceramics.order.OrderDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundListBean;
 import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
+import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
 import com.yuanyu.ceramics.shop_index.ShopIndexBean;
 import com.yuanyu.ceramics.shop_index.ShopPinglunBean;
@@ -202,4 +203,7 @@ public interface HttpService {
     //退货退款填写退款物流单号
     @POST("app_api/wujia/add_refund_logistics.php")
     Observable<BaseResponse<String[]>> InputLogistics(@Body RequestBody body);
+    //关注和粉丝列表
+    @POST("app_api/wujia/add_refund_logistics.php")
+    Observable<BaseResponse<List<FocusAndFansBean>>> getFocusandFansList(@Body RequestBody body);
 }
