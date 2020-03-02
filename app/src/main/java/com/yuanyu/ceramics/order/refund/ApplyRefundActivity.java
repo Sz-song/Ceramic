@@ -94,6 +94,7 @@ public class ApplyRefundActivity extends BaseActivity<ApplyRefundPresenter> impl
     private UploadPhotoAdapter adapter;
     private ArrayList<String> list;
     private String addPic = "add_pic" + R.drawable.add_photo;
+
     private String system_time;
     private String finish_time;
     private int reason_position;
