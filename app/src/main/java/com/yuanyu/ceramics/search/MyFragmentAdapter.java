@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.yuanyu.ceramics.utils.L;
 
 public class MyFragmentAdapter extends FragmentPagerAdapter {
-    private String[] mTitles = new String[]{"作品","店铺","大师"};
+    private String[] mTitles = new String[]{"作品","大师","店铺"};
     private String string;
     private String outsidetype;
     ZuopinFragment fragment = new ZuopinFragment() ;

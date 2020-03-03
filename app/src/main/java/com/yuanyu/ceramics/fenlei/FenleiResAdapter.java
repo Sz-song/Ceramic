@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -20,15 +19,10 @@ import butterknife.ButterKnife;
 
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 
-public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
+public class FenleiResAdapter extends RecyclerView.Adapter<FenleiResAdapter.ViewHolder> {
     private List<FenLeiResBean> list;
     private Context context;
-
-    public ResultAdapter(List<FenLeiResBean> list) {
-        this.list = list;
-    }
-
-    @NonNull
+    public FenleiResAdapter(List<FenLeiResBean> list){this.list=list;}
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
@@ -73,4 +67,3 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         }
     }
 }
-

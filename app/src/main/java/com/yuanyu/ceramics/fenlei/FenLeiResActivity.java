@@ -1,10 +1,8 @@
 package com.yuanyu.ceramics.fenlei;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -23,8 +21,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 public class FenLeiResActivity extends BaseActivity {
     @BindView(R.id.title)
@@ -37,7 +33,7 @@ public class FenLeiResActivity extends BaseActivity {
     SwipeRefreshLayout swiperefresh;
     @BindView(R.id.bottom_recycle)
     RecyclerView bottomRecycle;
-    private ResultAdapter adapter;
+    private FenleiResAdapter adapter;
     private BottomResultAdapter bottomResultAdapter;
     private List<String> bottomList = new ArrayList<>();
     private String[] strings = new String[5];
@@ -114,8 +110,11 @@ public class FenLeiResActivity extends BaseActivity {
         initResultList();
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         resultRecycle.setLayoutManager(layoutManager);
-//        FenLeiResBean rs1=new FenLeiResBean('1','n1','1',2000,'1','1');
-        adapter = new ResultAdapter(resultList);
+        FenLeiResBean rs1=new FenLeiResBean("1","商品1","南昌市",2000,"img/banner1.jpg","1");
+        FenLeiResBean rs2=new FenLeiResBean("2","商品2","南昌市",3000,"img/banner1.jpg","2");
+        resultList.add(rs1);
+        resultList.add(rs2);
+        adapter = new FenleiResAdapter(resultList);
         resultRecycle.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -154,10 +153,8 @@ public class FenLeiResActivity extends BaseActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return true;
     }

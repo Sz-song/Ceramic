@@ -87,6 +87,8 @@
         <activity android:name=".mine.systemsetting.ModifyPasswardActivity" />
         <activity android:name=".mine.systemsetting.OpinionOfYouActivity" />
         <activity android:name=".mine.systemsetting.SystemSettingActivity" />
+        <activity android:name=".shop_index.ShopIndexSearchActivity" />
+        <activity android:name=".search.SearchResultActivity" />
     </application>
 
 </manifest>

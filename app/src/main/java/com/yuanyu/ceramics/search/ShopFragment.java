@@ -72,6 +72,10 @@ public class ShopFragment extends BaseFragment {
         L.e("outsidetype  " + outsidetype);
         LinearLayoutManager manager = new LinearLayoutManager(this.getContext());
         recyShop.setLayoutManager(manager);
+        Shop sp1=new Shop("img/banner1.jpg","青花小店","60","30","30","1");
+        Shop sp2=new Shop("img/banner1.jpg","青花小店","50","35","35","2");
+        shopList.add(sp1);
+        shopList.add(sp2);
         adapter = new ShopAdapter(shopList, getContext());
         recyShop.setAdapter(adapter);
         recyShop.addOnScrollListener(new RecyclerView.OnScrollListener() {
