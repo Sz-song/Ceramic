@@ -64,7 +64,7 @@ public class SearchMasterAdapter extends RecyclerView.Adapter<SearchMasterAdapte
                 break;
         }
 //        holder.itemView.setOnClickListener(view -> PersonalIndexActivity.actionStart(content, Integer.parseInt(dashi.getId())));
-        holder.guanzhuBtn.setOnClickListener(view -> FocusClickListener.callback(position));
+//        holder.guanzhuBtn.setOnClickListener(view -> FocusClickListener.callback(position));
     }
 
     @Override

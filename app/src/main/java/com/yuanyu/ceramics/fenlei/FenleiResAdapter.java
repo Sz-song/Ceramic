@@ -6,12 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
-import com.yuanyu.ceramics.common.ResultBean;
 import com.yuanyu.ceramics.global.GlideApp;
 
 import java.util.List;
@@ -21,15 +19,10 @@ import butterknife.ButterKnife;
 
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 
-public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder> {
-    private List<ResultBean> list;
+public class FenleiResAdapter extends RecyclerView.Adapter<FenleiResAdapter.ViewHolder> {
+    private List<FenLeiResBean> list;
     private Context context;
-
-    public ResultAdapter(List<ResultBean> list) {
-        this.list = list;
-    }
-
-    @NonNull
+    public FenleiResAdapter(List<FenLeiResBean> list){this.list=list;}
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
@@ -40,7 +33,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        ResultBean resultBean = list.get(position);
+        FenLeiResBean resultBean = list.get(position);
         GlideApp.with(context)
                 .load(BASE_URL + resultBean.getImage())
                 .placeholder(R.drawable.img_default)
@@ -74,4 +67,3 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         }
     }
 }
-

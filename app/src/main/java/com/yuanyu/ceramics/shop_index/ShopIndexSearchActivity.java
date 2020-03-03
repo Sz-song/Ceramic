@@ -19,7 +19,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.common.ResultBean;
-import com.yuanyu.ceramics.fenlei.ResultAdapter;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;

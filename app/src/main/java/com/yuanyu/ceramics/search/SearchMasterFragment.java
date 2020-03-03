@@ -65,6 +65,13 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
         SearchMasterBean sb2=new SearchMasterBean("img/banner1.jpg","王锡良","1","3","2","2",0);
         list.add(sb1);
         list.add(sb2);
+        if (list.size() == 0) {
+            nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
+        }
         adapter = new SearchMasterAdapter(list, getContext());
         recyclerview.setAdapter(adapter);
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -87,7 +94,7 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
                 }
             }
         });
-        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getInt(getContext(), "useraccountid"),list.get(position).getId(),position));
+//        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getInt(getContext(), "useraccountid"),list.get(position).getId(),position));
         swipe.setOnRefreshListener(() -> {
 //            page = 0;
 //            list.clear();

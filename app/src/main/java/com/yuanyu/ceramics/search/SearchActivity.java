@@ -73,8 +73,8 @@ public class SearchActivity extends BaseActivity {
     protected void initEvent() {
         ButterKnife.bind(this);
         tablelayout.addTab(tablelayout.newTab().setText("作品"));
-        tablelayout.addTab(tablelayout.newTab().setText("店铺"));
         tablelayout.addTab(tablelayout.newTab().setText("大师"));
+        tablelayout.addTab(tablelayout.newTab().setText("店铺"));
         source.add("青花瓶子");
         source.add("青花器皿");
 //        source.add("白玉");

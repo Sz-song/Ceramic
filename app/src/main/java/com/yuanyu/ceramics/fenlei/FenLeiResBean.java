@@ -7,6 +7,14 @@ public class FenLeiResBean {
     private float price;
     private String image;
     private String shop;
+    public FenLeiResBean(String id, String name, String location, float price, String image, String shop) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.price = price;
+        this.image = image;
+        this.shop = shop;
+    }
 
     public String getId() {
         return id;
