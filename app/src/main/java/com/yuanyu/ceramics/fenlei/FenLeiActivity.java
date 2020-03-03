@@ -85,24 +85,14 @@ public class FenLeiActivity extends BaseActivity<FenLeiPresenter> implements Fen
         classifyAdapter=new ClassifyAdapter(classify_list,this);
         recyclerviewClassify.setAdapter(classifyAdapter);
         recyclerviewClassify.setLayoutManager(new LinearLayoutManager(this));
-        classifyAdapter = new ClassifyAdapter(classify_list, this);
-        recyclerviewClassify.setAdapter(classifyAdapter);
-        recyclerviewClassify.setLayoutManager(new LinearLayoutManager(this));
+//        classifyAdapter = new ClassifyAdapter(classify_list, this);
+//        recyclerviewClassify.setAdapter(classifyAdapter);
+//        recyclerviewClassify.setLayoutManager(new LinearLayoutManager(this));
         classifyAdapter.setPositionClickListener(position -> {
             classifyAdapter.notifyDataSetChanged();
-            if (position == 0) {
-                presenter.setShowList(showList, listfenlei);
-                Drawable drawable=getResources().getDrawable(R.drawable.fenlei01);
-                fenleibannar.setImageDrawable(drawable);
-            } else if (position == 1) {
-                presenter.setShowList(showList, listzhonglei);
-                Drawable drawable=getResources().getDrawable(R.drawable.fenlei02);
-                fenleibannar.setImageDrawable(drawable);
-            } else if (position == 2) {
-                presenter.setShowList(showList, listshape);
-                Drawable drawable=getResources().getDrawable(R.drawable.fenlei03);
-                fenleibannar.setImageDrawable(drawable);
-            }
+            if(position==0){presenter.setShowList(showList,listfenlei);}
+            else if(position==1){presenter.setShowList(showList,listzhonglei);}
+            else if(position==2){presenter.setShowList(showList, listshape);}
             fenleCellAdapter.notifyDataSetChanged();
         });
         presenter.setShowList(showList, listfenlei);
@@ -173,18 +163,16 @@ public class FenLeiActivity extends BaseActivity<FenLeiPresenter> implements Fen
     @OnClick(R.id.submit)
     public void onViewClicked() {
         if(submit.getText().toString().equals("确定")) {
-//            Intent intent = new Intent(FenLeiActivity.this, FenleiResultActivity.class);
-//            StringBuffer sb = new StringBuffer();
-//            for (int i = 0; i < stringList.size(); i++) {
-//                sb.append(stringList.get(i) + "/");
-//            }
-//            intent.putExtra("querycode", sb.toString());
-//            intent.putExtra("codeone", stringList.get(0));
-//            intent.putExtra("codetwo", stringList.get(1));
-//            intent.putExtra("codethree", stringList.get(2));
-//            intent.putExtra("codefour", stringList.get(3));
-//            intent.putExtra("codefive", stringList.get(4));
-//            startActivity(intent);
+            Intent intent = new Intent(FenLeiActivity.this, FenLeiResActivity.class);
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < stringList.size(); i++) {
+                sb.append(stringList.get(i) + "/");
+            }
+            intent.putExtra("querycode", sb.toString());
+            intent.putExtra("codeone", stringList.get(0));
+            intent.putExtra("codetwo", stringList.get(1));
+            intent.putExtra("codethree", stringList.get(2));
+            startActivity(intent);
         }else{
             Toast.makeText(this, "请至少选择一项", Toast.LENGTH_SHORT).show();
         }

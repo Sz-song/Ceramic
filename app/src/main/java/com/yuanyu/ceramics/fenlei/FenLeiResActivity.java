@@ -54,7 +54,7 @@ public class FenLeiResActivity extends BaseActivity {
 
     @Override
     protected BasePresenter initPresent() {
-        return new  FenLeiResPresenter();
+        return new FenLeiPresenter();
     }
 
     @Override
@@ -105,10 +105,6 @@ public class FenLeiResActivity extends BaseActivity {
         strings[1] = strtwo;
         String strthree = intent.getStringExtra("codethree");
         strings[2] = strthree;
-        String strfour = intent.getStringExtra("codefour");
-        strings[3] = strfour;
-        String strfive = intent.getStringExtra("codefive");
-        strings[4] = strfive;
         String[] listStr = selectStr.split("/");
         for (int i = 0; i < listStr.length; i++) {
             if (!listStr[i].equals("")) {
@@ -118,7 +114,8 @@ public class FenLeiResActivity extends BaseActivity {
         initResultList();
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         resultRecycle.setLayoutManager(layoutManager);
-//        adapter = new ResultAdapter(resultList);
+//        FenLeiResBean rs1=new FenLeiResBean('1','n1','1',2000,'1','1');
+        adapter = new ResultAdapter(resultList);
         resultRecycle.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -128,6 +125,7 @@ public class FenLeiResActivity extends BaseActivity {
     }
 
     private void initResultList() {
+
 //        model.getFenleiRusult(strings, page, page_size)
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
