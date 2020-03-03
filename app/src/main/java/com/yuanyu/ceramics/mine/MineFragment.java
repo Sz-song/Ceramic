@@ -16,10 +16,14 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseFragment;
+import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
+import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
+import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -27,7 +31,6 @@ import com.yuanyu.ceramics.utils.Sp;
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 import static com.yuanyu.ceramics.AppConstant.DAIFAHUO;
@@ -36,14 +39,20 @@ import static com.yuanyu.ceramics.AppConstant.DAIPINGJIA;
 import static com.yuanyu.ceramics.AppConstant.DAISHOUHUO;
 
 public class MineFragment extends BaseFragment<MinePresenter> implements MineConstract.IMineView {
-    @BindView(R.id.background)
-    ImageView background;
-    @BindView(R.id.cart)
-    ImageView cart;
+
+
+    @BindView(R.id.title)
+    TextView title;
+    @BindView(R.id.system_setting)
+    ImageView systemSetting;
+    @BindView(R.id.protrait)
+    CircleImageView protrait;
     @BindView(R.id.name)
     TextView name;
     @BindView(R.id.introduce)
     TextView introduce;
+    @BindView(R.id.mine_relat)
+    RelativeLayout mineRelat;
     @BindView(R.id.fans_num)
     TextView fansNum;
     @BindView(R.id.fans)
@@ -56,8 +65,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     TextView dynamicNum;
     @BindView(R.id.dynamic)
     LinearLayout dynamic;
-    @BindView(R.id.protrait)
-    CircleImageView protrait;
     @BindView(R.id.all_order)
     TextView allOrder;
     @BindView(R.id.daifukuan_image)
@@ -82,20 +89,14 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     RelativeLayout refund;
     @BindView(R.id.address)
     LinearLayout address;
-    @BindView(R.id.my_coupon)
-    LinearLayout myCoupon;
-    @BindView(R.id.mycollect)
-    LinearLayout mycollect;
-    @BindView(R.id.dashi)
-    TextView dashi;
-    @BindView(R.id.dashiattesta)
-    LinearLayout dashiattesta;
-    @BindView(R.id.apply_enter)
-    TextView applyEnter;
+    @BindView(R.id.my_dingzhi)
+    LinearLayout myDingzhi;
+    @BindView(R.id.my_collect)
+    LinearLayout myCollect;
     @BindView(R.id.applyenter)
     LinearLayout applyenter;
-    @BindView(R.id.system_setting)
-    LinearLayout systemSetting;
+    @BindView(R.id.dashiattesta)
+    LinearLayout dashiattesta;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
 
@@ -128,11 +129,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 .load(BASE_URL + bean.getPortrait()).placeholder(R.drawable.img_default)
                 .override(100, 100)
                 .into(protrait);
-        GlideApp.with(getContext())
-                .load(BASE_URL + bean.getPortrait())
-                .optionalTransform(new BlurTransformation(20))
-                .placeholder(R.drawable.img_default)
-                .into(background);
         name.setText(bean.getName());
         fansNum.setText(bean.getFans_num());
         focusNum.setText(bean.getFocus_num());
@@ -145,61 +141,75 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         L.e(e.status + e.message);
         swipe.setRefreshing(false);
     }
-    @OnClick({R.id.cart, R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_coupon, R.id.mycollect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting})
+
+    @OnClick({R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.mine_relat, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_dingzhi, R.id.my_collect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
-            case R.id.cart:
-                break;
             case R.id.fans:
+                intent = new Intent(getContext(), FocusAndFansActicity.class);
+                intent.putExtra("userid", Sp.getString(getContext(), "useraccountid"));
+                intent.putExtra("position", 2);
+                startActivity(intent);
                 break;
             case R.id.focus:
+                intent = new Intent(getContext(), FocusAndFansActicity.class);
+                intent.putExtra("userid", Sp.getString(getContext(), "useraccountid"));
+                intent.putExtra("position", 1);
+                startActivity(intent);
                 break;
             case R.id.dynamic:
-                break;
             case R.id.protrait:
-                intent = new Intent(getContext(), PersonalIndexActivity.class);
-                intent.putExtra("userid",Sp.getString(getContext(), "useraccountid"));
-                startActivity(intent);
+            case R.id.mine_relat:
+                PersonalIndexActivity.actionStart(getContext(),  Sp.getString(getContext(), "useraccountid"));
                 break;
             case R.id.all_order:
                 intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status",0);
+                intent.putExtra("status", 0);
                 startActivity(intent);
                 break;
             case R.id.daifukuan:
                 intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status",DAIFUKUAN);
+                intent.putExtra("status", DAIFUKUAN);
                 startActivity(intent);
                 break;
             case R.id.daifahuo:
                 intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status",DAIFAHUO);
+                intent.putExtra("status", DAIFAHUO);
                 startActivity(intent);
                 break;
             case R.id.daishouhuo:
                 intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status",DAISHOUHUO);
+                intent.putExtra("status", DAISHOUHUO);
                 startActivity(intent);
                 break;
             case R.id.daipingjia:
                 intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status",DAIPINGJIA);
+                intent.putExtra("status", DAIPINGJIA);
                 startActivity(intent);
                 break;
             case R.id.refund:
+                intent = new Intent(getContext(), RefundListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.address:
                 intent = new Intent(getContext(), AddressManageActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.my_coupon:
+            case R.id.my_dingzhi:
+                intent = new Intent(getContext(), MyDingzhiActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.mycollect:
+            case R.id.my_collect:
                 break;
             case R.id.dashiattesta:
                 break;
             case R.id.applyenter:
+                if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {
+                    intent = new Intent(this.getContext(), EnterProtocolActivity.class);
+                    intent.putExtra("type", 0);
+                    startActivity(intent);
+                }
                 break;
             case R.id.system_setting:
                 intent = new Intent(getContext(), SystemSettingActivity.class);
