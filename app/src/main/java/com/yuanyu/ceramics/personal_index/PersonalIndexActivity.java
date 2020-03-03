@@ -41,6 +41,7 @@ import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.SharePosterPopupWindow;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.myinfo.MyInfoActivity;
 import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HelpUtils;
@@ -394,9 +395,10 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
     }
 
 //    @OnClick({R.id.focus_num, R.id.fans_num, R.id.portrait, R.id.show_more, R.id.focus, R.id.contact, R.id.shop, R.id.master_fans, R.id.master_focus, R.id.focus_master, R.id.contact_master, R.id.enter_master_shop})
-//    public void onViewClicked(View view) {
-//        Intent intent;
-//        switch (view.getId()) {
+@OnClick({R.id.show_more})
+public void onViewClicked(View view) {
+        Intent intent;
+        switch (view.getId()) {
 //            case R.id.focus_num:
 //            case R.id.master_focus:
 ////                intent = new Intent(PersonalIndexActivity.this, FocusAndFansActicity.class);
@@ -423,11 +425,11 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
 ////                    ViewImageActivity.actionStart(PersonalIndexActivity.this, 0, imagelist);
 ////                }
 //                break;
-//            case R.id.show_more://编辑资料
-////                intent = new Intent(PersonalIndexActivity.this, ViewMyInfoActivity.class);
-////                intent.putExtra("userid", userid);
-////                startActivityForResult(intent, 1003);
-////                break;
+            case R.id.show_more://编辑资料
+                intent = new Intent(PersonalIndexActivity.this, MyInfoActivity.class);
+//                intent.putExtra("userid", userid);
+                startActivityForResult(intent, 1003);
+                break;
 //            case R.id.focus://关注此人
 //            case R.id.focus_master:
 //                if (null != Sp.getString(this, AppConstant.MOBILE) && Sp.getString(this, AppConstant.MOBILE).length() > 8) {
@@ -463,8 +465,8 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
 //                intent.putExtra("shopid", shopid + "");
 //                startActivity(intent);
 //                break;
-//        }
-//    }
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

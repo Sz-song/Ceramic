@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_marginStart="15dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/time_day"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/time"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="30dp"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <View
+            android:id="@+id/line_top"
+            android:background="@color/colorAccent"
+            android:layout_width="2dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="50dp" />
+        <View
+            android:id="@+id/line_bottom"
+            android:background="@color/colorAccent"
+            android:layout_width="2dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_height="50dp" />
+        <View
+            android:id="@+id/center_view"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:background="@drawable/r4_soebebeb"/>
+        <ImageView
+            android:id="@+id/center_img"
+            android:layout_width="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/blue_hook"
+            android:layout_height="20dp"/>
+    </FrameLayout>
+    <TextView
+        android:id="@+id/context"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="12sp"
+        android:gravity="center_vertical"
+        android:textColor="@color/blackLight"
+        android:textIsSelectable="true"/>
+</LinearLayout>
