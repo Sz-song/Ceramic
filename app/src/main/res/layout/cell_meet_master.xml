@@ -76,7 +76,7 @@
                 android:paddingBottom="5dp"
                 android:textSize="13sp"
                 android:textColor="@color/colorPrimary"
-                android:background="@drawable/r5_soblue"
+                android:background="@drawable/r2_sowhite_stpri"
                 android:layout_centerInParent="true"
                 android:text="咨询"
                 />

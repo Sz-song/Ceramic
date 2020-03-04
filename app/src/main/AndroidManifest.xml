@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".logistics.LogisticsActivity"></activity>
+        <activity android:name=".release_popwindow.ReleasePopwindowActivity"></activity>
+        <activity android:name=".logistics.LogisticsActivity" />
         <activity android:name=".myinfo.EditMyInfoActivity" />
 
         <uses-library
