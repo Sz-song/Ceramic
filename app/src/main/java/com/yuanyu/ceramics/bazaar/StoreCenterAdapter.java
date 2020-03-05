@@ -13,6 +13,7 @@ import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.common.CantScrollGirdLayoutManager;
 import com.yuanyu.ceramics.common.SquareImageView;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.item.ItemDetailAcitivity;
 
 import java.util.List;
 
@@ -109,7 +110,7 @@ public class StoreCenterAdapter extends RecyclerView.Adapter<StoreCenterAdapter.
                     .transforms(new CenterCrop(), new RoundedCornersTransformation(20, 0, RoundedCornersTransformation.CornerType.ALL))
                     .placeholder(R.drawable.img_default)
                     .into(holder.squareimage);
-//            holder.squareimage.setOnClickListener(view -> ItemDetailActivity.actionStart(context,item_list.get(position).getItem_id()));
+            holder.squareimage.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,item_list.get(position).getItem_id()));
         }
 
         @Override
