@@ -325,4 +325,13 @@
     <string name="helptool">辅助工具</string>
 <!--    sell-->
     <string name="nopay">未支付</string>
+    <string name="nofahuo">未发货</string>
+    <string name="yifahuo">已发货</string>
+    <string name="yishouhuo">已收货</string>
+    <string name="commodity">商品</string>
+    <string name="dzandqg">定制求购</string>
+    <string name="liveapply">直播申请</string>
+    <string name="info">信息</string>
+    <string name="contactkf">联系客服</string>
+    <string name="changeuser">切换用户</string>
 </resources>

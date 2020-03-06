@@ -1,5 +1,6 @@
-package com.yuanyu.ceramics.seller;
+package com.yuanyu.ceramics.seller.index;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +12,22 @@ import com.yuanyu.ceramics.base.BaseFragment;
 import com.yuanyu.ceramics.base.BasePresenter;
 
 public class IndexFragment extends BaseFragment {
+
+    private Context context;
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_index, container, false);
-        setHasOptionsMenu(true);
-        return view;
+        return inflater.inflate(R.layout.fragment_index, container, false);
     }
 
     @Override
     protected BasePresenter initPresent() {
-        return null;
+        return new BasePresenter() {
+        };
     }
 
     @Override
     protected void initEvent(View view) {
+        context = this.getActivity();
 
     }
 
