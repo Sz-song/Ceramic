@@ -9,17 +9,14 @@ public class AdsCellBean {
     private String shop;
     private String shopid;
 
-    public AdsCellBean(String image, String name, Double price, String location){
+    public AdsCellBean(String id, String image, String name, Double price, String location, String shop, String shopid) {
+        this.id = id;
         this.image = image;
         this.name = name;
         this.price = price;
         this.location = location;
-    }
-    public AdsCellBean(String image, String name, String shop, Double price){
-        this.image = image;
-        this.name = name;
         this.shop = shop;
-        this.price = price;
+        this.shopid = shopid;
     }
 
     public String getId() {
@@ -30,28 +27,20 @@ public class AdsCellBean {
         this.id = id;
     }
 
-    public String getShop() {
-        return shop;
-    }
-
-    public void setShop(String shop) {
-        this.shop = shop;
+    public String getImage() {
+        return image;
     }
 
     public void setImage(String image) {
         this.image = image;
     }
 
-    public String getImage() {
-        return image;
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Double getPrice() {
@@ -62,15 +51,27 @@ public class AdsCellBean {
         this.price = price;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getLocation() {
         return location;
     }
 
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getShop() {
+        return shop;
+    }
+
+    public void setShop(String shop) {
+        this.shop = shop;
+    }
+
     public String getShopid() {
         return shopid;
+    }
+
+    public void setShopid(String shopid) {
+        this.shopid = shopid;
     }
 }

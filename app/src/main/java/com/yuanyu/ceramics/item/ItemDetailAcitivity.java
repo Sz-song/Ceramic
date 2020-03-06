@@ -266,6 +266,11 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 .placeholder(R.drawable.img_default)
                 .into(topImage);
         recyclerview.setLayoutManager(gridLayoutManager);
+
+        AdsCellBean acb1=new AdsCellBean("1","img/banner1.jpg","青花瓷瓶",12000.00,"南昌市","1","1");
+        AdsCellBean acb2=new AdsCellBean("2","img/banner1.jpg","元代青花山水瓶仿品",11000.00,"南昌市","1","2");
+        adsCellBeanList.add(acb1);
+        adsCellBeanList.add(acb2);
         itemDetailAdapter = new ItemDetailAdapter(this, bean, adsCellBeanList);
         recyclerview.setAdapter(itemDetailAdapter);
         itemDetailAdapter.setOnShareClickListener(() -> {
@@ -365,7 +370,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
             shoucangImg.setBackgroundResource(R.drawable.collectedblue);
         } else {
             Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
-            shoucangImg.setBackgroundResource(R.drawable.collecticon);
+            shoucangImg.setBackgroundResource(R.drawable.shoucang);
         }
     }
 
