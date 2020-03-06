@@ -256,15 +256,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="【大师认证】"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/color_666666"-->
+<!--            android:textSize="16sp" />-->
+        <ImageView
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:text="【大师认证】"
-            android:textStyle="bold"
-            android:textColor="@color/color_666666"
-            android:textSize="16sp" />
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/masterintrotit"/>
         <LinearLayout
             android:id="@+id/cell_master"
             android:orientation="vertical"
@@ -355,22 +360,54 @@
             android:background="@color/dividerGray"
             android:layout_marginTop="8dp"/>
     </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:text="【商品属性】"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="@color/color_666666"-->
+<!--        android:textSize="16sp" />-->
+    <ImageView
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="【商品属性】"
-        android:textStyle="bold"
-        android:textColor="@color/color_666666"
-        android:textSize="16sp" />
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/itemdetailtit"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="#fff7f7f7"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:layout_marginStart="20dp"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:text="玉雕师"
+            android:layout_weight="1"
+            tools:ignore="RtlHardcoded" />
+        <TextView
+            android:id="@+id/artist"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginEnd="20dp"
+            android:textSize="13sp"
+            android:textColor="#333333"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/white"
         android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"
@@ -397,7 +434,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/white"
+        android:background="#fff7f7f7"
         android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"
@@ -422,7 +459,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#fff7f7f7"
+        android:background="@color/white"
         android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"
@@ -448,7 +485,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/white"
+        android:background="#fff7f7f7"
         android:orientation="horizontal"
         >
         <TextView
@@ -476,7 +513,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="#fff7f7f7"
+        android:background="@color/white"
         android:orientation="horizontal"
         >
         <TextView
@@ -499,33 +536,7 @@
             android:textColor="#333333"
             />
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@color/white"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center|left"
-            android:layout_marginStart="20dp"
-            android:textSize="13sp"
-            android:textColor="#666666"
-            android:text="玉雕师"
-            android:layout_weight="1"
-            tools:ignore="RtlHardcoded" />
-        <TextView
-            android:id="@+id/artist"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:layout_marginEnd="20dp"
-            android:textSize="13sp"
-            android:textColor="#333333"
-            />
-    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"

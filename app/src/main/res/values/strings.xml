@@ -31,6 +31,7 @@
     <string name="focus">关注</string>
     <string name="dynamic">动态</string>
     <string name="my_order">我的订单</string>
+    <string name="shop_order">店铺订单</string>
     <string name="view_all_order">查看所有订单>></string>
     <string name="wait_pay">待付款</string>
     <string name="wait_delivery">待发货</string>
@@ -321,4 +322,7 @@
     <string name="enter_platform">入驻平台</string>
     <string name="apply_enter">商家入驻</string>
     <string name="master_enter">大师入驻</string>
+    <string name="helptool">辅助工具</string>
+<!--    sell-->
+    <string name="nopay">未支付</string>
 </resources>
