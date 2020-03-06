@@ -266,7 +266,6 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 .placeholder(R.drawable.img_default)
                 .into(topImage);
         recyclerview.setLayoutManager(gridLayoutManager);
-
         AdsCellBean acb1=new AdsCellBean("1","img/banner1.jpg","青花瓷瓶",12000.00,"南昌市","1","1");
         AdsCellBean acb2=new AdsCellBean("2","img/banner1.jpg","元代青花山水瓶仿品",11000.00,"南昌市","1","2");
         adsCellBeanList.add(acb1);
