@@ -15,6 +15,19 @@ public class StoreBean implements Serializable {
         private String guanzhunum;
         private String introduce;
 
+    public StoreBean() {
+    }
+
+    public StoreBean(int shop_id, String studioheadimg, String storename, String yishounum, String pingfennum, String guanzhunum, String introduce) {
+        this.shop_id = shop_id;
+        this.studioheadimg = studioheadimg;
+        this.storename = storename;
+        this.yishounum = yishounum;
+        this.pingfennum = pingfennum;
+        this.guanzhunum = guanzhunum;
+        this.introduce = introduce;
+    }
+
     public int getShop_id() {
         return shop_id;
     }

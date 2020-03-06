@@ -143,8 +143,8 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
     @Override
     protected void initEvent() {
         ButterKnife.bind(this);
-//        loadingDialog = new LoadingDialog(this);
-//        loadingDialog.show();
+        loadingDialog = new LoadingDialog(this);
+        loadingDialog.show();
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -163,7 +163,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
         }
         relativebtn.setVisibility(View.GONE);
         fabtn.setVisibility(View.GONE);
-//        presenter.getItemDetail(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), itemid);
+        presenter.getItemDetail(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), itemid);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -260,11 +260,11 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
             }
         });
         topPrice.setText("¥" + bean.getItembean().getGoodsprice());
-        GlideApp.with(this)
-                .load(AppConstant.BASE_URL + bean.getItembean().getGoodslist().get(0))
-                .override(100, 100)
-                .placeholder(R.drawable.img_default)
-                .into(topImage);
+//        GlideApp.with(this)
+//                .load(AppConstant.BASE_URL + bean.getItembean().getGoodslist().get(0))
+//                .override(100, 100)
+//                .placeholder(R.drawable.img_default)
+//                .into(topImage);
         recyclerview.setLayoutManager(gridLayoutManager);
         AdsCellBean acb1=new AdsCellBean("1","img/banner1.jpg","青花瓷瓶",12000.00,"南昌市","1","1");
         AdsCellBean acb2=new AdsCellBean("2","img/banner1.jpg","元代青花山水瓶仿品",11000.00,"南昌市","1","2");
@@ -279,7 +279,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
         });
         itemDetailAdapter.setOnFocusMasterListener(() -> {
             canload = false;
-            presenter.focus(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), bean.getMaster_id());
+            presenter.focus(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), bean.getMaster_id());
         });
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -343,7 +343,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 }
             }
         });
-//        posterPopupWindow=new SharePosterPopupWindow(this,this,itemDetailBean.getStorebean().getStudioheadimg(),itemDetailBean.getStorebean().getStorename(),"商品分享",itemDetailBean.getItembean().getGoodsname(),bean.getItembean().getGoodslist().get(0),H5_URL + "YuanyuMiniprogram/html/page/commodityDetail/commodityDetail.html?id=" + itemid,"/pagesA/commodity_detail/commodity_detail?id="+ itemid);
+        posterPopupWindow=new SharePosterPopupWindow(this,this,itemDetailBean.getStorebean().getStudioheadimg(),itemDetailBean.getStorebean().getStorename(),"商品分享",itemDetailBean.getItembean().getGoodsname(),bean.getItembean().getGoodslist().get(0),"YuanyuMiniprogram/html/page/commodityDetail/commodityDetail.html?id=" + itemid,"/pagesA/commodity_detail/commodity_detail?id="+ itemid);
         posterPopupWindow.setSavaImageListener((bitmap,type) -> {
             this.bitmap=bitmap;
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -484,7 +484,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                     if (Sp.getString(this, AppConstant.SHOP_ID).trim().equals(bean.getStorebean().getShop_id() + "")) {
                         Toast.makeText(this, "此商品为您店里的商品", Toast.LENGTH_SHORT).show();
                     } else {
-                        presenter.addCart(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), itemid);
+                        presenter.addCart(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), itemid);
                     }
                 }else{
 //                    intent = new Intent(this, BindPhoneActivity.class);

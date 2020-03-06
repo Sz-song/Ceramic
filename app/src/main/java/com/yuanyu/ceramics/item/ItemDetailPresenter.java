@@ -12,6 +12,7 @@ import com.yuanyu.ceramics.utils.L;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,28 +22,36 @@ public class ItemDetailPresenter extends BasePresenter<ItemDetailConstract.IItem
 
     private ItemDetailConstract.IItemDetailModel model;
 
-//    public ItemDetailPresenter() {model=new ItemDetailModel();}
+    ItemDetailPresenter() {model=new ItemDetailModel();}
 
     @Override
-    public void getItemDetail(int useraccountid, String itemid) {
-        model.getItemDetail(useraccountid, itemid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<ItemDetailBean>())
-                .subscribe(new BaseObserver<ItemDetailBean>() {
-                    @Override
-                    public void onNext(ItemDetailBean itemDetailBean) {
-                        if(view!=null){view.getItemDetailSuccess(itemDetailBean);}
-                    }
-                    @Override
-                    public void onError(ExceptionHandler.ResponeThrowable e) {
-                        if(view!=null){view.getItemDetailFail(e);}
-                    }
-                });
+    public void getItemDetail(String useraccountid, String itemid) {
+        List<String> list=new ArrayList<>();
+        list.add("");
+        list.add("");
+        list.add("");
+        ItemBean itemBean=new ItemBean("",888,888,"",list,list,list,true,"",1,"","","","","","","","","","","");
+        StoreBean storeBean=new StoreBean(1,"","","","","","");
+        ItemDetailBean itemDetailBean=new ItemDetailBean(itemBean,storeBean,"","","",",",true,"","","","",",",true,"",list);
+        if(view!=null){view.getItemDetailSuccess(itemDetailBean);}
+//        model.getItemDetail(useraccountid, itemid)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .compose(new HttpServiceInstance.ErrorTransformer<ItemDetailBean>())
+//                .subscribe(new BaseObserver<ItemDetailBean>() {
+//                    @Override
+//                    public void onNext(ItemDetailBean itemDetailBean) {
+//                        if(view!=null){view.getItemDetailSuccess(itemDetailBean);}
+//                    }
+//                    @Override
+//                    public void onError(ExceptionHandler.ResponeThrowable e) {
+//                        if(view!=null){view.getItemDetailFail(e);}
+//                    }
+//                });
     }
 
     @Override
-    public void collectItem(int useraccountid, String itemid, int shopid) {
+    public void collectItem(String useraccountid, String itemid, int shopid) {
         model.collectItem(useraccountid, itemid,  shopid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -60,7 +69,7 @@ public class ItemDetailPresenter extends BasePresenter<ItemDetailConstract.IItem
     }
 
     @Override
-    public void addCart(int useraccountid, String itemid) {
+    public void addCart(String useraccountid, String itemid) {
         model.addCart(useraccountid, itemid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -88,7 +97,7 @@ public class ItemDetailPresenter extends BasePresenter<ItemDetailConstract.IItem
     }
 
     @Override
-    public void focus(int useraccountid, int userid) {
+    public void focus(String useraccountid, String userid) {
         model.focus(useraccountid,userid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -11,7 +11,7 @@ public class ItemDetailBean {
     private String video;
     private String cover;
     private boolean is_master;//是否大师作品
-    private int master_id;//大师id
+    private String master_id;//大师id
     private String master_img;//大师头像
     private String master_back;//大师背景
     private String master_name;//名字
@@ -19,6 +19,27 @@ public class ItemDetailBean {
     private boolean master_focus;//是否关注大师
     private String master_store_introduce;//大师店铺简介
     private List<String> master_achievement=new ArrayList<>();//大师成就
+
+    public ItemDetailBean() {
+    }
+
+    public ItemDetailBean(ItemBean itembean, StoreBean storebean, String text_introduce, String store_num, String video, String cover, boolean is_master, String master_id, String master_img, String master_back, String master_name, String master_tag, boolean master_focus, String master_store_introduce, List<String> master_achievement) {
+        this.itembean = itembean;
+        this.storebean = storebean;
+        this.text_introduce = text_introduce;
+        this.store_num = store_num;
+        this.video = video;
+        this.cover = cover;
+        this.is_master = is_master;
+        this.master_id = master_id;
+        this.master_img = master_img;
+        this.master_back = master_back;
+        this.master_name = master_name;
+        this.master_tag = master_tag;
+        this.master_focus = master_focus;
+        this.master_store_introduce = master_store_introduce;
+        this.master_achievement = master_achievement;
+    }
 
     public void setbean(ItemDetailBean bean){
         if(null!=bean.getItembean()) {
@@ -79,7 +100,7 @@ public class ItemDetailBean {
         return is_master;
     }
 
-    public int getMaster_id() {
+    public String getMaster_id() {
         return master_id;
     }
 

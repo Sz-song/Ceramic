@@ -13,6 +13,8 @@ import com.yuanyu.ceramics.dingzhi.DingzhiDetailBean;
 import com.yuanyu.ceramics.dingzhi.GenerateOrdersBean;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiBean;
 import com.yuanyu.ceramics.home.homepage.HomepageBean;
+import com.yuanyu.ceramics.item.AdsCellBean;
+import com.yuanyu.ceramics.item.ItemDetailBean;
 import com.yuanyu.ceramics.login.LoginBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
 import com.yuanyu.ceramics.message.MessageBean;
@@ -228,4 +230,14 @@ public interface HttpService {
     //用户反馈
     @POST("app_api/home_page/usersopinion.php")
     Observable<BaseResponse<String[]>> usersOpinion(@Body RequestBody body);
+
+    //商品详情页itemDetail
+    @POST("app_api/commodity/item_detail.php")
+    Observable<BaseResponse<ItemDetailBean>> itemDetail(@Body RequestBody body);
+    //添加购物车
+    @POST("app_api/home_page/cart_add.php")
+    Observable<BaseResponse<String[]>> addCart(@Body RequestBody body);
+    //加载更多广告
+    @POST("app_api/home_page/loadmoreads.php")
+    Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
 }

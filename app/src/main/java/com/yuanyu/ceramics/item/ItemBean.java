@@ -30,6 +30,33 @@ public class ItemBean {
     private String width;
     private String height;
 
+    public ItemBean() {
+    }
+
+    public ItemBean(String goodsname, double goodsprice, double oldprice, String studio, List<String> youhui, List<String> goodslist, List<String> introducelist, boolean iscollected, String sowaccountid, int status, String serial_no, String zhonglei, String pise, String fenlei, String chanzhuang, String ticai, String weight, String artist, String length, String width, String height) {
+        this.goodsname = goodsname;
+        this.goodsprice = goodsprice;
+        this.oldprice = oldprice;
+        this.studio = studio;
+        this.youhui = youhui;
+        this.goodslist = goodslist;
+        this.introducelist = introducelist;
+        this.iscollected = iscollected;
+        this.sowaccountid = sowaccountid;
+        this.status = status;
+        this.serial_no = serial_no;
+        this.zhonglei = zhonglei;
+        this.pise = pise;
+        this.fenlei = fenlei;
+        this.chanzhuang = chanzhuang;
+        this.ticai = ticai;
+        this.weight = weight;
+        this.artist = artist;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
+
     public String getGoodsname() {
         return goodsname;
     }

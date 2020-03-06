@@ -12,11 +12,11 @@ import io.reactivex.Observable;
 
 public interface ItemDetailConstract {
     interface IItemDetailModel {
-        Observable<BaseResponse<ItemDetailBean>> getItemDetail(int useraccountid, String itemid);
-        Observable<BaseResponse<Boolean>>collectItem(int useraccountid, String itemid, int shopid);
-        Observable<BaseResponse<String[]>> addCart(int useraccountid, String itemid);
+        Observable<BaseResponse<ItemDetailBean>> getItemDetail(String useraccountid, String itemid);
+        Observable<BaseResponse<Boolean>>collectItem(String useraccountid, String itemid, int shopid);
+        Observable<BaseResponse<String[]>> addCart(String useraccountid, String itemid);
         Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(Integer page);
-        Observable<BaseResponse<Boolean>> focus(int useraccountid, int userid);
+        Observable<BaseResponse<Boolean>> focus(String useraccountid, String userid);
     }
     interface IItemDetailView {
         void getItemDetailSuccess(ItemDetailBean bean);
@@ -39,11 +39,11 @@ public interface ItemDetailConstract {
     }
 
     interface IItemDetailPresenter {
-        void getItemDetail(int useraccountid, String itemid);
-        void collectItem(int useraccountid, String itemid,int shopid);
-        void addCart(int useraccountid, String itemid);
+        void getItemDetail(String useraccountid, String itemid);
+        void collectItem(String useraccountid, String itemid,int shopid);
+        void addCart(String useraccountid, String itemid);
         void loadMoreAds(Integer page);
-        void focus(int useraccountid, int userid);
+        void focus(String useraccountid, String userid);
         void saveScreenshot(Bitmap bitmap, int type);
     }
 }
