@@ -18,7 +18,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".item.ItemDetailAcitivity"></activity>
-        <activity android:name=".release_popwindow.ReleasePopwindowActivity" />
         <activity android:name=".logistics.LogisticsActivity" />
         <activity android:name=".myinfo.EditMyInfoActivity" />
 
@@ -96,6 +95,8 @@
         <activity android:name=".shop_index.ShopIndexSearchActivity" />
         <activity android:name=".search.SearchResultActivity" />
         <activity android:name=".myinfo.MyInfoActivity" />
+        <activity android:name=".seller.order.ShopOrderActivity" />
+        <activity android:name=".seller.order.detail.ShopOrderDetailActivity" />
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@ import com.yuanyu.ceramics.home.homepage.HomepageBean;
 import com.yuanyu.ceramics.item.AdsCellBean;
 import com.yuanyu.ceramics.item.ItemDetailBean;
 import com.yuanyu.ceramics.login.LoginBean;
+import com.yuanyu.ceramics.logistics.LogisticsBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
 import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
@@ -26,6 +27,8 @@ import com.yuanyu.ceramics.order.refund.RefundDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundListBean;
 import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansBean;
+import com.yuanyu.ceramics.seller.order.ShopOrderBean;
+import com.yuanyu.ceramics.seller.order.detail.ShopOrderDetailBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
 import com.yuanyu.ceramics.shop_index.ShopIndexBean;
 import com.yuanyu.ceramics.shop_index.ShopPinglunBean;
@@ -240,4 +243,16 @@ public interface HttpService {
     //加载更多广告
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
+    //订单管理接口
+    @POST("app_api/shangjia/ordermanage.php")
+    Observable<BaseResponse<List<ShopOrderBean>>>getOrdersManage(@Body RequestBody body);
+    //商家查看订单详情
+    @POST("app_api/shangjia/sellordermoremsg.php")
+    Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
+    //快递递踪
+    @POST("app_api/shangjia/express_tracking.php")
+    Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
+    //商家修改未支付订单价格
+    @POST("app_api/shangjia/change_order_price.php")
+    Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 }
