@@ -100,6 +100,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/layer3_r5_p05_00_08"
                 android:layout_marginTop="-50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -150,7 +152,7 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/my_address" />
+                            android:src="@drawable/seller_nopay" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -169,14 +171,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/dingzhi" />
+                            android:src="@drawable/seller_nofahuo" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/my_dingzhi"/>
+                            android:text="@string/nofahuo"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -188,14 +190,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/my_collect" />
+                            android:src="@drawable/seller_alfahuo" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/my_collection"/>
+                            android:text="@string/yifahuo"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
@@ -217,14 +219,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/my_address" />
+                            android:src="@drawable/seller_yishouhuo" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/delivery_address"/>
+                            android:text="@string/yishouhuo"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -236,14 +238,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/dingzhi" />
+                            android:src="@drawable/seller_refund" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/my_dingzhi"/>
+                            android:text="@string/refund"/>
                     </LinearLayout>
                     <View
                         android:layout_width="0dp"
@@ -297,14 +299,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/my_address" />
+                            android:src="@drawable/seller_comicon" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/delivery_address"/>
+                            android:text="@string/commodity"/>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/my_dingzhi"
@@ -317,14 +319,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/dingzhi" />
+                            android:src="@drawable/seller_dingzhiicon" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/my_dingzhi"/>
+                            android:text="@string/dzandqg"/>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/my_collect"
@@ -337,14 +339,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/my_collect" />
+                            android:src="@drawable/seller_liveapply" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/my_collection"/>
+                            android:text="@string/liveapply"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -391,14 +393,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/shop_enter" />
+                            android:src="@drawable/seller_info" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/apply_enter"/>
+                            android:text="@string/info"/>
                     </LinearLayout>
                     <LinearLayout
                         android:id="@+id/dashiattesta"
@@ -411,14 +413,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/master_enter" />
+                            android:src="@drawable/seller_kefu" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/master_enter"/>
+                            android:text="@string/contactkf"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="0dp"
@@ -430,14 +432,14 @@
                             android:layout_height="40dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/master_enter" />
+                            android:src="@drawable/seller_change" />
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/master_enter"/>
+                            android:text="@string/changeuser"/>
 
                     </LinearLayout>
                 </LinearLayout>
