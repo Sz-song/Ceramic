@@ -240,4 +240,6 @@ public interface HttpService {
     //加载更多广告
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
+
+
 }

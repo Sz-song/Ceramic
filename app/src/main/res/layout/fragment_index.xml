@@ -18,14 +18,13 @@
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:background="@color/background_gray"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="230dp">
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"/>
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="150dp"-->
-<!--                    android:background="@color/colorPrimary"/>-->
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/image_head"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/sellerbgimg"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -143,6 +142,7 @@
                     android:layout_marginBottom="10dp"
                     tools:ignore="DisableBaselineAlignment">
                     <LinearLayout
+                        android:id="@+id/nopay"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -162,6 +162,7 @@
                             android:text="@string/nopay"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/nofahuo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -181,6 +182,7 @@
                             android:text="@string/nofahuo"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/yifahuo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -210,6 +212,7 @@
                     android:layout_marginBottom="10dp"
                     tools:ignore="DisableBaselineAlignment">
                     <LinearLayout
+                        android:id="@+id/yishouhuo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -229,6 +232,7 @@
                             android:text="@string/yishouhuo"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/refund"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -289,7 +293,7 @@
                     android:layout_marginBottom="10dp"
                     tools:ignore="DisableBaselineAlignment">
                     <LinearLayout
-                        android:id="@+id/address"
+                        android:id="@+id/commodity"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -329,7 +333,7 @@
                             android:text="@string/dzandqg"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/my_collect"
+                        android:id="@+id/liveapply"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -383,7 +387,7 @@
                     android:layout_marginBottom="10dp"
                     tools:ignore="DisableBaselineAlignment">
                     <LinearLayout
-                        android:id="@+id/applyenter"
+                        android:id="@+id/message"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -403,7 +407,7 @@
                             android:text="@string/info"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/dashiattesta"
+                        android:id="@+id/contactkf"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -423,6 +427,7 @@
                             android:text="@string/contactkf"/>
                     </LinearLayout>
                     <LinearLayout
+                        android:id="@+id/changeuser"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
