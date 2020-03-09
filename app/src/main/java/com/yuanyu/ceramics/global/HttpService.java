@@ -243,16 +243,4 @@ public interface HttpService {
     //加载更多广告
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
-    //订单管理接口
-    @POST("app_api/shangjia/ordermanage.php")
-    Observable<BaseResponse<List<ShopOrderBean>>>getOrdersManage(@Body RequestBody body);
-    //商家查看订单详情
-    @POST("app_api/shangjia/sellordermoremsg.php")
-    Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
-    //快递递踪
-    @POST("app_api/shangjia/express_tracking.php")
-    Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
-    //商家修改未支付订单价格
-    @POST("app_api/shangjia/change_order_price.php")
-    Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 }

@@ -14,4 +14,5 @@ public abstract class BasePresenter<V> {
             view = null;
         }
     }
+
 }
