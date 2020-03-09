@@ -243,4 +243,17 @@ public interface HttpService {
     //加载更多广告
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
+    //    商家管理获取订单管理getOrdersManage
+    @POST("")
+    Observable<BaseResponse<List<ShopOrderBean>>> getOrdersManage(@Body RequestBody body);
+//    shopGetOrderDetail
+    @POST("")
+    Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
+//    getLogisticsTracing
+//快递递踪
+    @POST("")
+    Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
+//    modityOrderPrice商家修改未支付订单价格
+    @POST("")
+    Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 }

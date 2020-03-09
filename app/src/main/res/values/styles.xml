@@ -53,6 +53,11 @@
     <style name="MyCustomTabTextAppearance">
         <item name="android:textSize">17sp</item>
     </style>
+    <style name="textviewBlack">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 
     <!--timepicker-->
     <style name="Theme.Light.NoTitle.Dialog" parent="@android:style/Theme.Dialog">
