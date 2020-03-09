@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".item.ItemDetailAcitivity"></activity>
+        <activity android:name=".item.ItemDetailAcitivity"/>
         <activity android:name=".logistics.LogisticsActivity" />
         <activity android:name=".myinfo.EditMyInfoActivity" />
 
