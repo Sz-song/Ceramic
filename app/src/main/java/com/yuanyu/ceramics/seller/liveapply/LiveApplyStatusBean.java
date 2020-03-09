@@ -50,4 +50,16 @@ public class LiveApplyStatusBean {
     public String getPublish_url() {
         return publish_url;
     }
+
+    public LiveApplyStatusBean(String id, String cover_img, String title, String start_time, String type, List<ItemBean> item_list, int apply_state, String group_id, String publish_url) {
+        this.id = id;
+        this.cover_img = cover_img;
+        this.title = title;
+        this.start_time = start_time;
+        this.type = type;
+        this.item_list = item_list;
+        this.apply_state = apply_state;
+        this.group_id = group_id;
+        this.publish_url = publish_url;
+    }
 }

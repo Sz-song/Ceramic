@@ -20,6 +20,7 @@ import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
+import com.yuanyu.ceramics.seller.liveapply.LiveApplyActivity;
 import com.yuanyu.ceramics.seller.order.ShopOrderActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
@@ -157,6 +158,8 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 startActivity(intent);
                 break;
             case R.id.liveapply:
+                intent = new Intent(this, LiveApplyActivity.class);
+                startActivity(intent);
                 break;
             case R.id.message:
                 break;

@@ -9,11 +9,12 @@ public class ItemBean implements Serializable {
     private String price;
     private boolean isChecked = false;
 
-    public ItemBean(String id, String image, String item, String price) {
+    public ItemBean(String id, String image, String item, String price, boolean isChecked) {
         this.id = id;
         this.image = image;
         this.item = item;
         this.price = price;
+        this.isChecked = isChecked;
     }
 
     public String getId() {

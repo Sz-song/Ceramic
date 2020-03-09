@@ -2,7 +2,10 @@ package com.yuanyu.ceramics.utils;
 
 import java.security.MessageDigest;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
@@ -65,5 +68,28 @@ public class Md5Utils {
             e.printStackTrace();
         }
         return buf.toString();
+    }
+    // 将时间戳转为字符串
+    public static String getStrMin(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        // 例如：cc_time=1291778220
+        long lcc_time = Long.valueOf(cc_time);
+        re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+        return re_StrTime;
+    }
+    // 将字符串转为时间戳(精确到分)
+    public static String getTimeMin(String user_time) {
+        String re_time = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date d;
+        try {
+            d = sdf.parse(user_time);
+            long l = d.getTime();
+            String str = String.valueOf(l);
+            re_time = str.substring(0, 10);
+        } catch (ParseException e) {
+        }
+        return re_time;
     }
 }

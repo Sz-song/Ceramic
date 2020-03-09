@@ -141,8 +141,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_nopay" />
@@ -161,8 +161,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_nofahuo" />
@@ -181,8 +181,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_alfahuo" />
@@ -211,8 +211,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_yishouhuo" />
@@ -231,8 +231,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="35dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_refund" />
@@ -292,8 +292,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_comicon" />
@@ -312,8 +312,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_dingzhiicon" />
@@ -332,8 +332,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_liveapply" />
@@ -386,8 +386,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_info" />
@@ -406,8 +406,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_kefu" />
@@ -426,8 +426,8 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/seller_change" />
