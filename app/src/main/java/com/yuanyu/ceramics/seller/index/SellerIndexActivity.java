@@ -1,34 +1,32 @@
 package com.yuanyu.ceramics.seller.index;
 
 import android.content.Intent;
-import android.view.LayoutInflater;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
-import com.yuanyu.ceramics.base.BaseFragment;
+import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
-import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
-import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
+import com.yuanyu.ceramics.seller.order.ShopOrderActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,7 +36,7 @@ import static com.yuanyu.ceramics.AppConstant.DAIFUKUAN;
 import static com.yuanyu.ceramics.AppConstant.DAIPINGJIA;
 import static com.yuanyu.ceramics.AppConstant.DAISHOUHUO;
 
-public class IndexFragment extends BaseFragment<IndexPresenter> implements IndexConstract.IMineView {
+public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> implements SellerIndexConstract.IMineView {
 
 
     @BindView(R.id.image_head)
@@ -81,31 +79,25 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
     SwipeRefreshLayout swipe;
 
     @Override
-    protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
-        return inflater.inflate(R.layout.fragment_index, container, false);
+    protected int getLayout() {
+        return R.layout.seller_index_activity;
     }
 
     @Override
-    protected IndexPresenter initPresent() {
-        return new IndexPresenter();
+    protected SellerIndexPresenter initPresent() {
+        return new SellerIndexPresenter();
     }
 
     @Override
-    protected void initEvent(View view) {
+    protected void initEvent() {
+        ButterKnife.bind(this);
+    }
+
+
+    @Override
+    public void initDataSuccess(SellerIndexBean bean) {
         swipe.setRefreshing(false);
-        swipe.setColorSchemeResources(R.color.colorPrimary);
-        swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID)));
-    }
-
-    @Override
-    protected void initData() {
-        presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID));
-    }
-
-    @Override
-    public void initDataSuccess(IndexBean bean) {
-        swipe.setRefreshing(false);
-        GlideApp.with(getContext())
+        GlideApp.with(this)
                 .load(BASE_URL + bean.getPortrait()).placeholder(R.drawable.img_default)
                 .override(100, 100)
                 .into(protrait);
@@ -125,43 +117,43 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
         switch (view.getId()) {
             case R.id.protrait:
             case R.id.mine_relat:
-//                PersonalIndexActivity.actionStart(getContext(), Sp.getString(getContext(), "useraccountid"));
+//                PersonalIndexActivity.actionStart(this, Sp.getString(this, "useraccountid"));
                 break;
             case R.id.all_order:
-                intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status", 0);
+                intent = new Intent(this, ShopOrderActivity.class);
+                intent.putExtra("position", 0);
                 startActivity(intent);
                 break;
             case R.id.nopay:
-                intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status", DAIFUKUAN);
+                intent = new Intent(this, ShopOrderActivity.class);
+                intent.putExtra("position", 1);
                 startActivity(intent);
                 break;
             case R.id.nofahuo:
-                intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status", DAIFAHUO);
+                intent = new Intent(this, ShopOrderActivity.class);
+                intent.putExtra("position", 2);
                 startActivity(intent);
                 break;
             case R.id.yifahuo:
-                intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status", DAISHOUHUO);
+                intent = new Intent(this, ShopOrderActivity.class);
+                intent.putExtra("position", 3);
                 startActivity(intent);
                 break;
             case R.id.yishouhuo:
-                intent = new Intent(getContext(), MyOrderActivity.class);
-                intent.putExtra("status", DAIPINGJIA);
+                intent = new Intent(this, ShopOrderActivity.class);
+                intent.putExtra("position", 4);
                 startActivity(intent);
                 break;
             case R.id.refund:
-                intent = new Intent(getContext(), RefundListActivity.class);
+                intent = new Intent(this, RefundListActivity.class);
                 startActivity(intent);
                 break;
             case R.id.commodity:
-                intent = new Intent(getContext(), AddressManageActivity.class);
+                intent = new Intent(this, AddressManageActivity.class);
                 startActivity(intent);
                 break;
             case R.id.my_dingzhi:
-                intent = new Intent(getContext(), MyDingzhiActivity.class);
+                intent = new Intent(this, MyDingzhiActivity.class);
                 startActivity(intent);
                 break;
             case R.id.liveapply:
@@ -169,14 +161,14 @@ public class IndexFragment extends BaseFragment<IndexPresenter> implements Index
             case R.id.message:
                 break;
             case R.id.contactkf:
-                if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {
-                    intent = new Intent(this.getContext(), EnterProtocolActivity.class);
+                if (Sp.getString(this, AppConstant.SHOP_ID).equals("")) {
+                    intent = new Intent(this, EnterProtocolActivity.class);
                     intent.putExtra("type", 0);
                     startActivity(intent);
                 }
                 break;
             case R.id.changeuser:
-                intent = new Intent(getContext(), SystemSettingActivity.class);
+                intent = new Intent(this, SystemSettingActivity.class);
                 startActivity(intent);
                 break;
         }

@@ -12,13 +12,13 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
-public class IndexModel implements IndexConstract.IMineModel {
+public class SellerIndexModel implements SellerIndexConstract.IMineModel {
 
     private HttpService httpService;
-    IndexModel(){ httpService = HttpServiceInstance.getInstance();}
+    SellerIndexModel(){ httpService = HttpServiceInstance.getInstance();}
 
     @Override
-    public Observable<BaseResponse<IndexBean>> initData(String useraccountid) {
+    public Observable<BaseResponse<SellerIndexBean>> initData(String useraccountid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

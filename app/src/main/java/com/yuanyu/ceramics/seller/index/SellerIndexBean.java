@@ -1,6 +1,6 @@
 package com.yuanyu.ceramics.seller.index;
 
-public class IndexBean {
+public class SellerIndexBean {
     private int shopid;
     private String portrait;
     private String name;
@@ -22,7 +22,7 @@ public class IndexBean {
         return introduce;
     }
 
-    public IndexBean(int shopid, String portrait, String name, String introduce) {
+    public SellerIndexBean(int shopid, String portrait, String name, String introduce) {
         this.shopid = shopid;
         this.portrait = portrait;
         this.name = name;

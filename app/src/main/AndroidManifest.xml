@@ -99,6 +99,8 @@
         <activity android:name=".myinfo.MyInfoActivity" />
         <activity android:name=".seller.order.ShopOrderActivity" />
         <activity android:name=".seller.order.detail.ShopOrderDetailActivity" />
+        <activity android:name=".seller.index.SellerIndexActivity" />
+        <activity android:name=".order.refund.RefundListActivity" />
     </application>
 
 </manifest>

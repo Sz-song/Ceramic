@@ -5,12 +5,12 @@ import com.yuanyu.ceramics.utils.ExceptionHandler;
 
 import io.reactivex.Observable;
 
-public interface IndexConstract {
+public interface SellerIndexConstract {
     interface IMineModel{
-        Observable<BaseResponse<IndexBean>> initData(String useraccountid);
+        Observable<BaseResponse<SellerIndexBean>> initData(String useraccountid);
     }
     interface IMineView{
-        void initDataSuccess(IndexBean bean);
+        void initDataSuccess(SellerIndexBean bean);
         void initDataFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IMinePresenter{

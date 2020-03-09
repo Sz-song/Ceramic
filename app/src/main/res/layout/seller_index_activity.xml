@@ -82,13 +82,6 @@
                                 android:gravity="center"
                                 android:layout_toEndOf="@id/protrait"
                                 android:layout_below="@+id/name"/>
-                            <ImageView
-                                android:layout_width="8dp"
-                                android:src="@mipmap/triangle_right"
-                                android:layout_height="16dp"
-                                android:layout_centerVertical="true"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="20dp" />
                         </RelativeLayout>
 
                     </LinearLayout>

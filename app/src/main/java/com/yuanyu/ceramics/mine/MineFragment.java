@@ -24,6 +24,7 @@ import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
+import com.yuanyu.ceramics.seller.index.SellerIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -205,11 +206,13 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case R.id.dashiattesta:
                 break;
             case R.id.applyenter:
-                if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {
-                    intent = new Intent(this.getContext(), EnterProtocolActivity.class);
-                    intent.putExtra("type", 0);
-                    startActivity(intent);
-                }
+//                if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {
+//                    intent = new Intent(this.getContext(), EnterProtocolActivity.class);
+//                    intent.putExtra("type", 0);
+//                    startActivity(intent);
+//                }
+                intent = new Intent(this.getContext(), SellerIndexActivity.class);
+                startActivity(intent);
                 break;
             case R.id.system_setting:
                 intent = new Intent(getContext(), SystemSettingActivity.class);
