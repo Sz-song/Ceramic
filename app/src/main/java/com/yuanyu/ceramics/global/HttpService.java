@@ -27,6 +27,9 @@ import com.yuanyu.ceramics.order.refund.RefundDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundListBean;
 import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansBean;
+import com.yuanyu.ceramics.seller.delivery.CourierBean;
+import com.yuanyu.ceramics.seller.delivery.DeliveryBean;
+import com.yuanyu.ceramics.seller.delivery.WaitDeliveryBean;
 import com.yuanyu.ceramics.seller.order.ShopOrderBean;
 import com.yuanyu.ceramics.seller.order.detail.ShopOrderDetailBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
@@ -257,7 +260,21 @@ public interface HttpService {
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 //    修改商家
-    @POST("")
+    @POST("123")
     Observable<BaseResponse<Boolean>> ShopChangeIntroduce(@Body RequestBody body);
-
+    //查看快递类型
+    @POST("app_api/shangjia/ExpRecommend.php")
+    Observable<BaseResponse<List<CourierBean>>> getCourierData(@Body RequestBody body);
+    //获取所有快递
+    @POST("app_api/shangjia/expresscompany.php")
+    Observable<BaseResponse<List<CourierBean>>> getCourierCompany(@Body RequestBody body);
+    //商家发货
+    @POST("app_api/shangjia/shopdelivery.php")
+    Observable<BaseResponse<String>>Delivery(@Body RequestBody body);
+    //商家发货获取收货人信息
+    @POST("app_api/shangjia/getdeliverymsg.php")
+    Observable<BaseResponse<DeliveryBean>>getDeliveryData(@Body RequestBody body);
+    //商家获取待发货数据
+    @POST("app_api/shangjia/getnodelivery.php")
+    Observable<BaseResponse<List<WaitDeliveryBean>>>getWaitDeliveryData(@Body RequestBody body);
 }

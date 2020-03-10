@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/portrait"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_toEndOf="@+id/portrait"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/blackLight"
+            android:textStyle="bold"
+            android:textSize="17sp" />
+        <TextView
+            android:id="@+id/introduce"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/blackLight"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textSize="13sp"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/triangle_right"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_centerVertical="true"/>
+    <View
+        android:layout_alignParentBottom="true"
+        android:background="@color/background_gray"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+    <View
+        android:id="@+id/view_cover"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+</RelativeLayout>

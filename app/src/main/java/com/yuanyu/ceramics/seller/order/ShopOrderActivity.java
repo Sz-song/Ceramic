@@ -66,6 +66,5 @@ public class ShopOrderActivity extends NormalActivity {
             finish();
         }
         return true;
-
     }
 }
