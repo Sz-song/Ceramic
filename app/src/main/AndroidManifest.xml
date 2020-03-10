@@ -20,7 +20,6 @@
         <activity android:name=".seller.liveapply.SelectItemActivity"/>
         <activity android:name=".seller.shop_shelve.ShelveActivity"/>
         <activity android:name=".seller.shop_goods.ShopGoodsActivity" />
-        <activity android:name=".seller.liveapply.SelectItemActivity" />
         <activity android:name=".seller.liveapply.LiveApplyActivity" />
         <activity android:name=".item.ItemDetailAcitivity" />
         <activity android:name=".logistics.LogisticsActivity" />
