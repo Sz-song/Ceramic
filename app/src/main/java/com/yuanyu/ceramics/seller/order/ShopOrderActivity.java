@@ -30,12 +30,8 @@ public class ShopOrderActivity extends NormalActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orders);
+        setContentView(R.layout.activity_shop_orders);
         ButterKnife.bind(this);
-        initView();
-    }
-
-    void initView() {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -47,7 +43,6 @@ public class ShopOrderActivity extends NormalActivity {
         ShopOrderFragmentAdapter adapter = new ShopOrderFragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tablelayout.setupWithViewPager(viewPager);
-        viewPager.setCurrentItem(position);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
@@ -62,6 +57,7 @@ public class ShopOrderActivity extends NormalActivity {
             @Override
             public void onPageScrollStateChanged(int state) {}
         });
+        viewPager.setCurrentItem(position);
     }
 
     @Override
