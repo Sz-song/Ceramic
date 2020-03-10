@@ -18,6 +18,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".seller.liveapply.SelectItemActivity"/>
+        <activity android:name=".seller.shop_shelve.ShelveActivity"></activity>
+        <activity android:name=".seller.shop_goods.ShopGoodsActivity" />
+        <activity android:name=".seller.liveapply.SelectItemActivity" />
         <activity android:name=".seller.liveapply.LiveApplyActivity" />
         <activity android:name=".item.ItemDetailAcitivity" />
         <activity android:name=".logistics.LogisticsActivity" />
@@ -101,6 +104,7 @@
         <activity android:name=".seller.order.detail.ShopOrderDetailActivity" />
         <activity android:name=".seller.index.SellerIndexActivity" />
         <activity android:name=".order.refund.RefundListActivity" />
+        <activity android:name=".seller.shop_goods.ViewShopGoodsActivity" />
         <activity android:name=".seller.delivery.CourierListActivity" />
         <activity android:name=".seller.delivery.DeliveryActivity" />
         <activity android:name=".seller.delivery.WaitDeliveryActivity" />

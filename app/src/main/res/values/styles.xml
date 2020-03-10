@@ -91,4 +91,20 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+    <style name="edittext1">
+        <item name="android:textColorHint">@color/lightGray</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/blackLight</item>
+        <item name="android:hint">请选择</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:drawableRight">@mipmap/trianglerigth_black</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+    <style name="edittext">
+        <item name="android:textColorHint">@color/lightGray</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>

@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:elevation="0dp">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_gravity="center"
+            app:contentInsetStart="0dp">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"  />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="40dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:elevation="8dp">
+                        <TextView
+                            android:id="@+id/fail_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="80dp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_marginTop="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:gravity="top"
+                            android:textSize="14sp" />
+                    </androidx.cardview.widget.CardView>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+                        <EditText
+                            android:id="@+id/input_title_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:gravity="center_horizontal"
+                            android:hint="请输入商品名称"
+                            android:singleLine="true"
+                            android:maxLength="12"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/title_tag"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="*"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_height="45dp" />
+                        <EditText
+                            android:id="@+id/input_content_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="80dp"
+                            android:layout_below="@id/input_title_edit"
+                            android:layout_marginTop="10dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:background="@null"
+                            android:gravity="top"
+                            android:hint="请输入商品的详细介绍"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/content_tag"
+                            android:layout_marginTop="55dp"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="*"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_height="wrap_content" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/input_content_edit"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recy_addimage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginBottom="25dp">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:id="@+id/addimage_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginEnd="9dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:text="0/9"
+                                android:textSize="18sp" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/dividerGray" />
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="20dp"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:clickable="true">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:layout_alignParentStart="true"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="区块链编号"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/et_serial_no"-->
+<!--                            android:layout_width="100dp"-->
+<!--                            android:gravity="center_vertical|end"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:hint="请输入"-->
+<!--                            android:background="@null"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+
+<!--                    </RelativeLayout>-->
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+                    <RelativeLayout
+                        android:id="@+id/relat_jiangren"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:clickable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:text="玉雕师"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/artisan"
+                            android:layout_width="100dp"
+                            android:gravity="center_vertical|end"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:hint="请输入"
+                            android:background="@null"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp">
+
+                        <TextView
+                            android:id="@+id/temp_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="库存(数量)"
+                            android:textSize="16sp"
+                            android:textColor="@color/blackLight" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:minWidth="60dp"
+                            android:layout_height="20dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/r2_sowhite_stblack"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/reduce"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:gravity="center"
+                                android:text="—"
+                                />
+
+                            <TextView
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/blackLight" />
+
+                            <EditText
+                                android:id="@+id/num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:minWidth="20dp"
+                                android:background="@null"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:text="1"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="1dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/blackLight" />
+
+                            <TextView
+                                android:id="@+id/add"
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="+" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/price_tag"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_below="@+id/title_tag"
+                            android:text="*"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="价格:"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp"
+                            android:layout_weight="1" />
+                        <EditText
+                            android:id="@+id/price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:background="@null"
+                            android:hint="请输入"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:textColor="@color/colorPrimary"
+                            android:text="元"
+                            />
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/fenlei_tag"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_below="@+id/title_tag"
+                            android:text="*"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:text="分类"
+                            android:layout_weight="1"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/fenlei"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|end"
+                            style="@style/edittext1"/>
+
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/fenlei_rec"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/dividerGray"
+                        android:tag="0">
+                    </androidx.recyclerview.widget.RecyclerView>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/zhonglei_tag"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_below="@+id/title_tag"
+                            android:text="*"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:text="种类"
+                            android:layout_weight="1"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:id="@+id/zhonglei"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|end"
+                            style="@style/edittext1"/>
+
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/zhonglei_rec"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/dividerGray"
+                        android:tag="0">
+                    </androidx.recyclerview.widget.RecyclerView>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="@color/dividerGray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:text="题材"
+                            android:layout_weight="1"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+                        <EditText
+                            android:id="@+id/ticai"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|end"
+                            style="@style/edittext1"/>
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/ticai_rec"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/dividerGray"
+                        android:tag="0">
+                    </androidx.recyclerview.widget.RecyclerView>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+                        <TextView
+                            android:id="@+id/weight_tag"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="*"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:text="重量："
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+                        <EditText
+                            android:id="@+id/weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical|end"
+                            android:layout_alignParentEnd="true"
+                            android:background="@null"
+                            android:hint="请输入"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp"
+                            android:layout_marginRight="10dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:text="g" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="10dp"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+                        <TextView
+                            android:id="@+id/shape_tag"
+                            android:layout_width="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="*"
+                            android:textSize="13sp"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="尺寸："
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp"
+                            android:layout_weight="1"
+                            />
+                        <EditText
+                            android:id="@+id/length"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:minWidth="30dp"
+                            android:gravity="center"
+                            android:layout_alignParentEnd="true"
+                            android:background="@null"
+                            android:hint="长"
+                            android:inputType="number"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="mm"
+                            />
+                        <EditText
+                            android:id="@+id/width"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:minWidth="30dp"
+                            android:gravity="center"
+                            android:layout_alignParentEnd="true"
+                            android:background="@null"
+                            android:hint="宽"
+                            android:inputType="number"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="mm"
+                            />
+                        <EditText
+                            android:id="@+id/height"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:minWidth="30dp"
+                            android:gravity="center"
+                            android:layout_alignParentEnd="true"
+                            android:background="@null"
+                            android:hint="高"
+                            android:inputType="number"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="mm"
+                            />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="20dp"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/chanzhaung_tag"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:layout_below="@+id/title_tag"-->
+<!--                            android:text="*"-->
+<!--                            android:textSize="13sp"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:layout_height="wrap_content" />-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="产状"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                        <EditText-->
+<!--                            android:id="@+id/chanzhuang"-->
+<!--                            android:layout_width="100dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center_vertical|end"-->
+<!--                            style="@style/edittext1"/>-->
+
+<!--                    </LinearLayout>-->
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/chanzhuang_rec"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:background="@color/dividerGray"-->
+<!--                        android:tag="0">-->
+<!--                    </androidx.recyclerview.widget.RecyclerView>-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:background="@color/dividerGray" />-->
+
+
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginLeft="20dp"-->
+<!--                        android:layout_marginRight="10dp"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="皮色"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/pise"-->
+<!--                            android:layout_width="100dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center_vertical|end"-->
+<!--                            style="@style/edittext1"/>-->
+
+<!--                    </LinearLayout>-->
+<!--                    <androidx.recyclerview.widget.RecyclerView-->
+<!--                        android:id="@+id/pise_rec"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0dp"-->
+<!--                        android:background="@color/dividerGray"-->
+<!--                        android:tag="0">-->
+<!--                    </androidx.recyclerview.widget.RecyclerView>-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:background="@color/dividerGray" />-->
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginEnd="10dp">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_alignParentStart="true"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="运费："-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/freight"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:background="@null"-->
+<!--                            android:text="包邮"-->
+<!--                            android:inputType="numberDecimal"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:gravity="center"-->
+<!--                            android:textSize="16sp" />-->
+<!--                    </RelativeLayout>-->
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/dividerGray" />
+                <Button
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:text="提交"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
