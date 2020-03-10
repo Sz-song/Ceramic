@@ -256,4 +256,8 @@ public interface HttpService {
 //    modityOrderPrice商家修改未支付订单价格
     @POST("")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
+//    修改商家
+    @POST("")
+    Observable<BaseResponse<Boolean>> ShopChangeIntroduce(@Body RequestBody body);
+
 }
