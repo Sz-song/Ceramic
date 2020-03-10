@@ -8,6 +8,7 @@ import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
 import com.yuanyu.ceramics.common.DynamicBean;
 import com.yuanyu.ceramics.common.ResultBean;
+import com.yuanyu.ceramics.common.VideoBean;
 import com.yuanyu.ceramics.dingzhi.DashiCellBean;
 import com.yuanyu.ceramics.dingzhi.DingzhiDetailBean;
 import com.yuanyu.ceramics.dingzhi.GenerateOrdersBean;
@@ -29,6 +30,8 @@ import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansBean;
 import com.yuanyu.ceramics.seller.order.ShopOrderBean;
 import com.yuanyu.ceramics.seller.order.detail.ShopOrderDetailBean;
+import com.yuanyu.ceramics.seller.shop_shelve.ShelvingDetailBean;
+import com.yuanyu.ceramics.seller.shop_shelve.shelve_audit.ShelveAuditBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
 import com.yuanyu.ceramics.shop_index.ShopIndexBean;
 import com.yuanyu.ceramics.shop_index.ShopPinglunBean;
@@ -259,5 +262,33 @@ public interface HttpService {
 //    修改商家
     @POST("")
     Observable<BaseResponse<Boolean>> ShopChangeIntroduce(@Body RequestBody body);
+
+    //商品上架接口
+    @POST("")
+    Observable<BaseResponse<String[]>>Shelve(@Body RequestBody body);
+    //上传视频
+    @POST("")
+    @Multipart
+    Observable<BaseResponse<VideoBean>> uploadVideo(@Part("data")RequestBody body,
+                                                    @Part MultipartBody.Part[] part);
+    //商品上架审核状态接口
+    @POST("")
+    Observable<BaseResponse<List<ShelveAuditBean>>>getWaitReviewResult(@Body RequestBody body);
+    //删除仓库物品
+    @POST("")
+    Observable<BaseResponse<String[]>>getWareHouseDeleteResult(@Body RequestBody body);
+    //我的商品 重新上架
+    @POST("")
+    Observable<BaseResponse<ShelvingDetailBean>>getReOnSaleData(@Body RequestBody body);
+    //我的商品 下架接口
+    @POST("")
+    Observable<BaseResponse<String[]>>shopGoodsOffShelves(@Body RequestBody body);
+    //我的商品接口
+    @POST("")
+    Observable<BaseResponse<List<ShopGoodsBean>>>getShopGoodsList(@Body RequestBody body);
+    //商家获取商品详情
+    @POST("")
+    Observable<BaseResponse<ShelvingDetailBean>> getShopGoodsDetail(@Body RequestBody body);
+
 
 }

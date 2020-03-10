@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--高度40-->
+    <size android:height="24dp"/>
+    <!--圆角弧度20-->
+    <corners android:radius="12dp"/>
+    <!--变化率-->
+    <gradient
+        android:endColor="@color/gold"
+        android:startColor="@color/gold"/>
+</shape>

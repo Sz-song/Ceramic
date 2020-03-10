@@ -27,6 +27,7 @@ import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.seller.liveapply.LiveApplyActivity;
 import com.yuanyu.ceramics.seller.order.ShopOrderActivity;
+import com.yuanyu.ceramics.seller.shop_goods.ShopGoodsActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -185,7 +186,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 startActivity(intent);
                 break;
             case R.id.commodity:
-                intent = new Intent(this, AddressManageActivity.class);
+                intent = new Intent(this, ShopGoodsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.my_dingzhi:
