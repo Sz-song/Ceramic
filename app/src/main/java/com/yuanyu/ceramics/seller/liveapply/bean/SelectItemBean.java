@@ -39,4 +39,11 @@ public class SelectItemBean implements Serializable {
     public void setItem_num(String item_num) {
         this.item_num = item_num;
     }
+
+    public SelectItemBean(String image, String shop, String item_num, List<ItemBean> list) {
+        this.image = image;
+        this.shop = shop;
+        this.item_num = item_num;
+        this.list = list;
+    }
 }

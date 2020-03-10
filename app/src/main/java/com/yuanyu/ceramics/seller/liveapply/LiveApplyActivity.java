@@ -100,7 +100,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
+            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         list = new ArrayList<>();

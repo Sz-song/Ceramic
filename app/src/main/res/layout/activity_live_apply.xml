@@ -24,14 +24,15 @@
             android:layout_gravity="center"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:contentInsetStart="0dp">
+            app:contentInsetStart="0dp"
+            android:background="@color/colorPrimary">
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/blackLight"
+                android:textColor="@color/white"
                 android:textSize="18sp"  />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

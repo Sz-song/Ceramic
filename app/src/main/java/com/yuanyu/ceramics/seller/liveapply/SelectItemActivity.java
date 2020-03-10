@@ -75,10 +75,10 @@ public class SelectItemActivity extends BaseActivity<SelectItemPresenter> implem
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
+            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        title.setText("选择商品");
+        title.setText("店铺商品");
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         mData = (List<ItemBean>) bundle.getSerializable("data");
