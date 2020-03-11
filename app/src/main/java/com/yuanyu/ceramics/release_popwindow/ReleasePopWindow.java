@@ -15,6 +15,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.center_circle.release.ReleaseArticleActivity;
+import com.yuanyu.ceramics.center_circle.release.ReleaseDynamicActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.anime.KickBackAnimator;
 
@@ -154,13 +156,13 @@ public class ReleasePopWindow extends PopupWindow implements View.OnClickListene
         Intent intent;
         switch (v.getId()) {
             case R.id.wenzhang:
-//                intent = new Intent(context, ReleaseArticleActivity.class);
-//                intent.putExtra("type",0);
-//                context.startActivity(intent);
+                intent = new Intent(context, ReleaseArticleActivity.class);
+                intent.putExtra("type",0);
+                context.startActivity(intent);
                 break;
             case R.id.dongtai:
-//                intent = new Intent(context, ReleaseDynamicActivity.class);
-//                context.startActivity(intent);
+                intent = new Intent(context, ReleaseDynamicActivity.class);
+                context.startActivity(intent);
                 break;
 //            case R.id.drafts:
 //                //TODO

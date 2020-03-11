@@ -99,6 +99,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="80dp"
+        app:backgroundTint="@color/background_gray"
         app:elevation="5dp"/>
     <LinearLayout
         android:layout_width="match_parent"

@@ -36,4 +36,15 @@ public class ShelveAuditBean implements Serializable {
     public String getCommodityid() {
         return commodityid;
     }
+
+    public ShelveAuditBean(String image, String name, String artist, String num, String price, int type, String commodityid, String failed_massage) {
+        this.image = image;
+        this.name = name;
+        this.artist = artist;
+        this.num = num;
+        this.price = price;
+        this.type = type;
+        this.commodityid = commodityid;
+        this.failed_massage = failed_massage;
+    }
 }

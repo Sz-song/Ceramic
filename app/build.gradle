@@ -83,5 +83,6 @@ dependencies {
     //Phoenix
     //选填 - 视频压缩，开启功能：Phoenix.with().enableCompress(true)，获取结果：MediaEntity.getCompressPath()
     implementation 'com.github.guoxiaoxing:phoenix-compress-video:1.0.15'
+    implementation 'com.github.sunhapper:SpEditTool:0.2.3'
 
 }

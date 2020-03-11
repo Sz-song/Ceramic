@@ -38,6 +38,7 @@
                 app:xTabTextColor="@color/dividerGray">
             </com.androidkun.xtablayout.XTabLayout>
         </androidx.appcompat.widget.Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

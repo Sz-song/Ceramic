@@ -17,8 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".seller.liveapply.SelectItemActivity"/>
-        <activity android:name=".seller.shop_shelve.ShelveActivity"/>
+        <activity android:name=".center_circle.release.ReleaseDynamicActivity"></activity>
+        <activity android:name=".seller.liveapply.SelectItemActivity" />
+        <activity android:name=".seller.shop_shelve.ShelveActivity" />
         <activity android:name=".seller.shop_goods.ShopGoodsActivity" />
         <activity android:name=".seller.liveapply.LiveApplyActivity" />
         <activity android:name=".item.ItemDetailAcitivity" />
@@ -108,6 +109,9 @@
         <activity android:name=".seller.delivery.DeliveryActivity" />
         <activity android:name=".seller.delivery.WaitDeliveryActivity" />
         <activity android:name=".seller.shop_shelve.re_shelve.ReShelveActivity" />
+        <activity android:name=".center_circle.release.GetFriendsActivity" />
+        <activity android:name=".center_circle.release.DynamicTypeActivity" />
+        <activity android:name=".center_circle.release.ReleaseArticleActivity" />
     </application>
 
 </manifest>

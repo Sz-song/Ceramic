@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="110dp">
-        <com.taijie.yuanyu.common.SquareImageView
+        <com.yuanyu.ceramics.common.SquareImageView
             android:id="@+id/image"
             android:layout_width="90dp"
             android:layout_margin="10dp"

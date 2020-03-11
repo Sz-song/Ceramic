@@ -101,9 +101,9 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
             }
             ((ViewHolder1) holder).introduce.setText("" + bean.getText_introduce());
             ((ViewHolder1) holder).zhonglei.setText(bean.getItembean().getZhonglei());
-            ((ViewHolder1) holder).pise.setText(bean.getItembean().getPise());
+//            ((ViewHolder1) holder).pise.setText(bean.getItembean().getPise());
             ((ViewHolder1) holder).ticai.setText(bean.getItembean().getTicai());
-            ((ViewHolder1) holder).chanzhuang.setText(bean.getItembean().getChanzhuang());
+//            ((ViewHolder1) holder).chanzhuang.setText(bean.getItembean().getChanzhuang());
             ((ViewHolder1) holder).fenlei.setText(bean.getItembean().getFenlei());
             ((ViewHolder1) holder).weight.setText(bean.getItembean().getWeight() + "克");
             ((ViewHolder1) holder).serialNo.setText(bean.getItembean().getSerial_no());
@@ -167,7 +167,7 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
 //                        context.startActivity(intent);
                     }
                 });
-//                ((ViewHolder1) holder).enterMasterIndex.setOnClickListener(v -> PersonalIndexActivity.actionStart(context, bean.getMaster_id()));
+                ((ViewHolder1) holder).enterMasterIndex.setOnClickListener(v -> PersonalIndexActivity.actionStart(context, bean.getMaster_id()));
             } else {
                 ((ViewHolder1) holder).store.setVisibility(View.VISIBLE);
                 ((ViewHolder1) holder).master.setVisibility(View.GONE);
@@ -321,10 +321,10 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
         TextView zhonglei;
         @BindView(R.id.ticai)
         TextView ticai;
-        @BindView(R.id.pise)
-        TextView pise;
-        @BindView(R.id.chanzhuang)
-        TextView chanzhuang;
+//        @BindView(R.id.pise)
+//        TextView pise;
+//        @BindView(R.id.chanzhuang)
+//        TextView chanzhuang;
         @BindView(R.id.artist)
         TextView artist;
         @BindView(R.id.weight)

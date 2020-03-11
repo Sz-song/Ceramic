@@ -1,9 +1,11 @@
 package com.yuanyu.ceramics.mine;
 
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -24,6 +26,7 @@ import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
+import com.yuanyu.ceramics.release_popwindow.ReleasePopWindow;
 import com.yuanyu.ceramics.seller.index.SellerIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
@@ -100,6 +103,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     LinearLayout dashiattesta;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
+    @BindView(R.id.toseller)
+    LinearLayout toseller;
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -143,7 +148,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         swipe.setRefreshing(false);
     }
 
-    @OnClick({R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.mine_relat, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_dingzhi, R.id.my_collect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting})
+    @OnClick({R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.mine_relat, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_dingzhi, R.id.my_collect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting, R.id.toseller})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -215,6 +220,16 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case R.id.system_setting:
                 intent = new Intent(getContext(), SystemSettingActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.toseller:
+                   ReleasePopWindow popupWindow = new ReleasePopWindow(getActivity());
+                    popupWindow.showAtLocation(swipe, Gravity.BOTTOM, 0, 0);
+                    popupWindow.setOnDismissListener(() -> {
+                        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                        lp.alpha = 1f; // 0.0-1.0
+                        getActivity().getWindow().setAttributes(lp);
+                    });
+
                 break;
         }
     }

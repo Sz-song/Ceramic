@@ -3,6 +3,7 @@ package com.yuanyu.ceramics.fenlei;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -14,13 +15,19 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
+import com.yuanyu.ceramics.common.ResultBean;
+import com.yuanyu.ceramics.utils.ExceptionHandler;
+import com.yuanyu.ceramics.utils.HttpServiceInstance;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class FenLeiResActivity extends BaseActivity {
     @BindView(R.id.title)
@@ -37,7 +44,7 @@ public class FenLeiResActivity extends BaseActivity {
     private BottomResultAdapter bottomResultAdapter;
     private List<String> bottomList = new ArrayList<>();
     private String[] strings = new String[5];
-//    private FenleiModel model = new FenleiModel();
+    private FenleiModel model = new FenleiModel();
     private List<FenLeiResBean> resultList = new ArrayList<>();
     private int page = 0;
     private int page_size=10;
@@ -110,10 +117,6 @@ public class FenLeiResActivity extends BaseActivity {
         initResultList();
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         resultRecycle.setLayoutManager(layoutManager);
-        FenLeiResBean rs1=new FenLeiResBean("1","商品1","南昌市",2000,"img/banner1.jpg","1");
-        FenLeiResBean rs2=new FenLeiResBean("2","商品2","南昌市",3000,"img/banner1.jpg","2");
-        resultList.add(rs1);
-        resultList.add(rs2);
         adapter = new FenleiResAdapter(resultList);
         resultRecycle.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -124,31 +127,30 @@ public class FenLeiResActivity extends BaseActivity {
     }
 
     private void initResultList() {
-
-//        model.getFenleiRusult(strings, page, page_size)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<List<ResultBean>>())
-//                .subscribe(new BaseObserver<List<ResultBean>>() {
-//                    @Override
-//                    public void onNext(List<ResultBean> list) {
-//                        int count = (resultList.size());
-//                        for (int i = 0; i < list.size(); i++) {
-//                            resultList.add(list.get(i));
-//                        }
-//                        if(list.size()==0){
-//                            Toast.makeText(FenleiResultActivity.this, "没有更多数据", Toast.LENGTH_SHORT).show();
-//                        }
-//                        adapter.notifyItemRangeInserted(count, list.size());
-//                        page++;
-//                        swiperefresh.setRefreshing(false);
-//                    }
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {
-//                        swiperefresh.setRefreshing(false);
-//                        Toast.makeText(FenleiResultActivity.this, e.message, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+        model.getFenleiRusult(strings, page, page_size)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<List<FenLeiResBean>>())
+                .subscribe(new BaseObserver<List<FenLeiResBean>>() {
+                    @Override
+                    public void onNext(List<FenLeiResBean> list) {
+                        int count = (resultList.size());
+                        for (int i = 0; i < list.size(); i++) {
+                            resultList.add(list.get(i));
+                        }
+                        if(list.size()==0){
+                            Toast.makeText(FenLeiResActivity.this, "没有更多数据", Toast.LENGTH_SHORT).show();
+                        }
+                        adapter.notifyItemRangeInserted(count, list.size());
+                        page++;
+                        swiperefresh.setRefreshing(false);
+                    }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        swiperefresh.setRefreshing(false);
+                        Toast.makeText(FenLeiResActivity.this, e.message, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
     @Override

@@ -7,6 +7,7 @@ import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
 import com.yuanyu.ceramics.common.DynamicBean;
+import com.yuanyu.ceramics.common.FriendBean;
 import com.yuanyu.ceramics.common.ResultBean;
 import com.yuanyu.ceramics.common.VideoBean;
 import com.yuanyu.ceramics.dingzhi.DashiCellBean;
@@ -19,6 +20,7 @@ import com.yuanyu.ceramics.item.ItemDetailBean;
 import com.yuanyu.ceramics.login.LoginBean;
 import com.yuanyu.ceramics.logistics.LogisticsBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
+import com.yuanyu.ceramics.meet_master.MeetMasterBean;
 import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
 import com.yuanyu.ceramics.mine.systemsetting.BlackListBean;
@@ -123,6 +125,9 @@ public interface HttpService {
     //获取我的定制
     @POST("app_api/home_page/dingzhi.php")
     Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(@Body RequestBody body);
+    //获取遇见大师
+    @POST("app_api/master/master_studio_list.php")
+    Observable<BaseResponse<List<MeetMasterBean>>> getMasterStudio(@Body RequestBody body);
     //获取指定大师
     @POST("app_api/home_page/dingzhi.php")
     Observable<BaseResponse<List<DashiCellBean>>> ChooseDashi(@Body RequestBody body);
@@ -141,6 +146,16 @@ public interface HttpService {
     //点赞
     @POST("app_api/yuba/dianzan.php")
     Observable<BaseResponse<String []>>dianZan(@Body RequestBody body);
+
+    //发布动态
+    @POST("app_api/yuba/releasedynamic.php")
+    Observable<BaseResponse<Boolean>>ReleaseDynamic(@Body RequestBody body);
+    //获取好友列表
+    @POST("app_api/grounding/getfriends.php")
+    Observable<BaseResponse<List<FriendBean>>>getFriends(@Body RequestBody body);
+    //发布文章
+    @POST("app_api/yuba/releasearticle.php")
+    Observable<BaseResponse<Boolean>>ReleaseArticle(@Body RequestBody body);
 
     //评论
     @POST("app_api/yuba/releasepinglun.php")
@@ -252,15 +267,15 @@ public interface HttpService {
     //    商家管理获取订单管理getOrdersManage
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<List<ShopOrderBean>>> getOrdersManage(@Body RequestBody body);
-//    shopGetOrderDetail
+    //    shopGetOrderDetail
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
 //    getLogisticsTracing
-//快递递踪
-    @POST("app_api/home_page/loadmoreads.php")
+    //快递递踪
+    @POST("")
     Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
 //    modityOrderPrice商家修改未支付订单价格
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 //    修改商家
     @POST("123")
@@ -309,4 +324,7 @@ public interface HttpService {
     //商家获取待发货数据
     @POST("app_api/shangjia/getnodelivery.php")
     Observable<BaseResponse<List<WaitDeliveryBean>>>getWaitDeliveryData(@Body RequestBody body);
+    //获取分类
+    @POST("app_api/home_page/getfenlei.php")
+    Observable<BaseResponse<List<ResultBean>>>getFenleiResult(@Body RequestBody body);
 }
