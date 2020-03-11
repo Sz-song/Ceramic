@@ -103,12 +103,12 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
     EditText width;
     @BindView(R.id.height)
     EditText height;
-    @BindView(R.id.chanzhaung_tag)
-    TextView chanzhaungTag;
-    @BindView(R.id.chanzhuang)
-    EditText chanzhuang;
-    @BindView(R.id.chanzhuang_rec)
-    RecyclerView chanzhuangRec;
+//    @BindView(R.id.chanzhaung_tag)
+//    TextView chanzhaungTag;
+//    @BindView(R.id.chanzhuang)
+//    EditText chanzhuang;
+//    @BindView(R.id.chanzhuang_rec)
+//    RecyclerView chanzhuangRec;
     @BindView(R.id.fenlei_tag)
     TextView fenleiTag;
     @BindView(R.id.fenlei)
@@ -125,19 +125,19 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
     EditText ticai;
     @BindView(R.id.ticai_rec)
     RecyclerView ticaiRec;
-    @BindView(R.id.pise)
-    EditText pise;
-    @BindView(R.id.pise_rec)
-    RecyclerView piseRec;
-    @BindView(R.id.freight)
-    TextView freight;
+//    @BindView(R.id.pise)
+//    EditText pise;
+//    @BindView(R.id.pise_rec)
+//    RecyclerView piseRec;
+//    @BindView(R.id.freight)
+//    TextView freight;
     @BindView(R.id.submit)
     Button submit;
     @BindView(R.id.toonsale)
     LinearLayout toonsale;
 
-    private List<FenleiTypeBean> fenleiList, chanzhuangList, ticaiList, piseList, zhongleiList;
-    private FenleiTypeAdapter2 fenleiAdapter, chanzhuangAdapter, ticaiAdapter, piseAdapter, zhongleiAdapter;
+    private List<FenleiTypeBean> fenleiList,ticaiList, zhongleiList;
+    private FenleiTypeAdapter2 fenleiAdapter, ticaiAdapter, zhongleiAdapter;
     private InputMethodManager imm;
     private PhotoVedioAdapter adapter;
     private LoadingDialog dialog;
@@ -280,16 +280,16 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         fenlei.addTextChangedListener(new NotNullTextWatcher(fenleiTag));
         zhonglei.addTextChangedListener(new NotNullTextWatcher(zhongleiTag));
 
-        chanzhuang.addTextChangedListener(new NotNullTextWatcher(chanzhaungTag));
+//        chanzhuang.addTextChangedListener(new NotNullTextWatcher(chanzhaungTag));
 
         weight.addTextChangedListener(new NotNullTextWatcher(weightTag));
         length.addTextChangedListener(new ShapeTextWeacher());
         width.addTextChangedListener(new ShapeTextWeacher());
         height.addTextChangedListener(new ShapeTextWeacher());
         fenleiList = new ArrayList<>();
-        chanzhuangList = new ArrayList<>();
+//        chanzhuangList = new ArrayList<>();
         ticaiList = new ArrayList<>();
-        piseList = new ArrayList<>();
+//        piseList = new ArrayList<>();
         zhongleiList = new ArrayList<>();
         presenter.initList(fenleiList, ticaiList, zhongleiList);
         fenleiAdapter = new FenleiTypeAdapter2(getContext(), fenleiList);
@@ -322,25 +322,25 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         ticaiRec.setAdapter(ticaiAdapter);
         ticaiRec.setLayoutManager(new CantScrollGirdLayoutManager(getContext(), 4));
 
-        chanzhuangAdapter = new FenleiTypeAdapter2(getContext(), chanzhuangList);
-        chanzhuangAdapter.setClickListener(position -> {
-            chanzhuang.setText(chanzhuangList.get(position).getType());
-            chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
-            performAnime(chanzhuangRec, 500, false);
-            chanzhuangRec.setTag("0");
-        });
-        chanzhuangRec.setAdapter(chanzhuangAdapter);
-        chanzhuangRec.setLayoutManager(new CantScrollGirdLayoutManager(getContext(), 4));
+//        chanzhuangAdapter = new FenleiTypeAdapter2(getContext(), chanzhuangList);
+//        chanzhuangAdapter.setClickListener(position -> {
+//            chanzhuang.setText(chanzhuangList.get(position).getType());
+//            chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
+//            performAnime(chanzhuangRec, 500, false);
+//            chanzhuangRec.setTag("0");
+//        });
+//        chanzhuangRec.setAdapter(chanzhuangAdapter);
+//        chanzhuangRec.setLayoutManager(new CantScrollGirdLayoutManager(getContext(), 4));
 
-        piseAdapter = new FenleiTypeAdapter2(getContext(), piseList);
-        piseAdapter.setClickListener(position -> {
-            pise.setText(piseList.get(position).getType());
-            pise.setCompoundDrawables(null, null, triangleRight, null);
-            performAnime(piseRec, 500, false);
-            piseRec.setTag("0");
-        });
-        piseRec.setAdapter(piseAdapter);
-        piseRec.setLayoutManager(new CantScrollGirdLayoutManager(getContext(), 4));
+//        piseAdapter = new FenleiTypeAdapter2(getContext(), piseList);
+//        piseAdapter.setClickListener(position -> {
+//            pise.setText(piseList.get(position).getType());
+//            pise.setCompoundDrawables(null, null, triangleRight, null);
+//            performAnime(piseRec, 500, false);
+//            piseRec.setTag("0");
+//        });
+//        piseRec.setAdapter(piseAdapter);
+//        piseRec.setLayoutManager(new CantScrollGirdLayoutManager(getContext(), 4));
     }
 
     @Override
@@ -348,7 +348,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
 
     }
 
-    @OnClick({R.id.submit, R.id.add, R.id.reduce, R.id.fenlei, R.id.zhonglei, R.id.ticai, R.id.pise, R.id.chanzhuang})
+    @OnClick({R.id.submit, R.id.add, R.id.reduce, R.id.fenlei, R.id.zhonglei, R.id.ticai})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.fenlei:
@@ -375,18 +375,18 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
                     zhongleiRec.setTag("0");
                 }
                 break;
-            case R.id.pise:
-                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-                if (piseRec.getTag().equals("0")) {
-                    pise.setCompoundDrawables(null, null, triangleDown, null);
-                    performAnime(piseRec, 350, true);
-                    piseRec.setTag("1");
-                } else {
-                    pise.setCompoundDrawables(null, null, triangleRight, null);
-                    performAnime(piseRec, 350, false);
-                    piseRec.setTag("0");
-                }
-                break;
+//            case R.id.pise:
+//                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+//                if (piseRec.getTag().equals("0")) {
+//                    pise.setCompoundDrawables(null, null, triangleDown, null);
+//                    performAnime(piseRec, 350, true);
+//                    piseRec.setTag("1");
+//                } else {
+//                    pise.setCompoundDrawables(null, null, triangleRight, null);
+//                    performAnime(piseRec, 350, false);
+//                    piseRec.setTag("0");
+//                }
+//                break;
             case R.id.ticai:
                 imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
                 if (ticaiRec.getTag().equals("0")) {
@@ -399,18 +399,18 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
                     ticaiRec.setTag("0");
                 }
                 break;
-            case R.id.chanzhuang:
-                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-                if (chanzhuangRec.getTag().equals("0")) {
-                    chanzhuang.setCompoundDrawables(null, null, triangleDown, null);
-                    performAnime(chanzhuangRec, 350, true);
-                    chanzhuangRec.setTag("1");
-                } else {
-                    chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
-                    performAnime(chanzhuangRec, 350, false);
-                    chanzhuangRec.setTag("0");
-                }
-                break;
+//            case R.id.chanzhuang:
+//                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+//                if (chanzhuangRec.getTag().equals("0")) {
+//                    chanzhuang.setCompoundDrawables(null, null, triangleDown, null);
+//                    performAnime(chanzhuangRec, 350, true);
+//                    chanzhuangRec.setTag("1");
+//                } else {
+//                    chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
+//                    performAnime(chanzhuangRec, 350, false);
+//                    chanzhuangRec.setTag("0");
+//                }
+//                break;
             case R.id.submit:
                 if (!isEmpty()) {
                     submit.setEnabled(false);
@@ -470,10 +470,12 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
 //        } else if (switchRelat.getVisibility() == View.VISIBLE && switchBtn.isChecked() && !(fenxiaoPrice.getText().toString().trim().length() > 0)) {
 //            Toast.makeText(getContext(), "请填写分销价格", Toast.LENGTH_SHORT).show();
 //            return true;
-        } else if (chanzhuang.getText().toString().trim().length() == 0) {
-            Toast.makeText(getContext(), "请选择产状", Toast.LENGTH_SHORT).show();
-            return true;
-        } else if (fenlei.getText().toString().trim().length() == 0) {
+        }
+//        else if (chanzhuang.getText().toString().trim().length() == 0) {
+//            Toast.makeText(getContext(), "请选择产状", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+        else if (fenlei.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请选择分类", Toast.LENGTH_SHORT).show();
             return true;
         } else if (zhonglei.getText().toString().trim().length() == 0) {
@@ -503,8 +505,8 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
 //            bean.setDd_price(fenxiaoPrice.getText().toString());
             bean.setFenlei(fenlei.getText().toString());
             bean.setZhonglei(zhonglei.getText().toString());
-            bean.setChanzhuang(chanzhuang.getText().toString());
-            bean.setPise(pise.getText().toString());
+//            bean.setChanzhuang(chanzhuang.getText().toString());
+//            bean.setPise(pise.getText().toString());
             bean.setTicai(ticai.getText().toString());
             bean.setWeight(Double.parseDouble(weight.getText().toString()));
             bean.setWidth(Integer.parseInt(width.getText().toString()));
@@ -607,8 +609,8 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         addimageNum.setText("0/9");
         fenlei.setText("");
         zhonglei.setText("");
-        pise.setText("");
-        chanzhuang.setText("");
+//        pise.setText("");
+//        chanzhuang.setText("");
         ticai.setText("");
 //        etSerialNo.setText("");
         length.setText("");
@@ -618,13 +620,13 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         for (FenleiTypeBean bean : fenleiList) bean.setChoose(false);
         for (FenleiTypeBean bean : zhongleiList) bean.setChoose(false);
         for (FenleiTypeBean bean : ticaiList) bean.setChoose(false);
-        for (FenleiTypeBean bean : piseList) bean.setChoose(false);
-        for (FenleiTypeBean bean : chanzhuangList) bean.setChoose(false);
+//        for (FenleiTypeBean bean : piseList) bean.setChoose(false);
+//        for (FenleiTypeBean bean : chanzhuangList) bean.setChoose(false);
         fenleiAdapter.notifyDataSetChanged();
         zhongleiAdapter.notifyDataSetChanged();
         ticaiAdapter.notifyDataSetChanged();
-        chanzhuangAdapter.notifyDataSetChanged();
-        piseAdapter.notifyDataSetChanged();
+//        chanzhuangAdapter.notifyDataSetChanged();
+//        piseAdapter.notifyDataSetChanged();
     }
 
     private void performAnime(final View view, int height, boolean show) {

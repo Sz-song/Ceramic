@@ -162,7 +162,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case R.id.dynamic:
             case R.id.protrait:
             case R.id.mine_relat:
-                PersonalIndexActivity.actionStart(getContext(),  Sp.getString(getContext(), "useraccountid"));
+                PersonalIndexActivity.actionStart(getContext(), Sp.getString(getContext(), "useraccountid"));
                 break;
             case R.id.all_order:
                 intent = new Intent(getContext(), MyOrderActivity.class);
@@ -206,13 +206,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case R.id.dashiattesta:
                 break;
             case R.id.applyenter:
-//                if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {
-//                    intent = new Intent(this.getContext(), EnterProtocolActivity.class);
-//                    intent.putExtra("type", 0);
-//                    startActivity(intent);
-//                }
-                intent = new Intent(this.getContext(), SellerIndexActivity.class);
-                startActivity(intent);
+                if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {
+                    intent = new Intent(this.getContext(), EnterProtocolActivity.class);
+                    intent.putExtra("type", 0);
+                    startActivity(intent);
+                }
                 break;
             case R.id.system_setting:
                 intent = new Intent(getContext(), SystemSettingActivity.class);

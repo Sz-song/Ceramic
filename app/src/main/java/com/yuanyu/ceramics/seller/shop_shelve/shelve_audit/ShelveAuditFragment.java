@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,12 +24,16 @@ import com.yuanyu.ceramics.common.WrapContentLinearLayoutManager;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.seller.shop_shelve.re_shelve.ReShelveActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
+import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by cat on 2018/8/17.
@@ -118,26 +123,86 @@ public class ShelveAuditFragment extends BaseFragment<ShelveAuditPresenter> impl
 
     @Override
     protected void initData() {
+        dialog.show();
+        swipe.setRefreshing(true);
+        presenter.getShelveAuditData(Sp.getString(getContext(),AppConstant.SHOP_ID),type,page);
+    }
 
+    @OnClick({R.id.nodata_img, R.id.nodata})
+    public void onViewClicked(View view) {
+        page = 0;
+        list.clear();
+        adapter.notifyDataSetChanged();
+        dialog.show();
+        swipe.setRefreshing(true);
+        presenter.getShelveAuditData(Sp.getString(getContext(),AppConstant.SHOP_ID),type,page);
     }
 
     @Override
-    public void getShelveAuditDataSuccess(List<ShelveAuditBean> list) {
-
+    public void getShelveAuditDataSuccess(List<ShelveAuditBean> beans) {
+        dialog.dismiss();
+        list.addAll(beans);
+        if(isAlive){
+            adapter.notifyItemRangeInserted(list.size() - beans.size(),beans.size());
+            swipe.setRefreshing(false);
+            page++;
+            if (list.size() == 0) {
+                nodataImg.setVisibility(View.VISIBLE);
+                nodata.setVisibility(View.VISIBLE);
+            }else {
+                nodataImg.setVisibility(View.GONE);
+                nodata.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
     public void deleteShelveAuditSuccess(int position) {
-
+        if(isAlive) {
+            dialog.dismiss();
+            list.remove(position);
+            adapter.notifyItemRemoved(position);
+            adapter.notifyItemRangeChanged(position, list.size() - position);
+            if (list.size() == 0) {
+                nodataImg.setVisibility(View.VISIBLE);
+                nodata.setVisibility(View.VISIBLE);
+            } else {
+                nodataImg.setVisibility(View.GONE);
+                nodata.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
     public void getShelveAuditDataFail(ExceptionHandler.ResponeThrowable e) {
-
+        dialog.dismiss();
+        L.e(e.message+"  "+e.status);
+        if(isAlive) {
+            swipe.setRefreshing(false);
+            if (list.size() == 0) {
+                nodataImg.setVisibility(View.VISIBLE);
+                nodata.setVisibility(View.VISIBLE);
+            } else {
+                nodataImg.setVisibility(View.GONE);
+                nodata.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
     public void deleteShelveAuditFail(ExceptionHandler.ResponeThrowable e) {
-
+        dialog.dismiss();
+        L.e(e.message+"  "+e.status);
+        Toast.makeText(getContext(), "删除失败", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1001 && resultCode == RESULT_OK&&type==2) {
+            page = 0;
+            list.clear();
+            adapter.notifyDataSetChanged();
+            presenter.getShelveAuditData(Sp.getString(getContext(),AppConstant.SHOP_ID),type,page);
+        }
     }
 }
