@@ -80,8 +80,8 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
     RecyclerView recyAddimage;
     @BindView(R.id.addimage_num)
     TextView addimageNum;
-    @BindView(R.id.et_serial_no)
-    EditText etSerialNo;
+//    @BindView(R.id.et_serial_no)
+//    EditText etSerialNo;
     @BindView(R.id.artisan)
     EditText artisan;
     @BindView(R.id.relat_jiangren)
@@ -526,7 +526,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
             bean.setWidth(Integer.parseInt(width.getText().toString()));
             bean.setLength(Integer.parseInt(length.getText().toString()));
             bean.setHeight(Integer.parseInt(height.getText().toString()));
-            bean.setSerial_no(etSerialNo.getText().toString());
+//            bean.setSerial_no(etSerialNo.getText().toString());
             return false;
         }
     }
@@ -626,7 +626,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         pise.setText("");
         chanzhuang.setText("");
         ticai.setText("");
-        etSerialNo.setText("");
+//        etSerialNo.setText("");
         length.setText("");
         width.setText("");
         height.setText("");

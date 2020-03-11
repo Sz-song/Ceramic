@@ -89,34 +89,34 @@
                         android:layout_width="match_parent"
                         android:layout_height="5dp"
                         android:background="@color/dividerGray" />
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center_vertical"
-                            android:text="区块链编号"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/et_serial_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/dividerGray" />
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginEnd="10dp">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:layout_alignParentStart="true"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="区块链编号"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/et_serial_no"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                    </RelativeLayout>-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:background="@color/dividerGray" />-->
                     <RelativeLayout
                         android:id="@+id/relat_jiangren"
                         android:layout_width="match_parent"
@@ -217,43 +217,121 @@
                         android:layout_height="0.5dp"
                         android:background="@color/dividerGray"/>
                     <LinearLayout
-                        android:id="@+id/fenxiao_liner"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="10dp"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
                         android:orientation="horizontal">
-
                         <TextView
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="40dp"
                             android:gravity="center_vertical"
-                            android:text="分销价格:"
+                            android:text="分类:"
+                            android:layout_weight="1"
                             android:textColor="@color/blackLight"
-                            android:textSize="16sp"
-                            android:layout_weight="1" />
+                            android:textSize="16sp" />
                         <TextView
-                            android:id="@+id/fenxiao_price"
+                            android:id="@+id/fenlei"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:textColor="@color/blackLight"
                             android:textSize="16sp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
                         <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:text="种类:"
+                            android:layout_weight="1"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/zhonglei"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:textColor="@color/colorPrimary"
-                            android:text="元"
-                            />
-
+                            android:gravity="center_vertical"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="5dp"
                         android:background="@color/dividerGray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:text="题材:"
+                            android:layout_weight="1"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/ticai"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/blackLight"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/dividerGray" />
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/fenxiao_liner"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:focusable="true"-->
+<!--                        android:focusableInTouchMode="true"-->
+<!--                        android:orientation="horizontal">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="分销价格:"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:layout_weight="1" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/fenxiao_price"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center"-->
+<!--                            android:textColor="@color/colorPrimary"-->
+<!--                            android:text="元"-->
+<!--                            />-->
+
+<!--                    </LinearLayout>-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="5dp"-->
+<!--                        android:background="@color/dividerGray" />-->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
@@ -356,162 +434,85 @@
                         android:layout_height="0.5dp"
                         android:background="@color/dividerGray" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:gravity="center_vertical"
-                            android:text="分类:"
-                            android:layout_weight="1"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/fenlei"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/dividerGray" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:gravity="center_vertical"
-                            android:text="种类:"
-                            android:layout_weight="1"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/zhonglei"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:background="@color/dividerGray" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:gravity="center_vertical"
-                            android:text="题材:"
-                            android:layout_weight="1"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/ticai"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/dividerGray" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:gravity="center_vertical"
-                            android:text="产状:"
-                            android:layout_weight="1"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/chanzhuang"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/dividerGray" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:gravity="center_vertical"
-                            android:text="皮色:"
-                            android:layout_weight="1"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/pise"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/dividerGray" />
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:gravity="center_vertical"
-                            android:text="运费:"
-                            android:textColor="@color/blackLight"
-                            android:textSize="16sp" />
-                        <TextView
-                            android:id="@+id/freight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerVertical="true"
-                            android:text="包邮"
-                            android:textColor="@color/blackLight"
-                            android:gravity="center"
-                            android:textSize="16sp" />
-                    </RelativeLayout>
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="产状:"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/chanzhuang"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                    </LinearLayout>-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:background="@color/dividerGray" />-->
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginEnd="10dp"-->
+<!--                        android:orientation="horizontal">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="40dp"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="皮色:"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/pise"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                    </LinearLayout>-->
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="0.5dp"-->
+<!--                        android:background="@color/dividerGray" />-->
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginStart="20dp"-->
+<!--                        android:layout_marginEnd="10dp">-->
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_alignParentStart="true"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:gravity="center_vertical"-->
+<!--                            android:text="运费:"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:textSize="16sp" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/freight"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_alignParentEnd="true"-->
+<!--                            android:layout_alignParentTop="true"-->
+<!--                            android:layout_centerVertical="true"-->
+<!--                            android:text="包邮"-->
+<!--                            android:textColor="@color/blackLight"-->
+<!--                            android:gravity="center"-->
+<!--                            android:textSize="16sp" />-->
+<!--                    </RelativeLayout>-->
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
