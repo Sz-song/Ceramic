@@ -246,7 +246,7 @@ public interface HttpService {
     @POST("app_api/home_page/get_version.php")
     Observable<BaseResponse<Integer>> getVersion(@Body RequestBody body);
     //获取验证码
-    @POST("app_api/app_login/login_module.php")
+    @POST("back/test/api/app_login/login_module.php")
     Observable<BaseResponse<String[]>> getValidCode(@Body RequestBody body);
     //重置密码
     @POST("app_api/app_login/login_module.php")

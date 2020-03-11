@@ -3,7 +3,7 @@ package com.yuanyu.ceramics;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 
 public class AppConstant {
-    public static String BASE_URL="http://101.132.128.125/song/";
+    public static String BASE_URL="http://132.232.95.104/";
     public static String QQ_APP_ID="1107922776";
     public static final String ACCOUNT = "account";//用户手机号
     public static final String MOBILE = "mobile";//用户手机号

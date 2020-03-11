@@ -43,23 +43,22 @@ public class LoginModel implements LoginContract.ILoginModel {
 
     @Override
     public Observable<BaseResponse<String[]>> getValidCode(String mobile) {
-//        String timestamp = FileHelper.getTimeStamp();
-//        String randomstr = FileHelper.getRandomString(10);
-//        String signature = FileHelper.getSignature(timestamp,randomstr);
-//        Map map = new HashMap();
-//        map.put("timestamp",timestamp);
-//        map.put("randomstr",randomstr);
-//        map.put("signature",signature);
-//        map.put("action","getvalidatecode");
-//        Map data = new HashMap();
-//        data.put("mobile",mobile);
-//        map.put("data",data);
-//        Gson gson=new Gson();
-//        String str=gson.toJson(map);
-//        L.e("str is "+str);
-//        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-//        return httpService.getValidCode(body);
-        return null;
+        String timestamp = Md5Utils.getTimeStamp();
+        String randomstr = Md5Utils.getRandomString(10);
+        String signature = Md5Utils.getSignature(timestamp,randomstr);
+        Map map = new HashMap();
+        map.put("timestamp",timestamp);
+        map.put("randomstr",randomstr);
+        map.put("signature",signature);
+        map.put("action","getvalidatecode");
+        Map data = new HashMap();
+        data.put("mobile",mobile);
+        map.put("data",data);
+        Gson gson=new Gson();
+        String str=gson.toJson(map);
+        L.e("str is "+str);
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        return httpService.getValidCode(body);
     }
 
     @Override
