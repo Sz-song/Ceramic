@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,10 +55,6 @@ import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
 
-/**
- * Created by cat on 2018/8/17.
- */
-
 public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implements ShelvingConstract.IShelvingView {
     private static final int SELECT_IMAGE_CODE = 1000;
     private static final int SELECT_VIDEO_CODE = 1001;
@@ -80,8 +75,6 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
     RecyclerView recyAddimage;
     @BindView(R.id.addimage_num)
     TextView addimageNum;
-    @BindView(R.id.et_serial_no)
-    EditText etSerialNo;
     @BindView(R.id.artisan)
     EditText artisan;
     @BindView(R.id.relat_jiangren)
@@ -98,18 +91,6 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
     TextView priceTag;
     @BindView(R.id.price)
     EditText price;
-    @BindView(R.id.switch_btn)
-    Switch switchBtn;
-    @BindView(R.id.switch_relat)
-    RelativeLayout switchRelat;
-    @BindView(R.id.view)
-    View view;
-    @BindView(R.id.fenxiao_price_tag)
-    TextView fenxiaoPriceTag;
-    @BindView(R.id.fenxiao_price)
-    EditText fenxiaoPrice;
-    @BindView(R.id.fenxiao_liner)
-    LinearLayout fenxiaoLiner;
     @BindView(R.id.weight_tag)
     TextView weightTag;
     @BindView(R.id.weight)
@@ -154,6 +135,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
     Button submit;
     @BindView(R.id.toonsale)
     LinearLayout toonsale;
+
     private List<FenleiTypeBean> fenleiList, chanzhuangList, ticaiList, piseList, zhongleiList;
     private FenleiTypeAdapter2 fenleiAdapter, chanzhuangAdapter, ticaiAdapter, piseAdapter, zhongleiAdapter;
     private InputMethodManager imm;
@@ -164,6 +146,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
     private ShelvingDetailBean bean;
     private List<PhotoVideoBean> list;
     private ItemTouchHelper itemTouchHelper;
+
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.fragment_applyshelving, container, false);
@@ -279,11 +262,13 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         itemTouchHelper.attachToRecyclerView(recyAddimage);
         recyAddimage.addOnItemTouchListener(new OnItemClickListener(recyAddimage) {
             @Override
-            public void onItemClick(RecyclerView.ViewHolder vh) {}
+            public void onItemClick(RecyclerView.ViewHolder vh) {
+            }
+
             @Override
             public void onItemLongClick(RecyclerView.ViewHolder vh) {
                 //如果item不是最后一个，则执行拖拽
-                if (list.get(vh.getLayoutPosition()).getType()==2) {
+                if (list.get(vh.getLayoutPosition()).getType() == 2) {
                     itemTouchHelper.startDrag(vh);
                 }
             }
@@ -306,7 +291,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         ticaiList = new ArrayList<>();
         piseList = new ArrayList<>();
         zhongleiList = new ArrayList<>();
-        presenter.initList(fenleiList,  ticaiList,  zhongleiList);
+        presenter.initList(fenleiList, ticaiList, zhongleiList);
         fenleiAdapter = new FenleiTypeAdapter2(getContext(), fenleiList);
         fenleiAdapter.setClickListener(position -> {
             fenlei.setText(fenleiList.get(position).getType());
@@ -447,19 +432,19 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
                 break;
             case R.id.reduce:
                 try {
-                    if((Integer.parseInt(num.getText().toString()) - 1)<1){
+                    if ((Integer.parseInt(num.getText().toString()) - 1) < 1) {
                         num.setText("1");
-                    }else {
+                    } else {
                         num.setText((Integer.parseInt(num.getText().toString()) - 1) + "");
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     num.setText("1");
                 }
                 break;
             case R.id.add:
                 try {
                     num.setText((Integer.parseInt(num.getText().toString()) + 1) + "");
-                }catch (Exception e){
+                } catch (Exception e) {
                     num.setText("1");
                 }
                 break;
@@ -482,9 +467,9 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         } else if (!(price.getText().toString().trim().length() > 0)) {
             Toast.makeText(getContext(), "请填写价格", Toast.LENGTH_SHORT).show();
             return true;
-        } else if (switchRelat.getVisibility() == View.VISIBLE && switchBtn.isChecked() && !(fenxiaoPrice.getText().toString().trim().length() > 0)) {
-            Toast.makeText(getContext(), "请填写分销价格", Toast.LENGTH_SHORT).show();
-            return true;
+//        } else if (switchRelat.getVisibility() == View.VISIBLE && switchBtn.isChecked() && !(fenxiaoPrice.getText().toString().trim().length() > 0)) {
+//            Toast.makeText(getContext(), "请填写分销价格", Toast.LENGTH_SHORT).show();
+//            return true;
         } else if (chanzhuang.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请选择产状", Toast.LENGTH_SHORT).show();
             return true;
@@ -497,26 +482,25 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         } else if (Double.parseDouble(price.getText().toString()) < 0.01) {
             Toast.makeText(getContext(), "价格不能为0", Toast.LENGTH_SHORT).show();
             return true;
-        } else if(length.getText().toString().trim().length()==0){
+        } else if (length.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请输入长度", Toast.LENGTH_SHORT).show();
             return true;
-        }else if(width.getText().toString().trim().length()==0){
+        } else if (width.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请输入宽度", Toast.LENGTH_SHORT).show();
             return true;
-        }else if(height.getText().toString().trim().length()==0){
+        } else if (height.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请输入高度", Toast.LENGTH_SHORT).show();
             return true;
-        }else if(weight.getText().toString().trim().length()==0){
+        } else if (weight.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请输入重量", Toast.LENGTH_SHORT).show();
             return true;
-        }
-        else {
+        } else {
             bean.setTitle(inputTitleEdit.getText().toString());
             bean.setDescription(inputContentEdit.getText().toString());
             bean.setArtisan(artisan.getText().toString().trim());
             bean.setPrice(price.getText().toString());
             bean.setAmount(num.getText().toString());
-            bean.setDd_price(fenxiaoPrice.getText().toString());
+//            bean.setDd_price(fenxiaoPrice.getText().toString());
             bean.setFenlei(fenlei.getText().toString());
             bean.setZhonglei(zhonglei.getText().toString());
             bean.setChanzhuang(chanzhuang.getText().toString());
@@ -526,7 +510,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
             bean.setWidth(Integer.parseInt(width.getText().toString()));
             bean.setLength(Integer.parseInt(length.getText().toString()));
             bean.setHeight(Integer.parseInt(height.getText().toString()));
-            bean.setSerial_no(etSerialNo.getText().toString());
+//            bean.setSerial_no(etSerialNo.getText().toString());
             return false;
         }
     }
@@ -539,19 +523,19 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
             if (selectList.size() > 0) {
                 for (int i = 0; i < selectList.size(); i++) {
-                    list.add(list.size()-1,new PhotoVideoBean(selectList.get(i).getPath(), 2));
+                    list.add(list.size() - 1, new PhotoVideoBean(selectList.get(i).getPath(), 2));
                 }
                 if (list.size() > 9) {
                     list.remove(9);
                 }
             }
-            int n=0;
-            for(int i=0;i<list.size();i++){
-                if(list.get(i).getType()==2||list.get(i).getType()==3){
+            int n = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                     n++;
                 }
             }
-            addimageNum.setText(n+"/9");
+            addimageNum.setText(n + "/9");
             adapter.notifyDataSetChanged();
         } else if (requestCode == SELECT_VIDEO_CODE && resultCode == RESULT_OK) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
@@ -559,13 +543,13 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
             if (selectList.size() > 0) {
                 list.set(0, new PhotoVideoBean(selectList.get(0).getPath(), 3));
             }
-            int n=0;
-            for(int i=0;i<list.size();i++){
-                if(list.get(i).getType()==2||list.get(i).getType()==3){
+            int n = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                     n++;
                 }
             }
-            addimageNum.setText(n+"/9");
+            addimageNum.setText(n + "/9");
             adapter.notifyDataSetChanged();
         }
         if (requestCode == DISPLAY_IMAGE && resultCode == DELETE_IMAGE) {
@@ -574,36 +558,36 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
                 if (list.get(list.size() - 1).getType() == 0) {
                     list.remove(position);
                     adapter.notifyDataSetChanged();
-                    int n=0;
-                    for(int i=0;i<list.size();i++){
-                        if(list.get(i).getType()==2||list.get(i).getType()==3){
+                    int n = 0;
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                             n++;
                         }
                     }
-                    addimageNum.setText(n+"/9");
+                    addimageNum.setText(n + "/9");
                 } else {
                     list.remove(position);
                     list.add(new PhotoVideoBean(R.drawable.add_pic + "", 0));
                     adapter.notifyDataSetChanged();
-                    int n=0;
-                    for(int i=0;i<list.size();i++){
-                        if(list.get(i).getType()==2||list.get(i).getType()==3){
+                    int n = 0;
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                             n++;
                         }
                     }
-                    addimageNum.setText(n+"/9");
+                    addimageNum.setText(n + "/9");
                 }
             }
         } else if (requestCode == DISPLAY_VIDEO && resultCode == DELETE_VIDEO) {
             list.remove(0);
             list.add(0, new PhotoVideoBean(R.drawable.add_video + "", 1));
-            int n=0;
-            for(int i=0;i<list.size();i++){
-                if(list.get(i).getType()==2||list.get(i).getType()==3){
+            int n = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                     n++;
                 }
             }
-            addimageNum.setText(n+"/9");
+            addimageNum.setText(n + "/9");
             adapter.notifyDataSetChanged();
 
         }
@@ -626,7 +610,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         pise.setText("");
         chanzhuang.setText("");
         ticai.setText("");
-        etSerialNo.setText("");
+//        etSerialNo.setText("");
         length.setText("");
         width.setText("");
         height.setText("");
@@ -748,11 +732,12 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         }
+
         @Override
         public void afterTextChanged(Editable editable) {
             if (length.getText().toString().length() > 0 && width.getText().toString().length() > 0 && height.getText().toString().length() > 0) {
                 shapeTag.setVisibility(View.GONE);
-            }else {
+            } else {
                 shapeTag.setVisibility(View.VISIBLE);
             }
         }

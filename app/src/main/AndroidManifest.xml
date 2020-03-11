@@ -107,6 +107,7 @@
         <activity android:name=".seller.delivery.CourierListActivity" />
         <activity android:name=".seller.delivery.DeliveryActivity" />
         <activity android:name=".seller.delivery.WaitDeliveryActivity" />
+        <activity android:name=".seller.shop_shelve.re_shelve.ReShelveActivity" />
     </application>
 
 </manifest>

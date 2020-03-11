@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,8 +43,6 @@ import com.yuanyu.ceramics.common.PhotoVideoBean;
 import com.yuanyu.ceramics.common.VideoBean;
 import com.yuanyu.ceramics.common.VideoDisplayActivity;
 import com.yuanyu.ceramics.seller.shop_shelve.ShelvingDetailBean;
-import com.yuanyu.ceramics.seller.shop_shelve.re_shelve.ReShelveConstract;
-import com.yuanyu.ceramics.seller.shop_shelve.re_shelve.ReShelvePresenter;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -85,8 +81,6 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     RecyclerView recyAddimage;
     @BindView(R.id.addimage_num)
     TextView addimageNum;
-//    @BindView(R.id.et_serial_no)
-//    EditText etSerialNo;
     @BindView(R.id.artisan)
     EditText artisan;
     @BindView(R.id.relat_jiangren)
@@ -103,36 +97,6 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     TextView priceTag;
     @BindView(R.id.price)
     EditText price;
-//    @BindView(R.id.switch_btn)
-//    Switch switchBtn;
-//    @BindView(R.id.switch_relat)
-//    RelativeLayout switchRelat;
-    @BindView(R.id.view)
-    View view;
-//    @BindView(R.id.fenxiao_price_tag)
-//    TextView fenxiaoPriceTag;
-//    @BindView(R.id.fenxiao_price)
-//    EditText fenxiaoPrice;
-//    @BindView(R.id.fenxiao_liner)
-//    LinearLayout fenxiaoLiner;
-    @BindView(R.id.weight_tag)
-    TextView weightTag;
-    @BindView(R.id.weight)
-    EditText weight;
-    @BindView(R.id.shape_tag)
-    TextView shapeTag;
-    @BindView(R.id.length)
-    EditText length;
-    @BindView(R.id.width)
-    EditText width;
-    @BindView(R.id.height)
-    EditText height;
-//    @BindView(R.id.chanzhaung_tag)
-//    TextView chanzhaungTag;
-//    @BindView(R.id.chanzhuang)
-//    EditText chanzhuang;
-//    @BindView(R.id.chanzhuang_rec)
-//    RecyclerView chanzhuangRec;
     @BindView(R.id.fenlei_tag)
     TextView fenleiTag;
     @BindView(R.id.fenlei)
@@ -149,18 +113,25 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     EditText ticai;
     @BindView(R.id.ticai_rec)
     RecyclerView ticaiRec;
-//    @BindView(R.id.pise)
-//    EditText pise;
-//    @BindView(R.id.pise_rec)
-//    RecyclerView piseRec;
-//    @BindView(R.id.freight)
-//    TextView freight;
+    @BindView(R.id.weight_tag)
+    TextView weightTag;
+    @BindView(R.id.weight)
+    EditText weight;
+    @BindView(R.id.shape_tag)
+    TextView shapeTag;
+    @BindView(R.id.length)
+    EditText length;
+    @BindView(R.id.width)
+    EditText width;
+    @BindView(R.id.height)
+    EditText height;
     @BindView(R.id.submit)
     Button submit;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
-    private List<FenleiTypeBean> fenleiList,  ticaiList,  zhongleiList;
-    private FenleiTypeAdapter2 fenleiAdapter, ticaiAdapter,  zhongleiAdapter;
+
+    private List<FenleiTypeBean> fenleiList, ticaiList, zhongleiList;
+    private FenleiTypeAdapter2 fenleiAdapter, ticaiAdapter, zhongleiAdapter;
     private InputMethodManager imm;
     private PhotoVedioAdapter adapter;
     private LoadingDialog dialog;
@@ -309,7 +280,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         fenleiList = new ArrayList<>();
         ticaiList = new ArrayList<>();
         zhongleiList = new ArrayList<>();
-        presenter.initList(fenleiList,  ticaiList,  zhongleiList);
+        presenter.initList(fenleiList, ticaiList, zhongleiList);
         fenleiAdapter = new FenleiTypeAdapter2(this, fenleiList);
         fenleiAdapter.setClickListener(position -> {
             fenlei.setText(fenleiList.get(position).getType());
@@ -416,7 +387,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
             } else {
                 num.setText(shelvingDetailBean.getAmount());
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             num.setText("1");
         }
         artisan.setText(shelvingDetailBean.getArtisan().trim());
@@ -477,32 +448,32 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
 
             if (selectList.size() > 0) {
                 for (int i = 0; i < selectList.size(); i++) {
-                    list.add(list.size()-1,new PhotoVideoBean(selectList.get(i).getPath(), 2));
+                    list.add(list.size() - 1, new PhotoVideoBean(selectList.get(i).getPath(), 2));
                 }
                 if (list.size() > 9) {
                     list.remove(9);
                 }
             }
-            int n=0;
-            for(int i=0;i<list.size();i++){
-                if(list.get(i).getType()==2||list.get(i).getType()==3){
+            int n = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                     n++;
                 }
             }
-            addimageNum.setText(n+"/9");
+            addimageNum.setText(n + "/9");
             adapter.notifyDataSetChanged();
         } else if (requestCode == SELECT_VIDEO_CODE && resultCode == RESULT_OK) {
             List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
             if (selectList.size() > 0) {
                 list.set(0, new PhotoVideoBean(selectList.get(0).getPath(), 3));
             }
-            int n=0;
-            for(int i=0;i<list.size();i++){
-                if(list.get(i).getType()==2||list.get(i).getType()==3){
+            int n = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                     n++;
                 }
             }
-            addimageNum.setText(n+"/9");
+            addimageNum.setText(n + "/9");
             adapter.notifyDataSetChanged();
         }
         if (requestCode == DISPLAY_IMAGE && resultCode == DELETE_IMAGE) {
@@ -511,36 +482,36 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                 if (list.get(list.size() - 1).getType() == 0) {
                     list.remove(position);
                     adapter.notifyDataSetChanged();
-                    int n=0;
-                    for(int i=0;i<list.size();i++){
-                        if(list.get(i).getType()==2||list.get(i).getType()==3){
+                    int n = 0;
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                             n++;
                         }
                     }
-                    addimageNum.setText(n+"/9");
+                    addimageNum.setText(n + "/9");
                 } else {
                     list.remove(position);
                     list.add(new PhotoVideoBean(R.drawable.add_pic + "", 0));
                     adapter.notifyDataSetChanged();
-                    int n=0;
-                    for(int i=0;i<list.size();i++){
-                        if(list.get(i).getType()==2||list.get(i).getType()==3){
+                    int n = 0;
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                             n++;
                         }
                     }
-                    addimageNum.setText(n+"/9");
+                    addimageNum.setText(n + "/9");
                 }
             }
         } else if (requestCode == DISPLAY_VIDEO && resultCode == DELETE_VIDEO) {
             list.remove(0);
             list.add(0, new PhotoVideoBean(R.drawable.add_video + "", 1));
-            int n=0;
-            for(int i=0;i<list.size();i++){
-                if(list.get(i).getType()==2||list.get(i).getType()==3){
+            int n = 0;
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getType() == 2 || list.get(i).getType() == 3) {
                     n++;
                 }
             }
-            addimageNum.setText(n+"/9");
+            addimageNum.setText(n + "/9");
             adapter.notifyDataSetChanged();
         }
     }
@@ -616,17 +587,17 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                     List<String> imageList = new ArrayList<>();
                     if (list.get(list.size() - 1).getType() == 2) {
                         for (int i = 1; i < list.size(); i++) {
-                            if(list.get(i).getUrl().startsWith("img/")){
+                            if (list.get(i).getUrl().startsWith("img/")) {
                                 bean.getImages().add(list.get(i).getUrl());
-                            }else {
+                            } else {
                                 imageList.add(list.get(i).getUrl());
                             }
                         }
                     } else if (list.get(list.size() - 1).getType() == 0) {
                         for (int i = 1; i < list.size() - 1; i++) {
-                            if(list.get(i).getUrl().startsWith("img/")){
+                            if (list.get(i).getUrl().startsWith("img/")) {
                                 bean.getImages().add(list.get(i).getUrl());
-                            }else {
+                            } else {
                                 imageList.add(list.get(i).getUrl());
                             }
                         }
@@ -637,24 +608,25 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                 break;
             case R.id.reduce:
                 try {
-                    if((Integer.parseInt(num.getText().toString()) - 1)<1){
+                    if ((Integer.parseInt(num.getText().toString()) - 1) < 1) {
                         num.setText("1");
-                    }else {
+                    } else {
                         num.setText((Integer.parseInt(num.getText().toString()) - 1) + "");
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     num.setText("1");
                 }
                 break;
             case R.id.add:
                 try {
                     num.setText((Integer.parseInt(num.getText().toString()) + 1) + "");
-                }catch (Exception e){
+                } catch (Exception e) {
                     num.setText("1");
                 }
                 break;
         }
     }
+
     private void cleanData() {
         bean.setNoData();
         inputTitleEdit.setText("");
@@ -683,6 +655,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         zhongleiAdapter.notifyDataSetChanged();
         ticaiAdapter.notifyDataSetChanged();
     }
+
     private boolean isEmpty() {
         if (!(inputTitleEdit.getText().toString().trim().length() > 0)) {
             Toast.makeText(this, "请填写商品名称", Toast.LENGTH_SHORT).show();
@@ -717,19 +690,19 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         } else if (Double.parseDouble(price.getText().toString()) < 0.01) {
             Toast.makeText(this, "价格不能为0", Toast.LENGTH_SHORT).show();
             return true;
-        }  else if(length.getText().toString().trim().length()==0){
+        } else if (length.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "请输入长度", Toast.LENGTH_SHORT).show();
             return true;
-        }else if(width.getText().toString().trim().length()==0){
+        } else if (width.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "请输入宽度", Toast.LENGTH_SHORT).show();
             return true;
-        }else if(height.getText().toString().trim().length()==0){
+        } else if (height.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "请输入高度", Toast.LENGTH_SHORT).show();
             return true;
-        } else if(weight.getText().toString().trim().length()==0){
+        } else if (weight.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "请输入重量", Toast.LENGTH_SHORT).show();
             return true;
-        }else {
+        } else {
             bean.setTitle(inputTitleEdit.getText().toString());
             bean.setDescription(inputContentEdit.getText().toString());
             bean.setArtisan(artisan.getText().toString().trim());
@@ -753,17 +726,16 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     }
 
 
-
     @Override
     public void compressImagesSuccess(List<File> images) {
         L.e("压缩图片成功");
-        L.e("image size is:"+images.size()+"");
+        L.e("image size is:" + images.size() + "");
         presenter.uploadImage(images);
     }
 
     @Override
     public void uploadImageSuccess(List<String> listimage) {
-        for(int i=0;i<listimage.size();i++){
+        for (int i = 0; i < listimage.size(); i++) {
             bean.getImages().add(listimage.get(i));
         }
         L.e("上传图片成功");
@@ -779,10 +751,10 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
 
     @Override
     public void compressVideoSuccess(String path) {
-        if(path!=null&&path.startsWith("video/")){
+        if (path != null && path.startsWith("video/")) {
             bean.setVideo(path);
             presenter.Shelving(Sp.getString(this, AppConstant.SHOP_ID), bean);
-        }else {
+        } else {
             L.e("compress path is" + path);
             bean.setVideo(path);
             L.e("压缩视频成功");
@@ -804,7 +776,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         Toast.makeText(this, "发布成功，请等待审核", Toast.LENGTH_SHORT).show();
         dialog.dismiss();
         submit.setEnabled(true);
-        setResult(RESULT_OK,getIntent());
+        setResult(RESULT_OK, getIntent());
         finish();
     }
 
@@ -849,6 +821,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         dialog.dismiss();
         submit.setEnabled(true);
     }
+
     private void performAnime(final View view, int height, boolean show) {
         ValueAnimator va;
         if (show) va = ValueAnimator.ofInt(0, height);
@@ -874,13 +847,23 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         }
         return true;
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
     class ShapeTextWacher implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         }
+
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         }
+
         @Override
         public void afterTextChanged(Editable editable) {
             if (length.getText().toString().length() > 0 && width.getText().toString().length() > 0 && height.getText().toString().length() > 0) {
