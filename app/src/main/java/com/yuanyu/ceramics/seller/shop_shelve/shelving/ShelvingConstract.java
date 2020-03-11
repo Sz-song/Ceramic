@@ -40,6 +40,6 @@ public interface ShelvingConstract {
         void compressVideo(Context context, String path);
         void uploadImage(List<File> images);
         void uploadVideo(String video);
-        void initList(List<FenleiTypeBean> fenleiList, List<FenleiTypeBean> chanzhuangList, List<FenleiTypeBean> ticaiList, List<FenleiTypeBean> piseList, List<FenleiTypeBean> zhongleiList);
+        void initList(List<FenleiTypeBean> fenleiList,  List<FenleiTypeBean> ticaiList, List<FenleiTypeBean> zhongleiList);
     }
 }

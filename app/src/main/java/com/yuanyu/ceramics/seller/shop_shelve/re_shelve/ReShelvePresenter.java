@@ -3,6 +3,8 @@ package com.yuanyu.ceramics.seller.shop_shelve.re_shelve;
 import android.content.Context;
 import android.os.Environment;
 
+import com.guoxiaoxing.phoenix.compress.video.VideoCompressor;
+import com.guoxiaoxing.phoenix.compress.video.format.MediaFormatStrategyPresets;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.common.FenleiTypeBean;
@@ -68,33 +70,33 @@ public class ReShelvePresenter extends BasePresenter<ReShelveConstract.IReShelve
                 L.e("Failed to create temporary file");
                 return;
             }
-//            VideoCompressor.Listener listener = new VideoCompressor.Listener() {
-//                @Override
-//                public void onTranscodeProgress(double progress) {
-//                }
-//                @Override
-//                public void onTranscodeCompleted() {
-//                    if (view != null) {
-//                        view.compressVideoSuccess(compressFile.getAbsolutePath());
-//                    }
-//                }
-//                @Override
-//                public void onTranscodeCanceled() {
-//                    L.e("video compress is canceled");
-//                }
-//                @Override
-//                public void onTranscodeFailed(Exception exception) {
-//                    if (view != null) {
-//                        view.compressVideoFail();
-//                    }
-//                }
-//            };
-//            try {
-//                VideoCompressor.with().asyncTranscodeVideo(path, compressFile.getAbsolutePath(),
-//                        MediaFormatStrategyPresets.createAndroid480pFormatStrategy(), listener);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            VideoCompressor.Listener listener = new VideoCompressor.Listener() {
+                @Override
+                public void onTranscodeProgress(double progress) {
+                }
+                @Override
+                public void onTranscodeCompleted() {
+                    if (view != null) {
+                        view.compressVideoSuccess(compressFile.getAbsolutePath());
+                    }
+                }
+                @Override
+                public void onTranscodeCanceled() {
+                    L.e("video compress is canceled");
+                }
+                @Override
+                public void onTranscodeFailed(Exception exception) {
+                    if (view != null) {
+                        view.compressVideoFail();
+                    }
+                }
+            };
+            try {
+                VideoCompressor.with().asyncTranscodeVideo(path, compressFile.getAbsolutePath(),
+                        MediaFormatStrategyPresets.createAndroid480pFormatStrategy(), listener);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -127,21 +129,16 @@ public class ReShelvePresenter extends BasePresenter<ReShelveConstract.IReShelve
     }
 
     @Override
-    public void initList(List<FenleiTypeBean> fenleiList, List<FenleiTypeBean> chanzhuangList, List<FenleiTypeBean> ticaiList, List<FenleiTypeBean> piseList, List<FenleiTypeBean> zhongleiList) {
-        fenleiList.add(new FenleiTypeBean("原石"));
-        fenleiList.add(new FenleiTypeBean("挂件"));
-        fenleiList.add(new FenleiTypeBean("吊坠"));
-        fenleiList.add(new FenleiTypeBean("把件"));
-        fenleiList.add(new FenleiTypeBean("摆件"));
+    public void initList(List<FenleiTypeBean> fenleiList, List<FenleiTypeBean> ticaiList,  List<FenleiTypeBean> zhongleiList) {
+        fenleiList.add(new FenleiTypeBean("花瓶"));
+        fenleiList.add(new FenleiTypeBean("雕塑品"));
+        fenleiList.add(new FenleiTypeBean("园林陶艺"));
         fenleiList.add(new FenleiTypeBean("器皿"));
-        fenleiList.add(new FenleiTypeBean("手镯"));
-        fenleiList.add(new FenleiTypeBean("手串（链）"));
-        fenleiList.add(new FenleiTypeBean("项链"));
-        fenleiList.add(new FenleiTypeBean("饰品"));
-        fenleiList.add(new FenleiTypeBean("杂项"));
+        fenleiList.add(new FenleiTypeBean("相框"));
+        fenleiList.add(new FenleiTypeBean("壁画"));
+        fenleiList.add(new FenleiTypeBean("陈设品"));
+        fenleiList.add(new FenleiTypeBean("其它"));
 
-        chanzhuangList.add(new FenleiTypeBean("山料"));
-        chanzhuangList.add(new FenleiTypeBean("籽料"));
 
         ticaiList.add(new FenleiTypeBean("神佛"));
         ticaiList.add(new FenleiTypeBean("瑞兽"));
@@ -152,21 +149,12 @@ public class ReShelvePresenter extends BasePresenter<ReShelveConstract.IReShelve
         ticaiList.add(new FenleiTypeBean("动物"));
         ticaiList.add(new FenleiTypeBean("其它"));
 
-        piseList.add(new FenleiTypeBean("黄皮"));
-        piseList.add(new FenleiTypeBean("红皮"));
-        piseList.add(new FenleiTypeBean("黑皮"));
-        piseList.add(new FenleiTypeBean("秋梨皮"));
-        piseList.add(new FenleiTypeBean("虎皮"));
-        piseList.add(new FenleiTypeBean("其它"));
 
-        zhongleiList.add(new FenleiTypeBean("白玉"));
-        zhongleiList.add(new FenleiTypeBean("碧玉"));
-        zhongleiList.add(new FenleiTypeBean("墨玉"));
-        zhongleiList.add(new FenleiTypeBean("青玉"));
-        zhongleiList.add(new FenleiTypeBean("青花"));
-        zhongleiList.add(new FenleiTypeBean("糖玉"));
-        zhongleiList.add(new FenleiTypeBean("黄口料"));
-        zhongleiList.add(new FenleiTypeBean("黄沁"));
+        zhongleiList.add(new FenleiTypeBean("素瓷"));
+        zhongleiList.add(new FenleiTypeBean("青瓷"));
+        zhongleiList.add(new FenleiTypeBean("黑瓷"));
+        zhongleiList.add(new FenleiTypeBean("白瓷"));
+        zhongleiList.add(new FenleiTypeBean("青白瓷"));
         zhongleiList.add(new FenleiTypeBean("其它"));
     }
 

@@ -82,15 +82,11 @@ public class ReShelveModel implements ReShelveConstract.IReShelveModel {
         data.put("images",bean.getImages());
         data.put("artisan",bean.getArtisan());
         data.put("price",bean.getPrice());
-        data.put("express_fee",bean.getFreight());
         data.put("fenlei",bean.getFenlei());
         data.put("zhonglei",bean.getZhonglei());
-        data.put("chanzhuang",bean.getChanzhuang());
-        data.put("pise",bean.getPise());
         data.put("ticai",bean.getTicai());
         data.put("weight",bean.getWeight());
         data.put("amount",bean.getAmount());
-        data.put("serial_no",bean.getSerial_no());
         data.put("length",bean.getLength());
         data.put("width",bean.getWidth());
         data.put("height",bean.getHeight());

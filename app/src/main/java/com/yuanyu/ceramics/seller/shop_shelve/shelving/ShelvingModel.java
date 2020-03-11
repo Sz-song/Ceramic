@@ -47,12 +47,12 @@ public class ShelvingModel implements ShelvingConstract.IShelvingModel{
         data.put("express_fee",bean.getFreight());
         data.put("fenlei",bean.getFenlei());
         data.put("zhonglei",bean.getZhonglei());
-        data.put("chanzhuang",bean.getChanzhuang());
-        data.put("pise",bean.getPise());
+//        data.put("chanzhuang",bean.getChanzhuang());
+//        data.put("pise",bean.getPise());
         data.put("ticai",bean.getTicai());
         data.put("weight",bean.getWeight());
         data.put("amount",bean.getAmount());
-        data.put("serial_no",bean.getSerial_no());
+//        data.put("serial_no",bean.getSerial_no());
         data.put("length",bean.getLength());
         data.put("width",bean.getWidth());
         data.put("height",bean.getHeight());
@@ -60,7 +60,7 @@ public class ShelvingModel implements ShelvingConstract.IShelvingModel{
         data.put("cover",bean.getVideo_cover());
         data.put("id","");
         data.put("ddid","");
-        data.put("dd_price",bean.getDd_price());
+//        data.put("dd_price",bean.getDd_price());
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

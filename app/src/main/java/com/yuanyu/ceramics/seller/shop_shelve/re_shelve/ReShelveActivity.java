@@ -85,8 +85,8 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     RecyclerView recyAddimage;
     @BindView(R.id.addimage_num)
     TextView addimageNum;
-    @BindView(R.id.et_serial_no)
-    EditText etSerialNo;
+//    @BindView(R.id.et_serial_no)
+//    EditText etSerialNo;
     @BindView(R.id.artisan)
     EditText artisan;
     @BindView(R.id.relat_jiangren)
@@ -103,18 +103,18 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     TextView priceTag;
     @BindView(R.id.price)
     EditText price;
-    @BindView(R.id.switch_btn)
-    Switch switchBtn;
-    @BindView(R.id.switch_relat)
-    RelativeLayout switchRelat;
+//    @BindView(R.id.switch_btn)
+//    Switch switchBtn;
+//    @BindView(R.id.switch_relat)
+//    RelativeLayout switchRelat;
     @BindView(R.id.view)
     View view;
-    @BindView(R.id.fenxiao_price_tag)
-    TextView fenxiaoPriceTag;
-    @BindView(R.id.fenxiao_price)
-    EditText fenxiaoPrice;
-    @BindView(R.id.fenxiao_liner)
-    LinearLayout fenxiaoLiner;
+//    @BindView(R.id.fenxiao_price_tag)
+//    TextView fenxiaoPriceTag;
+//    @BindView(R.id.fenxiao_price)
+//    EditText fenxiaoPrice;
+//    @BindView(R.id.fenxiao_liner)
+//    LinearLayout fenxiaoLiner;
     @BindView(R.id.weight_tag)
     TextView weightTag;
     @BindView(R.id.weight)
@@ -127,12 +127,12 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     EditText width;
     @BindView(R.id.height)
     EditText height;
-    @BindView(R.id.chanzhaung_tag)
-    TextView chanzhaungTag;
-    @BindView(R.id.chanzhuang)
-    EditText chanzhuang;
-    @BindView(R.id.chanzhuang_rec)
-    RecyclerView chanzhuangRec;
+//    @BindView(R.id.chanzhaung_tag)
+//    TextView chanzhaungTag;
+//    @BindView(R.id.chanzhuang)
+//    EditText chanzhuang;
+//    @BindView(R.id.chanzhuang_rec)
+//    RecyclerView chanzhuangRec;
     @BindView(R.id.fenlei_tag)
     TextView fenleiTag;
     @BindView(R.id.fenlei)
@@ -149,18 +149,18 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     EditText ticai;
     @BindView(R.id.ticai_rec)
     RecyclerView ticaiRec;
-    @BindView(R.id.pise)
-    EditText pise;
-    @BindView(R.id.pise_rec)
-    RecyclerView piseRec;
-    @BindView(R.id.freight)
-    TextView freight;
+//    @BindView(R.id.pise)
+//    EditText pise;
+//    @BindView(R.id.pise_rec)
+//    RecyclerView piseRec;
+//    @BindView(R.id.freight)
+//    TextView freight;
     @BindView(R.id.submit)
     Button submit;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
-    private List<FenleiTypeBean> fenleiList, chanzhuangList, ticaiList, piseList, zhongleiList;
-    private FenleiTypeAdapter2 fenleiAdapter, chanzhuangAdapter, ticaiAdapter, piseAdapter, zhongleiAdapter;
+    private List<FenleiTypeBean> fenleiList,  ticaiList,  zhongleiList;
+    private FenleiTypeAdapter2 fenleiAdapter, ticaiAdapter,  zhongleiAdapter;
     private InputMethodManager imm;
     private PhotoVedioAdapter adapter;
     private LoadingDialog dialog;
@@ -208,21 +208,6 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         dialog.show();
         list = new ArrayList<>();
         bean = new ShelvingDetailBean();
-//        if (Sp.getInt(this, AppConstant.DISTRIBUTOR) == 1) {
-//            fenxiaoLiner.setVisibility(View.VISIBLE);
-//            switchBtn.setChecked(false);
-//            fenxiaoLiner.setVisibility(View.GONE);
-//        } else {
-//            switchRelat.setVisibility(View.GONE);
-//            fenxiaoLiner.setVisibility(View.GONE);
-//        }
-//        switchBtn.setOnCheckedChangeListener((compoundButton, b) -> {
-//            if (b) {
-//                fenxiaoLiner.setVisibility(View.VISIBLE);
-//            } else {
-//                fenxiaoLiner.setVisibility(View.GONE);
-//            }
-//        });
         num.setFilters(new InputFilter[]{new InputNumScopeFilter(1, 999999)});
         adapter = new PhotoVedioAdapter(this, list, true);
         recyAddimage.setLayoutManager(new CantScrollGirdLayoutManager(this, 3));
@@ -316,17 +301,15 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         price.addTextChangedListener(new NotNullTextWatcher(priceTag));
         fenlei.addTextChangedListener(new NotNullTextWatcher(fenleiTag));
         zhonglei.addTextChangedListener(new NotNullTextWatcher(zhongleiTag));
-        chanzhuang.addTextChangedListener(new NotNullTextWatcher(chanzhaungTag));
+//        chanzhuang.addTextChangedListener(new NotNullTextWatcher(chanzhaungTag));
         weight.addTextChangedListener(new NotNullTextWatcher(weightTag));
         length.addTextChangedListener(new ShapeTextWacher());
         width.addTextChangedListener(new ShapeTextWacher());
         height.addTextChangedListener(new ShapeTextWacher());
         fenleiList = new ArrayList<>();
-        chanzhuangList = new ArrayList<>();
         ticaiList = new ArrayList<>();
-        piseList = new ArrayList<>();
         zhongleiList = new ArrayList<>();
-        presenter.initList(fenleiList, chanzhuangList, ticaiList, piseList, zhongleiList);
+        presenter.initList(fenleiList,  ticaiList,  zhongleiList);
         fenleiAdapter = new FenleiTypeAdapter2(this, fenleiList);
         fenleiAdapter.setClickListener(position -> {
             fenlei.setText(fenleiList.get(position).getType());
@@ -357,25 +340,25 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         ticaiRec.setAdapter(ticaiAdapter);
         ticaiRec.setLayoutManager(new CantScrollGirdLayoutManager(this, 4));
 
-        chanzhuangAdapter = new FenleiTypeAdapter2(this, chanzhuangList);
-        chanzhuangAdapter.setClickListener(position -> {
-            chanzhuang.setText(chanzhuangList.get(position).getType());
-            chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
-            performAnime(chanzhuangRec, 500, false);
-            chanzhuangRec.setTag("0");
-        });
-        chanzhuangRec.setAdapter(chanzhuangAdapter);
-        chanzhuangRec.setLayoutManager(new CantScrollGirdLayoutManager(this, 4));
+//        chanzhuangAdapter = new FenleiTypeAdapter2(this, chanzhuangList);
+//        chanzhuangAdapter.setClickListener(position -> {
+//            chanzhuang.setText(chanzhuangList.get(position).getType());
+//            chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
+//            performAnime(chanzhuangRec, 500, false);
+//            chanzhuangRec.setTag("0");
+//        });
+//        chanzhuangRec.setAdapter(chanzhuangAdapter);
+//        chanzhuangRec.setLayoutManager(new CantScrollGirdLayoutManager(this, 4));
 
-        piseAdapter = new FenleiTypeAdapter2(this, piseList);
-        piseAdapter.setClickListener(position -> {
-            pise.setText(piseList.get(position).getType());
-            pise.setCompoundDrawables(null, null, triangleRight, null);
-            performAnime(piseRec, 500, false);
-            piseRec.setTag("0");
-        });
-        piseRec.setAdapter(piseAdapter);
-        piseRec.setLayoutManager(new CantScrollGirdLayoutManager(this, 4));
+//        piseAdapter = new FenleiTypeAdapter2(this, piseList);
+//        piseAdapter.setClickListener(position -> {
+//            pise.setText(piseList.get(position).getType());
+//            pise.setCompoundDrawables(null, null, triangleRight, null);
+//            performAnime(piseRec, 500, false);
+//            piseRec.setTag("0");
+//        });
+//        piseRec.setAdapter(piseAdapter);
+//        piseRec.setLayoutManager(new CantScrollGirdLayoutManager(this, 4));
         if (getIntent().getStringExtra("id") != null && getIntent().getStringExtra("id").length() > 0) {
             id = getIntent().getStringExtra("id");
             presenter.getReShelvingData(Sp.getString(this, AppConstant.SHOP_ID), id);
@@ -403,11 +386,11 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
     public void getReShelvingDataSuccess(ShelvingDetailBean shelvingDetailBean) {
         dialog.dismiss();
         bean.setVideo_cover(shelvingDetailBean.getVideo_cover());
-        bean.setDd_price(shelvingDetailBean.getDd_price());
-        if(bean.getDd_price().trim().length()>0){
-            switchBtn.setChecked(true);
-            fenxiaoPrice.setText(bean.getDd_price());
-        }
+//        bean.setDd_price(shelvingDetailBean.getDd_price());
+//        if(bean.getDd_price().trim().length()>0){
+//            switchBtn.setChecked(true);
+//            fenxiaoPrice.setText(bean.getDd_price());
+//        }
         inputTitleEdit.setText(shelvingDetailBean.getTitle());
         inputContentEdit.setText(shelvingDetailBean.getDescription());
         swipe.setRefreshing(false);
@@ -438,7 +421,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         }
         artisan.setText(shelvingDetailBean.getArtisan().trim());
         price.setText(shelvingDetailBean.getPrice());
-        etSerialNo.setText(shelvingDetailBean.getSerial_no());
+//        etSerialNo.setText(shelvingDetailBean.getSerial_no());
         weight.setText(shelvingDetailBean.getWeight() + "");
         length.setText(shelvingDetailBean.getLength() + "");
         width.setText(shelvingDetailBean.getWidth() + "");
@@ -485,91 +468,6 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
 //        }
     }
 
-//    @Override
-//    public void getFenxiaoGoodDataSuccess(FenxiaoGoodsDetailBean fenxiaoGoodsDetailBean) {
-//        dialog.dismiss();
-//        bean.setVideo_cover(fenxiaoGoodsDetailBean.getVideo_cover());
-//        bean.setDd_price("");
-//        if(bean.getDd_price().trim().length()>0){
-//            switchBtn.setChecked(true);
-//            fenxiaoPrice.setText(bean.getDd_price());
-//        }
-//        inputTitleEdit.setText(fenxiaoGoodsDetailBean.getTitle());
-//        inputContentEdit.setText(fenxiaoGoodsDetailBean.getBrief());
-//        swipe.setRefreshing(false);
-//        int num_image = 0;
-//        if (fenxiaoGoodsDetailBean.getVideo() != null && fenxiaoGoodsDetailBean.getVideo().length() > 0) {
-//            list.add(new PhotoVideoBean(fenxiaoGoodsDetailBean.getVideo(), 3));
-//            num_image++;
-//        } else {
-//            list.add(0, new PhotoVideoBean(R.drawable.add_video + "", 1));
-//        }
-//        for (int i = 0; i < fenxiaoGoodsDetailBean.getImages().size(); i++) {
-//            list.add(new PhotoVideoBean(fenxiaoGoodsDetailBean.getImages().get(i), 2));
-//            num_image++;
-//        }
-//        if (list.get(list.size() - 1).getType() != 0 && list.size() < 9) {
-//            list.add(new PhotoVideoBean(R.drawable.add_pic + "", 0));
-//        }
-//        adapter.notifyDataSetChanged();
-//        addimageNum.setText(num_image + "/9");
-//        try {
-//            if (Integer.parseInt(fenxiaoGoodsDetailBean.getAmount()) < 1) {
-//                num.setText("1");
-//            } else {
-//                num.setText(fenxiaoGoodsDetailBean.getAmount());
-//            }
-//        }catch (Exception e){
-//            num.setText("1");
-//        }
-//        artisan.setText(fenxiaoGoodsDetailBean.getArtisan().trim());
-//        price.setText(fenxiaoGoodsDetailBean.getPrice());
-//        etSerialNo.setText(fenxiaoGoodsDetailBean.getSerial_no());
-//        weight.setText(fenxiaoGoodsDetailBean.getWeight() + "");
-//        length.setText(fenxiaoGoodsDetailBean.getLength() + "");
-//        width.setText(fenxiaoGoodsDetailBean.getWidth() + "");
-//        height.setText(fenxiaoGoodsDetailBean.getHeight() + "");
-//        fenlei.setText(fenxiaoGoodsDetailBean.getFenlei());
-//        for (int i = 0; i < fenleiList.size(); i++) {
-//            if (fenxiaoGoodsDetailBean.getFenlei().equals(fenleiList.get(i).getType())) {
-//                fenleiList.get(i).setChoose(true);
-//                fenleiAdapter.notifyDataSetChanged();
-//                break;
-//            }
-//        }
-//        zhonglei.setText(fenxiaoGoodsDetailBean.getZhonglei());
-//        for (int i = 0; i < zhongleiList.size(); i++) {
-//            if (fenxiaoGoodsDetailBean.getZhonglei().equals(zhongleiList.get(i).getType())) {
-//                zhongleiList.get(i).setChoose(true);
-//                zhongleiAdapter.notifyDataSetChanged();
-//                break;
-//            }
-//        }
-//        ticai.setText(fenxiaoGoodsDetailBean.getTicai());
-//        for (int i = 0; i < ticaiList.size(); i++) {
-//            if (fenxiaoGoodsDetailBean.getTicai().equals(ticaiList.get(i).getType())) {
-//                ticaiList.get(i).setChoose(true);
-//                ticaiAdapter.notifyDataSetChanged();
-//                break;
-//            }
-//        }
-//        chanzhuang.setText(fenxiaoGoodsDetailBean.getChanzhuang());
-//        for (int i = 0; i < chanzhuangList.size(); i++) {
-//            if (fenxiaoGoodsDetailBean.getChanzhuang().equals(chanzhuangList.get(i).getType())) {
-//                chanzhuangList.get(i).setChoose(true);
-//                chanzhuangAdapter.notifyDataSetChanged();
-//                break;
-//            }
-//        }
-//        pise.setText(fenxiaoGoodsDetailBean.getPise());
-//        for (int i = 0; i < piseList.size(); i++) {
-//            if (fenxiaoGoodsDetailBean.getPise().equals(piseList.get(i).getType())) {
-//                piseList.get(i).setChoose(true);
-//                piseAdapter.notifyDataSetChanged();
-//                break;
-//            }
-//        }
-//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -647,7 +545,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         }
     }
 
-    @OnClick({R.id.submit, R.id.add, R.id.reduce, R.id.fenlei, R.id.zhonglei, R.id.ticai, R.id.pise, R.id.chanzhuang})
+    @OnClick({R.id.submit, R.id.add, R.id.reduce, R.id.fenlei, R.id.zhonglei, R.id.ticai})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.fenlei:
@@ -674,18 +572,18 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                     zhongleiRec.setTag("0");
                 }
                 break;
-            case R.id.pise:
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                if (piseRec.getTag().equals("0")) {
-                    pise.setCompoundDrawables(null, null, triangleDown, null);
-                    performAnime(piseRec, 350, true);
-                    piseRec.setTag("1");
-                } else {
-                    pise.setCompoundDrawables(null, null, triangleRight, null);
-                    performAnime(piseRec, 350, false);
-                    piseRec.setTag("0");
-                }
-                break;
+//            case R.id.pise:
+//                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+//                if (piseRec.getTag().equals("0")) {
+//                    pise.setCompoundDrawables(null, null, triangleDown, null);
+//                    performAnime(piseRec, 350, true);
+//                    piseRec.setTag("1");
+//                } else {
+//                    pise.setCompoundDrawables(null, null, triangleRight, null);
+//                    performAnime(piseRec, 350, false);
+//                    piseRec.setTag("0");
+//                }
+//                break;
             case R.id.ticai:
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                 if (ticaiRec.getTag().equals("0")) {
@@ -698,18 +596,18 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                     ticaiRec.setTag("0");
                 }
                 break;
-            case R.id.chanzhuang:
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                if (chanzhuangRec.getTag().equals("0")) {
-                    chanzhuang.setCompoundDrawables(null, null, triangleDown, null);
-                    performAnime(chanzhuangRec, 350, true);
-                    chanzhuangRec.setTag("1");
-                } else {
-                    chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
-                    performAnime(chanzhuangRec, 350, false);
-                    chanzhuangRec.setTag("0");
-                }
-                break;
+//            case R.id.chanzhuang:
+//                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+//                if (chanzhuangRec.getTag().equals("0")) {
+//                    chanzhuang.setCompoundDrawables(null, null, triangleDown, null);
+//                    performAnime(chanzhuangRec, 350, true);
+//                    chanzhuangRec.setTag("1");
+//                } else {
+//                    chanzhuang.setCompoundDrawables(null, null, triangleRight, null);
+//                    performAnime(chanzhuangRec, 350, false);
+//                    chanzhuangRec.setTag("0");
+//                }
+//                break;
             case R.id.submit:
                 if (!isEmpty()) {
                     submit.setEnabled(false);
@@ -771,23 +669,19 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         addimageNum.setText("0/9");
         fenlei.setText("");
         zhonglei.setText("");
-        pise.setText("");
-        chanzhuang.setText("");
+//        pise.setText("");
+//        chanzhuang.setText("");
         ticai.setText("");
-        etSerialNo.setText("");
+//        etSerialNo.setText("");
         length.setText("");
         width.setText("");
         height.setText("");
         for (FenleiTypeBean bean : fenleiList) bean.setChoose(false);
         for (FenleiTypeBean bean : zhongleiList) bean.setChoose(false);
         for (FenleiTypeBean bean : ticaiList) bean.setChoose(false);
-        for (FenleiTypeBean bean : piseList) bean.setChoose(false);
-        for (FenleiTypeBean bean : chanzhuangList) bean.setChoose(false);
         fenleiAdapter.notifyDataSetChanged();
         zhongleiAdapter.notifyDataSetChanged();
         ticaiAdapter.notifyDataSetChanged();
-        chanzhuangAdapter.notifyDataSetChanged();
-        piseAdapter.notifyDataSetChanged();
     }
     private boolean isEmpty() {
         if (!(inputTitleEdit.getText().toString().trim().length() > 0)) {
@@ -805,13 +699,16 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
         } else if (!(price.getText().toString().trim().length() > 0)) {
             Toast.makeText(this, "请填写价格", Toast.LENGTH_SHORT).show();
             return true;
-        } else if (switchRelat.getVisibility() == View.VISIBLE && switchBtn.isChecked() && !(fenxiaoPrice.getText().toString().trim().length() > 0)) {
-            Toast.makeText(this, "请填写分销价格", Toast.LENGTH_SHORT).show();
-            return true;
-        }else if (chanzhuang.getText().toString().trim().length() == 0) {
-            Toast.makeText(this, "请选择产状", Toast.LENGTH_SHORT).show();
-            return true;
-        } else if (fenlei.getText().toString().trim().length() == 0) {
+        }
+//        else if (switchRelat.getVisibility() == View.VISIBLE && switchBtn.isChecked() && !(fenxiaoPrice.getText().toString().trim().length() > 0)) {
+//            Toast.makeText(this, "请填写分销价格", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//        else if (chanzhuang.getText().toString().trim().length() == 0) {
+//            Toast.makeText(this, "请选择产状", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+        else if (fenlei.getText().toString().trim().length() == 0) {
             Toast.makeText(this, "请选择分类", Toast.LENGTH_SHORT).show();
             return true;
         } else if (zhonglei.getText().toString().trim().length() == 0) {
@@ -838,17 +735,17 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
             bean.setArtisan(artisan.getText().toString().trim());
             bean.setPrice(price.getText().toString());
             bean.setAmount(num.getText().toString());
-            bean.setDd_price(fenxiaoPrice.getText().toString());
+//            bean.setDd_price(fenxiaoPrice.getText().toString());
             bean.setFenlei(fenlei.getText().toString());
             bean.setZhonglei(zhonglei.getText().toString());
-            bean.setChanzhuang(chanzhuang.getText().toString());
-            bean.setPise(pise.getText().toString());
+//            bean.setChanzhuang(chanzhuang.getText().toString());
+//            bean.setPise(pise.getText().toString());
             bean.setTicai(ticai.getText().toString());
             bean.setWeight(Double.parseDouble(weight.getText().toString()));
             bean.setWidth(Integer.parseInt(width.getText().toString()));
             bean.setLength(Integer.parseInt(length.getText().toString()));
             bean.setHeight(Integer.parseInt(height.getText().toString()));
-            bean.setSerial_no(etSerialNo.getText().toString());
+//            bean.setSerial_no(etSerialNo.getText().toString());
             bean.setId(id);
             bean.setDd_id(dd_id);
             return false;

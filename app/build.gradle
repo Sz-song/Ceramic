@@ -80,5 +80,8 @@ dependencies {
     implementation 'cn.jzvd:jiaozivideoplayer:7.1.0'
     //image selector
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.2'
+    //Phoenix
+    //选填 - 视频压缩，开启功能：Phoenix.with().enableCompress(true)，获取结果：MediaEntity.getCompressPath()
+    implementation 'com.github.guoxiaoxing:phoenix-compress-video:1.0.15'
 
 }
