@@ -189,8 +189,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public void loginSuccess(LoginBean bean) {
         Sp.putString(this,AppConstant.USER_ACCOUNT_ID,bean.getUseraccountid());
-        Sp.putString(this,AppConstant.MOBILE,bean.getUsername());
-        Sp.putString(this,AppConstant.PASSWORD,bean.getPassword());
+        Sp.putString(this,AppConstant.MOBILE,bean.getMobile());
+        Sp.putString(this,AppConstant.PASSWORD,loginPassword.getText().toString());
         dialog.dismiss();
         Intent intent=new Intent(this,HomeActivity.class);
         startActivity(intent);

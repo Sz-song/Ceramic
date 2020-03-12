@@ -1,6 +1,7 @@
 package com.yuanyu.ceramics.login;
 
 import com.google.gson.Gson;
+import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
@@ -30,8 +31,13 @@ public class LoginModel implements LoginContract.ILoginModel {
         map.put("signature",signature);
         map.put("action","login");
         Map data = new HashMap();
-        data.put("username",mobile);
-        data.put("password",password);
+        data.put("mobile",mobile);
+        if(type==5){
+            data.put("password",password);
+        }else {
+            data.put("password", Md5Utils.toMD5(Md5Utils.toMD5(password) + AppConstant.SALT));
+        }
+        data.put("type",type);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

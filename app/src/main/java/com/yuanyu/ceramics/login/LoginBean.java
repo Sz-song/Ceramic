@@ -6,6 +6,11 @@ public class LoginBean {
     private String petname;
     private String peopleflag;
     private String password;
+    private String mobile;
+
+    public String getMobile() {
+        return mobile;
+    }
 
     public String getUseraccountid() {
         return useraccountid;

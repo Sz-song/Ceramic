@@ -11,7 +11,7 @@ import android.view.View;
 public class RegisterClickableSpan extends ClickableSpan {
     private Context context;
 
-    public RegisterClickableSpan(Context context) {this.context = context; }
+    RegisterClickableSpan(Context context) {this.context = context; }
 
     @Override
     public void onClick(@NonNull View widget) {

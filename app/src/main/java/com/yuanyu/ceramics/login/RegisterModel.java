@@ -1,10 +1,18 @@
 package com.yuanyu.ceramics.login;
 
+import com.google.gson.Gson;
+import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
+import com.yuanyu.ceramics.utils.L;
+import com.yuanyu.ceramics.utils.Md5Utils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 
 public class RegisterModel implements RegisterContract.IRegisterModel {
     private HttpService httpService;
@@ -12,68 +20,45 @@ public class RegisterModel implements RegisterContract.IRegisterModel {
 
     @Override
     public Observable<BaseResponse<String[]>> register(String mobile, String validCode, String userName, String password) {
-//        String timestamp = FileHelper.getTimeStamp();
-//        String randomstr = FileHelper.getRandomString(10);
-//        String signature = FileHelper.getSignature(timestamp,randomstr);
-//        Map map = new HashMap();
-//        map.put("timestamp",timestamp);
-//        map.put("randomstr",randomstr);
-//        map.put("signature",signature);
-//        map.put("action","register");
-//        Map data = new HashMap();
-//        data.put("mobile",mobile);
-//        data.put("validate_code",validCode);
-//        data.put("username",userName);
-//        data.put("password",FileHelper.toMD5(FileHelper.toMD5(password)+AppConstant.SALT));
-//        map.put("data",data);
-//        Gson gson=new Gson();
-//        String str=gson.toJson(map);
-//        L.e("str is "+str);
-//        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-//        return httpService.register(body);
-        return null;
+        String timestamp = Md5Utils.getTimeStamp();
+        String randomstr = Md5Utils.getRandomString(10);
+        String signature = Md5Utils.getSignature(timestamp,randomstr);
+        Map map = new HashMap();
+        map.put("timestamp",timestamp);
+        map.put("randomstr",randomstr);
+        map.put("signature",signature);
+        map.put("action","register");
+        Map data = new HashMap();
+        data.put("mobile",mobile);
+        data.put("validate_code",validCode);
+        data.put("username",userName);
+        data.put("password",Md5Utils.toMD5(Md5Utils.toMD5(password)+ AppConstant.SALT));
+        map.put("data",data);
+        Gson gson=new Gson();
+        String str=gson.toJson(map);
+        L.e("str is "+str);
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        return httpService.register(body);
     }
 
     @Override
     public Observable<BaseResponse<String[]>> getValidCode(String mobile) {
-//        String timestamp = FileHelper.getTimeStamp();
-//        String randomstr = FileHelper.getRandomString(10);
-//        String signature = FileHelper.getSignature(timestamp,randomstr);
-//        Map map = new HashMap();
-//        map.put("timestamp",timestamp);
-//        map.put("randomstr",randomstr);
-//        map.put("signature",signature);
-//        map.put("action","getvalidatecode");
-//        Map data = new HashMap();
-//        data.put("mobile",mobile);
-//        map.put("data",data);
-//        Gson gson=new Gson();
-//        String str=gson.toJson(map);
-//        L.e("str is "+str);
-//        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-//       return httpService.getValidCode(body);
-        return null;
+        String timestamp = Md5Utils.getTimeStamp();
+        String randomstr = Md5Utils.getRandomString(10);
+        String signature = Md5Utils.getSignature(timestamp,randomstr);
+        Map map = new HashMap();
+        map.put("timestamp",timestamp);
+        map.put("randomstr",randomstr);
+        map.put("signature",signature);
+        map.put("action","getvalidatecode");
+        Map data = new HashMap();
+        data.put("mobile",mobile);
+        map.put("data",data);
+        Gson gson=new Gson();
+        String str=gson.toJson(map);
+        L.e("str is "+str);
+        RequestBody body= RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        return httpService.getValidCode(body);
     }
 
-    //查询昵称是否占用
-    @Override
-    public Observable<BaseResponse<Boolean>> viewUserName(String name) {
-//        String timestamp = FileHelper.getTimeStamp();
-//        String randomstr = FileHelper.getRandomString(10);
-//        String signature = FileHelper.getSignature(timestamp,randomstr);
-//        Map map = new HashMap();
-//        map.put("timestamp",timestamp);
-//        map.put("randomstr",randomstr);
-//        map.put("signature",signature);
-//        map.put("action","view_username");
-//        Map data = new HashMap();
-//        data.put("name",name);
-//        map.put("data",data);
-//        Gson gson=new Gson();
-//        String str=gson.toJson(map);
-//        L.e("str is "+str);
-//        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-//        return httpService.viewUsername(body);
-        return null;
-    }
 }

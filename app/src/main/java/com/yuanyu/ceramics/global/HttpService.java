@@ -57,8 +57,14 @@ import retrofit2.http.Part;
 import retrofit2.http.QueryMap;
 
 public interface HttpService {
+    //注册
+    @POST("back/test/api/app_login/login_module.php")
+    Observable<BaseResponse<String[]>> register(@Body RequestBody body);
+//    //询问昵称是否占用
+//    @POST("app_api/wujia/view_username.php")
+//    Observable<BaseResponse<Boolean>>viewUsername(@Body RequestBody body);
     //用户登录
-    @POST("app_api/login.php")
+    @POST("back/test/api/app_login/login_module.php")
     Observable<BaseResponse<LoginBean>> login(@Body RequestBody body);
     //第三方登陆
     @POST("app_api/third_login.php")
@@ -249,7 +255,7 @@ public interface HttpService {
     @POST("back/test/api/app_login/login_module.php")
     Observable<BaseResponse<String[]>> getValidCode(@Body RequestBody body);
     //重置密码
-    @POST("app_api/app_login/login_module.php")
+    @POST("back/test/api/app_login/auto_login.php")
     Observable<BaseResponse<String[]>> resetPwd(@Body RequestBody body);
     //用户反馈
     @POST("app_api/home_page/usersopinion.php")

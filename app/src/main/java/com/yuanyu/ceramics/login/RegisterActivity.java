@@ -169,17 +169,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 }.start();
                 break;
             case R.id.register:
-                presenter.viewUserName(account.getText().toString(), code.getText().toString(), nickname.getText().toString(), loginPassword.getText().toString(), passwordAgain.getText().toString());
+                presenter.register(account.getText().toString(), code.getText().toString(), nickname.getText().toString(), loginPassword.getText().toString(), passwordAgain.getText().toString());
                 break;
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

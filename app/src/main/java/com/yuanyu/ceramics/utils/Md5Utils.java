@@ -43,7 +43,7 @@ public class Md5Utils {
 
 
     public static  String toMD5(String plainText) {
-        StringBuffer buf = new StringBuffer("");
+        StringBuilder buf = new StringBuilder();
         try {
             //生成实现指定摘要算法的 MessageDigest 对象。
             MessageDigest md = MessageDigest.getInstance("MD5");
