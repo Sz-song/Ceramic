@@ -13,6 +13,7 @@ public class FriendBean implements Serializable {
     private String txt;
     private int isfocus;
     private int fans_num;
+    private boolean isChecked = false;
 
     public int getFans_num() {
         return fans_num;
@@ -69,5 +70,12 @@ public class FriendBean implements Serializable {
 
     public void setTxt(String txt) {
         this.txt = txt;
+    }
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

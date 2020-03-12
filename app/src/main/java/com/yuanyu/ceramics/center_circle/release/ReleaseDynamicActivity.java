@@ -3,6 +3,7 @@ package com.yuanyu.ceramics.center_circle.release;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luck.picture.lib.PictureSelector;
@@ -81,6 +84,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     RelativeLayout limitRelat;
 
     private ArrayList<String> mList;
+    private List<FriendBean> list;
     private UploadPhotoAdapter adapter;
     private String addPic = "add_pic" + R.drawable.add_pic;
     private boolean isopen=true;
@@ -118,6 +122,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
         textNum.setText("0/140");
         recyclerview.setLayoutManager(new CantScrollGirdLayoutManager(this, 3));
         mList = new ArrayList<>();
+        list=new ArrayList<>();
         mList.add(addPic);
         adapter = new UploadPhotoAdapter(ReleaseDynamicActivity.this, mList);
         adapter.setCancelListener(position -> {
@@ -213,12 +218,20 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
             }
         }
         if (requestCode == DYNAMIC_REMIND && data != null) {
-            FriendBean friendBean = (FriendBean) data.getSerializableExtra("friend_data");
-            if(editYuyouquan.getText().toString().length()+friendBean.getName().length()>139){
+            list.clear();
+            list.addAll((List<FriendBean>) data.getExtras().getSerializable("friend_data"));
+            int wordlen=0;
+            for (int i=0;i<list.size();i++){
+                wordlen += list.get(i).getName().length();
+            }
+//            FriendBean friendBean = (FriendBean) data.getSerializableExtra("friend_data");
+            if(editYuyouquan.getText().toString().length()+wordlen>139){
                 Toast.makeText(this, "字数超过限制", Toast.LENGTH_SHORT).show();
             }else {
-                editYuyouquan.insertSpecialStr("@" + friendBean.getName() + " ", false, friendBean.getId(), new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)));
-            }
+                for (int i=0;i<list.size();i++){
+                    editYuyouquan.insertSpecialStr("@" + list.get(i).getName() + " ", false, list.get(i).getId(), new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)));
+                }
+                }
         }
     }
 
@@ -274,7 +287,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                 }
                 break;
             case R.id.remind_relat:
-                intent = new Intent(ReleaseDynamicActivity.this, GetFriendsActivity.class);
+                intent = new Intent(ReleaseDynamicActivity.this, SelectFriendActivity.class);
                 startActivityForResult(intent, DYNAMIC_REMIND);
                 break;
             case R.id.limit_relat:
