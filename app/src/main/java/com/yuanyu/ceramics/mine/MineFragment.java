@@ -146,7 +146,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         swipe.setRefreshing(false);
     }
 
-    @OnClick({R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.mine_relat, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_dingzhi, R.id.my_collect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting, R.id.toseller})
+    @OnClick({R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.mine_relat, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_dingzhi, R.id.my_collect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
