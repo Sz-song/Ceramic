@@ -51,7 +51,7 @@ public class ReleaseDynamicModel implements ReleaseDynamicConstract.IReleaseDyna
     }
 
     @Override
-    public Observable<BaseResponse<Boolean>> releaseDynamic(int useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
+    public Observable<BaseResponse<Boolean>> releaseDynamic(String useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

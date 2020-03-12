@@ -103,8 +103,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     LinearLayout dashiattesta;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
-    @BindView(R.id.toseller)
-    LinearLayout toseller;
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -220,16 +218,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
             case R.id.system_setting:
                 intent = new Intent(getContext(), SystemSettingActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.toseller:
-                   ReleasePopWindow popupWindow = new ReleasePopWindow(getActivity());
-                    popupWindow.showAtLocation(swipe, Gravity.BOTTOM, 0, 0);
-                    popupWindow.setOnDismissListener(() -> {
-                        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
-                        lp.alpha = 1f; // 0.0-1.0
-                        getActivity().getWindow().setAttributes(lp);
-                    });
-
                 break;
         }
     }

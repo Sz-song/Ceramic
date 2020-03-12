@@ -50,19 +50,16 @@ public class LiveApplyPresenter extends BasePresenter<LiveApplyConstract.ILiveAp
 
     @Override
     public void getLiveApplyState(String shop_id) {
-        List<ItemBean> list=new ArrayList<>();
-        LiveApplyStatusBean bean=new LiveApplyStatusBean("1","","标题1","2020-03-10 09:30","1",list,3,"1","1");
-         if(view!=null){view.getLiveApplyStateSuccess(bean);}
-//        model.getLiveApplyState(shop_id)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<LiveApplyStatusBean>())
-//                .subscribe(new BaseObserver<LiveApplyStatusBean>() {
-//                    @Override
-//                    public void onNext(LiveApplyStatusBean bean) {if(view!=null){view.getLiveApplyStateSuccess(bean);}}
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.getLiveApplyStateFail(e);}}
-//                });
+        model.getLiveApplyState(shop_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<LiveApplyStatusBean>())
+                .subscribe(new BaseObserver<LiveApplyStatusBean>() {
+                    @Override
+                    public void onNext(LiveApplyStatusBean bean) {if(view!=null){view.getLiveApplyStateSuccess(bean);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.getLiveApplyStateFail(e);}}
+                });
     }
 
     @Override

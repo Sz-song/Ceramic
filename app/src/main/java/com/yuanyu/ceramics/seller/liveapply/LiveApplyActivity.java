@@ -195,7 +195,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
             adapter.setCan_select(false);
             list.addAll(bean.getItem_list());
             adapter.notifyDataSetChanged();
-//            liveSubmit.setOnClickListener(view -> {
+            liveSubmit.setOnClickListener(view -> {
 //                Intent intent = new Intent(this, LivePublisherActivity.class);
 //                intent.putExtra(TCConstants.ROOM_TITLE, liveTitle.getText());
 //                intent.putExtra(TCConstants.USER_ID, UserInfo.getInstance().getId());
@@ -206,7 +206,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
 //                intent.putExtra(TCConstants.PUBLISH_URL, bean.getPublish_url());
 //                intent.putExtra("room_id", id);
 //                startActivityForResult(intent, START_LIVE);
-//            });
+            });
         } else if (bean.getApply_state() == 2) {
             cover=bean.getCover_img();
             coverImage.setScaleType(ImageView.ScaleType.CENTER_CROP);

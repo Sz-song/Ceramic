@@ -58,23 +58,22 @@ public class ReleaseDynamicPresenter extends BasePresenter<ReleaseDynamicConstra
     }
 
     @Override
-    public void releaseDynamic(int useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
+    public void releaseDynamic(String useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
         List<DynamicContentBean> list=new ArrayList<>();
         for(int i=0;i<listcontent.size();i++){
             if(listcontent.get(i).getContent().length()>0){
                 list.add(listcontent.get(i));
             }
         }
-        if(view!=null){view.releaseDynamicSuccess(true);}
-//        model.releaseDynamic(useraccountid,listimage,listfriends,isopen,list)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
-//                .subscribe(new BaseObserver<Boolean>() {
-//                    @Override
-//                    public void onNext(Boolean b) {if(view!=null){view.releaseDynamicSuccess(b);}}
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.releaseDynamicFail(e);}}
-//                });
+        model.releaseDynamic(useraccountid,listimage,listfriends,isopen,list)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean b) {if(view!=null){view.releaseDynamicSuccess(b);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.releaseDynamicFail(e);}}
+                });
     }
 }

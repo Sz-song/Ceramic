@@ -200,11 +200,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
             case R.id.message:
                 break;
             case R.id.contactkf:
-                if (Sp.getString(this, AppConstant.SHOP_ID).equals("")) {
-                    intent = new Intent(this, EnterProtocolActivity.class);
-                    intent.putExtra("type", 0);
-                    startActivity(intent);
-                }
+
                 break;
             case R.id.changeuser:
                 intent = new Intent(this, SystemSettingActivity.class);

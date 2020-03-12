@@ -274,7 +274,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                     }
                     if (mList.size() == 1) {
                         dialog.show();
-                        presenter.releaseDynamic(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID),listimages,listfriends,isopen,dynamicContentList);
+                        presenter.releaseDynamic(Sp.getString(this,AppConstant.USER_ACCOUNT_ID),listimages,listfriends,isopen,dynamicContentList);
                     } else if (mList.get(mList.size()-1).contains("add_pic")) {
                         for(int i=0;i<mList.size()-1;i++){listimages.add(mList.get(i));}
                         dialog.show();
@@ -313,7 +313,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
 
     @Override
     public void uploadImageSuccess(List<String> list) {
-        presenter.releaseDynamic(Sp.getInt(this,AppConstant.USER_ACCOUNT_ID),list,listfriends,isopen,dynamicContentList);
+        presenter.releaseDynamic(Sp.getString(this,AppConstant.USER_ACCOUNT_ID),list,listfriends,isopen,dynamicContentList);
     }
 
     @Override
