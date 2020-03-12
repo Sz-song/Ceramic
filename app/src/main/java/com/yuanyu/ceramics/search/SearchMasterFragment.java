@@ -89,24 +89,24 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
                     }
                     if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1) {
-//                        presenter.SearchMasterList(page, Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+                        presenter.SearchMasterList(page, Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
                     }
                 }
             }
         });
-//        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getInt(getContext(), "useraccountid"),list.get(position).getId(),position));
+        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getInt(getContext(), "useraccountid"),list.get(position).getId(),position));
         swipe.setOnRefreshListener(() -> {
-//            page = 0;
-//            list.clear();
-//            adapter.notifyDataSetChanged();
-//            presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+            page = 0;
+            list.clear();
+            adapter.notifyDataSetChanged();
+            presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
         });
 
     }
 
     @Override
     public void initData() {
-//        presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+        presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
     }
 
     public void search(String str) {
@@ -114,54 +114,54 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
         page = 0;
         list.clear();
         adapter.notifyDataSetChanged();
-//        presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+        presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
     }
 
-//    @Override
-//    public void SearchMasterSuccess(SearchBean bean) {
-//        list.addAll(bean.getGuanzhuDashiBean());
-//        if (isAlive) {
-//            adapter.notifyItemRangeInserted(list.size() - bean.getGuanzhuDashiBean().size(), bean.getGuanzhuDashiBean().size());
-//            swipe.setRefreshing(false);
-//            page++;
-//            if (list.size() == 0) {
-//                nodataImg.setVisibility(View.VISIBLE);
-//                nodata.setVisibility(View.VISIBLE);
-//            } else {
-//                nodataImg.setVisibility(View.GONE);
-//                nodata.setVisibility(View.GONE);
-//            }
-//        }
-//    }
+    @Override
+    public void SearchMasterSuccess(SearchBean bean) {
+        list.addAll(bean.getGuanzhuDashiBean());
+        if (isAlive) {
+            adapter.notifyItemRangeInserted(list.size() - bean.getGuanzhuDashiBean().size(), bean.getGuanzhuDashiBean().size());
+            swipe.setRefreshing(false);
+            page++;
+            if (list.size() == 0) {
+                nodataImg.setVisibility(View.VISIBLE);
+                nodata.setVisibility(View.VISIBLE);
+            } else {
+                nodataImg.setVisibility(View.GONE);
+                nodata.setVisibility(View.GONE);
+            }
+        }
+    }
 
-//    @Override
-//    public void SearchMasterFail(ExceptionHandler.ResponeThrowable e) {
-//        L.e(e.message + "  " + e.status);
-//        if (isAlive) {
-//            swipe.setRefreshing(false);
-//            if (list.size() == 0) {
-//                nodataImg.setVisibility(View.VISIBLE);
-//                nodata.setVisibility(View.VISIBLE);
-//            } else {
-//                nodataImg.setVisibility(View.GONE);
-//                nodata.setVisibility(View.GONE);
-//            }
-//        }
-//    }
+    @Override
+    public void SearchMasterFail(ExceptionHandler.ResponeThrowable e) {
+        L.e(e.message + "  " + e.status);
+        if (isAlive) {
+            swipe.setRefreshing(false);
+            if (list.size() == 0) {
+                nodataImg.setVisibility(View.VISIBLE);
+                nodata.setVisibility(View.VISIBLE);
+            } else {
+                nodataImg.setVisibility(View.GONE);
+                nodata.setVisibility(View.GONE);
+            }
+        }
+    }
 
-//    @Override
-//    public void focusSuccess(Boolean isfocus, int position) {
-//        if (isfocus) {
-//            list.get(position).setFollowed(1);
-//        } else {
-//            list.get(position).setFollowed(0);
-//        }
-//        adapter.notifyItemChanged(position);
-//    }
-//
-//    @Override
-//    public void focusFail(ExceptionHandler.ResponeThrowable e) {
-//        L.e("error is " + e.status + e.message);
-//        Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
-//    }
+    @Override
+    public void focusSuccess(Boolean isfocus, int position) {
+        if (isfocus) {
+            list.get(position).setFollowed(1);
+        } else {
+            list.get(position).setFollowed(0);
+        }
+        adapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void focusFail(ExceptionHandler.ResponeThrowable e) {
+        L.e("error is " + e.status + e.message);
+        Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
+    }
 }

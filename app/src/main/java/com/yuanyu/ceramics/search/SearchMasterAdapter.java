@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.common.OnPositionClickListener;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 
 import java.util.List;
 
@@ -63,8 +64,8 @@ public class SearchMasterAdapter extends RecyclerView.Adapter<SearchMasterAdapte
             case 1: holder.guanzhuBtn.setText("已关注");
                 break;
         }
-//        holder.itemView.setOnClickListener(view -> PersonalIndexActivity.actionStart(content, Integer.parseInt(dashi.getId())));
-//        holder.guanzhuBtn.setOnClickListener(view -> FocusClickListener.callback(position));
+        holder.itemView.setOnClickListener(view -> PersonalIndexActivity.actionStart(content, dashi.getId()));
+        holder.guanzhuBtn.setOnClickListener(view -> FocusClickListener.callback(position));
     }
 
     @Override

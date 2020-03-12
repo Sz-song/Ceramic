@@ -15,8 +15,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseFragment;
+import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.common.CommonDecoration;
+import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -31,7 +33,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ZuopinFragment extends BaseFragment {
     private List<Zuopin> zuopinList;
     private ZuopinAdapter adapter;
-//    private SearchZuopinModel model;
+    private SearchZuopinModel model;
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
     String keyword;
@@ -48,7 +50,7 @@ public class ZuopinFragment extends BaseFragment {
         mContext = this.getContext();
 //        Zuopininit();
         zuopinList = new ArrayList<>();
-//        model = new SearchZuopinModel();
+        model = new SearchZuopinModel();
         keyword = getArguments().getString("str");
         String i =  getArguments().getString("outtype");
         int outsidetype = Integer.parseInt(i);
@@ -116,34 +118,30 @@ public class ZuopinFragment extends BaseFragment {
             zuopinList.clear();
             adapter.notifyDataSetChanged();
         }
-        Zuopin zp1=new Zuopin("1","img/banner1.jpg","元代青花山水瓷仿制","南昌市",88880,"1");
-        Zuopin zp2=new Zuopin("2","img/banner1.jpg","元代青花山水瓷仿制","南昌市",88880,"1");
-        zuopinList.add(zp1);
-        zuopinList.add(zp2);
-//        model.getSearchZuopinResult(p, Sp.getInt(mContext,"useraccountid"), 1, search, 1)
-//                .subscribeOn(Schedulers.io())
-//                .compose(new HttpServiceInstance.ErrorTransformer<SearchBean>())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new BaseObserver<SearchBean>() {
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {
-//                        L.e("error is " + e.status + e.message);
-//                        if (e.status == 111){
-//                            ToastUtils.showToast(mContext,"已经到底了哦");
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onNext(SearchBean bean) {
-//                        if (bean.getAdsCellBean().size()>0)page++;
-//                        else ToastUtils.showToast(mContext,"已经到底了哦");
-//                        for (int i = 0; i < bean.getAdsCellBean().size(); i++) {
-//                            zuopinList.add(bean.getAdsCellBean().get(i));
-//                            L.e(zuopinList.get(i).toString());
-//                        }
-//
-//                        adapter.notifyItemRangeInserted(zuopinList.size() - bean.getAdsCellBean().size(), bean.getAdsCellBean().size());
-//                    }
-//                });
+        model.getSearchZuopinResult(p, Sp.getString(mContext,"useraccountid"), 1, search, 1)
+                .subscribeOn(Schedulers.io())
+                .compose(new HttpServiceInstance.ErrorTransformer<SearchBean>())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<SearchBean>() {
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        L.e("error is " + e.status + e.message);
+                        if (e.status == 111){
+                            ToastUtils.showToast(mContext,"已经到底了哦");
+                        }
+                    }
+
+                    @Override
+                    public void onNext(SearchBean bean) {
+                        if (bean.getAdsCellBean().size()>0)page++;
+                        else ToastUtils.showToast(mContext,"已经到底了哦");
+                        for (int i = 0; i < bean.getAdsCellBean().size(); i++) {
+                            zuopinList.add(bean.getAdsCellBean().get(i));
+                            L.e(zuopinList.get(i).toString());
+                        }
+
+                        adapter.notifyItemRangeInserted(zuopinList.size() - bean.getAdsCellBean().size(), bean.getAdsCellBean().size());
+                    }
+                });
     }
 }

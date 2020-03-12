@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.common.WebViewActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 
 import java.util.List;
@@ -46,9 +47,9 @@ public class CooperationAdapter extends RecyclerView.Adapter<CooperationAdapter.
         holder.introduce.setText(list.get(position).getIntroduce());
         holder.itemView.setOnClickListener(v -> {
             if(null!=list.get(position).getUrl()&&list.get(position).getUrl().length()>0){
-//                Intent intent=new Intent(context,WebViewActivity.class);
-//                intent.putExtra("webview_url",list.get(position).getUrl());
-//                context.startActivity(intent);
+                Intent intent=new Intent(context, WebViewActivity.class);
+                intent.putExtra("webview_url",list.get(position).getUrl());
+                context.startActivity(intent);
             }
         });
     }

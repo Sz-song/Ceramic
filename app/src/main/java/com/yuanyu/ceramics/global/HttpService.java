@@ -1,6 +1,7 @@
 package com.yuanyu.ceramics.global;
 
 
+import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.bazaar.MasterWorkBean;
 import com.yuanyu.ceramics.bazaar.StoreCenterBean;
@@ -10,6 +11,7 @@ import com.yuanyu.ceramics.common.DynamicBean;
 import com.yuanyu.ceramics.common.FriendBean;
 import com.yuanyu.ceramics.common.ResultBean;
 import com.yuanyu.ceramics.common.VideoBean;
+import com.yuanyu.ceramics.cooperation.CooperationListBean;
 import com.yuanyu.ceramics.dingzhi.DashiCellBean;
 import com.yuanyu.ceramics.dingzhi.DingzhiDetailBean;
 import com.yuanyu.ceramics.dingzhi.GenerateOrdersBean;
@@ -24,15 +26,18 @@ import com.yuanyu.ceramics.meet_master.MeetMasterBean;
 import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
 import com.yuanyu.ceramics.mine.systemsetting.BlackListBean;
+import com.yuanyu.ceramics.myinfo.MyInfoBean;
 import com.yuanyu.ceramics.order.MyOrderFragmentBean;
 import com.yuanyu.ceramics.order.OrderDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundListBean;
 import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansBean;
+import com.yuanyu.ceramics.search.SearchBean;
 import com.yuanyu.ceramics.seller.delivery.CourierBean;
 import com.yuanyu.ceramics.seller.delivery.DeliveryBean;
 import com.yuanyu.ceramics.seller.delivery.WaitDeliveryBean;
+import com.yuanyu.ceramics.seller.index.SellerIndexBean;
 import com.yuanyu.ceramics.seller.order.ShopOrderBean;
 import com.yuanyu.ceramics.seller.order.detail.ShopOrderDetailBean;
 import com.yuanyu.ceramics.seller.shop_shelve.ShelvingDetailBean;
@@ -81,6 +86,18 @@ public interface HttpService {
     //吾家初始化
     @POST("app_api/ceramics/mine_init.php")
     Observable<BaseResponse<MineBean>> mineinit(@Body RequestBody body);
+//    商家初始化
+    @POST("")
+    Observable<BaseResponse<SellerIndexBean>> sellerinit(@Body RequestBody body);
+    //获取搜索大师
+    @POST("app_api/home_page/search.php")
+    Observable<BaseResponse<SearchBean>> getSearchDashiResult(@Body RequestBody body);
+    //获取搜索店铺
+    @POST("app_api/home_page/search.php")
+    Observable<BaseResponse<SearchBean>> getSearchShopResult(@Body RequestBody body);
+    //获取搜索作品
+    @POST("app_api/home_page/search.php")
+    Observable<BaseResponse<SearchBean>> getSearchZuopinResult(@Body RequestBody body);
     //大师列表
     @POST("app_api/ceramics/master_list.php")
     Observable<BaseResponse<List<MasterItemBean>>> master_list(@Body RequestBody body);
@@ -152,6 +169,15 @@ public interface HttpService {
     //点赞
     @POST("app_api/yuba/dianzan.php")
     Observable<BaseResponse<String []>>dianZan(@Body RequestBody body);
+    //查看个人资料
+    @POST("app_api/wujia/view_userinfo.php")
+    Observable<BaseResponse<MyInfoBean>>viewUserInfo(@Body RequestBody body);
+    //询问昵称是否占用
+    @POST("app_api/wujia/view_username.php")
+    Observable<BaseResponse<Boolean>>viewUsername(@Body RequestBody body);
+    //修改个人资料
+    @POST("app_api/wujia/edit_userinfo.php")
+    Observable<BaseResponse<String[]>>editUserinfo(@Body RequestBody body);
 
     //发布动态
     @POST("app_api/yuba/releasedynamic.php")
@@ -283,6 +309,8 @@ public interface HttpService {
 //    modityOrderPrice商家修改未支付订单价格
     @POST("")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
+
+
 //    修改商家
     @POST("123")
     Observable<BaseResponse<Boolean>> ShopChangeIntroduce(@Body RequestBody body);
@@ -333,4 +361,26 @@ public interface HttpService {
     //获取分类
     @POST("app_api/home_page/getfenlei.php")
     Observable<BaseResponse<List<ResultBean>>>getFenleiResult(@Body RequestBody body);
+
+    //添加收货地址
+    @POST("app_api/home_page/add_address.php")
+    Observable<BaseResponse<String[]>> addAddress(@Body RequestBody body);
+
+    //编辑收货地址
+    @POST("app_api/home_page/edit_address.php")
+    Observable<BaseResponse<String[]>> editAddress(@Body RequestBody body);
+    //收货地址列表初始化
+    @POST("app_api/home_page/address.php")
+    Observable<BaseResponse<List<AddressManageBean>>> getAddressData(@Body RequestBody body);
+
+    //设置默认地址
+    @POST("app_api/home_page/default_address.php")
+    Observable<BaseResponse<String[]>> setDefaultAddress(@Body RequestBody body);
+
+    //删除地址
+    @POST("app_api/home_page/delete_address.php")
+    Observable<BaseResponse<String[]>> deleteAddress(@Body RequestBody body);
+    //获取合作机构列表
+    @POST("app_api/home_page/partners.php")
+    Observable<BaseResponse<List<CooperationListBean>>> getCooperationList(@Body RequestBody body);
 }

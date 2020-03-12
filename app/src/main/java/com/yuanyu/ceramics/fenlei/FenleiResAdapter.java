@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.item.ItemDetailAcitivity;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class FenleiResAdapter extends RecyclerView.Adapter<FenleiResAdapter.View
         holder.itemName.setText(resultBean.getName());
         holder.itemPrice.setText("¥" + resultBean.getPrice());
         holder.itemChandi.setText(resultBean.getLocation());
-//        holder.itemImg.setOnClickListener(view -> ItemDetailActivity.actionStart(context, list.get(position).getId()));
+        holder.itemImg.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context, list.get(position).getId()));
 
     }
 

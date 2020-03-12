@@ -86,7 +86,7 @@ public class EditMyInfoActivity extends BaseActivity {
     private DatePickerDialog dateDialog;
     private DataPickerDialog genderDialog;
     private AddressPickerPopupWindow pickerPopupWindow;
-//    private MyYubaModel model=new MyYubaModel();
+    private MyInfoModel model=new MyInfoModel();
     @Override
     protected int getLayout() {
         return R.layout.activity_edit_my_info;
@@ -114,12 +114,12 @@ public class EditMyInfoActivity extends BaseActivity {
         }
         Intent intent = getIntent();
         infoBean = (MyInfoBean) intent.getSerializableExtra("infoBean");
-//        name.setText(infoBean.getName());
-//        introduction.setText(infoBean.getIntroduce());
-//        gender.setText(infoBean.getGender());
-//        birthday.setText(infoBean.getBirthday());
-//        email.setText(infoBean.getEmail());
-//        location.setText(infoBean.getLocation());
+        name.setText(infoBean.getName());
+        introduction.setText(infoBean.getIntroduce());
+        gender.setText(infoBean.getGender());
+        birthday.setText(infoBean.getBirthday());
+        email.setText(infoBean.getEmail());
+        location.setText(infoBean.getLocation());
         name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -227,26 +227,26 @@ public class EditMyInfoActivity extends BaseActivity {
         }else if(name.getText().toString().equals(infoBean.getName())){
             viewEmail();
         }else{
-//            model.viewUsername(name.getText().toString())
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
-//                    .subscribe(new BaseObserver<Boolean>() {
-//                        @Override
-//                        public void onNext(Boolean aBoolean) {
-//                            if (!aBoolean) {
-//                                viewEmail();
-//                            } else {
-//                                Toast.makeText(EditMyInfoActivity.this, "该昵称已被占用", Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onError(ExceptionHandler.ResponeThrowable e) {
-//                            L.e(e.message + "  " + e.status);
-//                            Toast.makeText(EditMyInfoActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
+            model.viewUsername(name.getText().toString())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                    .subscribe(new BaseObserver<Boolean>() {
+                        @Override
+                        public void onNext(Boolean aBoolean) {
+                            if (!aBoolean) {
+                                viewEmail();
+                            } else {
+                                Toast.makeText(EditMyInfoActivity.this, "该昵称已被占用", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ExceptionHandler.ResponeThrowable e) {
+                            L.e(e.message + "  " + e.status);
+                            Toast.makeText(EditMyInfoActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
     }
 
@@ -268,23 +268,23 @@ public class EditMyInfoActivity extends BaseActivity {
         String birthdaystr=birthday.getText().toString();
         String emailstr=email.getText().toString();
         String locationstr=location.getText().toString();
-//        model.editUserinfo(Sp.getInt(EditMyInfoActivity.this,"useraccountid"),namestr,introducestr,genderstr,birthdaystr,emailstr,locationstr)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<String[]>())
-//                .subscribe(new BaseObserver<String[]>() {
-//                    @Override
-//                    public void onNext(String[] strings) {
-//                        Toast.makeText(EditMyInfoActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-//                        setResult(RESULT_OK);
-//                        finish();
-//                    }
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {
-//                        L.e(e.message+"  "+e.status);
-//                        Toast.makeText(EditMyInfoActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+        model.editUserinfo(Sp.getInt(EditMyInfoActivity.this,"useraccountid"),namestr,introducestr,genderstr,birthdaystr,emailstr,locationstr)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<String[]>())
+                .subscribe(new BaseObserver<String[]>() {
+                    @Override
+                    public void onNext(String[] strings) {
+                        Toast.makeText(EditMyInfoActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        L.e(e.message+"  "+e.status);
+                        Toast.makeText(EditMyInfoActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
     @OnClick({R.id.gender_relat, R.id.birthday_relat, R.id.location_relat, R.id.commit})
     public void onViewClicked(View view) {

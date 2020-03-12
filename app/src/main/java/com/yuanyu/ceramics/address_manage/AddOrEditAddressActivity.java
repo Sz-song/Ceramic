@@ -23,6 +23,7 @@ import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.view.mypicker.AddressPickerPopupWindow;
 import com.yuanyu.ceramics.common.view.mypicker.DataPickerDialog;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
+import com.yuanyu.ceramics.utils.Sp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,10 +141,10 @@ public class AddOrEditAddressActivity extends BaseActivity<AddOrEditAddressPrese
         if (queding.isActivated()) {
             if(type.equals("0")){//新增
                 int ifdefault=isdefault.getText().toString().equals("是")?1:0;
-//                presenter.addAddress(SpUtils.getInt(AddAddressActivity.this, "useraccountid"), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2] ,address.getText().toString(), ifdefault);
+                presenter.addAddress(Sp.getInt(AddOrEditAddressActivity.this, "useraccountid"), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2] ,address.getText().toString(), ifdefault);
             }else if(type.equals("1")){//编辑
                 int ifdefault=isdefault.getText().toString().equals("是")?1:0;
-//                presenter.editAddress(SpUtils.getInt(AddAddressActivity.this, "useraccountid"), addressBean.getAddressid(), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2]  , address.getText().toString(), ifdefault);
+                presenter.editAddress(Sp.getInt(AddOrEditAddressActivity.this, "useraccountid"), addressBean.getAddressid(), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2]  , address.getText().toString(), ifdefault);
             }else if(type.equals("2")){//修改
                 Intent intent = new Intent(this, AddOrEditAddressActivity.class);
                 intent.putExtra("type","2");

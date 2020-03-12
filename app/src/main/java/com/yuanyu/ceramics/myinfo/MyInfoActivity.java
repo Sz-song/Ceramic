@@ -13,7 +13,11 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
+import com.yuanyu.ceramics.utils.ExceptionHandler;
+import com.yuanyu.ceramics.utils.HttpServiceInstance;
+import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import butterknife.BindView;
@@ -47,7 +51,7 @@ public class MyInfoActivity extends BaseActivity {
     private int userid;
     private MyInfoBean infoBean;
 
-    //    private MyYubaModel model=new MyYubaModel();
+        private MyInfoModel model=new MyInfoModel();
     @Override
     protected int getLayout() {
         return R.layout.activity_my_info;
@@ -74,35 +78,35 @@ public class MyInfoActivity extends BaseActivity {
             actionBar.setDisplayShowTitleEnabled(false);
         }
         Intent intent = getIntent();
-//        userid = intent.getIntExtra("userid", -1);
-//        if (userid == -1) {
-//            Toast.makeText(this, "未知错误", Toast.LENGTH_SHORT).show();
-//            finish();
-//        }
-//        if (userid == Sp.getInt(this, "useraccountid")) {
-//            edit.setVisibility(View.VISIBLE);
-//        }else{
-//            edit.setVisibility(View.GONE);
-//        }
+        userid = intent.getIntExtra("userid", -1);
+        if (userid == -1) {
+            Toast.makeText(this, "未知错误", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        if (userid == Sp.getInt(this, "useraccountid")) {
+            edit.setVisibility(View.VISIBLE);
+        }else{
+            edit.setVisibility(View.GONE);
+        }
         edit.setVisibility(View.VISIBLE);
         initData();
     }
     private void initData() {
-//        model.viewUserInfo(userid)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<InfoBean>())
-//                .subscribe(new BaseObserver<InfoBean>() {
-//                    @Override
-//                    public void onNext(InfoBean bean) {
-//                        infoBean=new InfoBean(bean.getName(),bean.getIntroduce(),bean.getGender(),bean.getBirthday(),bean.getEmail(),bean.getLocation());
-//                        resumeView();
-//                    }
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {
-//                        L.e(e.message+" "+e.status);
-//                    }
-//                });
+        model.viewUserInfo(userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<MyInfoBean>())
+                .subscribe(new BaseObserver<MyInfoBean>() {
+                    @Override
+                    public void onNext(MyInfoBean bean) {
+                        infoBean=new MyInfoBean(bean.getName(),bean.getIntroduce(),bean.getGender(),bean.getBirthday(),bean.getEmail(),bean.getLocation());
+                        resumeView();
+                    }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        L.e(e.message+" "+e.status);
+                    }
+                });
     }
     private void resumeView() {
         name.setText(infoBean.getName());
@@ -115,7 +119,7 @@ public class MyInfoActivity extends BaseActivity {
     @OnClick(R.id.edit)
     public void onViewClicked() {
         Intent intent=new Intent(MyInfoActivity.this,EditMyInfoActivity.class);
-//        intent.putExtra("infoBean",infoBean);
+        intent.putExtra("infoBean",infoBean);
         startActivityForResult(intent,1001);
     }
     public boolean onOptionsItemSelected(MenuItem item) {

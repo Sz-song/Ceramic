@@ -1,4 +1,5 @@
-package com.yuanyu.ceramics.seller.index;
+package com.yuanyu.ceramics.search;
+
 import com.google.gson.Gson;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
@@ -12,13 +13,11 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
-public class SellerIndexModel implements SellerIndexConstract.IMineModel {
+public class SearchZuopinModel {
+    HttpService httpService;
+    public SearchZuopinModel(){httpService = HttpServiceInstance.getInstance();}
 
-    private HttpService httpService;
-    SellerIndexModel(){ httpService = HttpServiceInstance.getInstance();}
-
-    @Override
-    public Observable<BaseResponse<SellerIndexBean>> initData(String useraccountid) {
+    public Observable<BaseResponse<SearchBean>> getSearchZuopinResult(int page, String useraccountid, int type, String search, int outsidetype){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -26,14 +25,24 @@ public class SellerIndexModel implements SellerIndexConstract.IMineModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","mine_init");
+        map.put("action","searchresult");
         Map data = new HashMap();
+        data.put("page",page);
+        data.put("pagesize","");
         data.put("useraccountid",useraccountid);
+        data.put("intype",type);
+        data.put("search",search);
+        data.put("outtype",outsidetype);
+
         map.put("data",data);
+
         Gson gson=new Gson();
         String str=gson.toJson(map);
         L.e("str is "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.sellerinit(body);
+
+        return httpService.getSearchZuopinResult(body);
+
     }
+
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.item.ItemDetailAcitivity;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ZuopinAdapter extends RecyclerView.Adapter<ZuopinAdapter.ViewHolder
         holder.itemName.setText(zuopin.getName());
         holder.price.setText("￥"+zuopin.getPrice() + "");
         holder.location.setText(zuopin.getLocation());
-//        holder.itemView.setOnClickListener(view -> ItemDetailActivity.actionStart(mContext, mZuopinList.get(position).getId()));
+        holder.itemView.setOnClickListener(view -> ItemDetailAcitivity.actionStart(mContext, mZuopinList.get(position).getId()));
     }
 
     @Override

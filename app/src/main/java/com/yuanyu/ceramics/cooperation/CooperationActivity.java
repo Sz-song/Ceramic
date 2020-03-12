@@ -60,21 +60,18 @@ public class CooperationActivity extends BaseActivity<CooperationPresenter> impl
         title.setText("合作机构");
         list=new ArrayList<>();
         dialog=new LoadingDialog(this);
-//        dialog.show();
+        dialog.show();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(manager);
-        CooperationListBean cb1 = new CooperationListBean("1","img/banner1.jpg","深圳市大数据研究院","深圳市大数据研究院是在深圳市委、市政府的支持下于2016年3月组建，以整合引领深圳市的大数据相关产业与科研计划。研究院的初始资金来源于香港中文大","");
-        CooperationListBean cb2 = new CooperationListBean("2","img/banner1.jpg","深圳市智能机器人研究院","深圳市智能机器人研究院是在深圳市政府大力支持下的一个国际化、专业化的新型科研机构。主要研究方向包括：先进智能传感技术、服务机器人、工业机器人与自动化、特种机器人、微纳米机器人以及智能信息系统等","");
-        list.add(cb1);
-        list.add(cb2);
         adapter = new CooperationAdapter(this,list);
         recyclerview.setAdapter(adapter);
         swipe.setColorSchemeResources(R.color.colorPrimary);
-        swipe.setRefreshing(false);
+        swipe.setRefreshing(true);
+        presenter.getCooperationList();
         swipe.setOnRefreshListener(() -> {
-//            list.clear();
-//            adapter.notifyDataSetChanged();
-//            presenter.getCooperationList();
+            list.clear();
+            adapter.notifyDataSetChanged();
+            presenter.getCooperationList();
         });
     }
 

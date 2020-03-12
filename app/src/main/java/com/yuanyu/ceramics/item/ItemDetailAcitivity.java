@@ -266,10 +266,6 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
 //                .placeholder(R.drawable.img_default)
 //                .into(topImage);
         recyclerview.setLayoutManager(gridLayoutManager);
-        AdsCellBean acb1=new AdsCellBean("1","img/banner1.jpg","青花瓷瓶",12000.00,"南昌市","1","1");
-        AdsCellBean acb2=new AdsCellBean("2","img/banner1.jpg","元代青花山水瓶仿品",11000.00,"南昌市","1","2");
-        adsCellBeanList.add(acb1);
-        adsCellBeanList.add(acb2);
         itemDetailAdapter = new ItemDetailAdapter(this, bean, adsCellBeanList);
         recyclerview.setAdapter(itemDetailAdapter);
         itemDetailAdapter.setOnShareClickListener(() -> {
@@ -458,7 +454,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 break;
             case R.id.shoucang:
                 if(null!=Sp.getString(this,AppConstant.MOBILE)&&Sp.getString(this,AppConstant.MOBILE).length()>8) {
-//                    presenter.collectItem(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), itemid, bean.getStorebean().getShop_id());
+                    presenter.collectItem(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), itemid, bean.getStorebean().getShop_id());
                 }else{
 //                    intent = new Intent(this, BindPhoneActivity.class);
 //                    intent.putExtra("type",1);

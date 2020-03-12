@@ -85,9 +85,6 @@ public class FenLeiActivity extends BaseActivity<FenLeiPresenter> implements Fen
         classifyAdapter=new ClassifyAdapter(classify_list,this);
         recyclerviewClassify.setAdapter(classifyAdapter);
         recyclerviewClassify.setLayoutManager(new LinearLayoutManager(this));
-//        classifyAdapter = new ClassifyAdapter(classify_list, this);
-//        recyclerviewClassify.setAdapter(classifyAdapter);
-//        recyclerviewClassify.setLayoutManager(new LinearLayoutManager(this));
         classifyAdapter.setPositionClickListener(position -> {
             classifyAdapter.notifyDataSetChanged();
             if(position==0){presenter.setShowList(showList,listfenlei);}
