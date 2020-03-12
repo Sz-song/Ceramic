@@ -65,15 +65,16 @@ public class ReleaseDynamicPresenter extends BasePresenter<ReleaseDynamicConstra
                 list.add(listcontent.get(i));
             }
         }
-        model.releaseDynamic(useraccountid,listimage,listfriends,isopen,list)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
-                .subscribe(new BaseObserver<Boolean>() {
-                    @Override
-                    public void onNext(Boolean b) {if(view!=null){view.releaseDynamicSuccess(b);}}
-                    @Override
-                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.releaseDynamicFail(e);}}
-                });
+        if(view!=null){view.releaseDynamicSuccess(true);}
+//        model.releaseDynamic(useraccountid,listimage,listfriends,isopen,list)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+//                .subscribe(new BaseObserver<Boolean>() {
+//                    @Override
+//                    public void onNext(Boolean b) {if(view!=null){view.releaseDynamicSuccess(b);}}
+//                    @Override
+//                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.releaseDynamicFail(e);}}
+//                });
     }
 }

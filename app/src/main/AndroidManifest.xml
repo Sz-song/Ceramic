@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".center_circle.release.ReleaseDynamicActivity"></activity>
+        <activity android:name=".center_circle.release.SelectFriendActivity"></activity>
+        <activity android:name=".center_circle.release.ReleaseDynamicActivity" />
         <activity android:name=".seller.liveapply.SelectItemActivity" />
         <activity android:name=".seller.shop_shelve.ShelveActivity" />
         <activity android:name=".seller.shop_goods.ShopGoodsActivity" />
