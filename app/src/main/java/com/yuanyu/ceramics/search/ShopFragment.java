@@ -121,7 +121,7 @@ public class ShopFragment extends BaseFragment {
             shopList.clear();
             adapter.notifyDataSetChanged();
         }
-        model.getSearchShopResult(p, Sp.getInt(context, "useraccountid"), 3, search, 3)
+        model.getSearchShopResult(p, Sp.getString(context, "useraccountid"), 3, search, 3)
                 .subscribeOn(Schedulers.io())
                 .compose(new HttpServiceInstance.ErrorTransformer<SearchBean>())
                 .observeOn(AndroidSchedulers.mainThread())

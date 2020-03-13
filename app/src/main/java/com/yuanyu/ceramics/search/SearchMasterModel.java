@@ -18,7 +18,7 @@ public class SearchMasterModel implements SearchMasterConstract.ISearchMasterMod
     public SearchMasterModel(){httpService = HttpServiceInstance.getInstance();}
 
     @Override
-    public Observable<BaseResponse<SearchBean>> SearchMasterList(int page, int useraccountid, int type, String search, int outsidetype) {
+    public Observable<BaseResponse<SearchBean>> SearchMasterList(int page, String useraccountid, int type, String search, int outsidetype) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -43,7 +43,7 @@ public class SearchMasterModel implements SearchMasterConstract.ISearchMasterMod
     }
 
     @Override
-    public Observable<BaseResponse<Boolean>> Focus(int useraccountid, String userid) {
+    public Observable<BaseResponse<Boolean>> Focus(String useraccountid, String userid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

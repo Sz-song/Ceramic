@@ -7,8 +7,8 @@ import io.reactivex.Observable;
 
 public interface SearchMasterConstract {
     interface ISearchMasterModel {
-        Observable<BaseResponse<SearchBean>> SearchMasterList(int page, int useraccountid, int type, String search, int outsidetype);
-        Observable<BaseResponse<Boolean>> Focus(int useraccountid, String userid);
+        Observable<BaseResponse<SearchBean>> SearchMasterList(int page, String useraccountid, int type, String search, int outsidetype);
+        Observable<BaseResponse<Boolean>> Focus(String useraccountid, String userid);
     }
     interface ISearchMasterView {
         void SearchMasterSuccess(SearchBean bean);
@@ -19,7 +19,7 @@ public interface SearchMasterConstract {
     }
 
     interface ISearchMasterPresenter {
-        void SearchMasterList(int page, int useraccountid, int type, String search, int outsidetype);
-        void Focus(int useraccountid, String userid, int position);
+        void SearchMasterList(int page, String useraccountid, int type, String search, int outsidetype);
+        void Focus(String useraccountid, String userid, int position);
     }
 }

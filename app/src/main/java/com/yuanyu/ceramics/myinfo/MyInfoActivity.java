@@ -83,7 +83,7 @@ public class MyInfoActivity extends BaseActivity {
             Toast.makeText(this, "未知错误", Toast.LENGTH_SHORT).show();
             finish();
         }
-        if (userid == Sp.getInt(this, "useraccountid")) {
+        if (userid+"" == Sp.getString(this, "useraccountid")) {
             edit.setVisibility(View.VISIBLE);
         }else{
             edit.setVisibility(View.GONE);

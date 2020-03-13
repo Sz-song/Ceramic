@@ -119,37 +119,27 @@ public class GetFriendsActivity extends BaseActivity {
         });
     }
     private void initList() {
-        List<FriendBean> friendBeans=new ArrayList<>();
-        FriendBean fb1=new FriendBean(1,"孙志军","img/banner1.jpg","做个开心的人",1,12);
-        FriendBean fb2=new FriendBean(2,"拥抱夏天的风","img/banner1.jpg","简单",1,10);
-        friendBeans.add(fb1);
-        friendBeans.add(fb2);
-        for (int i = 0; i < friendBeans.size(); i++) {
-            list.add(friendBeans.get(i));
-        }
-        adapter.notifyItemRangeInserted(list.size() - friendBeans.size(), friendBeans.size());
-        swipe.setRefreshing(false);
-//        model.getFriends(Sp.getInt(this, "useraccountid"), page, pagesize)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<List<FriendBean>>())
-//                .subscribe(new BaseObserver<List<FriendBean>>() {
-//                    @Override
-//                    public void onNext(List<FriendBean> friendBeans) {
-//                        for (int i = 0; i < friendBeans.size(); i++) {
-//                            list.add(friendBeans.get(i));
-//                        }
-//                        adapter.notifyItemRangeInserted(list.size() - friendBeans.size(), friendBeans.size());
-//                        swipe.setRefreshing(false);
-//                        page++;
-//                    }
-//
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {
-//                        L.e(e.message + e.status);
-//                        swipe.setRefreshing(false);
-//                    }
-//                });
+        model.getFriends(Sp.getString(this, "useraccountid"), page, pagesize)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<List<FriendBean>>())
+                .subscribe(new BaseObserver<List<FriendBean>>() {
+                    @Override
+                    public void onNext(List<FriendBean> friendBeans) {
+                        for (int i = 0; i < friendBeans.size(); i++) {
+                            list.add(friendBeans.get(i));
+                        }
+                        adapter.notifyItemRangeInserted(list.size() - friendBeans.size(), friendBeans.size());
+                        swipe.setRefreshing(false);
+                        page++;
+                    }
+
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        L.e(e.message + e.status);
+                        swipe.setRefreshing(false);
+                    }
+                });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

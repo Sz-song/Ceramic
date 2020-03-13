@@ -22,7 +22,7 @@ import okhttp3.RequestBody;
 public class ReleaseModel {
     HttpService httpService;
     public ReleaseModel(){httpService = HttpServiceInstance.getInstance();}
-    public Observable<BaseResponse<List<FriendBean>>> getFriends(int useraccountid, int page, int pagesize){
+    public Observable<BaseResponse<List<FriendBean>>> getFriends(String useraccountid, int page, int pagesize){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

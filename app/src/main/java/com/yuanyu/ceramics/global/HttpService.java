@@ -304,10 +304,10 @@ public interface HttpService {
     Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
 //    getLogisticsTracing
     //快递递踪
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
 //    modityOrderPrice商家修改未支付订单价格
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 
 
@@ -316,30 +316,30 @@ public interface HttpService {
     Observable<BaseResponse<Boolean>> ShopChangeIntroduce(@Body RequestBody body);
 
     //商品上架接口
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<String[]>>Shelve(@Body RequestBody body);
     //上传视频
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     @Multipart
     Observable<BaseResponse<VideoBean>> uploadVideo(@Part("data")RequestBody body,
                                                     @Part MultipartBody.Part[] part);
     //商品上架审核状态接口
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<List<ShelveAuditBean>>>getWaitReviewResult(@Body RequestBody body);
     //删除仓库物品
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<String[]>>getWareHouseDeleteResult(@Body RequestBody body);
     //我的商品 重新上架
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<ShelvingDetailBean>>getReOnSaleData(@Body RequestBody body);
     //我的商品 下架接口
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<String[]>>shopGoodsOffShelves(@Body RequestBody body);
     //我的商品接口
-    @POST("")
+    @POST("app_api/shangjia/ExpRecommend.php")
     Observable<BaseResponse<List<ShopGoodsBean>>>getShopGoodsList(@Body RequestBody body);
     //商家获取商品详情
-    @POST("")
+    @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<ShelvingDetailBean>> getShopGoodsDetail(@Body RequestBody body);
 
 
@@ -370,7 +370,7 @@ public interface HttpService {
     @POST("app_api/home_page/edit_address.php")
     Observable<BaseResponse<String[]>> editAddress(@Body RequestBody body);
     //收货地址列表初始化
-    @POST("app_api/home_page/address.php")
+    @POST("back/test/api/address/address.php")
     Observable<BaseResponse<List<AddressManageBean>>> getAddressData(@Body RequestBody body);
 
     //设置默认地址

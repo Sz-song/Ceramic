@@ -21,7 +21,7 @@ public class SearchShopModel {
     HttpService httpService;
     public SearchShopModel(){httpService = HttpServiceInstance.getInstance();}
 
-    public Observable<BaseResponse<SearchBean>> getSearchShopResult(int page, int useraccountid, int type, String search, int outsidetype){
+    public Observable<BaseResponse<SearchBean>> getSearchShopResult(int page, String useraccountid, int type, String search, int outsidetype){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

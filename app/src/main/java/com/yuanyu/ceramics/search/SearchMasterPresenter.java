@@ -14,7 +14,7 @@ public class SearchMasterPresenter extends BasePresenter<SearchMasterConstract.I
     public SearchMasterPresenter() {model=new SearchMasterModel();}
 
     @Override
-    public void SearchMasterList(int page, int useraccountid, int type, String search, int outsidetype) {
+    public void SearchMasterList(int page, String useraccountid, int type, String search, int outsidetype) {
         model.SearchMasterList(page,useraccountid,type,search,outsidetype)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -28,7 +28,7 @@ public class SearchMasterPresenter extends BasePresenter<SearchMasterConstract.I
     }
 
     @Override
-    public void Focus(int useraccountid, String userid, int position) {
+    public void Focus(String useraccountid, String userid, int position) {
         model.Focus(useraccountid,userid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

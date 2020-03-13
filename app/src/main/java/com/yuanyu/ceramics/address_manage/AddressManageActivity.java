@@ -17,6 +17,7 @@ import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.utils.Sp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,10 +78,6 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerview.setLayoutManager(manager);
-        AddressManageBean ab1= new AddressManageBean("孙志军","15797895610","江西省","南昌市","蛟桥镇","英伦联邦");
-        AddressManageBean ab2= new AddressManageBean("孙小军","15797895610","江西省","乐平市","礼林镇","罗汉山村");
-        list.add(ab1);
-        list.add(ab2);
         if(list.size()>0){
             nodata.setVisibility(View.GONE);
             nodataImg.setVisibility(View.GONE);
@@ -100,11 +97,11 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
         });
         adapter.setOnDefaultClickListener(position -> {
             loaddialog.show();
-//            presenter.setDefaultAddress(SpUtils.getInt(AddressManageActivity.this,"useraccountid"),list.get(position).getAddressid(),position);
+            presenter.setDefaultAddress(Sp.getString(AddressManageActivity.this,"useraccountid"),list.get(position).getAddressid(),position);
         });
         adapter.setOnDeteleClickListener(position -> {
             loaddialog.show();
-//            presenter.deleteAddress(SpUtils.getInt(AddressManageActivity.this,"useraccountid"),list.get(position).getAddressid(),position);
+            presenter.deleteAddress(Sp.getString(AddressManageActivity.this,"useraccountid"),list.get(position).getAddressid(),position);
         });
         adapter.setOnEditClickListener(position -> {
             Intent intent = new Intent(AddressManageActivity.this, AddOrEditAddressActivity.class);
@@ -113,15 +110,15 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
             startActivityForResult(intent, 1001);
         });
         swipe.setOnRefreshListener(() -> {
-//            list.clear();
-//            adapter.notifyDataSetChanged();
-//            swipe.setRefreshing(false);
-//            loaddialog.show();
-//            presenter.getAddressData(SpUtils.getInt(this, "useraccountid"));
+            list.clear();
+            adapter.notifyDataSetChanged();
+            swipe.setRefreshing(false);
+            loaddialog.show();
+            presenter.getAddressData(Sp.getString(this, "useraccountid"));
         });
-//        loaddialog.show();
+        loaddialog.show();
         swipe.setRefreshing(false);
-//        presenter.getAddressData(SpUtils.getInt(this, "useraccountid"));
+        presenter.getAddressData(Sp.getString(this, "useraccountid"));
     }
 
 
@@ -142,14 +139,14 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
                 adapter.notifyDataSetChanged();
                 swipe.setRefreshing(true);
                 loaddialog.show();
-//                presenter.getAddressData(SpUtils.getInt(this, "useraccountid"));
+                presenter.getAddressData(Sp.getString(this, "useraccountid"));
                 break;
             case R.id.nodata:
-//                list.clear();
-//                adapter.notifyDataSetChanged();
-//                swipe.setRefreshing(true);
-//                loaddialog.show();
-//                presenter.getAddressData(SpUtils.getInt(this, "useraccountid"));
+                list.clear();
+                adapter.notifyDataSetChanged();
+                swipe.setRefreshing(true);
+                loaddialog.show();
+                presenter.getAddressData(Sp.getString(this, "useraccountid"));
                 break;
             case R.id.add_address:
                 Intent intent = new Intent(AddressManageActivity.this, AddOrEditAddressActivity.class);

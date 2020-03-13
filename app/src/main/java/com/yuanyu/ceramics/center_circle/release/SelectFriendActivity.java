@@ -134,7 +134,7 @@ public class SelectFriendActivity extends BaseActivity {
         });
     }
     private void initList() {
-        model.getFriends(Sp.getInt(this, "useraccountid"), page, pagesize)
+        model.getFriends(Sp.getString(this, "useraccountid"), page, pagesize)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<List<FriendBean>>())

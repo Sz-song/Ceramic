@@ -20,7 +20,7 @@ public class AddressManageModel implements AddressManageConstract.IAddressManage
     AddressManageModel(){httpService = HttpServiceInstance.getInstance();}
 
     @Override
-    public Observable<BaseResponse<List<AddressManageBean>>> getAddressData(int useraccountid) {
+    public Observable<BaseResponse<List<AddressManageBean>>> getAddressData(String useraccountid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -40,7 +40,7 @@ public class AddressManageModel implements AddressManageConstract.IAddressManage
     }
 
     @Override
-    public Observable<BaseResponse<String[]>> deleteAddress(int useraccountid, String id) {
+    public Observable<BaseResponse<String[]>> deleteAddress(String useraccountid, String id) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -61,7 +61,7 @@ public class AddressManageModel implements AddressManageConstract.IAddressManage
     }
 
     @Override
-    public Observable<BaseResponse<String[]>> setDefaultAddress(int useraccountid, String id) {
+    public Observable<BaseResponse<String[]>> setDefaultAddress(String useraccountid, String id) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

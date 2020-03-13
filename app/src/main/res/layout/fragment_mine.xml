@@ -509,14 +509,33 @@
                             android:textColor="@color/blackLight"
                             android:text="@string/master_enter"/>
                     </LinearLayout>
-
-                    <View
+                    <LinearLayout
+                        android:id="@+id/tosell"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:visibility="invisible"
                         android:orientation="vertical">
-                    </View>
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/master_enter" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:textSize="12sp"
+                            android:textColor="@color/blackLight"
+                            android:text="@string/master_enter"/>
+                    </LinearLayout>
+<!--                    <View-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:visibility="invisible"-->
+<!--                        android:orientation="vertical">-->
+<!--                    </View>-->
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

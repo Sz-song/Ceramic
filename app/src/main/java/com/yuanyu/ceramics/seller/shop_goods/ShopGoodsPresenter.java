@@ -16,20 +16,16 @@ public class ShopGoodsPresenter extends BasePresenter<ShopGoodsConstract.IShopGo
     public ShopGoodsPresenter() { model=new ShopGoodsModel(); }
     @Override
     public void getShopGoodsList(String shopid, int page, int type) {
-        List<ShopGoodsBean> list=new ArrayList<>();
-        ShopGoodsBean shopGoodsBeans=new ShopGoodsBean("1","img/banner1.jpg","元代青花山水瓶仿品","山水","1","18000",1);
-        list.add(shopGoodsBeans);
-        if (view!=null){view.getShopGoodsSuccess(list);}
-//        model.getShopGoodsList(shopid,page,type)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<List<ShopGoodsBean>>())
-//                .subscribe(new BaseObserver<List<ShopGoodsBean>>() {
-//                    @Override
-//                    public void onNext(List<ShopGoodsBean> shopGoodsBeans) {if (view!=null){view.getShopGoodsSuccess(shopGoodsBeans);}}
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {if (view!=null){view.getShopGoodsFail(e);} }
-//                });
+        model.getShopGoodsList(shopid,page,type)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<List<ShopGoodsBean>>())
+                .subscribe(new BaseObserver<List<ShopGoodsBean>>() {
+                    @Override
+                    public void onNext(List<ShopGoodsBean> shopGoodsBeans) {if (view!=null){view.getShopGoodsSuccess(shopGoodsBeans);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if (view!=null){view.getShopGoodsFail(e);} }
+                });
     }
 
     @Override

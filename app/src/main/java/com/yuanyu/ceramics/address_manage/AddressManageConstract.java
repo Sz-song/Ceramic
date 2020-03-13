@@ -9,9 +9,9 @@ import io.reactivex.Observable;
 
 public interface AddressManageConstract {
     interface IAddressManageModel{
-        Observable<BaseResponse<List<AddressManageBean>>> getAddressData(int useraccountid);
-        Observable<BaseResponse<String[]>> deleteAddress(int useraccountid, String id);
-        Observable<BaseResponse<String[]>> setDefaultAddress(int useraccountid, String id);
+        Observable<BaseResponse<List<AddressManageBean>>> getAddressData(String useraccountid);
+        Observable<BaseResponse<String[]>> deleteAddress(String useraccountid, String id);
+        Observable<BaseResponse<String[]>> setDefaultAddress(String useraccountid, String id);
     }
     interface IAddressManageView{
         void getAddressDataSuccess(List<AddressManageBean> list);
@@ -22,8 +22,8 @@ public interface AddressManageConstract {
         void setDefaultAddressFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IAddressManagePresenter{
-       void getAddressData(int useraccountid);
-       void deleteAddress(int useraccountid, String id, int position);
-       void setDefaultAddress(int useraccountid, String id, int position);
+       void getAddressData(String useraccountid);
+       void deleteAddress(String useraccountid, String id, int position);
+       void setDefaultAddress(String useraccountid, String id, int position);
     }
 }

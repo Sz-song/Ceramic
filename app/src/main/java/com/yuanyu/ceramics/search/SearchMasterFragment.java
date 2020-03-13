@@ -61,10 +61,6 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
         nodata.setText("暂时没有数据");
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerview.setLayoutManager(layoutManager);
-        SearchMasterBean sb1=new SearchMasterBean("img/banner1.jpg","黄建宏","1","3","2","2",0);
-        SearchMasterBean sb2=new SearchMasterBean("img/banner1.jpg","王锡良","1","3","2","2",0);
-        list.add(sb1);
-        list.add(sb2);
         if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
             nodata.setVisibility(View.VISIBLE);
@@ -89,24 +85,24 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
                     }
                     if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1) {
-                        presenter.SearchMasterList(page, Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+                        presenter.SearchMasterList(page, Sp.getString(getContext(), "useraccountid"),2,keyword,2);
                     }
                 }
             }
         });
-        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getInt(getContext(), "useraccountid"),list.get(position).getId(),position));
+        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getString(getContext(), "useraccountid"),list.get(position).getId(),position));
         swipe.setOnRefreshListener(() -> {
             page = 0;
             list.clear();
             adapter.notifyDataSetChanged();
-            presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+            presenter.SearchMasterList(page,Sp.getString(getContext(), "useraccountid"),2,keyword,2);
         });
 
     }
 
     @Override
     public void initData() {
-        presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+        presenter.SearchMasterList(page,Sp.getString(getContext(), "useraccountid"),2,keyword,2);
     }
 
     public void search(String str) {
@@ -114,7 +110,7 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
         page = 0;
         list.clear();
         adapter.notifyDataSetChanged();
-        presenter.SearchMasterList(page,Sp.getInt(getContext(), "useraccountid"),2,keyword,2);
+        presenter.SearchMasterList(page,Sp.getString(getContext(), "useraccountid"),2,keyword,2);
     }
 
     @Override

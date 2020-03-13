@@ -268,7 +268,7 @@ public class EditMyInfoActivity extends BaseActivity {
         String birthdaystr=birthday.getText().toString();
         String emailstr=email.getText().toString();
         String locationstr=location.getText().toString();
-        model.editUserinfo(Sp.getInt(EditMyInfoActivity.this,"useraccountid"),namestr,introducestr,genderstr,birthdaystr,emailstr,locationstr)
+        model.editUserinfo(Sp.getString(EditMyInfoActivity.this,"useraccountid"),namestr,introducestr,genderstr,birthdaystr,emailstr,locationstr)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<String[]>())

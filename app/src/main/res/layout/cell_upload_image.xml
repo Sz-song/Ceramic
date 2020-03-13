@@ -17,5 +17,5 @@
         android:id="@+id/cancel"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/delete_gray"/>
+        android:src="@drawable/delete_article_img"/>
 </RelativeLayout>

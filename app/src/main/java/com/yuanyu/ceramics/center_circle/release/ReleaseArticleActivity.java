@@ -118,6 +118,9 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                     .load(images.get(0).getPath())
                     .override(200,200)
                     .into(articleCover);
+            if (imagecover==null){}else{
+                articleCover.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            }
         }
     }
     //获取富文本内容。文字getText()  图片则获取路径再和封面一起上传
