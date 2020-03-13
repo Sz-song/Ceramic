@@ -191,6 +191,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         Sp.putString(this,AppConstant.USER_ACCOUNT_ID,bean.getUseraccountid());
         Sp.putString(this,AppConstant.MOBILE,bean.getMobile());
         Sp.putString(this,AppConstant.PASSWORD,loginPassword.getText().toString());
+        Sp.putString(this,AppConstant.TOKEN,bean.getToken());
+        Sp.putString(this,AppConstant.REFRESH_TOKEN,bean.getRefresh_token());
         dialog.dismiss();
         Intent intent=new Intent(this,HomeActivity.class);
         startActivity(intent);

@@ -141,10 +141,10 @@ public class AddOrEditAddressActivity extends BaseActivity<AddOrEditAddressPrese
         if (queding.isActivated()) {
             if(type.equals("0")){//新增
                 int ifdefault=isdefault.getText().toString().equals("是")?1:0;
-                presenter.addAddress(Sp.getInt(AddOrEditAddressActivity.this, "useraccountid"), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2] ,address.getText().toString(), ifdefault);
+                presenter.addAddress(Sp.getString(AddOrEditAddressActivity.this, "useraccountid"), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2] ,address.getText().toString(), ifdefault);
             }else if(type.equals("1")){//编辑
                 int ifdefault=isdefault.getText().toString().equals("是")?1:0;
-                presenter.editAddress(Sp.getInt(AddOrEditAddressActivity.this, "useraccountid"), addressBean.getAddressid(), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2]  , address.getText().toString(), ifdefault);
+                presenter.editAddress(Sp.getString(AddOrEditAddressActivity.this, "useraccountid"), addressBean.getAddressid(), name.getText().toString(), phone.getText().toString(), location.getText().toString().split(" ")[0], location.getText().toString().split(" ")[1], location.getText().toString().split(" ")[2]  , address.getText().toString(), ifdefault);
             }else if(type.equals("2")){//修改
                 Intent intent = new Intent(this, AddOrEditAddressActivity.class);
                 intent.putExtra("type","2");
@@ -187,10 +187,8 @@ public class AddOrEditAddressActivity extends BaseActivity<AddOrEditAddressPrese
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return true;
     }

@@ -19,7 +19,7 @@ public class FaxianModel implements FaxianConstract.IFaxianModel {
         httpService = HttpServiceInstance.getInstance();
     }
     @Override
-    public Observable<BaseResponse<HomepageBean>> initData(String useraccountid) {
+    public Observable<BaseResponse<FaxianBean>> initData(String useraccountid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

@@ -10,9 +10,9 @@ import io.reactivex.schedulers.Schedulers;
 
 public class AddOrEditAddressPresenter extends BasePresenter<AddOrEditAddressConstract.IAddAddressView>  implements AddOrEditAddressConstract.IAddAddressPresenter{
     private AddOrEditAddressConstract.IAddAddressModel model;
-    public AddOrEditAddressPresenter() {model=new AddOrEditAddressModel();}
+    AddOrEditAddressPresenter() {model=new AddOrEditAddressModel();}
     @Override
-    public void addAddress(int useraccountid,String name,String phone,String province,String city,String exparea,String address,int isdefault) {
+    public void addAddress(String useraccountid,String name,String phone,String province,String city,String exparea,String address,int isdefault) {
         model.addAddress(useraccountid, name, phone,province,city,exparea,address,isdefault)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -26,7 +26,7 @@ public class AddOrEditAddressPresenter extends BasePresenter<AddOrEditAddressCon
     }
 
     @Override
-    public void editAddress(int useraccountid,String id,String name,String phone,String province,String city,String exparea,String address,int isdefault) {
+    public void editAddress(String useraccountid,String id,String name,String phone,String province,String city,String exparea,String address,int isdefault) {
         model.editAddress(useraccountid,id,name, phone,province,city,exparea,address,isdefault)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

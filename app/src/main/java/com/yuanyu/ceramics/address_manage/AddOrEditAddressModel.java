@@ -15,10 +15,10 @@ import okhttp3.RequestBody;
 
 public class AddOrEditAddressModel implements AddOrEditAddressConstract.IAddAddressModel {
     private HttpService httpService;
-    public AddOrEditAddressModel(){httpService = HttpServiceInstance.getInstance();}
+    AddOrEditAddressModel(){httpService = HttpServiceInstance.getInstance();}
 
     @Override
-    public Observable<BaseResponse<String[]>> addAddress(int useraccountid, String name, String phone, String province, String city, String exparea, String address, int isdefault) {
+    public Observable<BaseResponse<String[]>> addAddress(String useraccountid, String name, String phone, String province, String city, String exparea, String address, int isdefault) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -31,9 +31,9 @@ public class AddOrEditAddressModel implements AddOrEditAddressConstract.IAddAddr
         data.put("useraccountid",useraccountid);
         data.put("name",name);
         data.put("phone",phone);
-        data.put("province",province);
-        data.put("city",city);
-        data.put("exparea",exparea);
+        data.put("sheng",province);
+        data.put("shi",city);
+        data.put("qu",exparea);
         data.put("address",address);
         data.put("isdefault",isdefault);
         map.put("data",data);
@@ -46,7 +46,7 @@ public class AddOrEditAddressModel implements AddOrEditAddressConstract.IAddAddr
     }
 
     @Override
-    public Observable<BaseResponse<String[]>> editAddress(int useraccountid, String id, String name, String phone, String province, String city, String exparea, String address, int isdefault) {
+    public Observable<BaseResponse<String[]>> editAddress(String useraccountid, String id, String name, String phone, String province, String city, String exparea, String address, int isdefault) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

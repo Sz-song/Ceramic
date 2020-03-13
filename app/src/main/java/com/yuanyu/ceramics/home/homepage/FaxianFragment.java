@@ -20,6 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseFragment;
+import com.yuanyu.ceramics.common.BannerBean;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -28,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class FaxianFragment extends BaseFragment<FaxianPresenter> implements FaxianConstract.IFaxianView {
 
@@ -43,8 +43,8 @@ public class FaxianFragment extends BaseFragment<FaxianPresenter> implements Fax
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
     private FaxianAdapter adapter;
-    private List<String> bannerList;
-    private List<HomeShopBean> list;
+    private List<BannerBean> bannerList;
+    private List<FaxianItemBean> list;
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.common_fragment, container, false);
@@ -92,7 +92,7 @@ public class FaxianFragment extends BaseFragment<FaxianPresenter> implements Fax
     }
 
     @Override
-    public void initDataSuccess(HomepageBean bean) {
+    public void initDataSuccess(FaxianBean bean) {
         swipe.setRefreshing(false);
         bannerList.addAll(bean.getBannerList());
         list.addAll(bean.getList());

@@ -66,4 +66,29 @@
         android:layout_below="@id/img2"
         android:layout_marginTop="10dp"
         android:layout_alignBottom="@id/img1"/>
+    <RelativeLayout
+        android:layout_below="@+id/img1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="150dp"
+            android:layout_marginStart="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/blackLight"/>
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="15dp"
+            android:layout_alignParentEnd="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/blackLight"/>
+    </RelativeLayout>
 </RelativeLayout>

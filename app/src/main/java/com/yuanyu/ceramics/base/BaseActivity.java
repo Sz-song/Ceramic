@@ -1,6 +1,9 @@
 package com.yuanyu.ceramics.base;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +15,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         setContentView(getLayout());
         presenter =initPresent();
         presenter.attachView(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//状态栏黑色字体
+            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN|View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         initEvent();
     }
 

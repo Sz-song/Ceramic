@@ -7,10 +7,10 @@ import io.reactivex.Observable;
 
 public interface FaxianConstract {
     interface IFaxianModel{
-        Observable<BaseResponse<HomepageBean>> initData(String useraccountid);
+        Observable<BaseResponse<FaxianBean>> initData(String useraccountid);
     }
     interface IFaxianView{
-        void initDataSuccess(HomepageBean bean);
+        void initDataSuccess(FaxianBean bean);
         void initDataFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IFaxianPresenter{

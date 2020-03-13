@@ -30,11 +30,11 @@ public class AddressManageModel implements AddressManageConstract.IAddressManage
         map.put("signature",signature);
         map.put("action","address");
         Map data = new HashMap();
-
         data.put("useraccountid",useraccountid);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
+        L.e("str is: "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
         return httpService.getAddressData(body);
     }

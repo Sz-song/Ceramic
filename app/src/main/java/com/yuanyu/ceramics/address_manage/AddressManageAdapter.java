@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yuanyu.ceramics.R;
@@ -57,8 +58,9 @@ public class AddressManageAdapter extends RecyclerView.Adapter<AddressManageAdap
         this.context = context;
         this.list = list;
     }
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.cell_address, parent, false));
     }
     @Override
@@ -71,7 +73,7 @@ public class AddressManageAdapter extends RecyclerView.Adapter<AddressManageAdap
         }else{
             holder.checkbox.setChecked(false);
         }
-        holder.checkbox.setOnClickListener(view -> {
+        holder.checkboxLinear.setOnClickListener(view -> {
             if (list.get(position).getIsdefault() == 1) {
                 holder.checkbox.setChecked(true);
             }else{
@@ -109,6 +111,8 @@ public class AddressManageAdapter extends RecyclerView.Adapter<AddressManageAdap
             LinearLayout liner;
             @BindView(R.id.checkbox)
             SmoothCheckBox checkbox;
+        @BindView(R.id.checkboxlinear)
+        LinearLayout checkboxLinear;
             @BindView(R.id.delete)
             LinearLayout delete;
             @BindView(R.id.edit)

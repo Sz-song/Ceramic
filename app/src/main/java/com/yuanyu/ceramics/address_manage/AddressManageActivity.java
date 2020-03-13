@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +18,8 @@ import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.utils.ExceptionHandler;
+import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import java.util.ArrayList;
@@ -26,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddressManageActivity extends BaseActivity<AddressManagePresenter> implements AddressManageConstract {
+public class AddressManageActivity extends BaseActivity<AddressManagePresenter> implements AddressManageConstract.IAddressManageView{
 
     @BindView(R.id.title)
     TextView title;
@@ -135,12 +138,6 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.nodata_img:
-                list.clear();
-                adapter.notifyDataSetChanged();
-                swipe.setRefreshing(true);
-                loaddialog.show();
-                presenter.getAddressData(Sp.getString(this, "useraccountid"));
-                break;
             case R.id.nodata:
                 list.clear();
                 adapter.notifyDataSetChanged();
@@ -154,5 +151,97 @@ public class AddressManageActivity extends BaseActivity<AddressManagePresenter> 
                 startActivityForResult(intent, 1002);
                 break;
         }
+    }
+
+    @Override
+    public void getAddressDataSuccess(List<AddressManageBean> beans) {
+        loaddialog.dismiss();
+        swipe.setRefreshing(false);
+        for (int i = 0; i < beans.size(); i++) {
+            if (beans.get(i).getIsdefault() == 1) {
+                list.add(0,beans.get(i));
+            } else {
+                list.add(beans.get(i));
+            }
+        }
+        adapter.notifyItemRangeChanged(list.size() -beans.size(), beans.size());
+        if(list.size()>0){
+            nodata.setVisibility(View.GONE);
+            nodataImg.setVisibility(View.GONE);
+        }else{
+            nodata.setVisibility(View.VISIBLE);
+            nodataImg.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void getAddressDataFail(ExceptionHandler.ResponeThrowable e) {
+        L.e(e.message + "  " + e.status);
+        loaddialog.dismiss();
+        swipe.setRefreshing(false);
+        if(list.size()>0){
+            nodata.setVisibility(View.GONE);
+            nodataImg.setVisibility(View.GONE);
+        }else{
+            nodata.setVisibility(View.VISIBLE);
+            nodataImg.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void deleteAddressSuccess(int position) {
+        loaddialog.dismiss();
+        if(list.get(position).getIsdefault()==1){
+            list.remove(position);
+            if(list.size()>0){
+                list.get(0).setIsdefault(1);
+            }
+        }else{
+            list.remove(position);
+        }
+        adapter.notifyDataSetChanged();
+        Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
+        if(list.size()>0){
+            nodata.setVisibility(View.GONE);
+            nodataImg.setVisibility(View.GONE);
+        }else{
+            nodata.setVisibility(View.VISIBLE);
+            nodataImg.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void deleteAddressFail(ExceptionHandler.ResponeThrowable e) {
+        loaddialog.dismiss();
+        Toast.makeText(this, "删除地址失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setDefaultAddressSuccess(int position) {
+        for(int i=0;i<list.size();i++){
+            list.get(i).setIsdefault(0);
+        }
+        list.get(position).setIsdefault(1);
+        loaddialog.dismiss();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setDefaultAddressFail(ExceptionHandler.ResponeThrowable e) {
+        loaddialog.dismiss();
+        Toast.makeText(this, "设置默认地址失败", Toast.LENGTH_SHORT).show();
+        L.e(e.message+"  "+e.status);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == RESULT_OK) {
+                loaddialog.show();
+                swipe.setRefreshing(true);
+                list.clear();
+                presenter.getAddressData(Sp.getString(this, "useraccountid"));
+                adapter.notifyDataSetChanged();
+            }
     }
 }

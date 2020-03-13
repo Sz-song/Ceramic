@@ -16,10 +16,11 @@ import com.yuanyu.ceramics.dingzhi.DashiCellBean;
 import com.yuanyu.ceramics.dingzhi.DingzhiDetailBean;
 import com.yuanyu.ceramics.dingzhi.GenerateOrdersBean;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiBean;
-import com.yuanyu.ceramics.home.homepage.HomepageBean;
+import com.yuanyu.ceramics.home.homepage.FaxianBean;
 import com.yuanyu.ceramics.item.AdsCellBean;
 import com.yuanyu.ceramics.item.ItemDetailBean;
 import com.yuanyu.ceramics.login.LoginBean;
+import com.yuanyu.ceramics.login.TokenBean;
 import com.yuanyu.ceramics.logistics.LogisticsBean;
 import com.yuanyu.ceramics.master.MasterItemBean;
 import com.yuanyu.ceramics.meet_master.MeetMasterBean;
@@ -78,7 +79,7 @@ public interface HttpService {
     Observable<BaseResponse<LoginBean>> thirdLogin(@Body RequestBody body);
     //首页初始化
     @POST("app_api/ceramics/homepage.php")
-    Observable<BaseResponse<HomepageBean>> homepage(@Body RequestBody body);
+    Observable<BaseResponse<FaxianBean>> homepage(@Body RequestBody body);
     //直播列表
     @POST("app_api/ceramics/broadcast_list.php")
     Observable<BaseResponse<List<BroadcastBean>>> broadcastlist(@Body RequestBody body);
@@ -104,10 +105,10 @@ public interface HttpService {
     @POST("app_api/ceramics/master_list.php")
     Observable<BaseResponse<List<MasterItemBean>>> master_list(@Body RequestBody body);
     //购物车
-    @POST("app_api/ceramics/shoppingcart.php")
+    @POST("back/test/api/shopping/shoppingcart.php")
     Observable<BaseResponse<List<GoodsBean>>> getGoods(@Body RequestBody body);
     //删除购物车
-    @POST("app_api/home_page/cart_delete.php")
+    @POST("back/test/api/shopping/cart_delete.php")
     Observable<BaseResponse<String[]>> deleteCart(@Body RequestBody body);
     //微博登陆验证
     @GET("users/show.json")
@@ -372,26 +373,29 @@ public interface HttpService {
     //获取分类
     @POST("app_api/home_page/getfenlei.php")
     Observable<BaseResponse<List<ResultBean>>>getFenleiResult(@Body RequestBody body);
-
     //添加收货地址
-    @POST("app_api/home_page/add_address.php")
+    @POST("back/test/api/address/add_address.php")
     Observable<BaseResponse<String[]>> addAddress(@Body RequestBody body);
-
     //编辑收货地址
-    @POST("app_api/home_page/edit_address.php")
+    @POST("back/test/api/address/edit_address.php")
     Observable<BaseResponse<String[]>> editAddress(@Body RequestBody body);
     //收货地址列表初始化
     @POST("back/test/api/address/address.php")
     Observable<BaseResponse<List<AddressManageBean>>> getAddressData(@Body RequestBody body);
-
     //设置默认地址
-    @POST("app_api/home_page/default_address.php")
+    @POST("back/test/api/address/default_address.php")
     Observable<BaseResponse<String[]>> setDefaultAddress(@Body RequestBody body);
-
     //删除地址
-    @POST("app_api/home_page/delete_address.php")
+    @POST("back/test/api/address/delete_address.php")
     Observable<BaseResponse<String[]>> deleteAddress(@Body RequestBody body);
     //获取合作机构列表
     @POST("app_api/home_page/partners.php")
     Observable<BaseResponse<List<CooperationListBean>>> getCooperationList(@Body RequestBody body);
+
+    //自动登录
+    @POST("back/test/api/app_login/auto_login.php")
+    Observable<BaseResponse<LoginBean>> autoLogin(@Body RequestBody body);
+    //刷新token
+    @POST("app_api/app_login/refresh_token.php")
+    Observable<BaseResponse<TokenBean>> refreshToken(@Body RequestBody body);
 }

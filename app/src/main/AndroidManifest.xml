@@ -35,10 +35,12 @@
 
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/FullScreen">
+            android:theme="@style/FullScreen"/>
+        <activity android:name=".login.SplashActivity"
+            android:taskAffinity="com.taijie.yuanyu"
+            android:theme="@style/WelcomeStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

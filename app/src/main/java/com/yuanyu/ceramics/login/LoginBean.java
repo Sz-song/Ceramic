@@ -7,6 +7,12 @@ public class LoginBean {
     private String peopleflag;
     private String password;
     private String mobile;
+    private String token;
+    private String refresh_token;
+
+    public String getToken() {
+        return token;
+    }
 
     public String getMobile() {
         return mobile;
@@ -30,5 +36,9 @@ public class LoginBean {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getRefresh_token() {
+        return refresh_token;
     }
 }

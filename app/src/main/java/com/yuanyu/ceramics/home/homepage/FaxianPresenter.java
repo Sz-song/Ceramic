@@ -20,10 +20,10 @@ public class FaxianPresenter extends BasePresenter<FaxianConstract.IFaxianView> 
         model.initData(useraccountid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<HomepageBean>())
-                .subscribe(new BaseObserver<HomepageBean>() {
+                .compose(new HttpServiceInstance.ErrorTransformer<FaxianBean>())
+                .subscribe(new BaseObserver<FaxianBean>() {
                     @Override
-                    public void onNext(HomepageBean bean) {
+                    public void onNext(FaxianBean bean) {
                         if(view!=null){view.initDataSuccess(bean);}
                     }
                     @Override
