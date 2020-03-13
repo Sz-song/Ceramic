@@ -37,7 +37,6 @@ public class SelectItemModel implements SelectItemConstract.ISelectItemModel {
         Gson gson=new Gson();
         String str=gson.toJson(map);
         RequestBody body=RequestBody.create(MediaType.parse("application/json; charset=utf-8"),str);
-        return null;
-//        return httpService.selectItem(body);
+        return httpService.selectItem(body);
     }
 }

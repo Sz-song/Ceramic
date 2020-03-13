@@ -38,6 +38,8 @@ import com.yuanyu.ceramics.seller.delivery.CourierBean;
 import com.yuanyu.ceramics.seller.delivery.DeliveryBean;
 import com.yuanyu.ceramics.seller.delivery.WaitDeliveryBean;
 import com.yuanyu.ceramics.seller.index.SellerIndexBean;
+import com.yuanyu.ceramics.seller.liveapply.LiveApplyStatusBean;
+import com.yuanyu.ceramics.seller.liveapply.bean.SelectItemBean;
 import com.yuanyu.ceramics.seller.order.ShopOrderBean;
 import com.yuanyu.ceramics.seller.order.detail.ShopOrderDetailBean;
 import com.yuanyu.ceramics.seller.shop_shelve.ShelvingDetailBean;
@@ -87,7 +89,7 @@ public interface HttpService {
     @POST("app_api/ceramics/mine_init.php")
     Observable<BaseResponse<MineBean>> mineinit(@Body RequestBody body);
 //    商家初始化
-    @POST("")
+    @POST("111")
     Observable<BaseResponse<SellerIndexBean>> sellerinit(@Body RequestBody body);
     //获取搜索大师
     @POST("app_api/home_page/search.php")
@@ -349,6 +351,15 @@ public interface HttpService {
     //获取所有快递
     @POST("app_api/shangjia/expresscompany.php")
     Observable<BaseResponse<List<CourierBean>>> getCourierCompany(@Body RequestBody body);
+    //获取商家申请直播状态
+    @POST("app_api/broadcast/liveapplystate.php")
+    Observable<BaseResponse<LiveApplyStatusBean>> getLiveApplyState(@Body RequestBody body);
+    //商家申请直播
+    @POST("app_api/broadcast/insert_live_application.php")
+    Observable<BaseResponse<String[]>> liveApply(@Body RequestBody body);
+    //获取商品列表
+    @POST("app_api/broadcast/selectitem.php")
+    Observable<BaseResponse<SelectItemBean>> selectItem(@Body RequestBody body);
     //商家发货
     @POST("app_api/shangjia/shopdelivery.php")
     Observable<BaseResponse<String>>Delivery(@Body RequestBody body);

@@ -60,8 +60,7 @@ public class LiveApplyModel implements LiveApplyConstract.ILiveApplyModel {
         Gson gson=new Gson();
         String str=gson.toJson(map);
         RequestBody body=RequestBody.create(MediaType.parse("application/json; charset=utf-8"),str);
-//        return httpService.getLiveApplyState(body);
-        return null;
+        return httpService.getLiveApplyState(body);
     }
 
     @Override
@@ -78,7 +77,6 @@ public class LiveApplyModel implements LiveApplyConstract.ILiveApplyModel {
         Gson gson=new Gson();
         String str=gson.toJson(map);
         RequestBody body=RequestBody.create(MediaType.parse("application/json; charset=utf-8"),str);
-        return null;
-//        return httpService.liveApply(body);
+        return httpService.liveApply(body);
     }
 }
