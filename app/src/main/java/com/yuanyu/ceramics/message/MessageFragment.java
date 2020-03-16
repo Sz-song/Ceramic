@@ -65,7 +65,7 @@ public class MessageFragment extends BaseFragment<MessagePresenter> implements M
 
     @Override
     protected void initData() {
-        presenter.initData(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID));
+        presenter.initData();
     }
 
     @Override

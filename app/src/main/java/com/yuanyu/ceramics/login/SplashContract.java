@@ -15,9 +15,11 @@ public interface SplashContract {
         void refreshTokenSuccess(TokenBean bean);
         void autoLoginFail(ExceptionHandler.ResponeThrowable e);
         void refreshTokenFail(ExceptionHandler.ResponeThrowable e);
+        void IMLoginSuccess();
     }
     interface ISplashPresenter {
         void autoLogin(String token);
         void refreshToken(String refresh_token);
+        void IMLogin(String useraccountid,String usersig);
     }
 }

@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.tencent.imsdk.TIMCallBack;
+import com.tencent.imsdk.TIMManager;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
@@ -48,9 +51,9 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
         Sp.putString(this, AppConstant.USER_ACCOUNT_ID,bean.getUseraccountid());
         Sp.putString(this,AppConstant.MOBILE,bean.getMobile());
         Sp.putString(this,AppConstant.TOKEN,bean.getToken());
-        Intent intent=new Intent(this, HomeActivity.class);
-        startActivity(intent);
-        finish();
+        //设置刷新监听
+        L.e("imsdk login");
+        presenter.IMLogin(bean.getUseraccountid(),bean.getUsersig());
     }
 
     @Override
@@ -71,6 +74,13 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
     @Override
     public void refreshTokenFail(ExceptionHandler.ResponeThrowable e) {
         Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void IMLoginSuccess() {
+        Intent intent=new Intent(SplashActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

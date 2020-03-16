@@ -9,13 +9,13 @@ import io.reactivex.Observable;
 
 public interface MessageConstract {
     interface IMessageModel{
-        Observable<BaseResponse<List<MessageBean>>> initData(String useraccountid);
+        Observable<BaseResponse<List<MessageBean>>> initData(List<String> useraccountidList);
     }
     interface IMessageView{
         void initDataSuccess(List<MessageBean> list);
         void initDataFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IMessagePresenter{
-        void initData(String useraccountid);
+        void initData();
     }
 }

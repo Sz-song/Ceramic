@@ -19,7 +19,7 @@ public class MessageModel implements MessageConstract.IMessageModel{
     MessageModel(){ httpService = HttpServiceInstance.getInstance();}
 
     @Override
-    public Observable<BaseResponse<List<MessageBean>>> initData(String useraccountid) {
+    public Observable<BaseResponse<List<MessageBean>>> initData(List<String> useraccountidList) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -29,7 +29,7 @@ public class MessageModel implements MessageConstract.IMessageModel{
         map.put("signature",signature);
         map.put("action","broadcast_list");
         Map data = new HashMap();
-        data.put("useraccountid",useraccountid);
+        data.put("useraccountidlist",useraccountidList);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

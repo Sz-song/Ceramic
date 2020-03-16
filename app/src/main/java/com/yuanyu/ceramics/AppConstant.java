@@ -7,16 +7,13 @@ public class AppConstant {
     public static final String REFRESH_TOKEN = "refresh_token";//30天过期
     public static String BASE_URL="http://132.232.95.104/";
     public static String QQ_APP_ID="1107922776";
-    public static final String ACCOUNT = "account";//用户手机号
     public static final String MOBILE = "mobile";//用户手机号
-    public static final String USER_NAME = "username";//用户昵称
     public static final String PASSWORD = "password";//用户密码
     public static final String SHOP_ID = "shop_id";//店铺id
-    public static final String IS_MERCHANT = "isMerchant";//是否是商家
-    public static final String SHOP_AVATAR = "shop_avatar";//店铺头像
-    public static final String SHOP_NAME = "shop_name";//店铺名称
+
     public static final String USER_ACCOUNT_ID = "useraccountid";//用户ID,用户在数据库索引id
     public static final String WECHAT_APP_ID = "wx4d8c30a755824341";
+    public static final int IM_APP_ID = 1400186194;//腾讯即时聊天app_id
     public static final String SALT = "#j@#*djYUANYU";
     //我的订单
     public static final int ALL = 0;

@@ -9,6 +9,11 @@ public class LoginBean {
     private String mobile;
     private String token;
     private String refresh_token;
+    private String usersig;
+
+    public String getUsersig() {
+        return usersig;
+    }
 
     public String getToken() {
         return token;
