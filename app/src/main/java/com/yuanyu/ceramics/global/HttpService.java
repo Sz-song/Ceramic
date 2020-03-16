@@ -125,7 +125,7 @@ public interface HttpService {
     @POST("app_api/shangjia/seller_getdingzhi.php")
     Observable<BaseResponse<List<MyDingzhiBean>>> getShopDingzhiList(@Body RequestBody body);
     //定制详情
-    @POST("app_api/home_page/dingzhi.php")
+    @POST("back/test/api/dingzhi/dingzhi_detail.php")
     Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(@Body RequestBody body);
     //生成定制保证金(尾款)订单
     @POST("app_api/home_page/generate_dingzhi_orders.php")
@@ -146,10 +146,10 @@ public interface HttpService {
     @POST("app_api/home_page/dingzhi_receive.php")
     Observable<BaseResponse<Boolean>> dingzhiConfirmReceipt(@Body RequestBody body);
     //发布定制需求
-    @POST("app_api/home_page/dingzhi.php")
+    @POST("back/test/api/dingzhi/publishdingzhi.php")
     Observable<BaseResponse<String[]>> publishDingzhi(@Body RequestBody body);
     //获取我的定制
-    @POST("app_api/home_page/dingzhi.php")
+    @POST("back/test/api/dingzhi/getmydingzhi.php")
     Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(@Body RequestBody body);
     //获取遇见大师
     @POST("app_api/master/master_studio_list.php")
