@@ -101,7 +101,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         ButterKnife.bind(this);
         swipe.setRefreshing(false);
         swipe.setColorSchemeResources(R.color.colorPrimary);
-        swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID)));
+        swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID)));
     }
 
 
