@@ -26,7 +26,7 @@ public class MeetMasterModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","master_studio_list");
+        map.put("action","meet_master");
         Map data = new HashMap();
         data.put("page",page);
         data.put("page_size","");

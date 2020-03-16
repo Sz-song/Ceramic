@@ -41,9 +41,7 @@ public class FenleiModel implements FenLeiConstract.IFenleiModel{
         data.put("pagesize",pagesize);
         data.put("fenlei",strings[0]);
         data.put("zhonglei",strings[1]);
-        data.put("pise",strings[2]);
-        data.put("ticai",strings[3]);
-        data.put("chanzhuang",strings[4]);
+        data.put("ticai",strings[2]);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

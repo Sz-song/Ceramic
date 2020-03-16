@@ -7,13 +7,13 @@ import io.reactivex.Observable;
 
 public interface SellerIndexConstract {
     interface IMineModel{
-        Observable<BaseResponse<SellerIndexBean>> initData(String useraccountid);
+        Observable<BaseResponse<SellerIndexBean>> initData(String shopid);
     }
     interface IMineView{
         void initDataSuccess(SellerIndexBean bean);
         void initDataFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IMinePresenter{
-        void initData(String useraccountid);
+        void initData(String shopid);
     }
 }

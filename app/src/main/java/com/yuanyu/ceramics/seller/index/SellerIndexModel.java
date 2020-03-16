@@ -18,7 +18,7 @@ public class SellerIndexModel implements SellerIndexConstract.IMineModel {
     SellerIndexModel(){ httpService = HttpServiceInstance.getInstance();}
 
     @Override
-    public Observable<BaseResponse<SellerIndexBean>> initData(String useraccountid) {
+    public Observable<BaseResponse<SellerIndexBean>> initData(String shopid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -28,7 +28,7 @@ public class SellerIndexModel implements SellerIndexConstract.IMineModel {
         map.put("signature",signature);
         map.put("action","mine_init");
         Map data = new HashMap();
-        data.put("useraccountid",useraccountid);
+        data.put("shopid",shopid);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

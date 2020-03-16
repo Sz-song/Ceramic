@@ -12,8 +12,8 @@ public class SellerIndexPresenter extends BasePresenter<SellerIndexConstract.IMi
     private SellerIndexConstract.IMineModel model;
     SellerIndexPresenter() {model=new SellerIndexModel();}
     @Override
-    public void initData(String useraccountid) {
-                model.initData(useraccountid)
+    public void initData(String shopid) {
+                model.initData(shopid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<SellerIndexBean>())

@@ -87,9 +87,18 @@ public class FenLeiActivity extends BaseActivity<FenLeiPresenter> implements Fen
         recyclerviewClassify.setLayoutManager(new LinearLayoutManager(this));
         classifyAdapter.setPositionClickListener(position -> {
             classifyAdapter.notifyDataSetChanged();
-            if(position==0){presenter.setShowList(showList,listfenlei);}
-            else if(position==1){presenter.setShowList(showList,listzhonglei);}
-            else if(position==2){presenter.setShowList(showList, listshape);}
+            if(position==0){
+                presenter.setShowList(showList,listfenlei);
+                fenleibannar.setImageResource(R.drawable.fenlei01);
+            }
+            else if(position==1){
+                presenter.setShowList(showList,listzhonglei);
+                fenleibannar.setImageResource(R.drawable.fenlei02);
+            }
+            else if(position==2){
+                presenter.setShowList(showList, listshape);
+                fenleibannar.setImageResource(R.drawable.fenlei03);
+            }
             fenleCellAdapter.notifyDataSetChanged();
         });
         presenter.setShowList(showList, listfenlei);

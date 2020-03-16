@@ -36,7 +36,7 @@ public class ReShelveModel implements ReShelveConstract.IReShelveModel {
         Map data = new HashMap();
         data.put("shopid",shop_id);
         data.put("id",id);
-        data.put("ddid","");
+//        data.put("ddid","");
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

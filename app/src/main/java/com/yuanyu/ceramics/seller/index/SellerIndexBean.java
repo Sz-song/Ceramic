@@ -1,14 +1,15 @@
 package com.yuanyu.ceramics.seller.index;
 
 public class SellerIndexBean {
-    private int shopid;
     private String portrait;
     private String name;
     private String introduce; //店铺简介
+    private int nopay; //未支付
+    private int nodeliver;//未发货
+    private int delivered;//已发货
+    private int received;//已收货
+    private int refund;//退款售后
 
-    public int getShopid() {
-        return shopid;
-    }
 
     public String getPortrait() {
         return portrait;
@@ -22,10 +23,34 @@ public class SellerIndexBean {
         return introduce;
     }
 
-    public SellerIndexBean(int shopid, String portrait, String name, String introduce) {
-        this.shopid = shopid;
+    public int getNopay() {
+        return nopay;
+    }
+
+    public int getNodeliver() {
+        return nodeliver;
+    }
+
+    public int getDelivered() {
+        return delivered;
+    }
+
+    public int getReceived() {
+        return received;
+    }
+
+    public int getRefund() {
+        return refund;
+    }
+
+    public SellerIndexBean(String portrait, String name, String introduce, int nopay, int nodeliver, int delivered, int received, int refund) {
         this.portrait = portrait;
         this.name = name;
         this.introduce = introduce;
+        this.nopay = nopay;
+        this.nodeliver = nodeliver;
+        this.delivered = delivered;
+        this.received = received;
+        this.refund = refund;
     }
 }

@@ -59,7 +59,6 @@ public class ShelvingModel implements ShelvingConstract.IShelvingModel{
         data.put("video",bean.getVideo());
         data.put("cover",bean.getVideo_cover());
         data.put("id","");
-        data.put("ddid","");
 //        data.put("dd_price",bean.getDd_price());
         map.put("data",data);
         Gson gson=new Gson();
