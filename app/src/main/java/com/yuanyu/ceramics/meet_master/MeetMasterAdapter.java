@@ -1,6 +1,7 @@
 package com.yuanyu.ceramics.meet_master;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 
 import java.util.List;
 
@@ -51,11 +53,14 @@ public class MeetMasterAdapter extends RecyclerView.Adapter<MeetMasterAdapter.Vi
     //每个布局长啥样
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        GlideApp.with(context).load(BASE_URL+list.get(position).getShop_avatar()).override(200,200).into(holder.avatar);
+        GlideApp.with(context).load(BASE_URL+list.get(position).getShop_avatar()).placeholder(R.drawable.img_default).override(200,200).into(holder.avatar);
         holder.fans.setText(list.get(position).getFansnum()+"粉丝");
         holder.focus.setText(list.get(position).getFocusnum()+"关注");
         holder.name.setText(list.get(position).getShop_name());
         if (!list.get(position).getShop_slogan().equals("")) holder.intro.setText(list.get(position).getShop_slogan());
+        holder.consult.setOnClickListener(view -> {
+            PersonalIndexActivity.actionStart(context,list.get(position).getUseraccountid());
+        });
     }
 
     //加载多少个布局

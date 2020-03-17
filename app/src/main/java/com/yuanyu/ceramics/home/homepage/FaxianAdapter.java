@@ -124,7 +124,7 @@ public class FaxianAdapter extends RecyclerView.Adapter {
             ((ViewHolder1) holder).slogan.setText(list.get(position - 1).getIntroduce());
             ((ViewHolder1) holder).itemName.setText(list.get(position-1).getItem_name());
             ((ViewHolder1) holder).itemPrice.setText("¥"+list.get(position-1).getPrice());
-            GlideApp.with(context).load(BASE_URL + list.get(position - 1).getProtrait()).override(50, 50).into(((ViewHolder1) holder).avatar);
+            GlideApp.with(context).load(BASE_URL + list.get(position - 1).getProtrait()).placeholder(R.drawable.img_default).override(50, 50).into(((ViewHolder1) holder).avatar);
             ((ViewHolder1) holder).avatar.setOnClickListener(v -> PersonalIndexActivity.actionStart(context,list.get(position-1).getUseraccountid()));
             switch (list.get(position - 1).getImages().size()) {
                 case 0:

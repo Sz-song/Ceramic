@@ -80,6 +80,13 @@ public class AddressManageAdapter extends RecyclerView.Adapter<AddressManageAdap
                 onDefaultClickListener.callback(position);
             }
         });
+        holder.checkbox.setOnClickListener(view -> {
+            if (list.get(position).getIsdefault() == 1) {
+                holder.checkbox.setChecked(true);
+            }else{
+                onDefaultClickListener.callback(position);
+            }
+        });
         holder.delete.setOnClickListener(view -> {
             DeleteDialog dialog=new DeleteDialog(context);
             dialog.setTitle("确定删除地址吗？");

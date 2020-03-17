@@ -36,7 +36,7 @@
         android:ellipsize="end"
         android:textSize="13sp"
         android:layout_below="@id/name"
-        android:text="和田玉专营，传承手艺"/>
+        android:text="青花瓷专营，传承手艺"/>
     <ImageView
         android:id="@+id/img1"
         android:layout_width="200dp"
@@ -89,6 +89,7 @@
             android:layout_alignParentEnd="true"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textColor="@color/blackLight"/>
+            android:textSize="17sp"
+            android:textColor="@color/colorPrimary"/>
     </RelativeLayout>
 </RelativeLayout>

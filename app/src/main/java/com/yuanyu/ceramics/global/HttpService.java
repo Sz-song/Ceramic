@@ -78,7 +78,7 @@ public interface HttpService {
     @POST("app_api/third_login.php")
     Observable<BaseResponse<LoginBean>> thirdLogin(@Body RequestBody body);
     //首页初始化
-    @POST("app_api/ceramics/homepage.php")
+    @POST("back/test/api/homepage/faxian.php")
     Observable<BaseResponse<FaxianBean>> homepage(@Body RequestBody body);
     //直播列表
     @POST("app_api/ceramics/broadcast_list.php")
@@ -152,7 +152,7 @@ public interface HttpService {
     @POST("back/test/api/dingzhi/getmydingzhi.php")
     Observable<BaseResponse<List<MyDingzhiBean>>> getMyDingzhi(@Body RequestBody body);
     //获取遇见大师
-    @POST("app_api/master/master_studio_list.php")
+    @POST("back/test/api/master/meet_master.php")
     Observable<BaseResponse<List<MeetMasterBean>>> getMasterStudio(@Body RequestBody body);
     //获取指定大师
     @POST("app_api/home_page/dingzhi.php")
@@ -389,7 +389,7 @@ public interface HttpService {
     @POST("back/test/api/address/delete_address.php")
     Observable<BaseResponse<String[]>> deleteAddress(@Body RequestBody body);
     //获取合作机构列表
-    @POST("app_api/home_page/partners.php")
+    @POST("back/test/api/homepage/partners.php")
     Observable<BaseResponse<List<CooperationListBean>>> getCooperationList(@Body RequestBody body);
 
     //自动登录

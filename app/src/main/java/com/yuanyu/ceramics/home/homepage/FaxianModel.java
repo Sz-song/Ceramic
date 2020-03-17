@@ -27,7 +27,7 @@ public class FaxianModel implements FaxianConstract.IFaxianModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","homepage");
+        map.put("action","faxian");
         Map data = new HashMap();
         data.put("useraccountid",useraccountid);
         map.put("data",data);
