@@ -27,7 +27,7 @@ public class MessageModel implements MessageConstract.IMessageModel{
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","broadcast_list");
+        map.put("action","get_userinfo");
         Map data = new HashMap();
         data.put("useraccountidlist",useraccountidList);
         map.put("data",data);

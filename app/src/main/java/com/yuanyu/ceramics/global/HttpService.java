@@ -84,7 +84,7 @@ public interface HttpService {
     @POST("app_api/ceramics/broadcast_list.php")
     Observable<BaseResponse<List<BroadcastBean>>> broadcastlist(@Body RequestBody body);
     //直播列表
-    @POST("app_api/ceramics/message_list.php")
+    @POST("back/test/api/homepage/get_userinfo.php")
     Observable<BaseResponse<List<MessageBean>>> messagelist(@Body RequestBody body);
     //吾家初始化
     @POST("app_api/ceramics/mine_init.php")

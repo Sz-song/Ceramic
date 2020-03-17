@@ -35,29 +35,31 @@
 
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/FullScreen">
+            android:theme="@style/FullScreen"/>
+        <activity android:name=".login.SplashActivity"
+            android:taskAffinity="com.taijie.yuanyu"
+            android:theme="@style/WelcomeStyle">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.ResetPasswordActivity" />
+        <activity android:name=".home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.SplashActivity"
-            android:taskAffinity="com.taijie.yuanyu"
-            android:theme="@style/WelcomeStyle">
-        </activity>
-        <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.ResetPasswordActivity" />
-        <activity android:name=".home.HomeActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="1107922776" />
             </intent-filter>
         </activity>
@@ -118,6 +120,7 @@
         <activity android:name=".center_circle.release.GetFriendsActivity" />
         <activity android:name=".center_circle.release.DynamicTypeActivity" />
         <activity android:name=".center_circle.release.ReleaseArticleActivity" />
+        <activity android:name=".chat.ChatActivity" android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>
 
 </manifest>

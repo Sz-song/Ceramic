@@ -89,7 +89,6 @@
             android:layout_alignParentEnd="true"
             android:maxLines="1"
             android:ellipsize="end"
-            android:textSize="17sp"
             android:textColor="@color/colorPrimary"/>
     </RelativeLayout>
 </RelativeLayout>

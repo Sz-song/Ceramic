@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white_drak"
+    android:background="@color/background_gray"
     tools:context=".broadcast.BroadcastFragment">
     <ImageView
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:background="@color/transparent">
             <View
                 android:layout_width="match_parent"
-                android:background="@color/white"
+                android:background="@color/background_gray"
                 android:layout_gravity="bottom"
                 android:layout_height="45dp"/>
             <LinearLayout

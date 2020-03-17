@@ -17,6 +17,20 @@ public class TimeUtils {
             return "";
         }
     }
+
+
+    public static String CountTime(long timestr) {
+        try {
+            Date date = new Date(timestr);
+            if (date.getMinutes() > 9) {
+                return ((1900 + date.getYear()) + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());
+            } else {
+                return ((1900 + date.getYear()) + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":0" + date.getMinutes());
+            }
+        } catch (Exception e) {
+            return "";
+        }
+    }
     //订单剩余时间
     public static String OrderTimeRemain(String createtime,String systemTime) {
         try {

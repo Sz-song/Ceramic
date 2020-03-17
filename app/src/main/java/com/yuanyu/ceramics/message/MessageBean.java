@@ -1,24 +1,49 @@
 package com.yuanyu.ceramics.message;
 
 public class MessageBean {
+    private String  useraccountid;
     private String  icon;
-    private String  title;
-    private String  time;
+    private String  nickname;
+    private long  time;
     private String  lastMsg;
+    private long unreadnum;
+
+
+    public String getUseraccountid() {
+        return useraccountid;
+    }
+
+    public long getUnreadnum() {
+        return unreadnum;
+    }
+
+    public void setUnreadnum(long unreadnum) {
+        this.unreadnum = unreadnum;
+    }
 
     public String getIcon() {
         return icon;
     }
 
-    public String getTitle() {
-        return title;
+    public String getNickname() {
+        return nickname;
     }
 
-    public String getTime() {
-        return time;
-    }
+
 
     public String getLastMsg() {
         return lastMsg;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public void setLastMsg(String lastMsg) {
+        this.lastMsg = lastMsg;
     }
 }

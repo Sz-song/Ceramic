@@ -10,7 +10,10 @@ import android.widget.TextView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.utils.TimeUtils;
+
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,13 +38,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(list.get(position).getTitle());
-        holder.time.setText(list.get(position).getTime());
+        holder.nickname.setText(list.get(position).getNickname());
+        holder.time.setText(TimeUtils.CountTime(list.get(position).getTime()));
         holder.lastMsg.setText(list.get(position).getLastMsg());
         GlideApp.with(context)
                 .load(BASE_URL+list.get(position).getIcon())
                 .placeholder(R.drawable.img_default)
                 .into(holder.conversationIcon);
+        holder.itemView.setOnClickListener(v -> ChatActivity.navToChat(context,list.get(position).getUseraccountid()));
     }
 
     @Override
@@ -52,8 +56,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     static class ViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.conversation_icon)
         RoundedImageView conversationIcon;
-        @BindView(R.id.title)
-        TextView title;
+        @BindView(R.id.nickname)
+        TextView nickname;
         @BindView(R.id.time)
         TextView time;
         @BindView(R.id.last_msg)

@@ -151,9 +151,9 @@ public class FaxianAdapter extends RecyclerView.Adapter {
                     ((ViewHolder1) holder).img3.setOnClickListener(null);
                     break;
                 case 3:
-                    GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(0)).override(200, 200).into(((ViewHolder1) holder).img1);
-                    GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(1)).override(100, 100).into(((ViewHolder1) holder).img2);
-                    GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(2)).override(100, 100).into(((ViewHolder1) holder).img3);
+                    GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(0)).placeholder(R.drawable.img_default).override(200, 200).into(((ViewHolder1) holder).img1);
+                    GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(1)).placeholder(R.drawable.img_default).override(100, 100).into(((ViewHolder1) holder).img2);
+                    GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(2)).placeholder(R.drawable.img_default).override(100, 100).into(((ViewHolder1) holder).img3);
                     ((ViewHolder1) holder).img1.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
                     ((ViewHolder1) holder).img2.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
                     ((ViewHolder1) holder).img3.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
