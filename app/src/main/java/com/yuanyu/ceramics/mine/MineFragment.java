@@ -1,11 +1,9 @@
 package com.yuanyu.ceramics.mine;
 
 import android.content.Intent;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,8 +24,6 @@ import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
-import com.yuanyu.ceramics.release_popwindow.ReleasePopWindow;
-import com.yuanyu.ceramics.seller.index.SellerIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -103,6 +99,16 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     LinearLayout dashiattesta;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
+    @BindView(R.id.daifukuan_count)
+    TextView daifukuanCount;
+    @BindView(R.id.daifahuo_count)
+    TextView daifahuoCount;
+    @BindView(R.id.daishouhuo_count)
+    TextView daishouhuoCount;
+    @BindView(R.id.daipingjia_count)
+    TextView daipingjiaCount;
+    @BindView(R.id.refund_count)
+    TextView refundCount;
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -138,6 +144,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         focusNum.setText(bean.getFocus_num());
         dynamicNum.setText(bean.getDongtai_num());
         introduce.setText(bean.getIntroduce());
+        presenter.setCount(daifukuanCount,bean.getDaifukuan());
+        presenter.setCount(daifahuoCount,bean.getDaifahuo());
+        presenter.setCount(daishouhuoCount,bean.getDaishouhuo());
+        presenter.setCount(daipingjiaCount,bean.getDaipingjia());
+        presenter.setCount(refundCount,bean.getTuikuan());
     }
 
     @Override
