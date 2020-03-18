@@ -6,21 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    tools:context=".broadcast.BroadcastFragment">
+    tools:context=".broadcast.BroadcastFragment"
+    android:id="@+id/main_content">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp"
         android:background="@color/colorPrimary"
         android:theme="@style/AppTheme.AppBarOverlay">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:contentInsetStart="0dp"
-            android:paddingTop="21dp">
+            android:paddingTop="21dp"
+            android:layout_weight="1">
             <com.androidkun.xtablayout.XTabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
@@ -28,7 +34,6 @@
                 app:xTabTextSize="16sp"
                 app:xTabSelectedTextSize="18sp"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
                 app:xTabIndicatorColor="@color/white"
                 app:xTabIndicatorHeight="3dp"
                 app:xTabMode="fixed"
@@ -38,7 +43,16 @@
                 app:xTabTextColor="@color/dividerGray">
             </com.androidkun.xtablayout.XTabLayout>
         </androidx.appcompat.widget.Toolbar>
-
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/torelease"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="15dp"
+            app:elevation="2dp"
+            android:src="@drawable/releasebtn"
+            android:layout_marginBottom="10dp"/>
+        </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"

@@ -8,6 +8,13 @@ public class MineBean {
     private String focus_num;
     private String dongtai_num;
     private String introduce;//个人简介
+    private int dashi_status;//0：不是大师；1：是大师；2：审核中
+    private int merchant_status;//0：不是商家；1：是商家；2：审核中
+    private int daifukuan; //待付款数量
+    private int daifahuo; //待发货数量
+    private int daishouhuo; //待收货数量
+    private int daipingjia; //待评价数量
+    private int tuikuan; //退款数量
 
     public int getId() {
         return id;
@@ -35,5 +42,33 @@ public class MineBean {
 
     public String getIntroduce() {
         return introduce;
+    }
+
+    public int getDashi_status() {
+        return dashi_status;
+    }
+
+    public int getMerchant_status() {
+        return merchant_status;
+    }
+
+    public int getDaifukuan() {
+        return daifukuan;
+    }
+
+    public int getDaifahuo() {
+        return daifahuo;
+    }
+
+    public int getDaishouhuo() {
+        return daishouhuo;
+    }
+
+    public int getDaipingjia() {
+        return daipingjia;
+    }
+
+    public int getTuikuan() {
+        return tuikuan;
     }
 }

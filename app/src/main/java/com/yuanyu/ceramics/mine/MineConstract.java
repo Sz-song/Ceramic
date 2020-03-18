@@ -1,5 +1,7 @@
 package com.yuanyu.ceramics.mine;
 
+import android.widget.TextView;
+
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 
@@ -15,6 +17,7 @@ public interface MineConstract {
     }
     interface IMinePresenter{
         void initData(String useraccountid);
+        void setCount(TextView view, int count);
     }
 
 }

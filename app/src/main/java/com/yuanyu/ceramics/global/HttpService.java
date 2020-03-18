@@ -87,7 +87,7 @@ public interface HttpService {
     @POST("back/test/api/homepage/get_userinfo.php")
     Observable<BaseResponse<List<MessageBean>>> messagelist(@Body RequestBody body);
     //吾家初始化
-    @POST("app_api/ceramics/mine_init.php")
+    @POST("back/test/api/mine/mineindex.php")
     Observable<BaseResponse<MineBean>> mineinit(@Body RequestBody body);
 //    商家初始化
     @POST("111")
@@ -173,13 +173,13 @@ public interface HttpService {
     @POST("app_api/yuba/dianzan.php")
     Observable<BaseResponse<String []>>dianZan(@Body RequestBody body);
     //查看个人资料
-    @POST("app_api/wujia/view_userinfo.php")
+    @POST("back/test/api/mine/view_userinfo.php")
     Observable<BaseResponse<MyInfoBean>>viewUserInfo(@Body RequestBody body);
     //询问昵称是否占用
     @POST("app_api/wujia/view_username.php")
     Observable<BaseResponse<Boolean>>viewUsername(@Body RequestBody body);
     //修改个人资料
-    @POST("app_api/wujia/edit_userinfo.php")
+    @POST("back/test/api/mine/edit_userinfo.php")
     Observable<BaseResponse<String[]>>editUserinfo(@Body RequestBody body);
 
     //发布动态
@@ -269,7 +269,7 @@ public interface HttpService {
     @POST("app_api/wujia/add_refund_logistics.php")
     Observable<BaseResponse<List<FocusAndFansBean>>> getFocusandFansList(@Body RequestBody body);
     //申请入驻
-    @POST("app_api/home_page/applyenter.php")
+    @POST("back/test/api/mine/applyenter.php")
     Observable<BaseResponse<String[]>> ApplyEnter(@Body RequestBody body);
     //移除黑名单
     @POST("app_api/home_page/remove_blacklist.php")
@@ -294,7 +294,7 @@ public interface HttpService {
     @POST("app_api/commodity/item_detail.php")
     Observable<BaseResponse<ItemDetailBean>> itemDetail(@Body RequestBody body);
     //添加购物车
-    @POST("app_api/home_page/cart_add.php")
+    @POST("back/test/api/shopping/cart_add.php")
     Observable<BaseResponse<String[]>> addCart(@Body RequestBody body);
     //加载更多广告
     @POST("app_api/home_page/loadmoreads.php")

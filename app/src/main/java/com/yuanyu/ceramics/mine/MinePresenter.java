@@ -1,5 +1,8 @@
 package com.yuanyu.ceramics.mine;
 
+import android.view.View;
+import android.widget.TextView;
+
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
@@ -28,5 +31,17 @@ public class MinePresenter extends BasePresenter<MineConstract.IMineView> implem
                         if(view!=null){view.initDataFail(e);}
                     }
                 });
+    }
+    @Override
+    public void setCount(TextView view, int count) {
+        if (count <1) view.setVisibility(View.GONE);
+        else if (count >=99){
+            view.setVisibility(View.VISIBLE);
+            view.setText("99");
+        }
+        else {
+            view.setVisibility(View.VISIBLE);
+            view.setText(count+"");
+        }
     }
 }

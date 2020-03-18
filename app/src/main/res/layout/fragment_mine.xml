@@ -246,6 +246,20 @@
                             android:textSize="11sp"
                             android:text="@string/wait_pay"
                             tools:ignore="SmallSp" />
+                        <TextView
+                            android:id="@+id/daifukuan_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/daifukuan_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
+                            tools:ignore="SmallSp" />
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/daifahuo"
@@ -269,6 +283,20 @@
                             android:text="@string/wait_delivery"
                             android:textColor="@color/blackLight"
                             tools:ignore="SmallSp" />
+                        <TextView
+                            android:id="@+id/daifahuo_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/daifahuo_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
+                            tools:ignore="SmallSp" />
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/daishouhuo"
@@ -291,6 +319,20 @@
                             android:textSize="11sp"
                             android:text="@string/wait_take_delivery"
                             android:textColor="@color/blackLight"
+                            tools:ignore="SmallSp" />
+                        <TextView
+                            android:id="@+id/daishouhuo_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/daishouhuo_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
                             tools:ignore="SmallSp" />
                     </RelativeLayout>
                     <RelativeLayout
@@ -316,6 +358,20 @@
                             android:text="@string/wait_pingjia"
                             android:textColor="@color/blackLight"
                             tools:ignore="SmallSp" />
+                        <TextView
+                            android:id="@+id/daipingjia_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/daipingjia_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
+                            tools:ignore="SmallSp" />
                     </RelativeLayout>
                     <RelativeLayout
                         android:id="@+id/refund"
@@ -339,6 +395,20 @@
                             android:text="@string/refund"
                             android:textColor="@color/blackLight"
                             android:maxLines="1"
+                            tools:ignore="SmallSp" />
+                        <TextView
+                            android:id="@+id/refund_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/refund_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
                             tools:ignore="SmallSp" />
                     </RelativeLayout>
                 </LinearLayout>
