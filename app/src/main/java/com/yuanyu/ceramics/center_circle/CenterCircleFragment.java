@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
 import com.yuanyu.ceramics.R;
-import com.yuanyu.ceramics.release_popwindow.ReleasePopWindow;
+import com.yuanyu.ceramics.center_circle.release.ReleasePopWindow;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
