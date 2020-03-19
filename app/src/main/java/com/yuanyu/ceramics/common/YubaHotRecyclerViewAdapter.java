@@ -131,7 +131,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
                 ((ViewHolder0) holder).masterCertification.setVisibility(View.GONE);
             }
             if (!list.get(position).isIsfocus()) {
-                if(list.get(position).getUseraccountid().equals(Sp.getInt(context,AppConstant.USER_ACCOUNT_ID))){
+                if(list.get(position).getUseraccountid().equals(Sp.getString(context,AppConstant.USER_ACCOUNT_ID))){
                     ((ViewHolder0) holder).isfocus.setVisibility(View.GONE);
                 }else {
                     ((ViewHolder0) holder).isfocus.setVisibility(View.VISIBLE);
@@ -201,7 +201,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
 //                context.startActivity(intent);
             });
             if (!list.get(position).isIsfocus()) {
-                if(list.get(position).getUseraccountid().equals(Sp.getInt(context,AppConstant.USER_ACCOUNT_ID))){
+                if(list.get(position).getUseraccountid().equals(Sp.getString(context,AppConstant.USER_ACCOUNT_ID))){
                     ((ViewHolder1) holder).isfocus.setVisibility(View.GONE);
                 }else {
                     ((ViewHolder1) holder).isfocus.setVisibility(View.VISIBLE);
@@ -233,7 +233,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
             ((ViewHolder2) holder).introduceTxt.setMovementMethod(LinkMovementMethod.getInstance());
             ((ViewHolder2) holder).introduceTxt.setText(parseTxt(list.get(position).getContent()));
             if (!list.get(position).isIsfocus()) {
-                if(list.get(position).getUseraccountid().equals(Sp.getInt(context,AppConstant.USER_ACCOUNT_ID))){
+                if(list.get(position).getUseraccountid().equals(Sp.getString(context,AppConstant.USER_ACCOUNT_ID))){
                     ((ViewHolder2) holder).isfocus.setVisibility(View.GONE);
                 }else {
                     ((ViewHolder2) holder).isfocus.setVisibility(View.VISIBLE);
@@ -285,7 +285,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
             SquareImageViewAdapter adapter=new SquareImageViewAdapter(context,list.get(position).getPicture_list());
             ((ViewHolder3) holder).recyclerview.setAdapter(adapter);
             if (!list.get(position).isIsfocus()) {
-                if(list.get(position).getUseraccountid().equals(Sp.getInt(context,AppConstant.USER_ACCOUNT_ID))){
+                if(list.get(position).getUseraccountid().equals(Sp.getString(context,AppConstant.USER_ACCOUNT_ID))){
                     ((ViewHolder3) holder).isfocus.setVisibility(View.GONE);
                 }else {((ViewHolder3) holder).isfocus.setVisibility(View.VISIBLE);}
             } else {

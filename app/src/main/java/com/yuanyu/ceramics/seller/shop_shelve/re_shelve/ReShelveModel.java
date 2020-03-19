@@ -93,8 +93,8 @@ public class ReShelveModel implements ReShelveConstract.IReShelveModel {
         data.put("video",bean.getVideo());
         data.put("cover",bean.getVideo_cover());
         data.put("id",bean.getId());
-        data.put("ddid",bean.getDd_id());
-        data.put("dd_price",bean.getDd_price());
+//        data.put("ddid",bean.getDd_id());
+//        data.put("dd_price",bean.getDd_price());
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

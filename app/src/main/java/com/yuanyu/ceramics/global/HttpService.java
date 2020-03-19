@@ -155,10 +155,10 @@ public interface HttpService {
     @POST("back/test/api/master/meet_master.php")
     Observable<BaseResponse<List<MeetMasterBean>>> getMasterStudio(@Body RequestBody body);
     //获取指定大师
-    @POST("app_api/home_page/dingzhi.php")
+    @POST("back/test/api/dingzhi/getmasterorshop.php")
     Observable<BaseResponse<List<DashiCellBean>>> ChooseDashi(@Body RequestBody body);
     //个人主页初始化
-    @POST("app_api/yuba/personal_index.php")
+    @POST("back/test/api/quan/personal_index.php")
     Observable<BaseResponse<PersonalIndexBean>> PersonalIndex(@Body RequestBody body);
     //关注与取关
     @POST("app_api/yuba/focusandchancel_new.php")
@@ -183,13 +183,13 @@ public interface HttpService {
     Observable<BaseResponse<String[]>>editUserinfo(@Body RequestBody body);
 
     //发布动态
-    @POST("app_api/yuba/releasedynamic.php")
+    @POST("back/test/api/quan/releasedynamic.php")
     Observable<BaseResponse<Boolean>>ReleaseDynamic(@Body RequestBody body);
     //获取好友列表
-    @POST("app_api/grounding/getfriends.php")
+    @POST("back/test/api/quan/getfriends.php")
     Observable<BaseResponse<List<FriendBean>>>getFriends(@Body RequestBody body);
     //发布文章
-    @POST("app_api/yuba/releasearticle.php")
+    @POST("back/test/api/quan/releasedynamic.php")
     Observable<BaseResponse<Boolean>>ReleaseArticle(@Body RequestBody body);
 
     //评论
@@ -226,7 +226,7 @@ public interface HttpService {
     @POST("app_api/shangjia/shopcommodity.php")
     Observable<BaseResponse<List<ShopGoodsBean>>> getShopCommodity(@Body RequestBody body);
     //广场动态和文章
-    @POST("app_api/yuba/square_dynamic_article.php")
+    @POST("back/test/api/quan/square_dynamic_article.php")
     Observable<BaseResponse<List<DynamicBean>>> getSquareDynamicArticle(@Body RequestBody body);
     //订单详情
     @POST("app_api/wujia/ordermoremsg.php")
@@ -319,7 +319,7 @@ public interface HttpService {
     Observable<BaseResponse<Boolean>> ShopChangeIntroduce(@Body RequestBody body);
 
     //商品上架接口
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("back/test/api/shangjia/shangjiaapply.php")
     Observable<BaseResponse<String[]>>Shelve(@Body RequestBody body);
     //上传视频
     @POST("app_api/home_page/loadmoreads.php")
