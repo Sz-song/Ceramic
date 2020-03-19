@@ -216,6 +216,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
                 focus.setText("+ 关注");
             }
             if (userid == useraccountid) {//自己进入自己主页
+
                 if (bean.getShopid() != null && bean.getShopid().length() > 0) {
                     bottomRelat.setVisibility(View.VISIBLE);
                     CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomRelat.getLayoutParams();
