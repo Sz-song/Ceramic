@@ -27,6 +27,7 @@ import com.yuanyu.ceramics.master.MasterItemBean;
 import com.yuanyu.ceramics.meet_master.MeetMasterBean;
 import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
+import com.yuanyu.ceramics.mine.my_collect.MyCollectBean;
 import com.yuanyu.ceramics.mine.systemsetting.BlackListBean;
 import com.yuanyu.ceramics.myinfo.MyInfoBean;
 import com.yuanyu.ceramics.order.MyOrderFragmentBean;
@@ -402,4 +403,7 @@ public interface HttpService {
     //获取聊天对象信息
     @POST("back/test/api/homepage/userinfo.php")
     Observable<BaseResponse<ChatBean>> getChaterInfo(@Body RequestBody body);
+    //获取我的收藏
+    @POST("back/test/api/homepage/userinfo.php")
+    Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(@Body RequestBody body);
 }

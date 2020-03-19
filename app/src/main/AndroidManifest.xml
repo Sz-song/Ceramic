@@ -120,6 +120,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".mine.my_collect.MyCollectActivity" />
     </application>
 
 </manifest>
