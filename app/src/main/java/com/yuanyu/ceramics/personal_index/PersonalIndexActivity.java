@@ -12,6 +12,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -173,6 +174,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
         useraccountid = Sp.getString(this, "useraccountid");
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
+        Log.d("PersonalIndexActivity", "------------------userid"+userid);
         loaddialog = new LoadingDialog(this);
         loaddialog.show();
         presenter.getPersonalIndexData(useraccountid, userid);
@@ -190,7 +192,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
         String focus_num = bean.getFocus_num();
         GlideApp.with(PersonalIndexActivity.this)
                 .load(BASE_URL + bean.getPortrait())
-                .placeholder(R.drawable.img_default)
+                .placeholder(R.drawable.logo_default)
                 .into(titleImage);
         title.setText(bean.getName());
         toolbarTitle.setText(bean.getName() + "的主页");
@@ -200,7 +202,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
 //            masterUser.setVisibility(View.GONE);
             GlideApp.with(PersonalIndexActivity.this)
                     .load(BASE_URL + bean.getPortrait())
-                    .placeholder(R.drawable.img_default)
+                    .placeholder(R.drawable.logo_default)
                     .into(portrait);
             titleImage.setVisibility(View.GONE);
             toolbarTitle.setVisibility(View.VISIBLE);
@@ -251,7 +253,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
             titleRelat.setVisibility(View.GONE);
 //            GlideApp.with(PersonalIndexActivity.this)
 //                    .load(BASE_URL + bean.getPortrait())
-//                    .placeholder(R.drawable.img_default)
+//                    .placeholder(R.drawable.logo_default)
 //                    .into(masterPortrait);
 //            if (bean.getVideo().length() > 3) {
 //                videoMaster.setVisibility(View.VISIBLE);
@@ -259,7 +261,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
 //                videoMaster.setUp(BASE_URL + bean.getVideo(), "", Jzvd.SCREEN_NORMAL);
 //                GlideApp.with(this)
 //                        .load(BASE_URL + bean.getCover())
-//                        .placeholder(R.drawable.img_default)
+//                        .placeholder(R.drawable.logo_default)
 //                        .override(300, 300)
 //                        .into(videoMaster.thumbImageView);
 //            } else {
@@ -267,7 +269,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
 //                bgMaster.setVisibility(View.VISIBLE);
 //                GlideApp.with(this)
 //                        .load(BASE_URL + urlimage)
-//                        .placeholder(R.drawable.img_default)
+//                        .placeholder(R.drawable.logo_default)
 //                        .override(300, 300)
 //                        .into(bgMaster);
 //            }
@@ -530,7 +532,7 @@ public void onViewClicked(View view) {
                 urlimage = data.getStringExtra("portrait_url");
                 GlideApp.with(PersonalIndexActivity.this)
                         .load(BASE_URL + urlimage)
-                        .placeholder(R.drawable.img_default)
+                        .placeholder(R.drawable.logo_default)
                         .into(titleImage);
             }
         }
