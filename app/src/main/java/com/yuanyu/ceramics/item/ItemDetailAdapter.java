@@ -177,13 +177,13 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
             }
             ((ViewHolder1) holder).enterStore.setOnClickListener(view -> {
                 Intent intent1 = new Intent(context, ShopIndexActivity.class);
-                intent1.putExtra("shopid", bean.getStorebean().getShop_id() + "");
+                intent1.putExtra(AppConstant.SHOP_ID, bean.getStorebean().getShop_id() + "");
                 L.e("shopid is" + bean.getStorebean().getShop_id());
                 context.startActivity(intent1);
             });
             ((ViewHolder1) holder).store.setOnClickListener(view -> {
                 Intent intent = new Intent(context, ShopIndexActivity.class);
-                intent.putExtra("shopid", bean.getStorebean().getShop_id() + "");
+                intent.putExtra(AppConstant.SHOP_ID, bean.getStorebean().getShop_id() + "");
                 L.e("shopid is" + bean.getStorebean().getShop_id());
                 context.startActivity(intent);
             });

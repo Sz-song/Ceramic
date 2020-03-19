@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
@@ -76,12 +77,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         holder.fensiNum.setText(shop.getFensi());
         holder.jindianBtn.setOnClickListener(view -> {
             Intent intent  = new Intent(context, ShopIndexActivity.class);
-            intent.putExtra("shopid",shop.getShopid());
+            intent.putExtra(AppConstant.SHOP_ID,shop.getShopid());
             context.startActivity(intent);
         });
         holder.itemView.setOnClickListener(view -> {
             Intent intent  = new Intent(context, ShopIndexActivity.class);
-            intent.putExtra("shopid",shop.getShopid());
+            intent.putExtra(AppConstant.SHOP_ID,shop.getShopid());
             context.startActivity(intent);
         });
     }

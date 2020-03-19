@@ -37,6 +37,7 @@ import com.tencent.tauth.Tencent;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.common.AppBarStateChangeListener;
 import com.yuanyu.ceramics.common.SharePosterPopupWindow;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.personal_index.PersonalIndexPopupWindow;
@@ -138,7 +139,7 @@ public class ShopIndexActivity extends BaseActivity<ShopIndexPresenter> implemen
         }
         pathList=new ArrayList<>();
         Intent intent = getIntent();
-        shopid = intent.getStringExtra("shopid");
+        shopid = intent.getStringExtra(AppConstant.SHOP_ID);
         ShopIndexFragmentAdapter fragmentAdapter = new ShopIndexFragmentAdapter(getSupportFragmentManager(), shopid);
         viewpager.setAdapter(fragmentAdapter);
         tablelayout.setupWithViewPager(viewpager);
@@ -149,18 +150,18 @@ public class ShopIndexActivity extends BaseActivity<ShopIndexPresenter> implemen
         adapter = new ShopIndexFilterAdapter(this);
         recyclerview.setAdapter(adapter);
         presenter.getShopIndexData(shopid, Sp.getString(this, "useraccountid"));
-//        appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-//            @Override
-//            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-//                if (state == State.EXPANDED) {
-//                    topRelat.setVisibility(View.GONE);
-//                    midRelat.setVisibility(View.VISIBLE);
-//                } else if (state == State.COLLAPSED) {
-//                    topRelat.setVisibility(View.VISIBLE);
-//                    midRelat.setVisibility(View.GONE);
-//                }
-//            }
-//        });
+        appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if (state == State.EXPANDED) {
+                    topRelat.setVisibility(View.GONE);
+                    midRelat.setVisibility(View.VISIBLE);
+                } else if (state == State.COLLAPSED) {
+                    topRelat.setVisibility(View.VISIBLE);
+                    midRelat.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override

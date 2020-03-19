@@ -51,6 +51,8 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
         Sp.putString(this, AppConstant.USER_ACCOUNT_ID,bean.getUseraccountid());
         Sp.putString(this,AppConstant.MOBILE,bean.getMobile());
         Sp.putString(this,AppConstant.TOKEN,bean.getToken());
+        Sp.putString(this, AppConstant.USERNAME,bean.getUsername());
+        Sp.putString(this,AppConstant.PROTRAIT,bean.getLogo());
         //设置刷新监听
         L.e("imsdk login");
         presenter.IMLogin(bean.getUseraccountid(),bean.getUsersig());

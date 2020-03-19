@@ -15,26 +15,27 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="100dp">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/avatar"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:padding="1dp"
-        android:background="@drawable/bo_one"/>
+        android:layout_marginStart="100dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="1dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bo_one"/>
         <TextView
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:textColor="@color/blackLight"
+            android:textColor="@color/white"
             android:textSize="14sp"
-            android:background="@drawable/layer3_r5_p05_00_08"
-            android:layout_toEndOf="@+id/avatar"
+            android:background="@drawable/r5_soblue"
+            android:layout_toStartOf="@+id/avatar"
             android:gravity="center_vertical"
-            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginTop="12dp"
             android:text="这是条消息" />
     </RelativeLayout>

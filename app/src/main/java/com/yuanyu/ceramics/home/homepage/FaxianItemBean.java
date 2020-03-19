@@ -3,8 +3,8 @@ package com.yuanyu.ceramics.home.homepage;
 import java.util.List;
 
 public class FaxianItemBean {
-    private String useraccountid;
-    private String nickname;
+    private String shop_id;
+    private String shop_name;
     private String introduce;
     private String protrait;
     private String price;
@@ -16,12 +16,12 @@ public class FaxianItemBean {
         return protrait;
     }
 
-    public String getUseraccountid() {
-        return useraccountid;
+    public String getShop_id() {
+        return shop_id;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getShop_name() {
+        return shop_name;
     }
 
     public String getIntroduce() {

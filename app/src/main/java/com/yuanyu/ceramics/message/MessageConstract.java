@@ -1,5 +1,6 @@
 package com.yuanyu.ceramics.message;
 
+import com.tencent.imsdk.TIMMessage;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 
@@ -14,6 +15,7 @@ public interface MessageConstract {
     interface IMessageView{
         void initDataSuccess(List<MessageBean> list);
         void initDataFail(ExceptionHandler.ResponeThrowable e);
+        void receiveMessageSuccess();
     }
     interface IMessagePresenter{
         void initData();

@@ -7,15 +7,19 @@ class ChatEntity {
     private String avatar;//发送人头像
     private long time;//发送时间
     private int type;//消息类型
+    private boolean mysend;
 
-    public ChatEntity(String useraccountid, String sendname, String msg, String avatar, long time, int type) {
+    public ChatEntity(String useraccountid, String sendname, String msg, String avatar, long time, int type, boolean mysend) {
         this.useraccountid = useraccountid;
         this.sendname = sendname;
         this.msg = msg;
         this.avatar = avatar;
         this.time = time;
         this.type = type;
+        this.mysend = mysend;
     }
+
+    public boolean isMysend() { return mysend; }
 
     public String getUseraccountid() {
         return useraccountid;

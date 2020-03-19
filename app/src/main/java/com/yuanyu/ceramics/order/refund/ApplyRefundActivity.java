@@ -309,7 +309,7 @@ public class ApplyRefundActivity extends BaseActivity<ApplyRefundPresenter> impl
                 case R.id.shop_portrait:
                 case R.id.shop_name:
                     intent = new Intent(this, ShopIndexActivity.class);
-                    intent.putExtra("shopid", shop_id);
+                    intent.putExtra(AppConstant.SHOP_ID, shop_id);
                     startActivity(intent);
                     break;
                 case R.id.contact_shop:

@@ -43,8 +43,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         holder.lastMsg.setText(list.get(position).getLastMsg());
         GlideApp.with(context)
                 .load(BASE_URL+list.get(position).getIcon())
-                .placeholder(R.drawable.img_default)
+                .placeholder(R.drawable.logo_default)
                 .into(holder.conversationIcon);
+        if(list.get(position).getUnreadnum()>0){
+            holder.count.setVisibility(View.VISIBLE);
+            if(list.get(position).getUnreadnum()>99){
+                holder.count.setText("99+");
+            }else{
+                holder.count.setText(""+list.get(position).getUnreadnum());
+            }
+        }else{
+            holder.count.setVisibility(View.GONE);
+        }
         holder.itemView.setOnClickListener(v -> ChatActivity.navToChat(context,list.get(position).getUseraccountid()));
     }
 
@@ -62,6 +72,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         TextView time;
         @BindView(R.id.last_msg)
         TextView lastMsg;
+        @BindView(R.id.count)
+        TextView count;
 
         ViewHolder(View view) {
             super(view);

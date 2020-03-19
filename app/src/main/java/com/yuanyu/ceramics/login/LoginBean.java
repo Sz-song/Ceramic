@@ -10,6 +10,7 @@ public class LoginBean {
     private String token;
     private String refresh_token;
     private String usersig;
+    private String logo;
 
     public String getUsersig() {
         return usersig;
@@ -45,5 +46,9 @@ public class LoginBean {
 
     public String getRefresh_token() {
         return refresh_token;
+    }
+
+    public String getLogo() {
+        return logo;
     }
 }

@@ -116,7 +116,10 @@
         <activity android:name=".center_circle.release.GetFriendsActivity" />
         <activity android:name=".center_circle.release.DynamicTypeActivity" />
         <activity android:name=".center_circle.release.ReleaseArticleActivity" />
-        <activity android:name=".chat.ChatActivity" android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".chat.ChatActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
     </application>
 
 </manifest>

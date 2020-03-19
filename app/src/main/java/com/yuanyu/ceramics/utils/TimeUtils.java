@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeUtils {
+
     public static String CountTime(String timestr) {
         try {
             long time = Long.parseLong(timestr + "000");
@@ -21,7 +22,7 @@ public class TimeUtils {
 
     public static String CountTime(long timestr) {
         try {
-            Date date = new Date(timestr);
+            Date date = new Date(timestr*1000);
             if (date.getMinutes() > 9) {
                 return ((1900 + date.getYear()) + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());
             } else {

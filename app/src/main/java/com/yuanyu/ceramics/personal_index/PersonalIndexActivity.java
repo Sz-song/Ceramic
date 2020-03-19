@@ -33,6 +33,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.androidkun.xtablayout.XTabLayout;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.sina.weibo.sdk.WbSdk;
+import com.sina.weibo.sdk.auth.AuthInfo;
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.Tencent;
 import com.yuanyu.ceramics.AppConstant;
@@ -148,6 +150,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
             actionBar.setDisplayShowTitleEnabled(false);
         }
         pathList = new ArrayList<>();
+        WbSdk.install(this,new AuthInfo(this, AppConstant.APP_KEY, AppConstant.REDIRECT_URL,AppConstant.SCOPE));
         Jzvd.WIFI_TIP_DIALOG_SHOWED = true;//关闭4G流量监控
 //        appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
 //            @Override

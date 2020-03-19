@@ -1,19 +1,14 @@
 package com.yuanyu.ceramics.login;
 
-import android.content.Intent;
-
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMConnListener;
 import com.tencent.imsdk.TIMConversation;
-import com.tencent.imsdk.TIMGroupEventListener;
-import com.tencent.imsdk.TIMGroupTipsElem;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMRefreshListener;
 import com.tencent.imsdk.TIMUserConfig;
 import com.tencent.imsdk.TIMUserStatusListener;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
-import com.yuanyu.ceramics.home.HomeActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;

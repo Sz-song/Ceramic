@@ -7,6 +7,7 @@ import com.yuanyu.ceramics.bazaar.MasterWorkBean;
 import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
+import com.yuanyu.ceramics.chat.ChatBean;
 import com.yuanyu.ceramics.common.DynamicBean;
 import com.yuanyu.ceramics.common.FriendBean;
 import com.yuanyu.ceramics.common.ResultBean;
@@ -398,4 +399,7 @@ public interface HttpService {
     //刷新token
     @POST("app_api/app_login/refresh_token.php")
     Observable<BaseResponse<TokenBean>> refreshToken(@Body RequestBody body);
+    //获取聊天对象信息
+    @POST("back/test/api/homepage/userinfo.php")
+    Observable<BaseResponse<ChatBean>> getChaterInfo(@Body RequestBody body);
 }

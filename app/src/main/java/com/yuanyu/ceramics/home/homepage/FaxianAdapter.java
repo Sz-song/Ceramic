@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.bazaar.BazaarActivity;
 import com.yuanyu.ceramics.common.BannerBean;
@@ -24,6 +25,7 @@ import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.item.ItemDetailAcitivity;
 import com.yuanyu.ceramics.meet_master.MeetMasterActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
+import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.L;
 
 import java.util.List;
@@ -120,12 +122,16 @@ public class FaxianAdapter extends RecyclerView.Adapter {
             params3.width = width;
             params3.height = width;
             ((ViewHolder1) holder).img3.setLayoutParams(params3);
-            ((ViewHolder1) holder).name.setText(list.get(position - 1).getNickname());
+            ((ViewHolder1) holder).name.setText(list.get(position - 1).getShop_name());
             ((ViewHolder1) holder).slogan.setText(list.get(position - 1).getIntroduce());
             ((ViewHolder1) holder).itemName.setText(list.get(position-1).getItem_name());
             ((ViewHolder1) holder).itemPrice.setText("¥"+list.get(position-1).getPrice());
             GlideApp.with(context).load(BASE_URL + list.get(position - 1).getProtrait()).placeholder(R.drawable.img_default).override(50, 50).into(((ViewHolder1) holder).avatar);
-            ((ViewHolder1) holder).avatar.setOnClickListener(v -> PersonalIndexActivity.actionStart(context,list.get(position-1).getUseraccountid()));
+            ((ViewHolder1) holder).avatar.setOnClickListener(v -> {
+                Intent intent =new Intent(context, ShopIndexActivity.class);
+                intent.putExtra(AppConstant.SHOP_ID,list.get(position).getShop_id());
+                context.startActivity(intent);
+            });
             switch (list.get(position - 1).getImages().size()) {
                 case 0:
                     GlideApp.with(context).load(R.drawable.img_default).override(200, 200).into(((ViewHolder1) holder).img1);

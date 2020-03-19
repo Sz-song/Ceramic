@@ -472,7 +472,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 break;
             case R.id.dianpu:
                 intent = new Intent(this, ShopIndexActivity.class);
-                intent.putExtra("shopid", bean.getStorebean().getShop_id() + "");
+                intent.putExtra(AppConstant.SHOP_ID, bean.getStorebean().getShop_id() + "");
                 startActivity(intent);
                 break;
             case R.id.add_cart:

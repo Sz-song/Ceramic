@@ -76,11 +76,11 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         holder.shopname.setText(mList.get(position).getShop_name());
         holder.shopname.setOnClickListener(v -> {
             Intent intent=new Intent(context, ShopIndexActivity.class);
-            intent.putExtra("shopid",mList.get(position).getShopid());
+            intent.putExtra(AppConstant.SHOP_ID,mList.get(position).getShopid());
         });
         holder.protrait.setOnClickListener(v -> {
             Intent intent=new Intent(context,ShopIndexActivity.class);
-            intent.putExtra("shopid",mList.get(position).getShopid());
+            intent.putExtra(AppConstant.SHOP_ID,mList.get(position).getShopid());
         });
         holder.totalQuantity.setText("共"+mList.get(position).getItem_list().size()+"件商品");
         holder.view.setLayerType(View.LAYER_TYPE_SOFTWARE,null);
