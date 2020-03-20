@@ -404,6 +404,6 @@ public interface HttpService {
     @POST("back/test/api/homepage/userinfo.php")
     Observable<BaseResponse<ChatBean>> getChaterInfo(@Body RequestBody body);
     //获取我的收藏
-    @POST("back/test/api/homepage/userinfo.php")
+    @POST("back/test/api/homepage/my_collect.php")
     Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(@Body RequestBody body);
 }

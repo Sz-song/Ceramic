@@ -7,13 +7,13 @@ import io.reactivex.Observable;
 
 public interface MyCollectConstract {
     interface IMyCollectModel{
-        Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(String useraccountid);
+        Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(String useraccountid,int page);
     }
     interface IMyCollectView{
         void getMyCollectSuccess(List<MyCollectBean> beans);
         void getMyCollectFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IMyCollectPresenter{
-        void getMyCollect(String useraccountid);
+        void getMyCollect(String useraccountid,int page);
     }
 }

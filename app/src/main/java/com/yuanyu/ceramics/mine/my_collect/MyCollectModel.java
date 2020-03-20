@@ -18,7 +18,7 @@ public class MyCollectModel implements MyCollectConstract.IMyCollectModel {
     private HttpService httpService;
     MyCollectModel(){ httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(String useraccountid) {
+    public Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(String useraccountid,int page) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -26,9 +26,11 @@ public class MyCollectModel implements MyCollectConstract.IMyCollectModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","mineindex");
+        map.put("action","my_collect");
         Map data = new HashMap();
         data.put("useraccountid",useraccountid);
+        data.put("page",page);
+        data.put("page_size",20);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
