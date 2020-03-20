@@ -194,16 +194,16 @@ public class ShopIndexActivity extends BaseActivity<ShopIndexPresenter> implemen
             masterStudioCertification.setVisibility(View.GONE);
         }
         userid = bean.getId();
-        posterPopupWindow=new SharePosterPopupWindow(this,this,bean.getPortrait(),bean.getName(),"店铺分享","",bean.getPortrait(),BASE_URL + "YuanyuMiniprogram/html/page/shop_homepage/shop_homepage.html?id=" + shopid,"/pagesA/shop_homepage/shop_homepage?id="+ shopid);
-        posterPopupWindow.setSavaImageListener((bitmap,type) -> {
-            this.bitmap=bitmap;
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, type);
-            } else {
-                presenter.saveScreenshot(bitmap,type);
-            }
-        });
-        posterPopupWindow.setShareShopListener(() -> presenter.shareShop(Sp.getString(this,AppConstant.SHOP_ID),Sp.getString(this,AppConstant.USER_ACCOUNT_ID)));
+//        posterPopupWindow=new SharePosterPopupWindow(this,this,bean.getPortrait(),bean.getName(),"店铺分享","",bean.getPortrait(),BASE_URL + "YuanyuMiniprogram/html/page/shop_homepage/shop_homepage.html?id=" + shopid,"/pagesA/shop_homepage/shop_homepage?id="+ shopid);
+//        posterPopupWindow.setSavaImageListener((bitmap,type) -> {
+//            this.bitmap=bitmap;
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, type);
+//            } else {
+//                presenter.saveScreenshot(bitmap,type);
+//            }
+//        });
+//        posterPopupWindow.setShareShopListener(() -> presenter.shareShop(Sp.getString(this,AppConstant.SHOP_ID),Sp.getString(this,AppConstant.USER_ACCOUNT_ID)));
     }
 
     @Override

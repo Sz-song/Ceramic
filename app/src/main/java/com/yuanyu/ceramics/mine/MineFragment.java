@@ -19,11 +19,13 @@ import com.yuanyu.ceramics.base.BaseFragment;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
+import com.yuanyu.ceramics.mine.my_collect.MyCollectActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
+import com.yuanyu.ceramics.seller.index.SellerIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -109,6 +111,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     TextView daipingjiaCount;
     @BindView(R.id.refund_count)
     TextView refundCount;
+    @BindView(R.id.sellstatus)
+    TextView sellstatus;
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -125,6 +129,11 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         swipe.setRefreshing(false);
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID)));
+        if (Sp.getString(getContext(), AppConstant.SHOP_ID, "").length()>0){
+            sellstatus.setText("进入店铺");
+        } else {
+            sellstatus.setText("商家入驻");
+        }
     }
 
     @Override
@@ -144,11 +153,15 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         focusNum.setText(bean.getFocus_num());
         dynamicNum.setText(bean.getDongtai_num());
         introduce.setText(bean.getIntroduce());
-        presenter.setCount(daifukuanCount,bean.getDaifukuan());
-        presenter.setCount(daifahuoCount,bean.getDaifahuo());
-        presenter.setCount(daishouhuoCount,bean.getDaishouhuo());
-        presenter.setCount(daipingjiaCount,bean.getDaipingjia());
-        presenter.setCount(refundCount,bean.getTuikuan());
+        presenter.setCount(daifukuanCount, bean.getDaifukuan());
+        presenter.setCount(daifahuoCount, bean.getDaifahuo());
+        presenter.setCount(daishouhuoCount, bean.getDaishouhuo());
+        presenter.setCount(daipingjiaCount, bean.getDaipingjia());
+        presenter.setCount(refundCount, bean.getTuikuan());
+        if (bean.getMerchant_status() == 2) {
+            sellstatus.setText("商家入驻(审核中)");
+            applyenter.setClickable(false);
+        }
     }
 
     @Override
@@ -216,6 +229,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 startActivity(intent);
                 break;
             case R.id.my_collect:
+                intent = new Intent(getContext(), MyCollectActivity.class);
+                startActivity(intent);
                 break;
             case R.id.dashiattesta:
                 break;
@@ -223,6 +238,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {
                     intent = new Intent(this.getContext(), EnterProtocolActivity.class);
                     intent.putExtra("type", 0);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(getActivity(), SellerIndexActivity.class);
                     startActivity(intent);
                 }
                 break;

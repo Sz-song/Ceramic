@@ -26,28 +26,20 @@ public class ItemDetailPresenter extends BasePresenter<ItemDetailConstract.IItem
 
     @Override
     public void getItemDetail(String useraccountid, String itemid) {
-        List<String> list=new ArrayList<>();
-        list.add("");
-        list.add("");
-        list.add("");
-        ItemBean itemBean=new ItemBean("",888,888,"",list,list,list,true,"",1,"","","","","","","","","","","");
-        StoreBean storeBean=new StoreBean(1,"","","","","","");
-        ItemDetailBean itemDetailBean=new ItemDetailBean(itemBean,storeBean,"","","",",",true,"","","","",",",true,"",list);
-        if(view!=null){view.getItemDetailSuccess(itemDetailBean);}
-//        model.getItemDetail(useraccountid, itemid)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<ItemDetailBean>())
-//                .subscribe(new BaseObserver<ItemDetailBean>() {
-//                    @Override
-//                    public void onNext(ItemDetailBean itemDetailBean) {
-//                        if(view!=null){view.getItemDetailSuccess(itemDetailBean);}
-//                    }
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {
-//                        if(view!=null){view.getItemDetailFail(e);}
-//                    }
-//                });
+        model.getItemDetail(useraccountid, itemid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<ItemDetailBean>())
+                .subscribe(new BaseObserver<ItemDetailBean>() {
+                    @Override
+                    public void onNext(ItemDetailBean itemDetailBean) {
+                        if(view!=null){view.getItemDetailSuccess(itemDetailBean);}
+                    }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        if(view!=null){view.getItemDetailFail(e);}
+                    }
+                });
     }
 
     @Override

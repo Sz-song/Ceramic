@@ -43,8 +43,10 @@ import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.SharePosterPopupWindow;
+import com.yuanyu.ceramics.common.ViewImageActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.myinfo.MyInfoActivity;
+import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
 import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HelpUtils;
@@ -174,7 +176,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
         useraccountid = Sp.getString(this, "useraccountid");
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
-        Log.d("PersonalIndexActivity", "------------------userid"+userid);
+        Log.d("PersonalIndexActivity", "------------------userid"+userid+"----------useraccountid"+useraccountid);
         loaddialog = new LoadingDialog(this);
         loaddialog.show();
         presenter.getPersonalIndexData(useraccountid, userid);
@@ -220,8 +222,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
             } else {
                 focus.setText("+ 关注");
             }
-            if (userid == useraccountid) {//自己进入自己主页
-
+            if (userid.equals(useraccountid)) {//自己进入自己主页
                 if (bean.getShopid() != null && bean.getShopid().length() > 0) {
                     bottomRelat.setVisibility(View.VISIBLE);
                     CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomRelat.getLayoutParams();
@@ -235,6 +236,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
                     bottomRelat.setVisibility(View.GONE);
                 }
             } else if (userid != useraccountid) {
+                showMore.setVisibility(View.GONE);
                 bottomRelat.setVisibility(View.VISIBLE);
                 CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomRelat.getLayoutParams();
                 CoordinatorLayout.LayoutParams layoutParams1 = (CoordinatorLayout.LayoutParams) viewpager.getLayoutParams();
@@ -300,7 +302,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
 //            } else {
 //                focusMaster.setText("+ 关注");
 //            }
-//            if (userid == useraccountid) {//自己进入自己主页
+//            if (userid.equals(useraccountid)) {//自己进入自己主页
 //                focusMaster.setVisibility(View.GONE);
 //                contactMaster.setVisibility(View.GONE);
 //            } else {
@@ -313,15 +315,15 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
 //                enterMasterShop.setVisibility(View.GONE);
 //            }
         }
-        posterPopupWindow = new SharePosterPopupWindow(this, this, bean.getPortrait(), bean.getName(), "源玉主页", bean.getContent(), bean.getPortrait(), BASE_URL + "YuanyuMiniprogram/html/page/masterpage/masterpage.html?id=" + userid, "/pagesA/masterpage/masterpage?id=" + userid);
-        posterPopupWindow.setSavaImageListener((bitmap, type) -> {
-            this.bitmap = bitmap;
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, type);
-            } else {
-                presenter.saveScreenshot(bitmap, type);
-            }
-        });
+//        posterPopupWindow = new SharePosterPopupWindow(this, this, bean.getPortrait(), bean.getName(), "源玉主页", bean.getContent(), bean.getPortrait(), BASE_URL + "YuanyuMiniprogram/html/page/masterpage/masterpage.html?id=" + userid, "/pagesA/masterpage/masterpage?id=" + userid);
+//        posterPopupWindow.setSavaImageListener((bitmap, type) -> {
+//            this.bitmap = bitmap;
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, type);
+//            } else {
+//                presenter.saveScreenshot(bitmap, type);
+//            }
+//        });
 
         loaddialog.dismiss();
     }
@@ -401,17 +403,17 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
     }
 
 //    @OnClick({R.id.focus_num, R.id.fans_num, R.id.portrait, R.id.show_more, R.id.focus, R.id.contact, R.id.shop, R.id.master_fans, R.id.master_focus, R.id.focus_master, R.id.contact_master, R.id.enter_master_shop})
-@OnClick({R.id.show_more})
+@OnClick({R.id.show_more,R.id.focus_num,R.id.portrait})
 public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
-//            case R.id.focus_num:
-//            case R.id.master_focus:
-////                intent = new Intent(PersonalIndexActivity.this, FocusAndFansActicity.class);
-////                intent.putExtra("userid", userid);
-////                intent.putExtra("position", 1);
-////                startActivity(intent);
-//                break;
+            case R.id.focus_num:
+            case R.id.master_focus:
+                intent = new Intent(PersonalIndexActivity.this, FocusAndFansActicity.class);
+                intent.putExtra("userid", userid);
+                intent.putExtra("position", 1);
+                startActivity(intent);
+                break;
 //            case R.id.fans_num:
 //            case R.id.master_fans:
 ////                intent = new Intent(PersonalIndexActivity.this, FocusAndFansActicity.class);
@@ -419,21 +421,22 @@ public void onViewClicked(View view) {
 ////                intent.putExtra("position", 2);
 ////                startActivity(intent);
 //                break;
-//            case R.id.portrait://更改头像
-////                if (userid == useraccountid) {
-////                    intent = new Intent(PersonalIndexActivity.this, ChangeImageActivity.class);
-////                    intent.putExtra("imagetype", 0);
-////                    intent.putExtra("url", urlimage);
-////                    startActivityForResult(intent, 1002);
-////                } else {
-////                    ArrayList imagelist = new ArrayList();
-////                    imagelist.add(urlimage);
-////                    ViewImageActivity.actionStart(PersonalIndexActivity.this, 0, imagelist);
-////                }
-//                break;
+            case R.id.portrait://更改头像
+                if (userid.equals(useraccountid)) {
+                    intent = new Intent(PersonalIndexActivity.this, ChangeImageActivity.class);
+                    intent.putExtra("imagetype", 0);
+                    intent.putExtra("url", urlimage);
+                    startActivityForResult(intent, 1002);
+                } else {
+                    ArrayList imagelist = new ArrayList();
+                    imagelist.add(urlimage);
+                    ViewImageActivity.actionStart(PersonalIndexActivity.this, 0, imagelist);
+                }
+                break;
             case R.id.show_more://编辑资料
                 intent = new Intent(PersonalIndexActivity.this, MyInfoActivity.class);
-//                intent.putExtra("userid", userid);
+                L.e("-----------"+userid);
+                intent.putExtra("userid", Integer.parseInt(userid));
                 startActivityForResult(intent, 1003);
                 break;
 //            case R.id.focus://关注此人
@@ -487,7 +490,7 @@ public void onViewClicked(View view) {
                 L.e("width is " + i);
                 popupWindow.showAsDropDown(findViewById(R.id.more), -i, 0);
                 popupWindow.HideDelete();
-                if (userid == useraccountid) {  //自己进入自己主页
+                if (userid.equals(useraccountid)) {  //自己进入自己主页
                     popupWindow.HideBlacklist();//隐藏拉黑（自己不能拉黑自己）
                 }
                 popupWindow.setBlacklist(view -> {

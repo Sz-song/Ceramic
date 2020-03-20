@@ -71,7 +71,7 @@ public class FocusAndFansFragment extends BaseFragment <FocusAndFansPresenter> i
         recyclerview.setAdapter(adapter);
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setRefreshing(true);
-        GlideApp.with(getActivity()).load(R.drawable.nodata_img).override(100,100).into(nodataImg);
+        GlideApp.with(getActivity()).load(R.drawable.nodata_img).into(nodataImg);
         nodata.setText("暂时没有数据");
         swipe.setOnRefreshListener(() -> {
             page = 0;

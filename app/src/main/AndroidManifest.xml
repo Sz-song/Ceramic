@@ -121,6 +121,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".mine.my_collect.MyCollectActivity" />
+        <activity android:name=".common.ViewImageActivity" />
+        <activity android:name=".personal_index.ChangeImageActivity" />
     </application>
 
 </manifest>

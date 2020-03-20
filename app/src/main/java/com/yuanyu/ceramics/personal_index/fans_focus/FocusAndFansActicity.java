@@ -45,16 +45,17 @@ public class FocusAndFansActicity extends NormalActivity {
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
         position = intent.getIntExtra("position", 0);
-        title.setText("我的好友");
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
+            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         if (userid.equals(Sp.getString(this, "useraccountid"))) {
+            title.setText("我的好友");
             fragmentAdapter = new FocusAndFansFragmentAdapter(getSupportFragmentManager(), tab, userid);
         } else {
+            title.setText("TA的好友");
             fragmentAdapter = new FocusAndFansFragmentAdapter(getSupportFragmentManager(), tab1, userid);
         }
         viewPager.setAdapter(fragmentAdapter);

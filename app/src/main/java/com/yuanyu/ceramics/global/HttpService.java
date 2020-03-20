@@ -169,7 +169,7 @@ public interface HttpService {
     @POST("app_api/home_page/add_blacklist.php")
     Observable<BaseResponse<Boolean>>addBlacklist(@Body RequestBody body);
     //个人动态文章
-    @POST("app_api/yuba/personal_dynamic_article.php")
+    @POST("back/test/api/quan/personal_dynamic_article.php")
     Observable<BaseResponse<List<DynamicBean>>> getPersonalDynamicArticle(@Body RequestBody body);
     //点赞
     @POST("app_api/yuba/dianzan.php")
@@ -178,7 +178,7 @@ public interface HttpService {
     @POST("back/test/api/mine/view_userinfo.php")
     Observable<BaseResponse<MyInfoBean>>viewUserInfo(@Body RequestBody body);
     //询问昵称是否占用
-    @POST("app_api/wujia/view_username.php")
+    @POST("back/test/api/mine/view_username.php")
     Observable<BaseResponse<Boolean>>viewUsername(@Body RequestBody body);
     //修改个人资料
     @POST("back/test/api/mine/edit_userinfo.php")
@@ -198,13 +198,13 @@ public interface HttpService {
     @POST("app_api/yuba/releasepinglun.php")
     Observable<BaseResponse<String>>pingLun(@Body RequestBody body);
     //删除动态
-    @POST("app_api/yuba/delete_dynamic.php")
+    @POST("back/test/api/quan/delete_dynamic.php")
     Observable<BaseResponse<String[]>> DeleteDynamic(@Body RequestBody body);
     //删除文章
-    @POST("app_api/yuba/delete_article.php")
+    @POST("back/test/api/quan/delete_article.php")
     Observable<BaseResponse<String[]>> DeleteArticle(@Body RequestBody body);
     //屏蔽
-    @POST("app_api/yuba/shield.php")
+    @POST("back/test/api/quan/shield.php")
     Observable<BaseResponse<String[]>> shield(@Body RequestBody body);
     //店铺动态
     @POST("app_api/commodity/shop_dynamic.php")
@@ -213,10 +213,10 @@ public interface HttpService {
     @POST("app_api/home_page/shop_fenlei.php")
     Observable<BaseResponse<List<ResultBean>>> getShopFenleiData(@Body RequestBody body);
     //用户访问店铺首页
-    @POST("app_api/shangjia/shophead.php")
+    @POST("back/test/api/homepage/shophead.php")
     Observable<BaseResponse<ShopIndexBean>>getUserShopIndexResult(@Body RequestBody body);
     //收藏商品collectItem
-    @POST("app_api/shangjia/add_collection.php")
+    @POST("back/test/api/mine/add_collection.php")
     Observable<BaseResponse<Boolean>> collectItem(@Body RequestBody body);
     //分享店铺
     @POST("app_api/wujia/share_shop.php")
@@ -249,7 +249,7 @@ public interface HttpService {
     @POST("app_api/wujia/reminddelivery.php")
     Observable<BaseResponse<String[]>>remindDelivery(@Body RequestBody body);
     //上传图片
-    @POST("app_api/upload/upload.php")
+    @POST("back/test/api/upload/upload.php")
     @Multipart
     Observable<BaseResponse<List<String>>> uploadImage(@Part("data")RequestBody body, @Part MultipartBody.Part[] part);
     //申请退款
@@ -293,7 +293,7 @@ public interface HttpService {
     Observable<BaseResponse<String[]>> usersOpinion(@Body RequestBody body);
 
     //商品详情页itemDetail
-    @POST("app_api/commodity/item_detail.php")
+    @POST("back/test/api/commodity/item_detail.php")
     Observable<BaseResponse<ItemDetailBean>> itemDetail(@Body RequestBody body);
     //添加购物车
     @POST("back/test/api/shopping/cart_add.php")
@@ -316,15 +316,15 @@ public interface HttpService {
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 
 
-//    修改商家
-    @POST("123")
+//    修改商家店铺简介
+    @POST("back/test/api/shangjia/change_shop_introduce.php")
     Observable<BaseResponse<Boolean>> ShopChangeIntroduce(@Body RequestBody body);
 
     //商品上架接口
     @POST("back/test/api/shangjia/shangjiaapply.php")
     Observable<BaseResponse<String[]>>Shelve(@Body RequestBody body);
     //上传视频
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("back/test/api/upload/upload_video.php")
     @Multipart
     Observable<BaseResponse<VideoBean>> uploadVideo(@Part("data")RequestBody body,
                                                     @Part MultipartBody.Part[] part);
@@ -404,6 +404,9 @@ public interface HttpService {
     @POST("back/test/api/homepage/userinfo.php")
     Observable<BaseResponse<ChatBean>> getChaterInfo(@Body RequestBody body);
     //获取我的收藏
-    @POST("back/test/api/homepage/my_collect.php")
+    @POST("back/test/api/mine/my_collect.php")
     Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(@Body RequestBody body);
+    //修改主页背景和头像
+    @POST("app_api/yuba/change_image.php")
+    Observable<BaseResponse>changeImage(@Body RequestBody body);
 }

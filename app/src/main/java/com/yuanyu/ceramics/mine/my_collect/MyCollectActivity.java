@@ -3,6 +3,7 @@ package com.yuanyu.ceramics.mine.my_collect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -68,7 +69,7 @@ public class MyCollectActivity extends BaseActivity<MyCollectPresenter> implemen
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
+            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         list = new ArrayList<>();
@@ -85,7 +86,7 @@ public class MyCollectActivity extends BaseActivity<MyCollectPresenter> implemen
                 .load(R.drawable.nodata_img)
                 .override(nodataImg.getWidth(), nodataImg.getHeight())
                 .into(nodataImg);
-        nodata.setText("请稍后再试");
+        nodata.setText("暂时没有数据");
         WindowManager wm = getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
@@ -138,6 +139,13 @@ public class MyCollectActivity extends BaseActivity<MyCollectPresenter> implemen
             nodata.setVisibility(View.GONE);
         }
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 
 }

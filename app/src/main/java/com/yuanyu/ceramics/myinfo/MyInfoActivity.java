@@ -122,6 +122,16 @@ public class MyInfoActivity extends BaseActivity {
         intent.putExtra("infoBean",infoBean);
         startActivityForResult(intent,1001);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1001:
+                if(resultCode==RESULT_OK){
+                    initData();
+                }
+        }
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();

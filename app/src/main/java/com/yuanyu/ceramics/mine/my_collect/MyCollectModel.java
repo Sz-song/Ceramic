@@ -26,7 +26,7 @@ public class MyCollectModel implements MyCollectConstract.IMyCollectModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","my_collect");
+        map.put("action","mycollect");
         Map data = new HashMap();
         data.put("useraccountid",useraccountid);
         data.put("page",page);

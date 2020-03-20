@@ -556,6 +556,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
+                            android:id="@+id/sellstatus"
                             android:textColor="@color/blackLight"
                             android:text="@string/apply_enter"/>
                     </LinearLayout>
