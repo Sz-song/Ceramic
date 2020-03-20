@@ -10,9 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        ndk {
-//            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
-//        }
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     buildTypes {
         release {
@@ -93,5 +93,7 @@ dependencies {
     implementation 'com.github.sunhapper:SpEditTool:0.2.3'
     //腾讯即时聊天 imsdk
     implementation 'com.tencent.imsdk:imsdk:4.6.102'
+    //  腾讯直播sdk
+    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
 
 }
