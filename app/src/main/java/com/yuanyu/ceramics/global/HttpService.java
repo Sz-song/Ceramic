@@ -401,6 +401,7 @@ public interface HttpService {
     @POST("app_api/app_login/refresh_token.php")
     Observable<BaseResponse<TokenBean>> refreshToken(@Body RequestBody body);
     //获取聊天对象信息
+
     @POST("back/test/api/homepage/userinfo.php")
     Observable<BaseResponse<ChatBean>> getChaterInfo(@Body RequestBody body);
     //获取我的收藏
