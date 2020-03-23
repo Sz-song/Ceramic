@@ -8,9 +8,9 @@ import io.reactivex.Observable;
 
 public interface RefundDetailWujiaConstract {
     interface IRefundDetailModel {
-        Observable<BaseResponse<RefundDetailBean>> getRefundDetailData(int useraccountid, String ordernum);
+        Observable<BaseResponse<RefundDetailBean>> getRefundDetailData(String useraccountid, String ordernum);
 //        Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(String couriernum, String courierid);
-        Observable<BaseResponse<String[]>> CancelRefund(int useraccountid, String ordernum);
+        Observable<BaseResponse<String[]>> CancelRefund(String useraccountid, String ordernum);
         Observable<BaseResponse<String[]>> InputLogistics(String ordernum, String couriernum, String kuaidi);
     }
     interface IRefundDetailView {
@@ -27,9 +27,9 @@ public interface RefundDetailWujiaConstract {
         void InputLogisticsFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IRefundDetailPresenter {
-        void getRefundDetailData(int useraccountid, String ordernum);
+        void getRefundDetailData(String useraccountid, String ordernum);
 //        void getLogisticsTracing(String couriernum, String courierid);
-        void CancelRefund(int useraccountid, String ordernum);
+        void CancelRefund(String useraccountid, String ordernum);
         void InputLogistics(String ordernum, String couriernum, String kuaidi);
     }
 }

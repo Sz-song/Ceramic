@@ -26,7 +26,7 @@ public class ApplyRefundPresenter extends BasePresenter<ApplyRefundConstract.IAp
     }
 
     @Override
-    public void getOrderDetail(int useraccountid, String ordernum) {
+    public void getOrderDetail(String useraccountid, String ordernum) {
         model.getOrderDetail(useraccountid,ordernum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

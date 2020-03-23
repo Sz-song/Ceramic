@@ -176,7 +176,6 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
         useraccountid = Sp.getString(this, "useraccountid");
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
-        Log.d("PersonalIndexActivity", "------------------userid"+userid+"----------useraccountid"+useraccountid);
         loaddialog = new LoadingDialog(this);
         loaddialog.show();
         presenter.getPersonalIndexData(useraccountid, userid);
@@ -236,7 +235,6 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
                     bottomRelat.setVisibility(View.GONE);
                 }
             } else if (userid != useraccountid) {
-                showMore.setVisibility(View.GONE);
                 bottomRelat.setVisibility(View.VISIBLE);
                 CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomRelat.getLayoutParams();
                 CoordinatorLayout.LayoutParams layoutParams1 = (CoordinatorLayout.LayoutParams) viewpager.getLayoutParams();

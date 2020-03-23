@@ -191,7 +191,7 @@ public interface HttpService {
     @POST("back/test/api/quan/getfriends.php")
     Observable<BaseResponse<List<FriendBean>>>getFriends(@Body RequestBody body);
     //发布文章
-    @POST("back/test/api/quan/releasedynamic.php")
+    @POST("back/test/api/quan/releasearticle.php")
     Observable<BaseResponse<Boolean>>ReleaseArticle(@Body RequestBody body);
 
     //评论
@@ -215,7 +215,7 @@ public interface HttpService {
     //用户访问店铺首页
     @POST("back/test/api/homepage/shophead.php")
     Observable<BaseResponse<ShopIndexBean>>getUserShopIndexResult(@Body RequestBody body);
-    //收藏商品collectItem
+    //收藏商品、店铺collectItem
     @POST("back/test/api/mine/add_collection.php")
     Observable<BaseResponse<Boolean>> collectItem(@Body RequestBody body);
     //分享店铺

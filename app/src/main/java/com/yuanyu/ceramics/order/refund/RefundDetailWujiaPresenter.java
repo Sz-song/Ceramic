@@ -18,7 +18,7 @@ public class RefundDetailWujiaPresenter extends BasePresenter<RefundDetailWujiaC
     }
 
     @Override
-    public void getRefundDetailData(int useraccountid, String ordernum) {
+    public void getRefundDetailData(String useraccountid, String ordernum) {
         model.getRefundDetailData(useraccountid,ordernum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -46,7 +46,7 @@ public class RefundDetailWujiaPresenter extends BasePresenter<RefundDetailWujiaC
 //    }
 
     @Override
-    public void CancelRefund(int useraccountid, String ordernum) {
+    public void CancelRefund(String useraccountid, String ordernum) {
         model.CancelRefund(useraccountid,ordernum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

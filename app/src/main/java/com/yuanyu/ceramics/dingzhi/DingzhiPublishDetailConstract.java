@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 
 interface DingzhiPublishDetailConstract {
     interface IDingzhiPublishDetailModel {
-        Observable<BaseResponse<String[]>> dingzhiPublish(int useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai);
+        Observable<BaseResponse<String[]>> dingzhiPublish(String useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai);
     }
     interface IDingzhiPublishDetailView {
         void showToast(String msg);
@@ -22,6 +22,6 @@ interface DingzhiPublishDetailConstract {
 
     interface IDingzhiPublishDetailPresenter {
         void initData(List<FenleiTypeBean> fenleiList, List<FenleiTypeBean> ticaiList);
-        void dingzhiPublish(int useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai);
+        void dingzhiPublish(String useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai);
     }
 }

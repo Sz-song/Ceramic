@@ -76,7 +76,7 @@ public class RefundListActivity extends BaseActivity<RefundListPresenter> implem
             page = 0;
             list.clear();
             adapter.notifyDataSetChanged();
-            presenter.getRefundList(Sp.getInt(RefundListActivity.this, AppConstant.USER_ACCOUNT_ID),page);
+            presenter.getRefundList(Sp.getString(RefundListActivity.this, AppConstant.USER_ACCOUNT_ID),page);
         });
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -93,12 +93,12 @@ public class RefundListActivity extends BaseActivity<RefundListPresenter> implem
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
                     }
                     if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1&&lastPosition>7) {
-                        presenter.getRefundList(Sp.getInt(RefundListActivity.this,AppConstant.USER_ACCOUNT_ID),page);
+                        presenter.getRefundList(Sp.getString(RefundListActivity.this,AppConstant.USER_ACCOUNT_ID),page);
                     }
                 }
             }
         });
-        presenter.getRefundList(Sp.getInt(RefundListActivity.this,AppConstant.USER_ACCOUNT_ID),page);
+        presenter.getRefundList(Sp.getString(RefundListActivity.this,AppConstant.USER_ACCOUNT_ID),page);
     }
 
     @Override

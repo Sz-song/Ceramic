@@ -32,6 +32,6 @@ public interface LiveApplyConstract {
         void compressImages(Context context, List<String> list);
         void uploadImage(List<File> images);
         void getLiveApplyState(String shop_id);
-        void liveApply(String id, int uid, int shop_id, String title, String coverimg, String time, int type, List<ItemBean> item_list);
+        void liveApply(String id, String uid, int shop_id, String title, String coverimg, String time, int type, List<ItemBean> item_list);
     }
 }

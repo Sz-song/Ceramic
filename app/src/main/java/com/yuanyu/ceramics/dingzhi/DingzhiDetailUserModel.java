@@ -19,7 +19,7 @@ public class DingzhiDetailUserModel implements DingzhiDetailUserConstact.IDingzh
     private HttpService httpService;
     DingzhiDetailUserModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, int useraccountid) {
+    public Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, String useraccountid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);
@@ -40,7 +40,7 @@ public class DingzhiDetailUserModel implements DingzhiDetailUserConstact.IDingzh
     }
 
     @Override
-    public Observable<BaseResponse<String>> generateBondOrder(String dingzhi_id, int useraccountid, int type, int paytype, AddressBean bean) {
+    public Observable<BaseResponse<String>> generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressBean bean) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -94,7 +94,7 @@ public class DingzhiDetailUserModel implements DingzhiDetailUserConstact.IDingzh
     }
 
     @Override
-    public Observable<BaseResponse<Boolean>> confirm_receipt(String dingzhi_id, int useraccountid) {
+    public Observable<BaseResponse<Boolean>> confirm_receipt(String dingzhi_id, String useraccountid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

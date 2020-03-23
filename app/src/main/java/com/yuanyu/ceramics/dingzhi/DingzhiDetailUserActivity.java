@@ -119,8 +119,8 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         id = getIntent().getStringExtra("id");
         dialog = new LoadingDialog(this);
         dialog.show();
-        presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID));
-        swipe.setOnRefreshListener(() -> presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID)));
+        presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
+        swipe.setOnRefreshListener(() -> presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID)));
     }
 
     @Override
@@ -335,7 +335,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         if (b) {
             Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
             dialog.show();
-            presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID));
+            presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
         } else {
             Toast.makeText(this, "订单异常", Toast.LENGTH_SHORT).show();
         }
@@ -351,7 +351,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
     public void confirmReceiptSuccess(Boolean aboolean) {
         Toast.makeText(this, "收货成功", Toast.LENGTH_SHORT).show();
         dialog.show();
-        presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID));
+        presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
     }
 
     @Override
@@ -400,7 +400,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
                             deleteDialog1.setTitle("收到货物,且确认无误");
                             deleteDialog1.setNoOnclickListener(deleteDialog1::dismiss);
                             deleteDialog1.setYesOnclickListener(() -> {
-                                presenter.confirmReceipt(id, Sp.getInt(DingzhiDetailUserActivity.this, AppConstant.USER_ACCOUNT_ID));
+                                presenter.confirmReceipt(id, Sp.getString(DingzhiDetailUserActivity.this, AppConstant.USER_ACCOUNT_ID));
                                 deleteDialog1.dismiss();
 
                             });
@@ -436,25 +436,25 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
                         dialog.show();
                         //支付宝支付
                         if (statusCode == 4) {
-                            presenter.generateBondOrder(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 0, 0, address);
+                            presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 0, 0, address);
                         } else if (statusCode == 5) {
-                            presenter.generateBondOrder(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 1, 0, address);
+                            presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 1, 0, address);
                         }
                     } else if (data.getIntExtra("paytype",-1)==1) {
                         dialog.show();
                         //微信支付
                         if (statusCode == 4) {
-                            presenter.generateBondOrder(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 0, 1, address);
+                            presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 0, 1, address);
                         } else if (statusCode == 5) {
-                            presenter.generateBondOrder(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 1, 1, address);
+                            presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 1, 1, address);
                         }
                     }else if (data.getIntExtra("paytype",-1)==3) {
                         dialog.show();
                         //微信支付
                         if (statusCode == 4) {
-                            presenter.generateBondOrder(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 0, 3, address);
+                            presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 0, 3, address);
                         } else if (statusCode == 5) {
-                            presenter.generateBondOrder(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 1, 3, address);
+                            presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 1, 3, address);
                         }
                     }
                 }

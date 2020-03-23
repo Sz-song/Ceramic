@@ -29,6 +29,9 @@ public class ReleaseArticlePresenter extends BasePresenter<ReleaseArticleConstra
     @SuppressLint("CheckResult")
     @Override
     public void compressImages(Context context, List<String> list) {
+        for (int i = 0; i <list.size() ; i++) {
+            L.e(list.get(i));
+        }
         Flowable.just(list).observeOn(Schedulers.io())
                 .map(list1 -> {
                     //Luban压缩，返回List<File>
@@ -59,7 +62,7 @@ public class ReleaseArticlePresenter extends BasePresenter<ReleaseArticleConstra
     }
 
     @Override
-    public void releaseArticle(String cover, String title, int useraccountid, List<ArticleContentBean> content) {
+    public void releaseArticle(String cover, String title, String useraccountid, List<ArticleContentBean> content) {
         //去除多余
         List<ArticleContentBean> list=new ArrayList<>();
         for(int i=0;i<content.size();i++){

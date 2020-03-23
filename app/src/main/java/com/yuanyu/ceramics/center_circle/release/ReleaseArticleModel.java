@@ -47,7 +47,7 @@ public class ReleaseArticleModel implements ReleaseArticleConstract.IReleaseArti
     }
 
     @Override
-    public Observable<BaseResponse<Boolean>> releaseArticle(String cover, String title, int useraccountid, List<ArticleContentBean> content) {
+    public Observable<BaseResponse<Boolean>> releaseArticle(String cover, String title, String useraccountid, List<ArticleContentBean> content) {
 
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);

@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 public interface ShopDingzhiDetailConstract {
 
     interface IShopDingzhiDetailModel {
-        Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, int useraccountid);
+        Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, String useraccountid);
         Observable<BaseResponse<Boolean>> confirmOrder(String dingzhi_id, String shop_id, String price, String time);
         Observable<BaseResponse<Boolean>> cancelOrder(String dingzhi_id, String shop_id);
         Observable<BaseResponse<Boolean>> dingzhiCourier(String dingzhi_id, String shop_id, String courier_id, String courier_num);
@@ -31,7 +31,7 @@ public interface ShopDingzhiDetailConstract {
     }
 
     interface IShopDingzhiDetailPresenter {
-        void dingzhiDetail(String dingzhi_id, int useraccountid);
+        void dingzhiDetail(String dingzhi_id, String useraccountid);
         void confirmOrder(String dingzhi_id, String shop_id, String price, String time);
         void cancelOrder(String dingzhi_id, String shop_id);
         void dingzhiCourier(String dingzhi_id, String shop_id, String courier_id, String courier_num);

@@ -217,7 +217,7 @@ public class DingzhiPublishDetailActivity extends BaseActivity<DingzhiPublishDet
                 break;
             case R.id.submit:
                 dialog.show();
-                presenter.dingzhiPublish(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID),master_id+"",introduceDetail.getText().toString(),useage,birthday.getText().toString(),priceType,fenlei.getText().toString(),ticai.getText().toString());
+                presenter.dingzhiPublish(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),master_id+"",introduceDetail.getText().toString(),useage,birthday.getText().toString(),priceType,fenlei.getText().toString(),ticai.getText().toString());
                 break;
         }
     }

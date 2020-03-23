@@ -17,7 +17,7 @@ public class ShopDingzhiDetailPresenter extends BasePresenter<ShopDingzhiDetailC
     ShopDingzhiDetailPresenter() { model=new ShopDingzhiDetailModel();}
 
     @Override
-    public void dingzhiDetail(String dingzhi_id, int useraccountid) {
+    public void dingzhiDetail(String dingzhi_id, String useraccountid) {
         model.dingzhiDetail(dingzhi_id,useraccountid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

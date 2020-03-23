@@ -139,7 +139,7 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setRefreshing(true);
         swipe.setOnRefreshListener(() -> {
-            presenter.getRefundDetailData(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), orderid);
+            presenter.getRefundDetailData(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), orderid);
         });
         adapterApply=new SquareImageViewAdapter(this,list_pic);
         recyclerviewApply.setLayoutManager(new CantScrollGirdLayoutManager(this,3));
@@ -147,7 +147,7 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
         adapterReject=new SquareImageViewAdapter(this, fail_pic);
         recyclerviewReject.setLayoutManager(new CantScrollGirdLayoutManager(this,3));
         recyclerviewReject.setAdapter(adapterReject);
-        presenter.getRefundDetailData(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), orderid);
+        presenter.getRefundDetailData(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), orderid);
     }
 
     @Override
@@ -381,7 +381,7 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
 //                    ChatActivity.navToChat(this, customer_service, TIMConversationType.C2C);
                     break;
                 case R.id.cancel_apply:
-                    presenter.CancelRefund(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID),orderid);
+                    presenter.CancelRefund(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),orderid);
                     break;
                 case R.id.modify_apply:
                     intent = new Intent(this,ApplyRefundActivity.class);

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LiveApplyBean {
     private String id;//直播id
-    private int uid;//用户id
+    private String uid;//用户id
     private int shop_id;//店铺id
     private String title;//直播标题
     private String coverimg;//封面图片url
@@ -12,7 +12,7 @@ public class LiveApplyBean {
     private int type;//直播类型
     private List<String> item_list;//直播商品id list
 
-    public LiveApplyBean(String id, int uid, int shop_id, String title, String coverimg, String time, int type, List<String> item_list) {
+    public LiveApplyBean(String id, String uid, int shop_id, String title, String coverimg, String time, int type, List<String> item_list) {
         this.id = id;
         this.uid = uid;
         this.shop_id = shop_id;
@@ -27,7 +27,7 @@ public class LiveApplyBean {
         return id;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 

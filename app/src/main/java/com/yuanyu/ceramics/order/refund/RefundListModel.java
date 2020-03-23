@@ -20,7 +20,7 @@ public class RefundListModel implements RefundListConstract.IRefundListModel{
     private HttpService httpService;
     RefundListModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<List<RefundListBean>>> getRefundList(int useraccountid, int page) {
+    public Observable<BaseResponse<List<RefundListBean>>> getRefundList(String useraccountid, int page) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

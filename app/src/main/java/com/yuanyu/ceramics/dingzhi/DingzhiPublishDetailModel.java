@@ -19,7 +19,7 @@ public class DingzhiPublishDetailModel implements DingzhiPublishDetailConstract.
     private HttpService httpService;
     DingzhiPublishDetailModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<String[]>> dingzhiPublish(int useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai) {
+    public Observable<BaseResponse<String[]>> dingzhiPublish(String useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);

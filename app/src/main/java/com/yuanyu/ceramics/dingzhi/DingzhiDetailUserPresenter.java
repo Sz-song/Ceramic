@@ -14,7 +14,7 @@ public class DingzhiDetailUserPresenter extends BasePresenter<DingzhiDetailUserC
     DingzhiDetailUserPresenter() { model=new DingzhiDetailUserModel();}
 
     @Override
-    public void dingzhiDetail(String dingzhi_id, int useraccountid) {
+    public void dingzhiDetail(String dingzhi_id, String useraccountid) {
         model.dingzhiDetail(dingzhi_id,useraccountid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -29,7 +29,7 @@ public class DingzhiDetailUserPresenter extends BasePresenter<DingzhiDetailUserC
     }
 
     @Override
-    public void generateBondOrder(String dingzhi_id, int useraccountid, int type, int paytype, AddressBean bean) {
+    public void generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressBean bean) {
         model.generateBondOrder(dingzhi_id,useraccountid,type,paytype, bean)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -65,7 +65,7 @@ public class DingzhiDetailUserPresenter extends BasePresenter<DingzhiDetailUserC
     }
 
     @Override
-    public void confirmReceipt(String dingzhi_id, int useraccountid) {
+    public void confirmReceipt(String dingzhi_id, String useraccountid) {
         model.confirm_receipt(dingzhi_id,useraccountid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

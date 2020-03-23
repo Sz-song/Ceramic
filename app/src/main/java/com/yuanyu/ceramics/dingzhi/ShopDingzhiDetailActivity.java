@@ -158,8 +158,8 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
         }, "2019-01-01 00:00", "2030-01-01 00:00"); // 初始化日期格式请用：yyyy-MM-dd HH:mm，否则不能正常运行
         endTimePicker.showSpecificTime(true); // 显示时和分
         endTimePicker.setIsLoop(true); // 允许循环滚动
-        presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID));
-        swipe.setOnRefreshListener(() -> presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID)));
+        presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
+        swipe.setOnRefreshListener(() -> presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID)));
     }
 
     @Override
@@ -299,7 +299,7 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
         dialog.dismiss();
         if (aBoolean) {
             Toast.makeText(this, "操作成功", Toast.LENGTH_SHORT).show();
-            presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID));
+            presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
         }
     }
 
@@ -340,7 +340,7 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
         dialog.dismiss();
         if (aBoolean) {
             Toast.makeText(this, "操作成功", Toast.LENGTH_SHORT).show();
-            presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID));
+            presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
         }
     }
 

@@ -176,6 +176,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
 
     @Override
     public void uploadImageSuccess(List<String> list) {
+        L.e("图片上传成功");
         //把图片路径替换成服务器路径
         cover = list.get(0);
         if (list.size() > 1) {
@@ -187,7 +188,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                 }
             }
         }
-        presenter.releaseArticle(cover,articleTitle.getText().toString(), Sp.getInt(this, AppConstant.USER_ACCOUNT_ID),content);
+        presenter.releaseArticle(cover,articleTitle.getText().toString(), Sp.getString(this, AppConstant.USER_ACCOUNT_ID),content);
 
     }
 
