@@ -105,7 +105,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
             });
             GlideApp.with(context)
                     .load(BASE_URL + list.get(position).getPortrait())
-                    .placeholder(R.drawable.img_default)
+                    .placeholder(R.drawable.logo_default)
                     .override(100, 100)
                     .into(((ViewHolder0) holder).portrait);
             GlideApp.with(context)
@@ -171,7 +171,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
             GlideApp.with(context)
                     .load(BASE_URL + list.get(position).getPortrait())
                     .override(100, 100)
-                    .placeholder(R.drawable.img_default)
+                    .placeholder(R.drawable.logo_default)
                     .into(((ViewHolder1) holder).portrait);
             ((ViewHolder1) holder).name.setText(list.get(position).getName());
             ((ViewHolder1) holder).time.setText(TimeUtils.CountTime(list.get(position).getTime()));
@@ -218,7 +218,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
             GlideApp.with(context)
                     .load(BASE_URL + list.get(position).getPortrait())
                     .override(100, 100)
-                    .placeholder(R.drawable.img_default)
+                    .placeholder(R.drawable.logo_default)
                     .into(((ViewHolder2) holder).portrait);
             GlideApp.with(context)
                     .load(BASE_URL + list.get(position).getPicture_list().get(0))
@@ -271,7 +271,7 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
             GlideApp.with(context)
                     .load(BASE_URL + list.get(position).getPortrait())
                     .override(100, 100)
-                    .placeholder(R.drawable.img_default)
+                    .placeholder(R.drawable.logo_default)
                     .into(((ViewHolder3) holder).portrait);
             ((ViewHolder3) holder).name.setText(list.get(position).getName());
             ((ViewHolder3) holder).time.setText(TimeUtils.CountTime(list.get(position).getTime()));
@@ -292,9 +292,9 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
                 ((ViewHolder3) holder).isfocus.setVisibility(View.GONE);
             }
             if (list.get(position).isIsdianzan()) {
-                GlideApp.with(context).load(R.drawable.dianzan_focus).placeholder(R.drawable.img_default).into(((ViewHolder3) holder).dianzanimg);
+                GlideApp.with(context).load(R.drawable.dianzan_focus).into(((ViewHolder3) holder).dianzanimg);
             } else {
-                GlideApp.with(context).load(R.drawable.dianzan).placeholder(R.drawable.img_default).into(((ViewHolder3) holder).dianzanimg);
+                GlideApp.with(context).load(R.drawable.dianzan).into(((ViewHolder3) holder).dianzanimg);
             }
             if(list.get(position).isIsmaster()){
                 ((ViewHolder3) holder).masterCertification.setVisibility(View.VISIBLE);

@@ -26,7 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".center_circle.release.SelectFriendActivity"></activity>
+        <activity android:name=".center_circle.release.SelectFriendActivity"/>
         <activity android:name=".center_circle.release.ReleaseDynamicActivity" />
         <activity android:name=".seller.liveapply.SelectItemActivity" />
         <activity android:name=".seller.shop_shelve.ShelveActivity" />
@@ -131,7 +131,8 @@
         <activity android:name=".common.ViewImageActivity" />
         <activity android:name=".personal_index.ChangeImageActivity" />
         <activity android:name=".broadcast.push.LivePushActivity" >
-
+        </activity>
+        <activity android:name=".broadcast.pull.LivePullActivity" >
         </activity>
     </application>
 

@@ -130,7 +130,7 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         livePusher = new TXLivePusher(this);
         livePusher.setConfig(livePushConfig);
         livePusher.startCameraPreview(pusherView);
-        String rtmpURL = "rtmp://push.jadeall.cn/live/12312312543?txSecret=4a680a8a19dd1dc4c32b2b20d9e3872b&txTime=5E74E87F"; //此处填写您的 rtmp 推流地址
+        String rtmpURL = "rtmp://push.jadeall.cn/live/123?txSecret=89c195e06d5b394cc7e68862500b668a&txTime=5E78DCFF"; //此处填写您的 rtmp 推流地址
         livePusher.startPusher(rtmpURL.trim());
         livePusher.setBeautyFilter(0,9,9,9);
         livePusher.switchCamera();
