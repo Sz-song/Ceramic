@@ -10,10 +10,10 @@ import io.reactivex.Observable;
 public interface DingzhiDetailUserConstact {
 
     interface IDingzhiDetailUserModel {
-        Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, int useraccountid);
-        Observable<BaseResponse<String>> generateBondOrder(String dingzhi_id, int useraccountid, int type, int paytype, AddressBean bean);
+        Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, String useraccountid);
+        Observable<BaseResponse<String>> generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressBean bean);
         Observable<BaseResponse<Boolean>> BondPay(String id, int type, String out_trade_no, String trade_no);
-        Observable<BaseResponse<Boolean>> confirm_receipt(String dingzhi_id, int useraccountid);
+        Observable<BaseResponse<Boolean>> confirm_receipt(String dingzhi_id, String useraccountid);
     }
     interface IDingzhiDetailUserView {
         void dingzhiDetailSuccess(DingzhiDetailBean detailBean);
@@ -31,9 +31,9 @@ public interface DingzhiDetailUserConstact {
     }
 
     interface IDingzhiDetailUserPresenter {
-        void dingzhiDetail(String dingzhi_id, int useraccountid);
-        void generateBondOrder(String dingzhi_id, int useraccountid, int type, int paytype, AddressBean bean);
+        void dingzhiDetail(String dingzhi_id, String useraccountid);
+        void generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressBean bean);
         void BondPay(String id, int type, String out_trade_no, String trade_no);
-        void confirmReceipt(String dingzhi_id, int useraccountid);
+        void confirmReceipt(String dingzhi_id, String useraccountid);
     }
 }

@@ -16,7 +16,7 @@ public class RefundListPresenter extends BasePresenter<RefundListConstract.IRefu
     RefundListPresenter() {model=new RefundListModel();}
 
     @Override
-    public void getRefundList(int useraccountid, int page) {
+    public void getRefundList(String useraccountid, int page) {
         model.getRefundList(useraccountid,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

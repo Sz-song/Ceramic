@@ -11,7 +11,7 @@ import io.reactivex.Observable;
 
 public interface RefundListConstract {
     interface IRefundListModel {
-        Observable<BaseResponse<List<RefundListBean>>> getRefundList(int useraccountid, int page);
+        Observable<BaseResponse<List<RefundListBean>>> getRefundList(String useraccountid, int page);
 
     }
 
@@ -21,6 +21,6 @@ public interface RefundListConstract {
 
     }
     interface IRefundListPresenter {
-        void getRefundList(int useraccountid, int page);
+        void getRefundList(String useraccountid, int page);
     }
 }

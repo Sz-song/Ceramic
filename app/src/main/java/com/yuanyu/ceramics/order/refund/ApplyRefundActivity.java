@@ -156,7 +156,7 @@ public class ApplyRefundActivity extends BaseActivity<ApplyRefundPresenter> impl
             }
         });
         recyclerview.setAdapter(adapter);
-        presenter.getOrderDetail(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), orderNum);
+        presenter.getOrderDetail(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), orderNum);
     }
     @Override
     public void getOrderDetailSuccess(OrderDetailBean bean) {

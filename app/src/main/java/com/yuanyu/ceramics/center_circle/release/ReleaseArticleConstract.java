@@ -14,7 +14,7 @@ import io.reactivex.Observable;
 public interface ReleaseArticleConstract {
     interface IReleaseArticleModel {
         Observable<BaseResponse<List<String>>> uploadImage(List<File> images);//上传图片
-        Observable<BaseResponse<Boolean>> releaseArticle(String cover, String title, int useraccountid, List<ArticleContentBean> content);//发布文章
+        Observable<BaseResponse<Boolean>> releaseArticle(String cover, String title, String useraccountid, List<ArticleContentBean> content);//发布文章
     }
 
     interface IReleaseArticleView {
@@ -30,6 +30,6 @@ public interface ReleaseArticleConstract {
     interface IReleaseArticlePresenter {
         void compressImages(Context context, List<String> list);//压缩图片
         void uploadImage(List<File> images);//上传图片
-        void releaseArticle(String cover, String title, int useraccountid, List<ArticleContentBean> content);//发布文章
+        void releaseArticle(String cover, String title, String useraccountid, List<ArticleContentBean> content);//发布文章
     }
 }

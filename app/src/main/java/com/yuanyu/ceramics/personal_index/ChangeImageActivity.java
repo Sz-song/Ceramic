@@ -188,7 +188,7 @@ public class ChangeImageActivity extends BaseActivity {
 
     private void chanageImage(final String image) {/** 更改头像**/
         model = new PersonalIndexModel();
-        model.changeImage(Sp.getInt(ChangeImageActivity.this, "useraccountid"), imagetype, image)
+        model.changeImage(Sp.getString(ChangeImageActivity.this, "useraccountid"), imagetype, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<>())

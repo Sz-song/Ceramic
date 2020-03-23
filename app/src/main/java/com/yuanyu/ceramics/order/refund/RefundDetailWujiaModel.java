@@ -17,7 +17,7 @@ public class RefundDetailWujiaModel implements RefundDetailWujiaConstract.IRefun
     private HttpService httpService;
     public RefundDetailWujiaModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<RefundDetailBean>> getRefundDetailData(int useraccountid, String ordernum) {
+    public Observable<BaseResponse<RefundDetailBean>> getRefundDetailData(String useraccountid, String ordernum) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);
@@ -59,7 +59,7 @@ public class RefundDetailWujiaModel implements RefundDetailWujiaConstract.IRefun
 //    }
 
     @Override
-    public Observable<BaseResponse<String[]>> CancelRefund(int useraccountid, String ordernum) {
+    public Observable<BaseResponse<String[]>> CancelRefund(String useraccountid, String ordernum) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);

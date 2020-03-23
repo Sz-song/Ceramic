@@ -13,7 +13,7 @@ import io.reactivex.Observable;
 
 public interface ApplyRefundConstract {
     interface IApplyRefundModel {
-        Observable<BaseResponse<OrderDetailBean>> getOrderDetail(int useraccountid, String ordernum);
+        Observable<BaseResponse<OrderDetailBean>> getOrderDetail(String useraccountid, String ordernum);
         Observable<BaseResponse<List<String>>> uploadImage(List<File> images);//上传图片
         Observable<BaseResponse> submitRefund(RefundBean bean);
     }
@@ -33,7 +33,7 @@ public interface ApplyRefundConstract {
 
     }
     interface IApplyRefundPresenter {
-        void getOrderDetail(int useraccountid, String ordernum);
+        void getOrderDetail(String useraccountid, String ordernum);
         void compressImages(Context context, List<String> list);//压缩图片
         void uploadImage(List<File> images);//上传图片
         void submitRefund(RefundBean bean);

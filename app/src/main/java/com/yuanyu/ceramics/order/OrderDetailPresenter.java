@@ -83,7 +83,7 @@ public class OrderDetailPresenter extends BasePresenter<OrderDetailConstract.IOr
     }
 
 //    @Override
-//    public void generateOrders(int useraccountid, int paytype, int type, int tag, int qiugou_id, String name, String address, String province, String city, String area, String tel, List<SumOrderBean> list) {
+//    public void generateOrders(String useraccountid, int paytype, int type, int tag, int qiugou_id, String name, String address, String province, String city, String area, String tel, List<SumOrderBean> list) {
 //        model.generateOrders(useraccountid, paytype, type, 1, qiugou_id, name, address, province, city, area, tel, list)
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
@@ -108,7 +108,7 @@ public class OrderDetailPresenter extends BasePresenter<OrderDetailConstract.IOr
 //    }
 //
 //    @Override
-//    public void sendAlipay(int useraccountid, List<String> order_list, String out_trade_no, String trade_no) {
+//    public void sendAlipay(String useraccountid, List<String> order_list, String out_trade_no, String trade_no) {
 //        model.sendAlipay(useraccountid, order_list, out_trade_no, trade_no)
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
@@ -125,7 +125,7 @@ public class OrderDetailPresenter extends BasePresenter<OrderDetailConstract.IOr
 //    }
 //
 //    @Override
-//    public void notifyOrderException(String orderid, int useraccountid, String out_trade_no, String trade_no) {
+//    public void notifyOrderException(String orderid, String useraccountid, String out_trade_no, String trade_no) {
 //        List<String> orderList = new ArrayList<>();
 //        orderList.add(orderid);
 //        model.notifyOrderException(orderList, useraccountid,out_trade_no, trade_no)

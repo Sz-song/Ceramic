@@ -136,7 +136,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
     @Override
     public void uploadImageSuccess(List<String> imglist) {
         String time = Md5Utils.getTimeMin(liveTime.getText().toString());
-        presenter.liveApply(id,Sp.getInt(this,AppConstant.USER_ACCOUNT_ID),Integer.parseInt(Sp.getString(LiveApplyActivity.this,AppConstant.SHOP_ID)),liveTitle.getText().toString(),imglist.get(0),time,live_type,list);
+        presenter.liveApply(id,Sp.getString(this,AppConstant.USER_ACCOUNT_ID),Integer.parseInt(Sp.getString(LiveApplyActivity.this,AppConstant.SHOP_ID)),liveTitle.getText().toString(),imglist.get(0),time,live_type,list);
     }
 
     @Override
@@ -285,7 +285,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
                 if(status==2||status==3){
                     if (cover.startsWith("img")){
                         String time = Md5Utils.getTimeMin(liveTime.getText().toString());
-                        presenter.liveApply(id,Sp.getInt(LiveApplyActivity.this,"useraccountid"),Integer.parseInt(Sp.getString(LiveApplyActivity.this,AppConstant.SHOP_ID)),liveTitle.getText().toString(), cover,time,live_type,list);
+                        presenter.liveApply(id,Sp.getString(LiveApplyActivity.this,"useraccountid"),Integer.parseInt(Sp.getString(LiveApplyActivity.this,AppConstant.SHOP_ID)),liveTitle.getText().toString(), cover,time,live_type,list);
                     } else {
                         if(cover!=null&&cover.length()>1){
                             List<String> images = new ArrayList<>();

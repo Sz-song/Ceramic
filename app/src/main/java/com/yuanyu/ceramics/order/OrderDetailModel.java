@@ -104,7 +104,7 @@ public class OrderDetailModel implements OrderDetailConstract.IOrderDetailModel{
     }
 
 //    @Override
-//    public Observable<BaseResponse<GenerateOrdersBean>> generateOrders(int useraccountid, int paytype, int type, int tag, int qiugou_id, String name, String address, String province, String city, String area, String tel, List<SumOrderBean> list) {
+//    public Observable<BaseResponse<GenerateOrdersBean>> generateOrders(String useraccountid, int paytype, int type, int tag, int qiugou_id, String name, String address, String province, String city, String area, String tel, List<SumOrderBean> list) {
 //        String timestamp = FileHelper.getTimeStamp();
 //        String randomstr = FileHelper.getRandomString(10);
 //        String signature = FileHelper.getSignature(timestamp,randomstr);

@@ -122,7 +122,7 @@ public class PersonalFragment extends BaseFragment<PersonalFragmentPersenter> im
         });
         adapter.setOnMoreListenner(position -> {
             DynamicPopupWindow popupWindow;
-            if(list.get(position).getUseraccountid()==Sp.getString(getContext(),AppConstant.USER_ACCOUNT_ID)) {
+            if((list.get(position).getUseraccountid()).equals(Sp.getString(getContext(),AppConstant.USER_ACCOUNT_ID))) {
                 popupWindow = new DynamicPopupWindow(getContext(), 0, list.get(position).getType(), position, list.get(position).getId(),true);
             }else{
                 popupWindow = new DynamicPopupWindow(getContext(), 1, list.get(position).getType(), position, list.get(position).getId(),true);

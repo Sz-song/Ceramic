@@ -82,7 +82,7 @@ public class PersonalIndexModel implements PersonalIndexConstract.IPersonalIndex
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
         return httpService.addBlacklist(body);
     }
-    public Observable<BaseResponse> changeImage(int useraccountid,int type,String url){
+    public Observable<BaseResponse> changeImage(String useraccountid,int type,String url){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

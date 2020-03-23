@@ -63,7 +63,7 @@ public class LiveApplyPresenter extends BasePresenter<LiveApplyConstract.ILiveAp
     }
 
     @Override
-    public void liveApply(String id, int uid, int shop_id, String title, String coverimg, String time, int type, List<ItemBean> item_list) {
+    public void liveApply(String id, String uid, int shop_id, String title, String coverimg, String time, int type, List<ItemBean> item_list) {
         if(title==null||title.trim().length()==0){
             if(view!=null){view.showToast("请填写直播标题");}
             return;

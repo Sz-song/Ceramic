@@ -42,7 +42,7 @@ public class DingzhiPublishDetailPresenter extends BasePresenter<DingzhiPublishD
     }
 
     @Override
-    public void dingzhiPublish(int useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai) {
+    public void dingzhiPublish(String useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai) {
         try {
             if(Integer.parseInt(master_id)<1){
                 if(view!=null){view.showToast("请选择合作大师");}

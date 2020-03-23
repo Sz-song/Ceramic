@@ -19,7 +19,7 @@ public class ShopDingzhiDetailModel implements ShopDingzhiDetailConstract.IShopD
     private HttpService httpService;
     ShopDingzhiDetailModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, int useraccountid) {
+    public Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(String dingzhi_id, String useraccountid) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);

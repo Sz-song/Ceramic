@@ -112,7 +112,7 @@ public class ShopDynamicFragment extends BaseFragment<ShopDynamicPresenter> impl
 
         adapter.setOnMoreListenner(position -> {
             DynamicPopupWindow popupWindow;
-            if(list.get(position).getUseraccountid()==Sp.getString(getContext(),AppConstant.USER_ACCOUNT_ID)) {
+            if((list.get(position).getUseraccountid()).equals(Sp.getString(getContext(),AppConstant.USER_ACCOUNT_ID))) {
                 popupWindow = new DynamicPopupWindow(getContext(), 0, list.get(position).getType(), position, list.get(position).getId(),false);
             }else{
                 popupWindow = new DynamicPopupWindow(getContext(), 2, list.get(position).getType(), position, list.get(position).getId(),false);

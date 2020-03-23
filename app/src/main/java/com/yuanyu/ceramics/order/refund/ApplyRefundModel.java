@@ -23,7 +23,7 @@ public class ApplyRefundModel implements ApplyRefundConstract.IApplyRefundModel 
     private HttpService httpService;
     ApplyRefundModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<OrderDetailBean>> getOrderDetail(int useraccountid, String ordernum) {
+    public Observable<BaseResponse<OrderDetailBean>> getOrderDetail(String useraccountid, String ordernum) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);
