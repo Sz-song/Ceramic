@@ -222,7 +222,7 @@ public interface HttpService {
     @POST("app_api/wujia/share_shop.php")
     Observable<BaseResponse<Boolean>> shareShop(@Body RequestBody body);
     //店铺首页 店铺评论
-    @POST("app_api/commodity/shop_pinglun.php")
+    @POST("back/test/api/commodity/shop_pinglun.php")
     Observable<BaseResponse<ShopPinglunBean>> getShopPinglun(@Body RequestBody body);
     //店铺首页 新品和全部1商品
     @POST("app_api/shangjia/shopcommodity.php")
