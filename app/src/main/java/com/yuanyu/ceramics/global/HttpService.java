@@ -91,8 +91,8 @@ public interface HttpService {
     //吾家初始化
     @POST("back/test/api/mine/mineindex.php")
     Observable<BaseResponse<MineBean>> mineinit(@Body RequestBody body);
-//    商家初始化
-    @POST("111")
+//    商家首页
+    @POST("back/test/api/shangjia/sellermyhome.php")
     Observable<BaseResponse<SellerIndexBean>> sellerinit(@Body RequestBody body);
     //获取搜索大师
     @POST("app_api/home_page/search.php")
@@ -163,16 +163,16 @@ public interface HttpService {
     @POST("back/test/api/quan/personal_index.php")
     Observable<BaseResponse<PersonalIndexBean>> PersonalIndex(@Body RequestBody body);
     //关注与取关
-    @POST("app_api/yuba/focusandchancel_new.php")
+    @POST("back/test/api/quan/focusandchancel.php")
     Observable<BaseResponse<Boolean>>Focus(@Body RequestBody body);
     //添加黑名单
-    @POST("app_api/home_page/add_blacklist.php")
+    @POST("back/test/api/homepage/add_blacklist.php")
     Observable<BaseResponse<Boolean>>addBlacklist(@Body RequestBody body);
     //个人动态文章
     @POST("back/test/api/quan/personal_dynamic_article.php")
     Observable<BaseResponse<List<DynamicBean>>> getPersonalDynamicArticle(@Body RequestBody body);
     //点赞
-    @POST("app_api/yuba/dianzan.php")
+    @POST("back/test/api/quan/dianzan.php")
     Observable<BaseResponse<String []>>dianZan(@Body RequestBody body);
     //查看个人资料
     @POST("back/test/api/mine/view_userinfo.php")
@@ -207,7 +207,7 @@ public interface HttpService {
     @POST("back/test/api/quan/shield.php")
     Observable<BaseResponse<String[]>> shield(@Body RequestBody body);
     //店铺动态
-    @POST("app_api/commodity/shop_dynamic.php")
+    @POST("back/test/api/commodity/shop_dynamic.php")
     Observable<BaseResponse<List<DynamicBean>>> getShopDynamic(@Body RequestBody body);
     //店铺内分类搜索
     @POST("app_api/home_page/shop_fenlei.php")
@@ -225,7 +225,7 @@ public interface HttpService {
     @POST("back/test/api/commodity/shop_pinglun.php")
     Observable<BaseResponse<ShopPinglunBean>> getShopPinglun(@Body RequestBody body);
     //店铺首页 新品和全部1商品
-    @POST("app_api/shangjia/shopcommodity.php")
+    @POST("back/test/api/homepage/shopxinpin.php")
     Observable<BaseResponse<List<ShopGoodsBean>>> getShopCommodity(@Body RequestBody body);
     //广场动态和文章
     @POST("back/test/api/quan/square_dynamic_article.php")
@@ -268,7 +268,7 @@ public interface HttpService {
     @POST("app_api/wujia/add_refund_logistics.php")
     Observable<BaseResponse<String[]>> InputLogistics(@Body RequestBody body);
     //关注和粉丝列表
-    @POST("app_api/wujia/add_refund_logistics.php")
+    @POST("back/test/api/quan/focusandfans.php")
     Observable<BaseResponse<List<FocusAndFansBean>>> getFocusandFansList(@Body RequestBody body);
     //申请入驻
     @POST("back/test/api/mine/applyenter.php")
@@ -289,7 +289,7 @@ public interface HttpService {
     @POST("back/test/api/app_login/auto_login.php")
     Observable<BaseResponse<String[]>> resetPwd(@Body RequestBody body);
     //用户反馈
-    @POST("app_api/home_page/usersopinion.php")
+    @POST("back/test/api/homepage/usersopinion.php")
     Observable<BaseResponse<String[]>> usersOpinion(@Body RequestBody body);
 
     //商品详情页itemDetail
@@ -329,22 +329,22 @@ public interface HttpService {
     Observable<BaseResponse<VideoBean>> uploadVideo(@Part("data")RequestBody body,
                                                     @Part MultipartBody.Part[] part);
     //商品上架审核状态接口
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("back/test/api/shangjia/waitreview.php")
     Observable<BaseResponse<List<ShelveAuditBean>>>getWaitReviewResult(@Body RequestBody body);
     //删除仓库物品
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<String[]>>getWareHouseDeleteResult(@Body RequestBody body);
-    //我的商品 重新上架
-    @POST("app_api/home_page/loadmoreads.php")
+    //我的商品 重新申请上架获取商品信息
+    @POST("back/test/api/shangjia/reonsale.php")
     Observable<BaseResponse<ShelvingDetailBean>>getReOnSaleData(@Body RequestBody body);
     //我的商品 下架接口
     @POST("app_api/home_page/loadmoreads.php")
     Observable<BaseResponse<String[]>>shopGoodsOffShelves(@Body RequestBody body);
     //我的商品接口
-    @POST("app_api/shangjia/ExpRecommend.php")
+    @POST("back/test/api/shangjia/mycommodity.php")
     Observable<BaseResponse<List<ShopGoodsBean>>>getShopGoodsList(@Body RequestBody body);
     //商家获取商品详情
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("back/test/api/shangjia/get_shop_goodsdetail.php")
     Observable<BaseResponse<ShelvingDetailBean>> getShopGoodsDetail(@Body RequestBody body);
 
 
@@ -360,8 +360,8 @@ public interface HttpService {
     //商家申请直播
     @POST("app_api/broadcast/insert_live_application.php")
     Observable<BaseResponse<String[]>> liveApply(@Body RequestBody body);
-    //获取商品列表
-    @POST("app_api/broadcast/selectitem.php")
+    //直播获取商品列表
+    @POST("back/test/api/broadcast/selectitem.php")
     Observable<BaseResponse<SelectItemBean>> selectItem(@Body RequestBody body);
     //商家发货
     @POST("app_api/shangjia/shopdelivery.php")

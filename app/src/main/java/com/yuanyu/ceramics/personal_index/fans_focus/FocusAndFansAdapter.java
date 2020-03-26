@@ -42,7 +42,7 @@ public class FocusAndFansAdapter extends RecyclerView.Adapter<FocusAndFansAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder,int position) {
-        GlideApp.with(context).load(BASE_URL+list.get(position).getPortrait()).placeholder(R.drawable.img_default).into(holder.image);
+        GlideApp.with(context).load(BASE_URL+list.get(position).getPortrait()).placeholder(R.drawable.logo_default).into(holder.image);
         holder.name.setText(list.get(position).getName());
         holder.txt.setText(list.get(position).getTxt());
         holder.fansNum.setText("粉丝:"+list.get(position).getFans_num());

@@ -27,7 +27,7 @@ public class ShopGoodsModel implements ShopGoodsConstract.IShopGoodsModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","shopcommodity");
+        map.put("action","shopxinpin");
         Map data = new HashMap();
         data.put("shopid",shopid);
         data.put("page",page);

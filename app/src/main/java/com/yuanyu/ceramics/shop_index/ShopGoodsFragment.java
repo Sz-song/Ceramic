@@ -75,7 +75,7 @@ public class ShopGoodsFragment extends BaseFragment<ShopGoodsPresenter> implemen
                 switch (newState) {
                     case 2:if(isAlive) { Glide.with(getContext()).pauseRequests();}
                         break;
-                    case 1:
+                    case 1:if(isAlive) {Glide.with(getContext()).resumeRequests();}
                     case 0:
                         if(isAlive) {
                         Glide.with(getContext()).resumeRequests();}
