@@ -114,8 +114,8 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
         dialog = new LoadingDialog(this);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         selectPeople.setText("所有人可见");

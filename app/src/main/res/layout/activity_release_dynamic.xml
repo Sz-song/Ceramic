@@ -86,7 +86,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/lightGray"/>
+                android:textColor="@color/lightGray"
+                android:visibility="gone"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:minHeight="150dp"
@@ -166,11 +167,6 @@
                     android:layout_marginStart="10dp"
                     android:textColor="@color/blackLight"
                     android:text="提醒谁看"/>
-                <View
-                    android:background="@color/lightGray"
-                    android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_height="0.5dp"/>
             </RelativeLayout>
             </LinearLayout>
 

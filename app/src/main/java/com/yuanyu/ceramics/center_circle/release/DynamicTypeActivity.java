@@ -59,8 +59,8 @@ public class DynamicTypeActivity extends BaseActivity {
         title.setText("谁可以见");
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         checkAnyone.setChecked(true);

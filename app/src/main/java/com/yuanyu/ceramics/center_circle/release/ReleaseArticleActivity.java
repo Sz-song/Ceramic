@@ -55,11 +55,14 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
     ImageView addImage;
     @BindView(R.id.bottom_tool)
     LinearLayout bottomTool;
+    @BindView(R.id.back)
+    TextView back;
     private List<ArticleContentBean> content;
     private String imagecover = null;
     private String cover;
     private LoadingDialog dialog;
     private List<String> image = new ArrayList<>();
+    private boolean canres = false;
 
     @Override
     protected int getLayout() {
@@ -78,8 +81,8 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         articleContent.setOnTouchListener((arg0, arg1) -> true);
@@ -99,6 +102,13 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                     Toast.makeText(ReleaseArticleActivity.this, "字数超过限制", Toast.LENGTH_SHORT).show();
                     articleTitle.setText(editable.toString().substring(0, 25));
                     articleTitle.setSelection(25);
+                }
+                if (imagecover == null || articleTitle.getText().toString().trim().equals("")){
+                    canres = false;
+                    release.setBackgroundResource(R.drawable.disablebtnbg);
+                }else {
+                    canres = true;
+                    release.setBackgroundResource(R.drawable.ablebtnbg);
                 }
             }
         });
@@ -120,6 +130,13 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                     .into(articleCover);
             if (imagecover==null){}else{
                 articleCover.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            }
+            if (imagecover == null || articleTitle.getText().toString().trim().equals("")){
+                canres = false;
+                release.setBackgroundResource(R.drawable.disablebtnbg);
+            }else {
+                canres = true;
+                release.setBackgroundResource(R.drawable.ablebtnbg);
             }
         }
     }
@@ -217,7 +234,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
         dialog.dismiss();
     }
 
-    @OnClick({R.id.release, R.id.article_cover, R.id.add_image})
+    @OnClick({R.id.release, R.id.article_cover, R.id.add_image,R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.release:
@@ -247,6 +264,9 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                         .maxSelectNum(8)// 选择图片数量
                         .isCamera(true)// 是否显示拍照按钮
                         .forResult(1003);
+                break;
+            case R.id.back:
+                finish();
                 break;
         }
     }

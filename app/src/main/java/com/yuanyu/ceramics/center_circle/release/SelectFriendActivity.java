@@ -53,7 +53,9 @@ public class SelectFriendActivity extends BaseActivity {
     private int page = 0;
     private int pagesize = 20;
     private SelectFriendAdapter adapter;
+    private GetFriImgAdapter adapter2;
     private List<FriendBean> list;
+    private List<FriendBean> list2;
     private List<FriendBean> listarr;
     private ReleaseModel model = new ReleaseModel();
 
@@ -76,8 +78,8 @@ public class SelectFriendActivity extends BaseActivity {
         title.setText("提醒谁看");
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         list = new ArrayList<>();
@@ -88,18 +90,32 @@ public class SelectFriendActivity extends BaseActivity {
         recyclerview.setAdapter(adapter);
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setRefreshing(true);
-//        adapter.setItemOnClick(new SelectFriendAdapter.ItemOnClick() {
-//            @Override
-//            public void click(FriendBean friendBean) {
-//                Intent intent=new Intent();
-//                intent.putExtra("friend_data",friendBean);
-//                setResult(RESULT_OK,intent);
-////                finish();
-//            }
-//        });
         adapter.setListener((holder, position) -> {
             if (holder instanceof SelectFriendAdapter.ViewHolder) {
-                list.get(position).setChecked(!list.get(position).isChecked());
+                if (list2.size() < 1){
+                    if (list.get(position).isChecked()){
+                        list2.add(list.get(position));
+                    }
+                }else {
+//                    判断list2中是否包含选中的元素
+                    for (int i = 0; i < list2.size(); i++) {
+                        if (list2.get(i).getId() == list.get(position).getId()){
+                            if (list.get(position).isChecked()){}else {
+                                list2.remove(i);
+                                break;
+                            }
+                        }else {
+                            if (list.get(position).isChecked()){
+                                list2.add(list.get(position));
+                                break;
+                            }else {}
+                        }
+                    }
+                }
+
+
+                adapter2 = new GetFriImgAdapter(SelectFriendActivity.this,list2);
+                checkedimg.setAdapter(adapter2);
                 ((SelectFriendAdapter.ViewHolder) holder).itemCheckbox.setChecked(list.get(position).isChecked());
                 adapter.notifyItemChanged(position);
             }
@@ -110,6 +126,8 @@ public class SelectFriendActivity extends BaseActivity {
             public void onRefresh() {
                 page = 0;
                 list.clear();
+                list2.clear();
+                adapter2.notifyDataSetChanged();
                 adapter.notifyDataSetChanged();
                 initList();
             }
@@ -171,25 +189,23 @@ public class SelectFriendActivity extends BaseActivity {
         return true;
     }
 
-    @OnClick(R.id.release)
+    @OnClick({R.id.release,R.id.back})
     void onClick(View view) {
-        Intent intent = new Intent();
-        Bundle bundle = new Bundle();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isChecked()) {
-                listarr.add(list.get(i));
-            }
+        switch (view.getId()) {
+            case R.id.release:
+                Intent intent = new Intent();
+                Bundle bundle = new Bundle();
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).isChecked()) {
+                        listarr.add(list.get(i));
+                    }
+                }
+                bundle.putSerializable("friend_data", (Serializable) listarr);
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+                finish();
+            case R.id.back:
+                finish();
         }
-        bundle.putSerializable("friend_data", (Serializable) listarr);
-        intent.putExtras(bundle);
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

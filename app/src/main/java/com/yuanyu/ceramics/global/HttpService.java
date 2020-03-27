@@ -7,6 +7,7 @@ import com.yuanyu.ceramics.bazaar.MasterWorkBean;
 import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
+import com.yuanyu.ceramics.center_circle.release.DraftsBean;
 import com.yuanyu.ceramics.chat.ChatBean;
 import com.yuanyu.ceramics.common.DynamicBean;
 import com.yuanyu.ceramics.common.FriendBean;
@@ -410,4 +411,7 @@ public interface HttpService {
     //修改主页背景和头像
     @POST("app_api/yuba/change_image.php")
     Observable<BaseResponse>changeImage(@Body RequestBody body);
+    //    获取草稿箱内容
+    @POST("111")
+    Observable<BaseResponse<List<DraftsBean>>> getDrafts(@Body RequestBody body);
 }
