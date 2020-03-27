@@ -3,13 +3,11 @@ package com.yuanyu.ceramics.center_circle.release;
 import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,8 +16,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luck.picture.lib.PictureSelector;
@@ -82,19 +78,22 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     TextView selectPeople;
     @BindView(R.id.limit_relat)
     RelativeLayout limitRelat;
+    @BindView(R.id.back)
+    TextView back;
 
     private ArrayList<String> mList;
     private List<FriendBean> list;
     private UploadPhotoAdapter adapter;
     private String addPic = "add_pic" + R.drawable.add_pic;
-    private boolean isopen=true;
+    private boolean isopen = true;
     private int textnum;
-    private List<Integer> start_index=new ArrayList<>();
-    private List<Integer> end_index=new ArrayList<>();
-    private List<Integer> listfriends =new ArrayList<>();
-    private List<String>listimages=new ArrayList<>();
-    private List<DynamicContentBean> dynamicContentList =new ArrayList<>();
+    private List<Integer> start_index = new ArrayList<>();
+    private List<Integer> end_index = new ArrayList<>();
+    private List<Integer> listfriends = new ArrayList<>();
+    private List<String> listimages = new ArrayList<>();
+    private List<DynamicContentBean> dynamicContentList = new ArrayList<>();
     private LoadingDialog dialog;
+    private boolean canres = false;
 
     @Override
     protected int getLayout() {
@@ -105,13 +104,14 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     protected ReleaseDynamicPresenter initPresent() {
         return new ReleaseDynamicPresenter();
     }
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void initEvent() {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         title.setText("发布动态");
-        dialog=new LoadingDialog(this);
+        dialog = new LoadingDialog(this);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -122,13 +122,20 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
         textNum.setText("0/140");
         recyclerview.setLayoutManager(new CantScrollGirdLayoutManager(this, 3));
         mList = new ArrayList<>();
-        list=new ArrayList<>();
+        list = new ArrayList<>();
         mList.add(addPic);
         adapter = new UploadPhotoAdapter(ReleaseDynamicActivity.this, mList);
         adapter.setCancelListener(position -> {
             mList.remove(position);
             if (!mList.get(mList.size() - 1).contains("add_pic")) mList.add(addPic);
             adapter.notifyDataSetChanged();
+            if ((mList.size() == 1) && editYuyouquan.getText().toString().trim().length() < 1) {
+                canres = false;
+                release.setBackgroundResource(R.drawable.disablebtnbg);
+            } else {
+                canres = true;
+                release.setBackgroundResource(R.drawable.ablebtnbg);
+            }
         });
         adapter.setOnItemClickListener((position, view) -> {
             if (adapter.getImages().get(position).contains("add_pic")) {
@@ -157,22 +164,36 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
         recyclerview.setAdapter(adapter);
         editYuyouquan.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
             @Override
             public void afterTextChanged(Editable editable) {
-                textnum = editYuyouquan.getText().length();
-                textNum.setText(textnum + "/140");
-                if (editable.toString().length()>139) {
-                    textNum.setTextColor(getResources().getColor(R.color.blackLight));
-                    Toast.makeText(ReleaseDynamicActivity.this, "字数不能超过140", Toast.LENGTH_SHORT).show();
+                if (mList.size() == 1 && editable.toString().length() < 1) {
+                    canres = false;
+
+                    release.setBackgroundResource(R.drawable.disablebtnbg);
                 } else {
-                    textNum.setTextColor(getResources().getColor(R.color.lightGray));
+                    canres = true;
+                    release.setBackgroundResource(R.drawable.ablebtnbg);
+                    textnum = editYuyouquan.getText().length();
+                    textNum.setText(textnum + "/140");
+                    if (editable.toString().length() > 139) {
+                        textNum.setTextColor(getResources().getColor(R.color.blackLight));
+                        Toast.makeText(ReleaseDynamicActivity.this, "字数不能超过140", Toast.LENGTH_SHORT).show();
+                    } else {
+                        textNum.setTextColor(getResources().getColor(R.color.lightGray));
+                    }
                 }
+
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -190,6 +211,13 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                 }
                 adapter.notifyDataSetChanged();
             }
+            if ((mList.size() == 1) && editYuyouquan.getText().toString().trim().length() < 1) {
+                canres = false;
+                release.setBackgroundResource(R.drawable.disablebtnbg);
+            } else {
+                canres = true;
+                release.setBackgroundResource(R.drawable.ablebtnbg);
+            }
         }
         if (requestCode == DISPLAY_IMAGE && resultCode == DELETE_IMAGE) {
             int position = data.getIntExtra("position", 999);
@@ -204,85 +232,95 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                 }
 
             }
+            if ((mList.size() == 1) && editYuyouquan.getText().toString().trim().length() < 1) {
+                canres = false;
+                release.setBackgroundResource(R.drawable.disablebtnbg);
+            } else {
+                canres = true;
+                release.setBackgroundResource(R.drawable.ablebtnbg);
+            }
         }
         if (requestCode == DYNAMIC_TYPE_CODE && data != null) {
             if (data.getIntExtra("dynamic_type", -1) == -1) {
                 selectPeople.setText("所有人可见");
-                isopen=true;
+                isopen = true;
             } else if (data.getIntExtra("dynamic_type", -1) == 0) {
                 selectPeople.setText("所有人可见");
-                isopen=true;
+                isopen = true;
             } else if (data.getIntExtra("dynamic_type", -1) == 1) {
                 selectPeople.setText("仅关注的人可见");
-                isopen=false;
+                isopen = false;
             }
         }
         if (requestCode == DYNAMIC_REMIND && data != null) {
             list.clear();
             list.addAll((List<FriendBean>) data.getExtras().getSerializable("friend_data"));
-            int wordlen=0;
-            for (int i=0;i<list.size();i++){
+            int wordlen = 0;
+            for (int i = 0; i < list.size(); i++) {
                 wordlen += list.get(i).getName().length();
             }
 //            FriendBean friendBean = (FriendBean) data.getSerializableExtra("friend_data");
-            if(editYuyouquan.getText().toString().length()+wordlen>139){
+            if (editYuyouquan.getText().toString().length() + wordlen > 139) {
                 Toast.makeText(this, "字数超过限制", Toast.LENGTH_SHORT).show();
-            }else {
-                for (int i=0;i<list.size();i++){
+            } else {
+                for (int i = 0; i < list.size(); i++) {
                     editYuyouquan.insertSpecialStr("@" + list.get(i).getName() + " ", false, list.get(i).getId(), new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)));
                 }
-                }
+            }
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home:
+//                finish();
+//                break;
+//        }
+//        return true;
+//    }
 
-    @OnClick({R.id.release, R.id.remind_relat, R.id.limit_relat})
+    @OnClick({R.id.release, R.id.remind_relat, R.id.limit_relat,R.id.back})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.release:
-                if(editYuyouquan.getText().toString().length()>140){
-                    Toast.makeText(this, "字数超过140", Toast.LENGTH_SHORT).show();
-                }else if (editYuyouquan.getText().toString().trim().length()<1&&mList.size() == 1){
-                    Toast.makeText(this, "内容不为空", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    SpEditText.SpData[] spDatas = editYuyouquan.getSpDatas();
-                    start_index.add(0);
-                    for (int i = 0; i < spDatas.length; i++) {
-                        end_index.add(spDatas[i].getStart());
-                        start_index.add(spDatas[i].getEnd());
-                    }
-                    end_index.add(editYuyouquan.length());
-                    String str = editYuyouquan.getText().toString();
-                    for (int i = 0; i < spDatas.length * 2 + 1; i++) {
-                        if (i % 2 == 0) {
-                            dynamicContentList.add(new DynamicContentBean(str.substring(start_index.get(i / 2), end_index.get(i / 2)), 0,"0"));
-                        } else {
-                            dynamicContentList.add(new DynamicContentBean(str.substring(end_index.get(i / 2), start_index.get(i / 2 + 1)), 1, spDatas[i / 2].getCustomData()+""));
-                            listfriends.add((int) spDatas[i / 2].getCustomData());
-                        }
-                    }
-                    if (mList.size() == 1) {
-                        dialog.show();
-                        presenter.releaseDynamic(Sp.getString(this,AppConstant.USER_ACCOUNT_ID),listimages,listfriends,isopen,dynamicContentList);
-                    } else if (mList.get(mList.size()-1).contains("add_pic")) {
-                        for(int i=0;i<mList.size()-1;i++){listimages.add(mList.get(i));}
-                        dialog.show();
-                        presenter.compressImages(this,listimages);
+                if (canres) {
+                    if (editYuyouquan.getText().toString().length() > 140) {
+                        Toast.makeText(this, "字数超过140", Toast.LENGTH_SHORT).show();
+                    } else if (editYuyouquan.getText().toString().trim().length() < 1 && mList.size() == 1) {
+                        Toast.makeText(this, "内容不为空", Toast.LENGTH_SHORT).show();
                     } else {
-                        listimages.addAll(mList);
-                        dialog.show();
-                        presenter.compressImages(this,listimages);
+                        SpEditText.SpData[] spDatas = editYuyouquan.getSpDatas();
+                        start_index.add(0);
+                        for (int i = 0; i < spDatas.length; i++) {
+                            end_index.add(spDatas[i].getStart());
+                            start_index.add(spDatas[i].getEnd());
+                        }
+                        end_index.add(editYuyouquan.length());
+                        String str = editYuyouquan.getText().toString();
+                        for (int i = 0; i < spDatas.length * 2 + 1; i++) {
+                            if (i % 2 == 0) {
+                                dynamicContentList.add(new DynamicContentBean(str.substring(start_index.get(i / 2), end_index.get(i / 2)), 0, "0"));
+                            } else {
+                                dynamicContentList.add(new DynamicContentBean(str.substring(end_index.get(i / 2), start_index.get(i / 2 + 1)), 1, spDatas[i / 2].getCustomData() + ""));
+                                listfriends.add((int) spDatas[i / 2].getCustomData());
+                            }
+                        }
+                        if (mList.size() == 1) {
+                            dialog.show();
+                            presenter.releaseDynamic(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), listimages, listfriends, isopen, dynamicContentList);
+                        } else if (mList.get(mList.size() - 1).contains("add_pic")) {
+                            for (int i = 0; i < mList.size() - 1; i++) {
+                                listimages.add(mList.get(i));
+                            }
+                            dialog.show();
+                            presenter.compressImages(this, listimages);
+                        } else {
+                            listimages.addAll(mList);
+                            dialog.show();
+                            presenter.compressImages(this, listimages);
+                        }
                     }
                 }
                 break;
@@ -294,8 +332,11 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                 intent = new Intent(ReleaseDynamicActivity.this, DynamicTypeActivity.class);
                 startActivityForResult(intent, DYNAMIC_TYPE_CODE);
                 break;
+            case R.id.back:
+                finish();
         }
     }
+
     @Override
     public void compressImagesSuccess(List<File> list) {
         presenter.uploadImage(list);
@@ -313,7 +354,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
 
     @Override
     public void uploadImageSuccess(List<String> list) {
-        presenter.releaseDynamic(Sp.getString(this,AppConstant.USER_ACCOUNT_ID),list,listfriends,isopen,dynamicContentList);
+        presenter.releaseDynamic(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), list, listfriends, isopen, dynamicContentList);
     }
 
     @Override
@@ -339,8 +380,14 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
         listfriends.clear();
         dynamicContentList.clear();
         Toast.makeText(this, "发布失败", Toast.LENGTH_SHORT).show();
-        L.e(e.message+"  "+e.status);
+        L.e(e.message + "  " + e.status);
         dialog.dismiss();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

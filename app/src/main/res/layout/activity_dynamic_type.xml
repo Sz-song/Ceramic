@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
     tools:context="com.yuanyu.ceramics.center_circle.release.DynamicTypeActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/white"
         app:elevation="0dp">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -20,22 +20,35 @@
             android:layout_gravity="center"
             app:contentInsetStart="0dp">
             <TextView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="取消"
+                android:layout_marginStart="20dp"
+                />
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/white"
+                android:textColor="@color/blackLight"
                 android:textSize="18sp"  />
             <TextView
                 android:id="@+id/release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gold"
+                android:textColor="@color/white"
                 android:textSize="16sp"
+                style="@style/ableRea"
                 android:layout_gravity="end"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="10dp"
                 android:text="完成"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -45,12 +58,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="10dp"
-        android:background="@color/white">
+        android:background="@color/background_gray">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/layer6_r5_p05_00_06"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        app:elevation="0dp">
         <RelativeLayout
             android:id="@+id/anyone"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="60dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -86,7 +110,7 @@
             android:id="@+id/friend"
             android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="60dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -107,5 +131,6 @@
                 android:layout_marginEnd="20dp"
                 />
         </RelativeLayout>
+    </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

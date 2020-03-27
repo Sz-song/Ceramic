@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -47,6 +46,10 @@ public class SelectFriendActivity extends BaseActivity {
     RecyclerView recyclerview;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
+    @BindView(R.id.back)
+    TextView back;
+    @BindView(R.id.checkedimg)
+    RecyclerView checkedimg;
     private int page = 0;
     private int pagesize = 20;
     private SelectFriendAdapter adapter;
@@ -78,7 +81,7 @@ public class SelectFriendActivity extends BaseActivity {
             actionBar.setDisplayShowTitleEnabled(false);
         }
         list = new ArrayList<>();
-        listarr=new ArrayList<>();
+        listarr = new ArrayList<>();
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerview.setLayoutManager(manager);
         adapter = new SelectFriendAdapter(this, list);
@@ -105,7 +108,7 @@ public class SelectFriendActivity extends BaseActivity {
         swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                page=0;
+                page = 0;
                 list.clear();
                 adapter.notifyDataSetChanged();
                 initList();
@@ -126,13 +129,14 @@ public class SelectFriendActivity extends BaseActivity {
                         int[] lastPositions = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
                     }
-                    if (lastPosition == recyclerView.getLayoutManager().getItemCount()-1) {
+                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1) {
                         initList();
                     }
                 }
             }
         });
     }
+
     private void initList() {
         model.getFriends(Sp.getString(this, "useraccountid"), page, pagesize)
                 .subscribeOn(Schedulers.io())
@@ -156,6 +160,7 @@ public class SelectFriendActivity extends BaseActivity {
                     }
                 });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -165,6 +170,7 @@ public class SelectFriendActivity extends BaseActivity {
         }
         return true;
     }
+
     @OnClick(R.id.release)
     void onClick(View view) {
         Intent intent = new Intent();
@@ -176,7 +182,14 @@ public class SelectFriendActivity extends BaseActivity {
         }
         bundle.putSerializable("friend_data", (Serializable) listarr);
         intent.putExtras(bundle);
-        setResult(RESULT_OK,intent);
+        setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

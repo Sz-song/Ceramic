@@ -18,4 +18,5 @@
     <color name="color_666666">#666666</color>
     <color name="gold">#ffc746</color>
     <color name="text_gray2">#767676</color>
+    <color name="disablebtnbg">#DBDBDB</color>
 </resources>

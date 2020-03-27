@@ -111,4 +111,11 @@
         <item name="android:textColorHint">@color/lightGray</item>
         <item name="android:textSize">15sp</item>
     </style>
+    <!--    发布按钮-->
+    <style name="disableRea">
+        <item name="android:background">@drawable/disablebtnbg</item>
+    </style>
+    <style name="ableRea">
+        <item name="android:background">@drawable/ablebtnbg</item>
+    </style>
 </resources>

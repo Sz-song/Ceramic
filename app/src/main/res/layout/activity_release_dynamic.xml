@@ -19,6 +19,14 @@
             android:layout_gravity="center"
             app:contentInsetStart="0dp">
             <TextView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="取消"
+                android:layout_marginStart="20dp"
+                />
+            <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -30,18 +38,33 @@
                 android:id="@+id/release"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
+                style="@style/disableRea"
                 android:textSize="16sp"
                 android:layout_gravity="end"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
-                android:text="发表"/>
+                android:paddingTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="10dp"
+                android:text="发布"/>
         </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white_drak"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/contain"
+                android:background="@drawable/layer6_r5_p05_00_06"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp">
             <com.sunhapper.spedittool.view.SpEditText
                 android:id="@+id/edit_yuyouquan"
                 android:layout_width="match_parent"
@@ -54,7 +77,7 @@
                 android:textSize="14sp"
                 android:padding="10dp"
                 android:maxLength="140"
-                android:hint="分享你的故事..."
+                android:hint="这一刻的想法..."
                 android:background="@drawable/release_edit"/>
             <TextView
                 android:id="@+id/text_num"
@@ -73,13 +96,51 @@
                 android:layout_marginRight="15dp"
                 android:layout_height="wrap_content">
             </androidx.recyclerview.widget.RecyclerView>
-            <View
-                android:layout_below="@+id/recyclerview"
-                android:background="@color/lightGray"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/contain"
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/layer6_r5_p05_00_06">
+                <RelativeLayout
+                    android:id="@+id/limit_relat"
+                    android:layout_below="@+id/remind_relat"
+                    android:layout_marginTop="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="50dp">
+                    <ImageView
+                        android:id="@+id/limit_image"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/compass"
+                        />
+                    <TextView
+                        android:id="@+id/limit_friends"
+                        android:layout_toEndOf="@+id/limit_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textSize="16sp"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@color/blackLight"
+                        android:text="谁可以看"/>
+                    <TextView
+                        android:id="@+id/select_people"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/lightGray"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/remind_relat"
                 android:layout_below="@+id/recyclerview"
@@ -111,49 +172,12 @@
                     android:layout_alignParentBottom="true"
                     android:layout_height="0.5dp"/>
             </RelativeLayout>
-            <RelativeLayout
-                android:id="@+id/limit_relat"
-                android:layout_below="@+id/remind_relat"
-                android:layout_marginTop="1dp"
-                android:layout_width="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_height="50dp">
-                <ImageView
-                    android:id="@+id/limit_image"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/compass"
-                    />
-                <TextView
-                    android:id="@+id/limit_friends"
-                    android:layout_toEndOf="@+id/limit_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textSize="16sp"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@color/blackLight"
-                    android:text="谁可以看"/>
-                <TextView
-                    android:id="@+id/select_people"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/lightGray"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="10dp"
-                    android:textSize="16sp"/>
-                <View
-                    android:background="@color/lightGray"
-                    android:layout_width="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_height="0.5dp"/>
-            </RelativeLayout>
+            </LinearLayout>
 
         </RelativeLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
+    <View
+        android:background="@color/lineGray"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="1dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

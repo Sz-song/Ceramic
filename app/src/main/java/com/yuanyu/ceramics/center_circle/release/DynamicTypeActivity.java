@@ -36,8 +36,11 @@ public class DynamicTypeActivity extends BaseActivity {
     SmoothCheckBox checkFriend;
     @BindView(R.id.friend)
     RelativeLayout friend;
+    @BindView(R.id.back)
+    TextView back;
 
     private int dynamic_type;
+
     @Override
     protected int getLayout() {
         return R.layout.activity_dynamic_type;
@@ -61,8 +64,9 @@ public class DynamicTypeActivity extends BaseActivity {
             actionBar.setDisplayShowTitleEnabled(false);
         }
         checkAnyone.setChecked(true);
-        dynamic_type=0;
+        dynamic_type = 0;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -72,35 +76,45 @@ public class DynamicTypeActivity extends BaseActivity {
         }
         return true;
     }
-    @OnClick({R.id.release, R.id.check_anyone, R.id.anyone, R.id.check_friend, R.id.friend})
+
+    @OnClick({R.id.release, R.id.check_anyone, R.id.anyone, R.id.check_friend, R.id.friend,R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.release:
-                Intent intent=new Intent();
-                intent.putExtra("dynamic_type",dynamic_type);
-                setResult(RESULT_OK,intent);
+                Intent intent = new Intent();
+                intent.putExtra("dynamic_type", dynamic_type);
+                setResult(RESULT_OK, intent);
                 finish();
                 break;
             case R.id.check_anyone:
                 checkAnyone.setChecked(true);
                 checkFriend.setChecked(false);
-                dynamic_type=0;
+                dynamic_type = 0;
                 break;
             case R.id.anyone:
                 checkAnyone.setChecked(true);
                 checkFriend.setChecked(false);
-                dynamic_type=0;
+                dynamic_type = 0;
                 break;
             case R.id.check_friend:
                 checkAnyone.setChecked(false);
                 checkFriend.setChecked(true);
-                dynamic_type=1;
+                dynamic_type = 1;
                 break;
             case R.id.friend:
                 checkAnyone.setChecked(false);
                 checkFriend.setChecked(true);
-                dynamic_type=1;
+                dynamic_type = 1;
                 break;
+            case R.id.back:
+                finish();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
