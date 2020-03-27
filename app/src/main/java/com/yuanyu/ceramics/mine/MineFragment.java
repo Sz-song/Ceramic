@@ -104,7 +104,6 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     @BindView(R.id.daifukuan_count)
     TextView daifukuanCount;
     @BindView(R.id.daifahuo_count)
-
     TextView daifahuoCount;
     @BindView(R.id.daishouhuo_count)
     TextView daishouhuoCount;
