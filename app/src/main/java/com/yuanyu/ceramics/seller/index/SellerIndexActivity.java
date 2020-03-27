@@ -134,7 +134,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 portraitPopupWindow.setPortraitClickListener(v -> {
 //                    PictureSelector.create(getActivity()).openGallery(PictureMimeType.ofImage())
 //                            .loadImageEngine(GlideEngine.createGlideEngine())
-//                            .maxSelectNum(1)
+//                              .maxSelectNum(1)
 //                            .forResult(CHANGE_PORTRAIT);
 //                    portraitPopupWindow.dismiss();
                 });
