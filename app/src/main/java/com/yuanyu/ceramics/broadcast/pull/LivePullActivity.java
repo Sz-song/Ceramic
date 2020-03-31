@@ -1,10 +1,12 @@
 package com.yuanyu.ceramics.broadcast.pull;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ import com.tencent.rtmp.ui.TXCloudVideoView;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
@@ -72,7 +75,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
     private LiveChatAdapter adapter;
     private List<LiveChatBean> list;
     private TIMConversation conversation;
-    private TIMGroupManager groupManager;
+    private String groupId="@TGS#a5GDQRJGE";
 
     @Override
     protected int getLayout() {
@@ -95,47 +98,29 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
             actionBar.setHomeAsUpIndicator(R.mipmap.back_rd);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        groupManager = TIMGroupManager.getInstance();
-        List<String> user = new ArrayList<>();
-        user.add(Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
-        groupManager.applyJoinGroup("@TGS#a5GDQRJGE", "", new TIMCallBack() {
-                    @Override
-                    public void onError(int i, String s) {
-                        L.e(s);
-                        Toast.makeText(LivePullActivity.this, "加入直播聊天室失败", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onSuccess() {
-                        Toast.makeText(LivePullActivity.this, "加入直播聊天室成功", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
+        conversation = TIMManager.getInstance().getConversation(TIMConversationType.Group, groupId);
+        livePlayer = new TXLivePlayer(this);
         list = new ArrayList<>();
         list.add(new LiveChatBean("0", "系统通知", "倡导文明直播，诚信交易，将会对内容进行24小时的在线巡查。任何传播违法、违规、低俗、暴力等不良信息的行为将会导致账号封停。"));
         adapter = new LiveChatAdapter(this, list);
         cahtRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         cahtRecyclerview.setAdapter(adapter);
-        presenter.initLivePull();
-        initLivePull();
-
+    }
+    @Override
+    public void initDataSuccess(LivePullBean bean) {
+        groupId=bean.getGroupid();
+        pusherShopName.setText(bean.getShop_name());
+        GlideApp.with(this)
+                .load(AppConstant.BASE_URL+bean.getShop_portrait())
+                .placeholder(R.drawable.logo_default)
+                .override(50,50)
+                .into(pusherAvatar);
+        presenter.IMLogin(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),Sp.getString(this, AppConstant.USERSIG),bean.getGroupid());
     }
 
     @Override
     public void initLivePull() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
-        conversation = TIMManager.getInstance().getConversation(TIMConversationType.Group, "@TGS#a5GDQRJGE");
-        livePlayer = new TXLivePlayer(this);
-        livePlayer.setPlayListener(new ITXLivePlayListener() {
-            @Override
-            public void onPlayEvent(int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onNetStatus(Bundle bundle) {
-
-            }
-        });
         livePlayer.setPlayerView(playerView);
         livePlayer.setRenderMode(TXLiveConstants.RENDER_MODE_FULL_FILL_SCREEN);
         livePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
@@ -147,79 +132,40 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         livePlayer.setConfig(livePlayConfig);
         String flvUrl = "http://play.jadeall.cn/live/123.flv";
         livePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
-
     }
-
     @Override
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void receiveMessageSuccess(List<TIMMessage> TIMMessagelist) {
-        L.e(TIMMessagelist.size() + "");
-        for (int i = 0; i < TIMMessagelist.size(); i++) {
-            if (TIMMessagelist.get(i).getConversation().getPeer().equals("@TGS#a5GDQRJGE")) {
-                TIMMessage msg = TIMMessagelist.get(i);
-                msg.getSenderProfile(new TIMValueCallBack<TIMUserProfile>() {
-                    @Override
-                    public void onError(int i, String s) {
-                        L.e("资料获取失败");
-                    }
-
-                    @Override
-                    public void onSuccess(TIMUserProfile timUserProfile) {
-                        for (int j = 0; j < msg.getElementCount(); ++j) {
-                            TIMElem elem = msg.getElement(j);
-                            //获取当前元素的类型
-                            TIMElemType elemType = elem.getType();
-                            if (elemType == TIMElemType.Text) {
-                                TIMTextElem textElem = (TIMTextElem) elem;
-                                LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), textElem.getText());
-                                list.add(chatBean);
-                                adapter.notifyItemRangeInserted(list.size() - 1, 1);
-                                ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
-                            } else if (elemType == TIMElemType.Image) {
-                                //处理图片消息
-                            }
-                        }
-                    }
-                });
-
-            }
-        }
-    }
-
-    @Override
-    public void sentMassageSuccess(String msg) {
-        LiveChatBean entity = new LiveChatBean(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),
-                Sp.getString(this, AppConstant.USERNAME), msg);
-        list.add(entity);
+    public void receiveMessageSuccess(LiveChatBean chatBean) {
+        list.add(chatBean);
         adapter.notifyItemRangeInserted(list.size() - 1, 1);
         ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
     }
 
     @Override
+    public void sentMassageSuccess(String msg) {
+        LiveChatBean entity = new LiveChatBean(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME), msg);
+        list.add(entity);
+        adapter.notifyItemRangeInserted(list.size() - 1, 1);
+        ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
+    }
+
+
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-        livePlayer.stopPlay(true); // true 代表清除最后一帧画面
+        if(livePlayer!=null){livePlayer.stopPlay(true); }// true 代表清除最后一帧画面
         playerView.onDestroy();
-        groupManager.quitGroup("@TGS#a5GDQRJGE", new TIMCallBack() {
-            @Override
-            public void onError(int i, String s) {
-                L.e(s);
-                Toast.makeText(LivePullActivity.this, "退出直播聊天室失败", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onSuccess() {
-                Toast.makeText(LivePullActivity.this, "退出直播", Toast.LENGTH_SHORT).show();
-            }
-        });
+        presenter.quitChatGroup(groupId);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.live_push_menu, menu);
+        getMenuInflater().inflate(R.menu.auction_detail_menu, menu);
         return true;
     }
 
@@ -229,9 +175,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
             case android.R.id.home:
                 finish();
                 break;
-            case R.id.share:
-                presenter.sentMassage("大家好", conversation);
-//                TODO
+            case R.id.more:
                 break;
             default:
                 break;
@@ -240,14 +184,22 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
 
     }
 
-    @OnClick({R.id.focus, R.id.chat_input, R.id.send, R.id.shopping})
+    @OnClick({R.id.focus,R.id.send, R.id.shopping})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.focus:
                 break;
-            case R.id.chat_input:
-                break;
             case R.id.send:
+                if(chatInput.getText().toString().length()>0){
+                    presenter.sentMassage(chatInput.getText().toString(), conversation);
+                    chatInput.setText("");
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null){
+                        imm.hideSoftInputFromWindow(chatInput.getWindowToken(), 0);
+                    }
+                }else{
+                    Toast.makeText(this, "输入不能为空", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.shopping:
                 break;

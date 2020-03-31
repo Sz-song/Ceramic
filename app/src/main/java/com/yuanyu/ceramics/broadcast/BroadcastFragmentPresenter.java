@@ -31,4 +31,22 @@ public class BroadcastFragmentPresenter extends BasePresenter<BroadcastFragmentC
                     }
                 });
     }
+
+    @Override
+    public void subscribeLive(String useraccountid, String live_id,int position) {
+        model.subscribeLive(useraccountid,live_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean subscribe) {
+                        if(view!=null){view.subscribeLiveSuccess(subscribe,position);}
+                    }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        if(view!=null){view.subscribeLiveFail(e);}
+                    }
+                });
+    }
 }

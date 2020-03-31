@@ -6,6 +6,7 @@ import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.bazaar.MasterWorkBean;
 import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
+import com.yuanyu.ceramics.broadcast.pull.LivePullBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
 import com.yuanyu.ceramics.center_circle.release.DraftsBean;
 import com.yuanyu.ceramics.chat.ChatBean;
@@ -414,4 +415,10 @@ public interface HttpService {
     //    获取草稿箱内容
     @POST("111")
     Observable<BaseResponse<List<DraftsBean>>> getDrafts(@Body RequestBody body);
+    //观众直播初始化
+    @POST("app_api/yuba/change_image.php")
+    Observable<BaseResponse<LivePullBean>> broadcastInit(@Body RequestBody body);
+    //直播订阅
+    @POST("app_api/yuba/change_image.php")
+    Observable<BaseResponse<List<Boolean>>> subscribeLive(@Body RequestBody body);
 }

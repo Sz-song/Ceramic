@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseFragment;
+import com.yuanyu.ceramics.common.OnPositionClickListener;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -39,7 +40,7 @@ public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> 
     private List<BroadcastBean> list;
     private BroadcastAdapter adapter;
     private int page;
-
+    private boolean ising;
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
         return inflater.inflate(R.layout.common_fragment, container, false);
@@ -54,7 +55,7 @@ public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> 
     protected void initEvent(View view) {
         list = new ArrayList<>();
         page=0;
-        adapter = new BroadcastAdapter(getContext(), list);
+        ising=false;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -65,7 +66,14 @@ public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> 
             }
         });
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new BroadcastAdapter(getContext(), list);
         recyclerview.setAdapter(adapter);
+        adapter.setOnSuscribeClick(position -> {
+            if(!ising){
+                ising=true;
+                presenter.subscribeLive(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID),list.get(position).getId(),position);
+            }
+        });
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setOnRefreshListener(() -> {
             page=0;
@@ -112,7 +120,7 @@ public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> 
 
     @Override
     public void initDataFail(ExceptionHandler.ResponeThrowable e) {
-        BroadcastBean broadcastBean=new BroadcastBean("","","","","");
+        BroadcastBean broadcastBean=new BroadcastBean("","","","","",true);
         list.add(broadcastBean);
         adapter.notifyDataSetChanged();
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
@@ -126,5 +134,19 @@ public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> 
                 nodata.setVisibility(View.GONE);
             }
         }
+    }
+
+    @Override
+    public void subscribeLiveSuccess(Boolean issubscribe,int pos) {
+        ising=false;
+        list.get(pos).setIssubscribe(issubscribe);
+        adapter.notifyItemChanged(pos);
+    }
+
+    @Override
+    public void subscribeLiveFail(ExceptionHandler.ResponeThrowable e) {
+        ising=false;
+        L.e(e.message+"  " +e.status);
+        Toast.makeText(getContext(), "订阅失败", Toast.LENGTH_SHORT).show();
     }
 }

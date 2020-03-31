@@ -16,6 +16,7 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.broadcast.pull.LivePullActivity;
 import com.yuanyu.ceramics.broadcast.push.LivePushActivity;
+import com.yuanyu.ceramics.common.OnPositionClickListener;
 import com.yuanyu.ceramics.global.GlideApp;
 
 import java.util.List;
@@ -26,10 +27,14 @@ import butterknife.ButterKnife;
 public class BroadcastAdapter extends RecyclerView.Adapter<BroadcastAdapter.ViewHolder> {
     private Context context;
     private List<BroadcastBean> list;
-
+    private OnPositionClickListener onSuscribeClick;
     BroadcastAdapter(Context context, List<BroadcastBean> list) {
         this.context = context;
         this.list = list;
+    }
+
+    public void setOnSuscribeClick(OnPositionClickListener onSuscribeClick) {
+        this.onSuscribeClick = onSuscribeClick;
     }
 
     @NonNull
@@ -47,9 +52,17 @@ public class BroadcastAdapter extends RecyclerView.Adapter<BroadcastAdapter.View
                 .load(AppConstant.BASE_URL+list.get(position).getImage())
                 .placeholder(R.drawable.img_default)
                 .into(holder.image);
+        if(list.get(position).isIssubscribe()){
+            holder.suscribe.setText("已订阅");
+        }else{
+            holder.suscribe.setText("+订阅");
+        }
         holder.suscribe.setOnClickListener(view -> {
-//            todo
-            Toast.makeText(context, "订阅", Toast.LENGTH_SHORT).show();
+            if(list.get(position).isIssubscribe()){
+                Toast.makeText(context, "您已经订阅过了", Toast.LENGTH_SHORT).show();
+            }else{
+                onSuscribeClick.callback(position);
+            }
         });
         holder.itemView.setOnClickListener(view -> {
             Intent intent=new Intent(context, LivePullActivity.class);

@@ -38,7 +38,7 @@ public class LiveChatAdapter extends RecyclerView.Adapter<LiveChatAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(context.getResources().getColor(R.color.colorPrimary));
-        DynamicClickableSpan clickableSpan = new DynamicClickableSpan(context, list.get(position).getUseraccountid());
+        LiveChatClickableSpan clickableSpan = new LiveChatClickableSpan(context, list.get(position).getUseraccountid());
         SpannableString spannabletxt = new SpannableString(list.get(position).getUickname()+":"+list.get(position).getMessage());
         spannabletxt.setSpan(colorSpan, 0, list.get(position).getUickname().length()+1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         spannabletxt.setSpan(clickableSpan, 0, list.get(position).getUickname().length()+1,  Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
