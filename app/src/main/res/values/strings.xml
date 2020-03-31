@@ -336,4 +336,6 @@
     <string name="changeuser">切换用户</string>
     <string name="cancel">取消</string>
     <string name="send">发送</string>
+    <string name="wu">无</string>
+    <string name="biaozhun">标准</string>
 </resources>

@@ -100,8 +100,8 @@ public class YubaHotRecyclerViewAdapter extends RecyclerView.Adapter {
         if (holder instanceof ViewHolder0) {
             holder.itemView.setOnClickListener(view -> {
 //                Intent intent=new Intent(context,ArticleDetailActivity.class);
-////                intent.putExtra("article_id",list.get(position).getId());
-////                context.startActivity(intent);
+//                intent.putExtra("article_id",list.get(position).getId());
+//                context.startActivity(intent);
             });
             GlideApp.with(context)
                     .load(BASE_URL + list.get(position).getPortrait())

@@ -21,7 +21,7 @@ public class BroadcastFragmentModel implements BroadcastFragmentConstract.IBroad
     }
 
     @Override
-    public Observable<BaseResponse<List<BroadcastBean>>> initData(String useraccountid) {
+    public Observable<BaseResponse<List<BroadcastBean>>> initData(String useraccountid,int page) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -32,6 +32,8 @@ public class BroadcastFragmentModel implements BroadcastFragmentConstract.IBroad
         map.put("action","broadcast_list");
         Map data = new HashMap();
         data.put("useraccountid",useraccountid);
+        data.put("page",page);
+        data.put("page_size",20);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

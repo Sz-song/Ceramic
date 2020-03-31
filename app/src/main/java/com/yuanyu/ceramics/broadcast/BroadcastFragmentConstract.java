@@ -10,13 +10,13 @@ import io.reactivex.Observable;
 
 public interface BroadcastFragmentConstract {
     interface IBroadcastFragmentModel{
-        Observable<BaseResponse<List<BroadcastBean>>> initData(String useraccountid);
+        Observable<BaseResponse<List<BroadcastBean>>> initData(String useraccountid,int page);
     }
     interface IBroadcastFragmentView{
         void initDataSuccess(List<BroadcastBean> list);
         void initDataFail(ExceptionHandler.ResponeThrowable e);
     }
     interface IBroadcastFragmentPresenter{
-        void initData(String useraccountid);
+        void initData(String useraccountid,int page);
     }
 }

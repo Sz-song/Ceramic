@@ -130,10 +130,10 @@
         <activity android:name=".mine.my_collect.MyCollectActivity" />
         <activity android:name=".common.ViewImageActivity" />
         <activity android:name=".personal_index.ChangeImageActivity" />
-        <activity android:name=".broadcast.push.LivePushActivity" >
+        <activity android:name=".broadcast.pull.LivePullActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
-        <activity android:name=".broadcast.pull.LivePullActivity" >
-        </activity>
+        <activity android:name=".broadcast.push.LivePushActivity" />
     </application>
 
 </manifest>

@@ -7,6 +7,14 @@ public class BroadcastBean {
     private String watch;//观看人数
     private String name;//直播标题
 
+    public BroadcastBean(String id, String image, String shop, String watch, String name) {
+        this.id = id;
+        this.image = image;
+        this.shop = shop;
+        this.watch = watch;
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }

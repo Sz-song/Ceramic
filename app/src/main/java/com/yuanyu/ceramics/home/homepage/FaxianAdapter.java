@@ -129,7 +129,7 @@ public class FaxianAdapter extends RecyclerView.Adapter {
             GlideApp.with(context).load(BASE_URL + list.get(position - 1).getProtrait()).placeholder(R.drawable.img_default).override(50, 50).into(((ViewHolder1) holder).avatar);
             ((ViewHolder1) holder).avatar.setOnClickListener(v -> {
                 Intent intent =new Intent(context, ShopIndexActivity.class);
-                intent.putExtra(AppConstant.SHOP_ID,list.get(position).getShop_id());
+                intent.putExtra(AppConstant.SHOP_ID,list.get(position-1).getShop_id());
                 context.startActivity(intent);
             });
             switch (list.get(position - 1).getImages().size()) {

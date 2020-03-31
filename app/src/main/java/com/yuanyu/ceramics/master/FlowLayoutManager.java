@@ -18,7 +18,7 @@ public class FlowLayoutManager extends RecyclerView.LayoutManager {
     private int mOffset;
     private boolean mIsFullyLayout;
 
-    FlowLayoutManager(Context context, boolean isFullyLayout) {
+    public FlowLayoutManager(Context context, boolean isFullyLayout) {
         mIsFullyLayout = isFullyLayout;
     }
 

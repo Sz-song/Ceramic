@@ -15,8 +15,8 @@ public class BroadcastFragmentPresenter extends BasePresenter<BroadcastFragmentC
     BroadcastFragmentPresenter() {model=new BroadcastFragmentModel();}
 
     @Override
-    public void initData(String useraccountid) {
-        model.initData(useraccountid)
+    public void initData(String useraccountid,int page) {
+        model.initData(useraccountid,page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<List<BroadcastBean>>())

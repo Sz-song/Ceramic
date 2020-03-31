@@ -3,14 +3,19 @@ package com.yuanyu.ceramics.broadcast;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.broadcast.pull.LivePullActivity;
+import com.yuanyu.ceramics.broadcast.push.LivePushActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 
 import java.util.List;
@@ -42,6 +47,14 @@ public class BroadcastAdapter extends RecyclerView.Adapter<BroadcastAdapter.View
                 .load(AppConstant.BASE_URL+list.get(position).getImage())
                 .placeholder(R.drawable.img_default)
                 .into(holder.image);
+        holder.suscribe.setOnClickListener(view -> {
+//            todo
+            Toast.makeText(context, "订阅", Toast.LENGTH_SHORT).show();
+        });
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent=new Intent(context, LivePullActivity.class);
+            context.startActivity(intent);
+        });
     }
 
     @Override

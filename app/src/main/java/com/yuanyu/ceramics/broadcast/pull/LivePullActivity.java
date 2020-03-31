@@ -3,7 +3,11 @@ package com.yuanyu.ceramics.broadcast.pull;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +17,6 @@ import com.tencent.imsdk.TIMConversationType;
 import com.tencent.imsdk.TIMElem;
 import com.tencent.imsdk.TIMElemType;
 import com.tencent.imsdk.TIMGroupManager;
-import com.tencent.imsdk.TIMGroupMemberInfo;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.TIMTextElem;
@@ -32,24 +35,39 @@ import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class LivePullActivity extends BaseActivity<LivePullPresenter> implements LivePullConstract.ILivePullView {
+
     @BindView(R.id.player_view)
     TXCloudVideoView playerView;
-    @BindView(R.id.title)
-    TextView title;
+    @BindView(R.id.pusher_avatar)
+    CircleImageView pusherAvatar;
+    @BindView(R.id.pusher_shop_name)
+    TextView pusherShopName;
+    @BindView(R.id.watch)
+    TextView watch;
+    @BindView(R.id.focus)
+    Button focus;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.caht_recyclerview)
     RecyclerView cahtRecyclerview;
+    @BindView(R.id.chat_input)
+    EditText chatInput;
+    @BindView(R.id.send)
+    TextView send;
+    @BindView(R.id.shopping)
+    ImageView shopping;
     private TXLivePlayer livePlayer;
     private LiveChatAdapter adapter;
     private List<LiveChatBean> list;
@@ -77,22 +95,23 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
             actionBar.setHomeAsUpIndicator(R.mipmap.back_rd);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        groupManager=TIMGroupManager.getInstance();
-        List<String> user=new ArrayList<>();
-        user.add(Sp.getString(this,AppConstant.USER_ACCOUNT_ID));
-        groupManager.inviteGroupMember("@TGS#a5GDQRJGE",user , new TIMValueCallBack<List<TIMGroupMemberResult>>() {
-            @Override
-            public void onError(int i, String s) {
-                L.e(s);
-                Toast.makeText(LivePullActivity.this, "加入直播失败", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onSuccess(List<TIMGroupMemberResult> timGroupMemberResults) {
-                Toast.makeText(LivePullActivity.this, "加入直播成功", Toast.LENGTH_SHORT).show();
-            }
-        });
+        groupManager = TIMGroupManager.getInstance();
+        List<String> user = new ArrayList<>();
+        user.add(Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
+        groupManager.applyJoinGroup("@TGS#a5GDQRJGE", "", new TIMCallBack() {
+                    @Override
+                    public void onError(int i, String s) {
+                        L.e(s);
+                        Toast.makeText(LivePullActivity.this, "加入直播聊天室失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        Toast.makeText(LivePullActivity.this, "加入直播聊天室成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
         list = new ArrayList<>();
-        list.add(new LiveChatBean("0","系统通知","倡导文明直播，诚信交易，将会对内容进行24小时的在线巡查。任何传播违法、违规、低俗、暴力等不良信息的行为将会导致账号封停。"));
+        list.add(new LiveChatBean("0", "系统通知", "倡导文明直播，诚信交易，将会对内容进行24小时的在线巡查。任何传播违法、违规、低俗、暴力等不良信息的行为将会导致账号封停。"));
         adapter = new LiveChatAdapter(this, list);
         cahtRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         cahtRecyclerview.setAdapter(adapter);
@@ -147,6 +166,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
                     public void onError(int i, String s) {
                         L.e("资料获取失败");
                     }
+
                     @Override
                     public void onSuccess(TIMUserProfile timUserProfile) {
                         for (int j = 0; j < msg.getElementCount(); ++j) {
@@ -155,7 +175,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
                             TIMElemType elemType = elem.getType();
                             if (elemType == TIMElemType.Text) {
                                 TIMTextElem textElem = (TIMTextElem) elem;
-                                LiveChatBean chatBean=new LiveChatBean(timUserProfile.getIdentifier(),timUserProfile.getNickName(),textElem.getText());
+                                LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), textElem.getText());
                                 list.add(chatBean);
                                 adapter.notifyItemRangeInserted(list.size() - 1, 1);
                                 ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
@@ -187,9 +207,9 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         groupManager.quitGroup("@TGS#a5GDQRJGE", new TIMCallBack() {
             @Override
             public void onError(int i, String s) {
-
+                L.e(s);
+                Toast.makeText(LivePullActivity.this, "退出直播聊天室失败", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onSuccess() {
                 Toast.makeText(LivePullActivity.this, "退出直播", Toast.LENGTH_SHORT).show();
@@ -210,7 +230,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
                 finish();
                 break;
             case R.id.share:
-                presenter.sentMassage("大家好",conversation);
+                presenter.sentMassage("大家好", conversation);
 //                TODO
                 break;
             default:
@@ -218,5 +238,19 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         }
         return true;
 
+    }
+
+    @OnClick({R.id.focus, R.id.chat_input, R.id.send, R.id.shopping})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.focus:
+                break;
+            case R.id.chat_input:
+                break;
+            case R.id.send:
+                break;
+            case R.id.shopping:
+                break;
+        }
     }
 }
