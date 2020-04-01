@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginBottom="5dp">
     <ImageView
         android:id="@+id/image"
         android:layout_width="20dp"
@@ -12,8 +14,8 @@
         android:background="@drawable/address"/>
     <LinearLayout
         android:id="@+id/liner"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/image"
@@ -47,7 +49,7 @@
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="10dp"
             android:textSize="13sp"
             android:textColor="@color/gray"/>
     </LinearLayout>
@@ -55,10 +57,9 @@
     <RelativeLayout
         android:id="@+id/relat"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/liner">
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0.3dp"
@@ -136,9 +137,4 @@
                 android:textSize="13sp" />
         </LinearLayout>
     </RelativeLayout>
-    <View
-        android:layout_below="@+id/relat"
-        android:background="@color/dividerGray"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"/>
 </RelativeLayout>

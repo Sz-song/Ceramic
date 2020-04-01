@@ -39,10 +39,25 @@
             android:layout_height="wrap_content"
             android:text="重发"
             android:layout_alignParentEnd="true"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:textSize="13sp"
+            android:background="@drawable/layer6_r5_p05_00_06"/>
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tores"
+            android:layout_marginTop="5dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:textSize="13sp"
             android:background="@drawable/layer6_r5_p05_00_06"/>
     </RelativeLayout>
     <View

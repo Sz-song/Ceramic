@@ -1,12 +1,12 @@
 package com.yuanyu.ceramics.center_circle.release;
 
 public class DraftsBean {
-    private String type;
+    private int type;
     private String time;
     private String content;
     private String id;
 
-    public DraftsBean(String type, String time, String content, String id) {
+    public DraftsBean(int type, String time, String content, String id) {
         this.type = type;
         this.time = time;
         this.content = content;
@@ -20,11 +20,11 @@ public class DraftsBean {
         return id;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(int type) {
         this.type = type;
     }
 

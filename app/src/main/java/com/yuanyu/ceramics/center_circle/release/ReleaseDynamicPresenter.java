@@ -6,6 +6,7 @@ import android.content.Context;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.common.DynamicContentBean;
+import com.yuanyu.ceramics.common.FriendBean;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
@@ -58,14 +59,14 @@ public class ReleaseDynamicPresenter extends BasePresenter<ReleaseDynamicConstra
     }
 
     @Override
-    public void releaseDynamic(String useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
+    public void releaseDynamic(String id,String useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
         List<DynamicContentBean> list=new ArrayList<>();
         for(int i=0;i<listcontent.size();i++){
             if(listcontent.get(i).getContent().length()>0){
                 list.add(listcontent.get(i));
             }
         }
-        model.releaseDynamic(useraccountid,listimage,listfriends,isopen,list)
+        model.releaseDynamic(id,useraccountid,listimage,listfriends,isopen,list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
@@ -74,6 +75,40 @@ public class ReleaseDynamicPresenter extends BasePresenter<ReleaseDynamicConstra
                     public void onNext(Boolean b) {if(view!=null){view.releaseDynamicSuccess(b);}}
                     @Override
                     public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.releaseDynamicFail(e);}}
+                });
+    }
+    @Override
+//    mlist
+    public void savedraftsDynamic(String id, String useraccountid, List<DynamicContentBean> inputcontent, String inputstr, List<String> imglist, List<FriendBean> peoplelist, boolean isopen) {
+        List<DynamicContentBean> list=new ArrayList<>();
+        for(int i=0;i<inputcontent.size();i++){
+            if(inputcontent.get(i).getContent().length()>0){
+                list.add(inputcontent.get(i));
+            }
+        }
+        model.savedraftsDynamic(id,useraccountid,inputcontent,inputstr,imglist,peoplelist,isopen)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean b) {if(view!=null){view.savedraftsDynamicSuccess(b);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.savedraftsDynamicFail(e);}}
+                });
+    }
+
+    @Override
+    public void getDynamic(String id) {
+        model.getDynamic(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<DraftsDynamic>() {
+                    @Override
+                    public void onNext(DraftsDynamic b) {if(view!=null){view.getDynamicSuccess(b);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.getDynamicFail(e);}}
                 });
     }
 }

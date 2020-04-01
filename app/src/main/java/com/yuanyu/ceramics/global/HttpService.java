@@ -8,7 +8,9 @@ import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.broadcast.pull.LivePullBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
+import com.yuanyu.ceramics.center_circle.release.DraftsArticle;
 import com.yuanyu.ceramics.center_circle.release.DraftsBean;
+import com.yuanyu.ceramics.center_circle.release.DraftsDynamic;
 import com.yuanyu.ceramics.chat.ChatBean;
 import com.yuanyu.ceramics.common.DynamicBean;
 import com.yuanyu.ceramics.common.FriendBean;
@@ -189,12 +191,29 @@ public interface HttpService {
     //发布动态
     @POST("back/test/api/quan/releasedynamic.php")
     Observable<BaseResponse<Boolean>>ReleaseDynamic(@Body RequestBody body);
+    //    保存动态
+    @POST("app_api/yuba/save_dynamic.php")
+    Observable<BaseResponse<Boolean>>SaveDynamic(@Body RequestBody body);
+    //    获取草稿箱动态详情
+    @POST("app_api/yuba/get_dynamic_draft.php")
+    Observable<BaseResponse<DraftsDynamic>>getDynamic(@Body RequestBody body);
     //获取好友列表
     @POST("back/test/api/quan/getfriends.php")
     Observable<BaseResponse<List<FriendBean>>>getFriends(@Body RequestBody body);
     //发布文章
     @POST("back/test/api/quan/releasearticle.php")
     Observable<BaseResponse<Boolean>>ReleaseArticle(@Body RequestBody body);
+    //    获取草稿箱文章详情
+    @POST("app_api/yuba/get_drafts_articledetail.php")
+    Observable<BaseResponse<DraftsArticle>>getArticle(@Body RequestBody body);
+    //    保存文章
+    @POST("app_api/yuba/drafts_article.php")
+    Observable<BaseResponse<Boolean>>SaveArticle(@Body RequestBody body);
+
+//    草稿箱
+//    从草稿箱删除动态/文章
+    @POST("app_api/yuba/delete_drafts.php")
+    Observable<BaseResponse<String[]>>deleteDraftsDynamic(@Body RequestBody body);
 
     //评论
     @POST("app_api/yuba/releasepinglun.php")

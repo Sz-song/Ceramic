@@ -4,6 +4,7 @@ package com.yuanyu.ceramics.center_circle.release;
 import com.google.gson.Gson;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.common.DynamicContentBean;
+import com.yuanyu.ceramics.common.FriendBean;
 import com.yuanyu.ceramics.global.HttpService;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
@@ -51,7 +52,7 @@ public class ReleaseDynamicModel implements ReleaseDynamicConstract.IReleaseDyna
     }
 
     @Override
-    public Observable<BaseResponse<Boolean>> releaseDynamic(String useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
+    public Observable<BaseResponse<Boolean>> releaseDynamic(String id,String useraccountid, List<String> listimage, List<Integer> listfriends, boolean isopen, List<DynamicContentBean> listcontent) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -72,5 +73,50 @@ public class ReleaseDynamicModel implements ReleaseDynamicConstract.IReleaseDyna
         L.e("str is "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
         return httpService.ReleaseDynamic(body);
+    }
+    @Override
+    public Observable<BaseResponse<Boolean>> savedraftsDynamic(String id, String useraccountid, List<DynamicContentBean> inputcontent, String inputstr, List<String> imglist, List<FriendBean> peoplelist, boolean isopen) {
+        String timestamp = Md5Utils.getTimeStamp();
+        String randomstr = Md5Utils.getRandomString(10);
+        String signature = Md5Utils.getSignature(timestamp,randomstr);
+        Map map = new HashMap();
+        map.put("timestamp",timestamp);
+        map.put("randomstr",randomstr);
+        map.put("signature",signature);
+        map.put("action","save_dynamic");
+        Map data = new HashMap();
+        data.put("useraccountid",useraccountid);
+        data.put("id",id);
+        data.put("listcontent",inputcontent);
+        data.put("inputstr",inputstr);
+        data.put("listimage",imglist);
+        data.put("listfriends",peoplelist);
+        data.put("isopen",isopen);
+        map.put("data",data);
+        Gson gson=new Gson();
+        String str=gson.toJson(map);
+        L.e("str is "+str);
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        return httpService.SaveDynamic(body);
+    }
+
+    @Override
+    public Observable<BaseResponse<DraftsDynamic>> getDynamic(String id) {
+        String timestamp = Md5Utils.getTimeStamp();
+        String randomstr = Md5Utils.getRandomString(10);
+        String signature = Md5Utils.getSignature(timestamp,randomstr);
+        Map map = new HashMap();
+        map.put("timestamp",timestamp);
+        map.put("randomstr",randomstr);
+        map.put("signature",signature);
+        map.put("action","get_dynamic_draft");
+        Map data = new HashMap();
+        data.put("id",id);
+        map.put("data",data);
+        Gson gson=new Gson();
+        String str=gson.toJson(map);
+        L.e("str is "+str);
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        return httpService.getDynamic(body);
     }
 }

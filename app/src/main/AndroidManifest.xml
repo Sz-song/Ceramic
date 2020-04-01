@@ -134,6 +134,7 @@
             android:windowSoftInputMode="stateHidden|adjustPan">
         </activity>
         <activity android:name=".broadcast.push.LivePushActivity" />
+        <activity android:name=".center_circle.release.DraftsActivity" />
     </application>
 
 </manifest>

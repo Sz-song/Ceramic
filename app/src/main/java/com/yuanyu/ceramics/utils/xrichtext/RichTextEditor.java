@@ -693,6 +693,7 @@ public class RichTextEditor extends ScrollView {
 		public Bitmap bitmap;
 	}
 
+	public LinearLayout getAllLayout(){ return allLayout;}
     public int getRtImageHeight() {
         return rtImageHeight;
     }

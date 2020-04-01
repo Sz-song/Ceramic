@@ -62,7 +62,7 @@ public class ReleaseArticlePresenter extends BasePresenter<ReleaseArticleConstra
     }
 
     @Override
-    public void releaseArticle(String cover, String title, String useraccountid, List<ArticleContentBean> content) {
+    public void releaseArticle(String id,String cover, String title, String useraccountid, List<ArticleContentBean> content) {
         //去除多余
         List<ArticleContentBean> list=new ArrayList<>();
         for(int i=0;i<content.size();i++){
@@ -70,7 +70,7 @@ public class ReleaseArticlePresenter extends BasePresenter<ReleaseArticleConstra
                 list.add(content.get(i));
             }
         }
-        model.releaseArticle(cover,title,useraccountid,list)
+        model.releaseArticle(id,cover,title,useraccountid,list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
@@ -79,6 +79,54 @@ public class ReleaseArticlePresenter extends BasePresenter<ReleaseArticleConstra
                     public void onNext(Boolean b) {if(view!=null){view.releaseArticleSuccess(b);}}
                     @Override
                     public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.releaseArticleFail(e);}}
+                });
+    }
+    @Override
+    public void saveArticle(String id,String cover, String title, String useraccountid, List<ArticleContentBean> content) {
+        //去除多余
+        List<ArticleContentBean> list=new ArrayList<>();
+        for(int i=0;i<content.size();i++){
+            if(content.get(i).getContent().length()>0){
+                list.add(content.get(i));
+            }
+        }
+        model.saveArticle(id,cover,title,useraccountid,list)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean b) {if(view!=null){view.saveArticleSuccess(b);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.saveArticleFail(e);}}
+                });
+    }
+
+    @Override
+    public void getArticle(String id) {
+        model.getArticle(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<DraftsArticle>() {
+                    @Override
+                    public void onNext(DraftsArticle b) {if(view!=null){view.getArticleSuccess(b);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.getArticleFail(e);}}
+                });
+    }
+
+    @Override
+    public void deleteArticle(String useraccountid,String id) {
+        model.deleteArticle(useraccountid,id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<String[]>() {
+                    @Override
+                    public void onNext(String[] b) {if(view!=null){view.deleteArticleSuccess(b);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.deleteArticleFail(e);}}
                 });
     }
 }

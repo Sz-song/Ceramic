@@ -104,9 +104,9 @@ public class ReleasePopWindow extends PopupWindow implements View.OnClickListene
                         @Override
                         public void accept(Long aLong) {
                             child.setVisibility(View.VISIBLE);
-//                            if (child.getId() == R.id.drafts) {
-//                                child.setVisibility(View.GONE);
-//                            }
+                            if (child.getId() == R.id.drafts) {
+                                child.setVisibility(View.GONE);
+                            }
                             ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 0, 600);
                             fadeAnim.setDuration(400);
                             KickBackAnimator kickAnimator = new KickBackAnimator();
@@ -164,9 +164,10 @@ public class ReleasePopWindow extends PopupWindow implements View.OnClickListene
                 intent = new Intent(context, ReleaseDynamicActivity.class);
                 context.startActivity(intent);
                 break;
-//            case R.id.drafts:
-//                //TODO
-//                break;
+            case R.id.drafts:
+                intent = new Intent(context, DraftsActivity.class);
+                context.startActivity(intent);
+                break;
             case R.id.ll_close:
                 if (isShowing()) {
                     closeAnimation(contentView);
