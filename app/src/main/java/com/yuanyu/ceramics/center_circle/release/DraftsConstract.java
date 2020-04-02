@@ -12,7 +12,7 @@ public interface DraftsConstract {
     interface  IDraftsModel {
 //        获取草稿列表
         Observable<BaseResponse<List<DraftsBean>>> getDrafts(String useraccoundid, int page, int pagesize);
-        Observable<BaseResponse<String[]>> deletedrafts(int useraccountid,String id,int type,int position);
+        Observable<BaseResponse<String[]>> deletedrafts(String useraccountid,String id,int type,int position);
     }
 //    调完接口要执行的方法
     interface IDraftsView{
@@ -25,6 +25,6 @@ public interface DraftsConstract {
     //要用的方法
     interface IDraftsPresenter{
         void getDrafts(String useraccoundid, int page, int pagesize);
-        void deletedrafts(int useraccountid,String id,int type,int position);
+        void deletedrafts(String useraccountid,String id,int type,int position);
 }
 }

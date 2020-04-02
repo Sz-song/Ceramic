@@ -26,10 +26,14 @@ public class ReleaseDynamicPresenter extends BasePresenter<ReleaseDynamicConstra
     @SuppressLint("CheckResult")
     @Override
     public void compressImages(Context context, List<String> list) {
-        for (int i = 0; i <list.size() ; i++) {
-            L.e(list.get(i));
+        List<String> newlist = new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).startsWith("back/img/")){
+            }else {
+                newlist.add(list.get(i));
+            }
         }
-        Flowable.just(list).observeOn(Schedulers.io())
+        Flowable.just(newlist).observeOn(Schedulers.io())
                 .map(list1 -> {
                     //Luban压缩，返回List<File>
                     return Luban.with(context).load(list1).get();

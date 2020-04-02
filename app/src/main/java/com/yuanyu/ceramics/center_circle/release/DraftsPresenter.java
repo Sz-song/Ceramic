@@ -38,7 +38,7 @@ public class DraftsPresenter extends BasePresenter<DraftsConstract.IDraftsView> 
                 });
     }
     @Override
-    public void deletedrafts(int useraccountid, String id, int type,int position) {
+    public void deletedrafts(String useraccountid, String id, int type,int position) {
         model.deletedrafts(useraccountid,id,type,position)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -70,6 +70,19 @@ public class Md5Utils {
         return buf.toString();
     }
     // 将时间戳转为字符串
+    public static String getStrSecond(String cc_time) {
+        String re_StrTime = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 例如：cc_time=1291778220
+        try {
+            long lcc_time = Long.valueOf(cc_time);
+            re_StrTime = sdf.format(new Date(lcc_time * 1000L));
+            return re_StrTime;
+        }catch (Exception e){
+            return "";
+        }
+    }
+    // 将时间戳转为字符串
     public static String getStrMin(String cc_time) {
         String re_StrTime = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");

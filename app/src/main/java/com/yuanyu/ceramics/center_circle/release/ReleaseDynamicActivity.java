@@ -184,7 +184,6 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                 } else {
                     canres = true;
                     release.setBackgroundResource(R.drawable.ablebtnbg);
-//                    release.setTextAppearance(ReleaseDynamicActivity.this, R.style.ableRea);
                     textnum = editYuyouquan.getText().length();
                     textNum.setText(textnum + "/140");
                     if (editable.toString().length() > 139) {
@@ -271,7 +270,6 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
             for (int i = 0; i < listfri.size(); i++) {
                 wordlen += listfri.get(i).getName().length();
             }
-//            FriendBean friendBean = (FriendBean) data.getSerializableExtra("friend_data");
             if (editYuyouquan.getText().toString().length() + wordlen > 139) {
                 Toast.makeText(this, "字数超过限制", Toast.LENGTH_SHORT).show();
             } else {
@@ -371,15 +369,16 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     @Override
     public void uploadImageSuccess(List<String> list) {
         int j = 0;
-        for (int i = 0; i < listimages.size(); i++) {
-            if (listimages.get(i).startsWith("img/")){
+        if (list.size() > 0){
+            for (int i = 0; i < listimages.size(); i++) {
+                if (listimages.get(i).startsWith("back/img/")){
 
-            }else {
-                listimages.set(i,list.get(j));
-                j++;
+                }else {
+                    listimages.set(i,list.get(j));
+                    j++;
+                }
             }
         }
-
         String draftsid = "";
         if (dynamicId != null && dynamicId.length() > 0) {
             draftsid = dynamicId;

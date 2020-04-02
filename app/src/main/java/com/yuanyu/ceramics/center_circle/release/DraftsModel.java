@@ -41,7 +41,7 @@ public class DraftsModel implements DraftsConstract.IDraftsModel {
         return httpService.getDrafts(body);
     }
     @Override
-    public Observable<BaseResponse<String[]>> deletedrafts(int useraccountid, String id, int type,int position) {
+    public Observable<BaseResponse<String[]>> deletedrafts(String useraccountid, String id, int type,int position) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

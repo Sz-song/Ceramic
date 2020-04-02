@@ -51,7 +51,7 @@ public class DraftsAdapter extends RecyclerView.Adapter<DraftsAdapter.ViewHolder
                 holder.type.setText("文章");
                 break;
         }
-        holder.time.setText(Md5Utils.getTimeMin(list.get(position).getTime()));
+        holder.time.setText(Md5Utils.getStrSecond(list.get(position).getTime()));
         holder.content.setText(list.get(position).getContent());
         holder.tores.setOnClickListener(view -> {ToresListener.callback(position);});
         holder.delete.setOnClickListener(view -> {

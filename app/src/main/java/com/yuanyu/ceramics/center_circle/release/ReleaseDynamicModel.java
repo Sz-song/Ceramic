@@ -62,6 +62,7 @@ public class ReleaseDynamicModel implements ReleaseDynamicConstract.IReleaseDyna
         map.put("signature",signature);
         map.put("action","releasedynamic");
         Map data = new HashMap();
+        data.put("id",id);
         data.put("useraccountid",useraccountid);
         data.put("listimage",listimage);
         data.put("listfriends",listfriends);

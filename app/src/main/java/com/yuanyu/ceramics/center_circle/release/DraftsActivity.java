@@ -92,20 +92,20 @@ public class DraftsActivity extends BaseActivity<DraftsPresenter> implements Dra
         adapter.ToresListener(position -> {
             if (list.get(position).getType() == 0) {
                 Intent intent = new Intent(DraftsActivity.this, ReleaseDynamicActivity.class);
-                intent.putExtra("id", list.get(position).getId());
+                intent.putExtra("dynamicid", list.get(position).getId());
                 startActivity(intent);
             }else {
                 Intent intent = new Intent(DraftsActivity.this, ReleaseArticleActivity.class);
-                intent.putExtra("id", list.get(position).getId());
+                intent.putExtra("articleid", list.get(position).getId());
                 startActivity(intent);
             }
         });
         adapter.Todelete(position -> {
             if (list.get(position).getType() == 0) {
-                presenter.deletedrafts(Sp.getInt(DraftsActivity.this,"useraccountid"),list.get(position).getId(),0,position);
+                presenter.deletedrafts(Sp.getString(DraftsActivity.this,"useraccountid"),list.get(position).getId(),0,position);
             }
             else {
-                presenter.deletedrafts(Sp.getInt(DraftsActivity.this,"useraccountid"),list.get(position).getId(),1,position);
+                presenter.deletedrafts(Sp.getString(DraftsActivity.this,"useraccountid"),list.get(position).getId(),1,position);
             }
         });
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {

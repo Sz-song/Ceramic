@@ -158,8 +158,8 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
             if (itemData.inputStr != null) {
                 content.add(new ArticleContentBean(0, itemData.inputStr));
             } else if (itemData.imagePath != null) {
-                if (itemData.imagePath.indexOf("img/") != -1){
-                    String tempstr = itemData.imagePath.substring(itemData.imagePath.indexOf("img/"));
+                if (itemData.imagePath.indexOf("back/img/") != -1){
+                    String tempstr = itemData.imagePath.substring(itemData.imagePath.indexOf("back/img/"));
                     image.add(tempstr);
                     content.add(new ArticleContentBean(1, tempstr));
                 }else {
@@ -170,7 +170,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
         }
         List<String> templist = new ArrayList<>();
         for (int i = 0; i < image.size(); i++) {
-            if (image.get(i).startsWith("img/")){}
+            if (image.get(i).startsWith("back/img/")){}
             else {
                 templist.add(image.get(i));
             }
@@ -218,14 +218,14 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
         //把图片路径替换成服务器路径
         if (list.size() == 1){
             if (imagecover != null && imagecover.length() > 0){
-                if (imagecover.startsWith("img/")){
+                if (imagecover.startsWith("back/img/")){
                     cover = imagecover;
                 }else {
                     cover = list.get(0);
                 }
             }else {
                 for (int i = 0; i < content.size(); i++) {
-                    if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
+                    if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("back/img/")) {
                         content.set(i, new ArticleContentBean(1, list.get(0)));
                         break;
                     }
@@ -234,11 +234,11 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
         }
         if (list.size() > 1) {
             if (imagecover != null && imagecover.length() > 0){
-                if (imagecover.startsWith("img/")){
+                if (imagecover.startsWith("back/img/")){
                     cover = imagecover;
                     int temp = 0;
                     for (int i = 0; i < content.size(); i++) {
-                        if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
+                        if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("back/img/")) {
                             content.set(i, new ArticleContentBean(1, list.get(temp)));
                             temp++;
                         }
@@ -247,7 +247,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                     cover = list.get(0);
                     int temp = 1;
                     for (int i = 0; i < content.size(); i++) {
-                        if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
+                        if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("back/img/")) {
                             content.set(i, new ArticleContentBean(1, list.get(temp)));
                             temp++;
                         }
@@ -256,7 +256,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
             }else {
                 int temp = 0;
                 for (int i = 0; i < content.size(); i++) {
-                   if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
+                   if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("back/img/")) {
                         content.set(i, new ArticleContentBean(1, list.get(temp)));
                         temp++;
                     }
@@ -292,11 +292,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
     public void releaseArticleSuccess(Boolean b) {
         Toast.makeText(this, "发布成功", Toast.LENGTH_SHORT).show();
         dialog.dismiss();
-        if (articleId != null && articleId.length() > 0){
-            presenter.deleteArticle(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),articleId);
-        }else {
-            finish();
-        }
+        finish();
     }
 
     @Override
@@ -445,12 +441,11 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
             dialog.show();
             List<String> templist = new ArrayList<>();
             for (int i = 0; i < imglist.size(); i++) {
-                if (imglist.get(i).startsWith("img/")){}
+                if (imglist.get(i).startsWith("back/img/")){}
                 else {
                     templist.add(imglist.get(i));
                 }
             }
-            L.e("iiiii"+imglist.size());
             if (templist.size() > 0){
                 presenter.compressImages(this,templist);
             }else {
@@ -482,8 +477,8 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
             if (itemData.inputStr != null) {
                 content.add(new ArticleContentBean(0, itemData.inputStr));
             } else if (itemData.imagePath != null) {
-                if (itemData.imagePath.indexOf("img/") != -1){
-                    String tempstr = itemData.imagePath.substring(itemData.imagePath.indexOf("img/"));
+                if (itemData.imagePath.indexOf("back/img/") != -1){
+                    String tempstr = itemData.imagePath.substring(itemData.imagePath.indexOf("back/img/"));
                     image.add(tempstr);
                     content.add(new ArticleContentBean(1, tempstr));
                 }else {

@@ -79,7 +79,6 @@ public class SelectFriendActivity extends BaseActivity {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
-//            actionBar.setHomeAsUpIndicator(R.mipmap.back1);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         list = new ArrayList<>();
