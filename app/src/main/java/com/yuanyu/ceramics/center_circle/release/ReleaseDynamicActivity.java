@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -26,6 +27,7 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.CantScrollGirdLayoutManager;
+import com.yuanyu.ceramics.common.DeleteDialog;
 import com.yuanyu.ceramics.common.DynamicContentBean;
 import com.yuanyu.ceramics.common.FriendBean;
 import com.yuanyu.ceramics.common.GlideEngine;
@@ -82,7 +84,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     TextView back;
 
     private ArrayList<String> mList;
-    private List<FriendBean> list;
+    private List<FriendBean> listfri;
     private UploadPhotoAdapter adapter;
     private String addPic = "add_pic" + R.drawable.add_pic;
     private boolean isopen = true;
@@ -94,6 +96,9 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     private List<DynamicContentBean> dynamicContentList = new ArrayList<>();
     private LoadingDialog dialog;
     private boolean canres = false;
+    private String dynamicId = "";
+    private boolean savedrafts = false;
+    private String savestr = "";
 
     @Override
     protected int getLayout() {
@@ -115,15 +120,14 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
-//            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        selectPeople.setText("所有人可见");
-        textNum.setText("0/140");
+        //        如果是从草稿箱来的
+        Intent getintent = getIntent();
+        dynamicId = getintent.getStringExtra("dynamicid");
         recyclerview.setLayoutManager(new CantScrollGirdLayoutManager(this, 3));
         mList = new ArrayList<>();
-        list = new ArrayList<>();
-        mList.add(addPic);
+        listfri = new ArrayList<>();
         adapter = new UploadPhotoAdapter(ReleaseDynamicActivity.this, mList);
         adapter.setCancelListener(position -> {
             mList.remove(position);
@@ -180,6 +184,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                 } else {
                     canres = true;
                     release.setBackgroundResource(R.drawable.ablebtnbg);
+//                    release.setTextAppearance(ReleaseDynamicActivity.this, R.style.ableRea);
                     textnum = editYuyouquan.getText().length();
                     textNum.setText(textnum + "/140");
                     if (editable.toString().length() > 139) {
@@ -192,6 +197,13 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
 
             }
         });
+        if (dynamicId != null && dynamicId.length() > 0) {
+            getDynamicDetail();
+        } else {
+            selectPeople.setText("所有人可见");
+            textNum.setText("0/140");
+            mList.add(addPic);
+        }
     }
 
     @Override
@@ -253,39 +265,32 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
             }
         }
         if (requestCode == DYNAMIC_REMIND && data != null) {
-            list.clear();
-            list.addAll((List<FriendBean>) data.getExtras().getSerializable("friend_data"));
+            listfri.clear();
+            listfri.addAll((List<FriendBean>) data.getExtras().getSerializable("friend_data"));
             int wordlen = 0;
-            for (int i = 0; i < list.size(); i++) {
-                wordlen += list.get(i).getName().length();
+            for (int i = 0; i < listfri.size(); i++) {
+                wordlen += listfri.get(i).getName().length();
             }
 //            FriendBean friendBean = (FriendBean) data.getSerializableExtra("friend_data");
             if (editYuyouquan.getText().toString().length() + wordlen > 139) {
                 Toast.makeText(this, "字数超过限制", Toast.LENGTH_SHORT).show();
             } else {
-                for (int i = 0; i < list.size(); i++) {
-                    editYuyouquan.insertSpecialStr("@" + list.get(i).getName() + " ", false, list.get(i).getId(), new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)));
+                for (int i = 0; i < listfri.size(); i++) {
+                    editYuyouquan.insertSpecialStr("@" + listfri.get(i).getName() + " ", false, listfri.get(i).getId(), new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)));
                 }
             }
         }
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case android.R.id.home:
-//                finish();
-//                break;
-//        }
-//        return true;
-//    }
 
     @OnClick({R.id.release, R.id.remind_relat, R.id.limit_relat,R.id.back})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
             case R.id.release:
+                savedrafts = false;
                 if (canres) {
+                    dynamicContentList.clear();
+                    listfriends.clear();
                     if (editYuyouquan.getText().toString().length() > 140) {
                         Toast.makeText(this, "字数超过140", Toast.LENGTH_SHORT).show();
                     } else if (editYuyouquan.getText().toString().trim().length() < 1 && mList.size() == 1) {
@@ -307,9 +312,15 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                                 listfriends.add((int) spDatas[i / 2].getCustomData());
                             }
                         }
+                        String draftsid = "";
+                        if (dynamicId != null && dynamicId.length() > 0) {
+                            draftsid = dynamicId;
+                        } else {
+                            draftsid = "";
+                        }
                         if (mList.size() == 1) {
                             dialog.show();
-                            presenter.releaseDynamic(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), listimages, listfriends, isopen, dynamicContentList);
+                            presenter.releaseDynamic(draftsid, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), listimages, listfriends, isopen, dynamicContentList);
                         } else if (mList.get(mList.size() - 1).contains("add_pic")) {
                             for (int i = 0; i < mList.size() - 1; i++) {
                                 listimages.add(mList.get(i));
@@ -333,7 +344,11 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
                 startActivityForResult(intent, DYNAMIC_TYPE_CODE);
                 break;
             case R.id.back:
-                finish();
+                if (canres) {
+                    savedrafts();
+                } else {
+                    finish();
+                }
         }
     }
 
@@ -346,6 +361,7 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     public void compressImagesFail() {
         listimages.clear();
         listfriends.clear();
+        listfri.clear();
         dynamicContentList.clear();
         Toast.makeText(this, "上传图片失败", Toast.LENGTH_SHORT).show();
         L.e("上传图片失败");
@@ -354,13 +370,35 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
 
     @Override
     public void uploadImageSuccess(List<String> list) {
-        presenter.releaseDynamic(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), list, listfriends, isopen, dynamicContentList);
+        int j = 0;
+        for (int i = 0; i < listimages.size(); i++) {
+            if (listimages.get(i).startsWith("img/")){
+
+            }else {
+                listimages.set(i,list.get(j));
+                j++;
+            }
+        }
+
+        String draftsid = "";
+        if (dynamicId != null && dynamicId.length() > 0) {
+            draftsid = dynamicId;
+        } else {
+            draftsid = "";
+        }
+        if (savedrafts) {
+            presenter.savedraftsDynamic(draftsid,Sp.getString(this, AppConstant.USER_ACCOUNT_ID),dynamicContentList,savestr,listimages,listfri,isopen);
+        }
+        else{
+            presenter.releaseDynamic(draftsid, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), listimages, listfriends, isopen, dynamicContentList);
+        }
     }
 
     @Override
     public void uploadImageFail(ExceptionHandler.ResponeThrowable e) {
         listimages.clear();
         listfriends.clear();
+        listfri.clear();
         dynamicContentList.clear();
         Toast.makeText(this, "图片上传失败", Toast.LENGTH_SHORT).show();
         L.e("图片上传失败");
@@ -378,16 +416,178 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
     public void releaseDynamicFail(ExceptionHandler.ResponeThrowable e) {
         listimages.clear();
         listfriends.clear();
+        listfri.clear();
         dynamicContentList.clear();
         Toast.makeText(this, "发布失败", Toast.LENGTH_SHORT).show();
         L.e(e.message + "  " + e.status);
         dialog.dismiss();
     }
+    @Override
+    public void savedraftsDynamicSuccess(Boolean b) {
+        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        dialog.dismiss();
+        finish();
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    public void savedraftsDynamicFail(ExceptionHandler.ResponeThrowable e) {
+        Toast.makeText(this, "保存失败", Toast.LENGTH_SHORT).show();
+        L.e(e.message + "  " + e.status);
+        listimages.clear();
+        listfriends.clear();
+        listfri.clear();
+        dynamicContentList.clear();
+        dialog.dismiss();
+    }
+
+    @Override
+    public void getDynamicSuccess(DraftsDynamic lists) {
+        L.e("获取成功");
+        if (!lists.getInputStr().equals("")){
+            if (lists.listcontent().size() < 1){
+                editYuyouquan.setText(lists.getInputStr());
+            }
+        }else {
+            editYuyouquan.setText("");
+        }
+        if (lists.isIsopen()){
+            selectPeople.setText("所有人可见");
+        }else {
+            selectPeople.setText("仅关注的人可见");
+        }
+        if (lists.listcontent().size() > 0){
+            editYuyouquan.setText("");
+            dynamicContentList = lists.listcontent();
+            canres = true;
+            release.setBackgroundResource(R.drawable.ablebtnbg);
+            textnum = editYuyouquan.getText().length();
+            textNum.setText(textnum + "/140");
+            int wordlen=0;
+            for (int i=0;i<lists.listcontent().size();i++){
+                wordlen += lists.listcontent().get(i).getContent().length();
+            }
+            if(editYuyouquan.getText().toString().length()+wordlen>139){
+                Toast.makeText(this, "字数超过限制", Toast.LENGTH_SHORT).show();
+            }else {
+                for (int i = 0; i < lists.listcontent().size(); i++) {
+                    if (lists.listcontent().get(i).getFlag() == 0) {
+                        editYuyouquan.append(lists.listcontent().get(i).getContent());
+                    } else {
+                        int tempid = 0;
+                        try {
+                            tempid = Integer.valueOf(lists.listcontent().get(i).getId()).intValue();
+                        }catch (NumberFormatException e){
+                            e.printStackTrace();
+                        }
+                        editYuyouquan.insertSpecialStr("@" + lists.listcontent().get(i).getContent().substring(1) + " ", false,tempid, new ForegroundColorSpan(getResources().getColor(R.color.colorPrimary)));
+                    }
+                }
+            }
+
+        }else {
+            textNum.setText("0/140");
+        }
+        if (lists.getListfriends() != null && lists.getListfriends().size() > 0){
+            listfri = lists.getListfriends();
+        }else {
+            listfri.clear();
+        }
+        if (lists.getListimages().size() > 0 && lists.getListimages().size() < 9){
+            for (int i = 0; i < lists.getListimages().size(); i++) {
+                mList.add(lists.getListimages().get(i));
+            }
+            mList.add(addPic);
+        }else if(lists.getListimages().size() == 9){
+            for (int i = 0; i < lists.getListimages().size(); i++) {
+                mList.add(lists.getListimages().get(i));
+            }
+        } else {
+            mList.clear();
+            mList.add(addPic);
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getDynamicFail(ExceptionHandler.ResponeThrowable e) {
+        Toast.makeText(this, "获取失败", Toast.LENGTH_SHORT).show();
+        L.e(e.status+" "+e.message);
+        finish();
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            if (canres){
+                savedrafts();
+            }else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode,event);
+    }
+
+    private void savedrafts(){
+        savedrafts = true;
+        DeleteDialog dialog2 = new DeleteDialog(ReleaseDynamicActivity.this);
+        dialog2.setTitle("保留此次编辑？");
+        dialog2.setNoOnclickListener(() -> {
+            finish();
+        });
+        dialog2.setYesOnclickListener(() -> {
+            if (editYuyouquan.getText().toString().length() > 140) {
+                Toast.makeText(this, "字数超过140", Toast.LENGTH_SHORT).show();
+            } else if (editYuyouquan.getText().toString().trim().length() < 1 && mList.size() == 1) {
+                Toast.makeText(this, "内容不为空", Toast.LENGTH_SHORT).show();
+            } else {
+                dynamicContentList.clear();
+                listfriends.clear();
+                listfri.clear();
+                dialog2.dismiss();
+                String nowid = "";
+                if (dynamicId != null && dynamicId.length() > 0){
+                    nowid = dynamicId;
+                }else {
+                    nowid = "";
+                }
+                SpEditText.SpData[] spDatas = editYuyouquan.getSpDatas();
+                start_index.add(0);
+                for (int i = 0; i < spDatas.length; i++) {
+                    end_index.add(spDatas[i].getStart());
+                    start_index.add(spDatas[i].getEnd());
+                }
+                end_index.add(editYuyouquan.length());
+                String str = editYuyouquan.getText().toString();
+                savestr = str;
+                for (int i = 0; i < spDatas.length * 2 + 1; i++) {
+                    if (i % 2 == 0) {
+                        dynamicContentList.add(new DynamicContentBean(str.substring(start_index.get(i / 2), end_index.get(i / 2)), 0, "0"));
+                    } else {
+                        dynamicContentList.add(new DynamicContentBean(str.substring(end_index.get(i / 2), start_index.get(i / 2 + 1)), 1, spDatas[i / 2].getCustomData() + ""));
+                        listfriends.add((int) spDatas[i / 2].getCustomData());
+                    }
+                }
+                if (mList.size() == 1) {
+                    dialog.show();
+                    presenter.savedraftsDynamic(nowid,Sp.getString(this, AppConstant.USER_ACCOUNT_ID),dynamicContentList,savestr,listimages,listfri,isopen);
+                } else if (mList.get(mList.size() - 1).contains("add_pic")) {
+                    for (int i = 0; i < mList.size() - 1; i++) {
+                        listimages.add(mList.get(i));
+                    }
+                    dialog.show();
+                    presenter.compressImages(this, listimages);
+                } else {
+                    listimages.addAll(mList);
+                    dialog.show();
+                    presenter.compressImages(this, listimages);
+                }
+            }
+        });
+        dialog2.show();
+    }
+    private void getDynamicDetail(){
+        presenter.getDynamic(dynamicId);
     }
 }

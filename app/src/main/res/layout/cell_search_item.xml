@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <com.yuanyu.ceramics.common.SquareImageView
+        android:id="@+id/item_img"
+        android:layout_width="match_parent"
+        app:riv_corner_radius_top_left="2dp"
+        app:riv_corner_radius_top_right="2dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop" />
+    <TextView
+        android:id="@+id/item_name"
+        android:textColor="@color/blackLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:textSize="14sp"/>
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:textSize="14sp"
+        android:textColor="@color/colorPrimary"/>
+</LinearLayout>

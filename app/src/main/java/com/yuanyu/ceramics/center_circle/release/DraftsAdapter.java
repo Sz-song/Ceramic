@@ -22,6 +22,7 @@ public class DraftsAdapter extends RecyclerView.Adapter<DraftsAdapter.ViewHolder
     private Context context;
     private List<DraftsBean> list;
     private OnPositionClickListener ToresListener;
+    private OnPositionClickListener TodeleteLis;
 
     public DraftsAdapter(Context context, List<DraftsBean> list) {
         this.context = context;
@@ -29,6 +30,9 @@ public class DraftsAdapter extends RecyclerView.Adapter<DraftsAdapter.ViewHolder
     }
     public void ToresListener(OnPositionClickListener ToresListener){
         this.ToresListener = ToresListener;
+    }
+    public void Todelete(OnPositionClickListener TodeleteLis){
+        this.TodeleteLis = TodeleteLis;
     }
 
     @Override
@@ -40,16 +44,19 @@ public class DraftsAdapter extends RecyclerView.Adapter<DraftsAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         switch (list.get(position).getType()) {
-            case "0":
+            case 0:
                 holder.type.setText("动态");
                 break;
-            case "1":
+            case 1:
                 holder.type.setText("文章");
                 break;
         }
         holder.time.setText(Md5Utils.getTimeMin(list.get(position).getTime()));
         holder.content.setText(list.get(position).getContent());
         holder.tores.setOnClickListener(view -> {ToresListener.callback(position);});
+        holder.delete.setOnClickListener(view -> {
+            TodeleteLis.callback(position);
+        });
     }
 
     @Override
@@ -67,6 +74,8 @@ public class DraftsAdapter extends RecyclerView.Adapter<DraftsAdapter.ViewHolder
         TextView content;
         @BindView(R.id.tores)
         TextView tores;
+        @BindView(R.id.delete)
+        TextView delete;
 
 
         public ViewHolder(@NonNull View itemView) {

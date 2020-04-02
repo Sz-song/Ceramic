@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="ceramics.db" />
+    <version value="20200402" />
+    <list>
+        <!--搜索历史记录-->
+        <mapping class="com.yuanyu.ceramics.db.SearchHistoryBean"/>
+    </list>
+</litepal>

@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -89,7 +90,7 @@ public class DraftsActivity extends BaseActivity<DraftsPresenter> implements Dra
         recyclerview.setLayoutManager(manager);
         recyclerview.setAdapter(adapter);
         adapter.ToresListener(position -> {
-            if (list.get(position).getType().equals("0")) {
+            if (list.get(position).getType() == 0) {
                 Intent intent = new Intent(DraftsActivity.this, ReleaseDynamicActivity.class);
                 intent.putExtra("id", list.get(position).getId());
                 startActivity(intent);
@@ -97,6 +98,14 @@ public class DraftsActivity extends BaseActivity<DraftsPresenter> implements Dra
                 Intent intent = new Intent(DraftsActivity.this, ReleaseArticleActivity.class);
                 intent.putExtra("id", list.get(position).getId());
                 startActivity(intent);
+            }
+        });
+        adapter.Todelete(position -> {
+            if (list.get(position).getType() == 0) {
+                presenter.deletedrafts(Sp.getInt(DraftsActivity.this,"useraccountid"),list.get(position).getId(),0,position);
+            }
+            else {
+                presenter.deletedrafts(Sp.getInt(DraftsActivity.this,"useraccountid"),list.get(position).getId(),1,position);
             }
         });
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -114,20 +123,27 @@ public class DraftsActivity extends BaseActivity<DraftsPresenter> implements Dra
                         int[] lastPositions = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
                     }
-                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1) {
+                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1 &&lastPosition>6) {
+                        swipe.setRefreshing(true);
                         presenter.getDrafts(Sp.getString(DraftsActivity.this,"useraccountid"),page,pagesize);
                     }
                 }
             }
         });
     }
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        page = 0;
+        list.clear();
+        adapter.notifyDataSetChanged();
+        swipe.setRefreshing(true);
+        presenter.getDrafts(Sp.getString(DraftsActivity.this,"useraccountid"),page,pagesize);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+        if (item.getItemId() == android.R.id.home) {
                 finish();
-                break;
         }
         return true;
     }
@@ -161,6 +177,25 @@ public class DraftsActivity extends BaseActivity<DraftsPresenter> implements Dra
             nodataImg.setVisibility(View.GONE);
             nodata.setVisibility(View.GONE);
         }
+    }
+    @Override
+    public void deleteSuccess(int position) {
+        Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
+        list.remove(position);
+        adapter.notifyItemRemoved(position);
+        adapter.notifyItemRangeChanged(position, list.size() - position);
+        if (list.size() == 0) {
+            nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void deleteFail(ExceptionHandler.ResponeThrowable e) {
+        Toast.makeText(this, "删除失败", Toast.LENGTH_SHORT).show();
     }
 
 }

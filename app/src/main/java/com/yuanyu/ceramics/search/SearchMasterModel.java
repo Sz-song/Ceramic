@@ -8,6 +8,7 @@ import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Md5Utils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -15,10 +16,11 @@ import okhttp3.RequestBody;
 
 public class SearchMasterModel implements SearchMasterConstract.ISearchMasterModel{
     private HttpService httpService;
-    public SearchMasterModel(){httpService = HttpServiceInstance.getInstance();}
+    SearchMasterModel(){httpService = HttpServiceInstance.getInstance();}
+
 
     @Override
-    public Observable<BaseResponse<SearchBean>> SearchMasterList(int page, String useraccountid, int type, String search, int outsidetype) {
+    public Observable<BaseResponse<List<SearchMasterBean>>> SearchMasterList(String useraccountid, int page, String query) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -26,20 +28,19 @@ public class SearchMasterModel implements SearchMasterConstract.ISearchMasterMod
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","searchresult");
+        map.put("action","search");
         Map data = new HashMap();
-        data.put("page",page);
-        data.put("pagesize","");
-        data.put("intype",type);
-        data.put("search",search);
         data.put("useraccountid",useraccountid);
-        data.put("outtype",outsidetype);
+        data.put("page",page);
+        data.put("query",query);
+        data.put("type",2);
+        data.put("page_size",20);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
-        L.e("dashi data "+str);
+        L.e("str is "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.getSearchDashiResult(body);
+        return httpService.SearchMasterList(body);
     }
 
     @Override

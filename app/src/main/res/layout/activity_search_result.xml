@@ -1,49 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@color/white"
-    tools:context=".search.SearchResultActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:paddingTop="21dp"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    tools:context=".home.homepage.HomepageFragment"
+    android:orientation="vertical">
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
+        app:elevation="0dp"
         android:background="@color/white"
-        android:theme="@style/style_titlebar_normal">
-        <androidx.appcompat.widget.SearchView
-            android:background="@drawable/searchview_homepage"
-            android:id="@+id/searchview"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp">
-        </androidx.appcompat.widget.SearchView>
-    </androidx.appcompat.widget.Toolbar>
-    <com.androidkun.xtablayout.XTabLayout
-        android:id="@+id/tablelayout"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/transparent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/home_search"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="25dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/search_soblue"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="15dp"
+                    android:padding="2dp"
+                    android:src="@drawable/search_black"/>
+                <EditText
+                    android:id="@+id/search_edit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:gravity="start|center_vertical"
+                    android:textColor="@color/blackLight"
+                    android:imeOptions="actionSearch"
+                    android:hint="@string/jateall"
+                    android:background="@null"
+                    android:textColorHint="#999999" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/cancel"
+                android:text="@string/cancel"
+                android:textColor="@color/blackLight"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"/>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:background="@color/white"
-        app:xTabDividerWidthWidthText="true"
-        app:xTabIndicatorColor="@color/colorPrimary"
-        app:xTabIndicatorHeight="3dp"
-        app:xTabMode="fixed"
-        app:xTabSelectedTextColor="@color/colorPrimary"
-        app:xTabSelectedTextSize="16sp"
-        app:xTabTextColor="@color/gray"
-        app:xTabTextSize="15sp">
-    </com.androidkun.xtablayout.XTabLayout>
-    <View
-        android:background="@color/dividerGray"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.viewpager.widget.ViewPager>
-</LinearLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/white_drak"
+        android:layout_height="wrap_content">
+        <com.androidkun.xtablayout.XTabLayout
+            android:id="@+id/tablelayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:xTabDividerWidthWidthText="true"
+            app:xTabIndicatorColor="@color/colorPrimary"
+            app:xTabIndicatorHeight="3dp"
+            app:xTabMode="fixed"
+            app:xTabSelectedTextColor="@color/tab_select"
+            app:xTabSelectedTextSize="14sp"
+            app:xTabTextColor="@color/tab_unselect"
+            android:background="@color/white"
+            app:xTabTextSize="12.5sp">
+        </com.androidkun.xtablayout.XTabLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.viewpager.widget.ViewPager>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

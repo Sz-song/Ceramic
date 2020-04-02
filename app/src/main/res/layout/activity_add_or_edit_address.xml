@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/background_gray"
     android:id="@+id/main_content"
     tools:context=".address_manage.AddOrEditAddressActivity"
     android:orientation="vertical">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:minHeight="?attr/actionBarSize"
             android:paddingTop="21dp"
             app:contentInsetStart="0dp"
-            android:background="@color/colorPrimary">
+            android:background="@color/white">
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
                 android:singleLine="true"
                 android:text="编辑收货地址"
                 android:textSize="18sp"
-                android:textColor="@color/white"
+                android:textColor="@color/blackLight"
                 android:gravity="center"/>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -35,12 +36,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:background="@color/background_gray"
+        android:orientation="vertical"
+        android:layout_marginBottom="60dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
             <TextView
                 android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
@@ -52,6 +55,7 @@
                 android:textSize="14sp"/>
             <EditText
                 android:id="@+id/name"
+                android:textAlignment="textEnd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="请输入姓名"
@@ -67,8 +71,9 @@
             android:layout_height="0.5dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
             <TextView
                 android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
@@ -86,7 +91,8 @@
                 android:background="@drawable/r2_sowhite"
                 android:hint="请输入11位电话号码"
                 android:inputType="phone"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textAlignment="textEnd"/>
         </LinearLayout>
         <View
             android:background="@color/lightGray"
@@ -96,7 +102,8 @@
         <RelativeLayout
             android:id="@+id/location_relat"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="50dp"
+            android:background="@color/white">
             <TextView
                 android:id="@+id/location_txt"
                 android:layout_marginStart="15dp"
@@ -112,11 +119,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:layout_toEndOf="@+id/location_txt"
+                android:layout_toStartOf="@+id/imgright"
+                android:layout_marginEnd="10dp"
                 android:hint="请选择"
                 android:textColor="@color/blackLight"
                 android:textSize="14sp"/>
             <ImageView
+                android:id="@+id/imgright"
                 android:layout_width="9dp"
                 android:layout_height="18dp"
                 android:layout_marginEnd="15dp"
@@ -132,8 +141,9 @@
         </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal">
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
             <TextView
                 android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
@@ -144,6 +154,7 @@
                 android:textColor="@color/blackLight"
                 android:textSize="14sp"/>
             <EditText
+                android:textAlignment="textEnd"
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -153,15 +164,13 @@
                 android:maxEms="8"
                 android:textSize="14sp"/>
         </LinearLayout>
-        <View
-            android:background="@color/lightGray"
-            android:layout_width="match_parent"
-            android:layout_marginStart="15dp"
-            android:layout_height="0.5dp"/>
+
         <RelativeLayout
             android:id="@+id/isdefault_relat"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:layout_marginTop="10dp">
             <TextView
                 android:id="@+id/isdefault_txt"
                 android:layout_marginStart="15dp"
@@ -180,32 +189,37 @@
                 android:layout_toEndOf="@+id/isdefault_txt"
                 android:hint="请选择"
                 android:textColor="@color/blackLight"
-                android:textSize="14sp"/>
-            <ImageView
-                android:layout_width="9dp"
-                android:layout_height="18dp"
-                android:layout_marginEnd="15dp"
-                android:layout_centerVertical="true"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+            <Switch
+                android:id="@+id/isdefaultbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:src="@mipmap/triangle_right"/>
-            <View
-                android:background="@color/lightGray"
-                android:layout_width="match_parent"
-                android:layout_marginStart="15dp"
-                android:layout_alignParentBottom="true"
-                android:layout_height="0.5dp"/>
+                android:layout_marginEnd="15dp"
+                android:switchMinWidth="40dp"
+                android:thumb="@drawable/thumb_switch"
+                android:track="@drawable/switch_thumb1"
+                />
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/queding"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="确定"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:textColor="@color/white"
-            android:background="@drawable/btn_gray_blue"
-            />
     </LinearLayout>
+    <Button
+        android:id="@+id/queding"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="确定"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_gray_noradius"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/lineGray"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="0.5dp"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

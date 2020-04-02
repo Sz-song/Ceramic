@@ -7,20 +7,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseFragment;
+import com.yuanyu.ceramics.common.WrapContentLinearLayoutManager;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
-import com.yuanyu.ceramics.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +36,13 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
     SwipeRefreshLayout swipe;
     private List<SearchMasterBean> list;
     private SearchMasterAdapter adapter;
-    private String keyword;
     private int page;
+    private String query;
 
     @Override
-    public View initView(LayoutInflater inflater, @Nullable ViewGroup container) {return inflater.inflate(R.layout.common_fragment, container, false); }
+    public View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
+        return inflater.inflate(R.layout.common_fragment, container, false);
+    }
     @Override
     protected SearchMasterPresenter initPresent() {return new SearchMasterPresenter();}
 
@@ -51,7 +50,8 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
     public void initEvent(View view) {
         list = new ArrayList<>();
         page = 0;
-        keyword = getArguments().getString("str");
+        query = getArguments().getString("query");
+        adapter = new SearchMasterAdapter(list, getContext());
         swipe = view.findViewById(R.id.swipe);
         swipe.setColorSchemeResources(R.color.colorPrimary);
         GlideApp.with(getActivity())
@@ -59,65 +59,45 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
                 .override(nodataImg.getWidth(), nodataImg.getHeight())
                 .into(nodataImg);
         nodata.setText("暂时没有数据");
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        WrapContentLinearLayoutManager layoutManager = new WrapContentLinearLayoutManager(getActivity());
         recyclerview.setLayoutManager(layoutManager);
-        if (list.size() == 0) {
-            nodataImg.setVisibility(View.VISIBLE);
-            nodata.setVisibility(View.VISIBLE);
-        } else {
-            nodataImg.setVisibility(View.GONE);
-            nodata.setVisibility(View.GONE);
-        }
-        adapter = new SearchMasterAdapter(list, getContext());
         recyclerview.setAdapter(adapter);
         recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(final RecyclerView recyclerView, int newState) {
-                int lastPosition = -1;
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                int lastPosition;
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                    if (layoutManager instanceof GridLayoutManager) {
-                        lastPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
-                    } else if (layoutManager instanceof LinearLayoutManager) {
-                        lastPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
-                    } else if (layoutManager instanceof StaggeredGridLayoutManager) {
-                        int[] lastPositions = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
-                        ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
-                    }
-                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1) {
-                        presenter.SearchMasterList(page, Sp.getString(getContext(), "useraccountid"),2,keyword,2);
+                    lastPosition = ((WrapContentLinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1 && lastPosition > 8) {
+                        presenter.SearchMasterList(Sp.getString(getContext(), "useraccountid"),page,query);
                     }
                 }
             }
         });
-        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getString(getContext(), "useraccountid"),list.get(position).getId(),position));
+        adapter.setFocusClickListener(position -> presenter.Focus(Sp.getString(getContext(), "useraccountid"),list.get(position).getUseraccountid()+"",position));
         swipe.setOnRefreshListener(() -> {
             page = 0;
             list.clear();
             adapter.notifyDataSetChanged();
-            presenter.SearchMasterList(page,Sp.getString(getContext(), "useraccountid"),2,keyword,2);
+            presenter.SearchMasterList(Sp.getString(getContext(), "useraccountid"),page,query);
         });
 
     }
 
     @Override
-    public void initData() {
-        presenter.SearchMasterList(page,Sp.getString(getContext(), "useraccountid"),2,keyword,2);
-    }
-
-    public void search(String str) {
-        keyword = str;
-        page = 0;
-        list.clear();
-        adapter.notifyDataSetChanged();
-        presenter.SearchMasterList(page,Sp.getString(getContext(), "useraccountid"),2,keyword,2);
+    protected void initData() {
+        if(query.length()>0){
+            presenter.SearchMasterList(Sp.getString(getContext(), "useraccountid"),page,query);
+        }
     }
 
     @Override
-    public void SearchMasterSuccess(SearchBean bean) {
-        list.addAll(bean.getGuanzhuDashiBean());
+    public void SearchMasterSuccess(List<SearchMasterBean> beans) {
+        list.addAll(beans);
         if (isAlive) {
-            adapter.notifyItemRangeInserted(list.size() - bean.getGuanzhuDashiBean().size(), bean.getGuanzhuDashiBean().size());
+            L.e("123");
+            adapter.notifyItemRangeInserted(list.size() - beans.size(), beans.size());
             swipe.setRefreshing(false);
             page++;
             if (list.size() == 0) {
@@ -148,9 +128,9 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
     @Override
     public void focusSuccess(Boolean isfocus, int position) {
         if (isfocus) {
-            list.get(position).setFollowed(1);
+            list.get(position).setIsfollowed(true);
         } else {
-            list.get(position).setFollowed(0);
+            list.get(position).setIsfollowed(false);
         }
         adapter.notifyItemChanged(position);
     }
@@ -159,5 +139,14 @@ public class SearchMasterFragment extends BaseFragment<SearchMasterPresenter> im
     public void focusFail(ExceptionHandler.ResponeThrowable e) {
         L.e("error is " + e.status + e.message);
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void Search(String query) {
+        this.query=query;
+        page = 0;
+        list.clear();
+        adapter.notifyDataSetChanged();
+        presenter.SearchMasterList(Sp.getString(getContext(), "useraccountid"),page,query);
     }
 }

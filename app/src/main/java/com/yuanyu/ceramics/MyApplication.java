@@ -13,6 +13,8 @@ import com.tencent.imsdk.session.SessionWrapper;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.rtmp.TXLiveBase;
 
+import org.litepal.LitePal;
+
 public class MyApplication extends Application {
     private static Context context;
 
@@ -20,6 +22,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        //LitePal初始化
+        LitePal.initialize(this);
         WbSdk.install(this,new AuthInfo(this, AppConstant.APP_KEY, AppConstant.REDIRECT_URL,AppConstant.SCOPE));
         AppConstant.wx_api = WXAPIFactory.createWXAPI(context,AppConstant.WECHAT_APP_ID,false);
         AppConstant.wx_api.registerApp(AppConstant.WECHAT_APP_ID);

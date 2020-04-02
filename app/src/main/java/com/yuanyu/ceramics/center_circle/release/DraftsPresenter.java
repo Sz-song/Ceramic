@@ -37,5 +37,18 @@ public class DraftsPresenter extends BasePresenter<DraftsConstract.IDraftsView> 
                     }
                 });
     }
+    @Override
+    public void deletedrafts(int useraccountid, String id, int type,int position) {
+        model.deletedrafts(useraccountid,id,type,position)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                .subscribe(new BaseObserver<String[]>() {
+                    @Override
+                    public void onNext(String[] strings) {if(view!=null){view.deleteSuccess(position);}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.deleteFail(e);}}
+                });
+    }
 
 }

@@ -1,109 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="125dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/layer3_r2_p05_00_08">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/portrait"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:padding="1dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="15dp"/>
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:textColor="@color/blackLight"
+        android:layout_toEndOf="@+id/portrait"
+        android:layout_marginTop="20dp"
+        android:maxEms="10"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+    <TextView
+        android:id="@+id/focus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/recy_btn_selected_shape"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentEnd="true"
+        android:text="@string/focus" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/portrait"
         android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/touxiang"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_margin="10dp"
-            android:scaleType="centerCrop"/>
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:id="@+id/relat"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:textStyle="bold"
-                    android:textColor="@color/blackLight"
-                    android:layout_marginTop="5dp"/>
-
-                <TextView
-                    android:id="@+id/guanzhu_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="20dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/recy_btn_selected_shape"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="1dp"
-                    android:text="+ 关注"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp"/>
-            </RelativeLayout>
-            <TextView
-                android:id="@+id/job"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
-            <LinearLayout
-                android:id="@+id/linear"
-                android:layout_width="match_parent"
-                android:layout_height="28dp"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="13sp"
-                    android:gravity="bottom"
-                    android:layout_height="28dp"
-                    android:text="粉丝："/>
-                <TextView
-                    android:id="@+id/fensi"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="13sp"
-                    android:gravity="bottom"
-                    android:layout_height="28dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="13sp"
-                    android:gravity="bottom"
-                    android:layout_height="28dp"
-                    android:text="关注："/>
-                <TextView
-                    android:id="@+id/guanzhu"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="13sp"
-                    android:gravity="bottom"
-                    android:layout_height="28dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="13sp"
-                    android:gravity="bottom"
-                    android:text="动态："
-                    android:layout_height="28dp" />
-                <TextView
-                    android:id="@+id/dongtai"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="13sp"
-                    android:gravity="bottom"
-                    android:layout_height="28dp" />
-            </LinearLayout>
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/lineGray"
-                />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/focus_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/ninegray"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+        <TextView
+            android:id="@+id/fan_num"
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/ninegray"
+            android:maxLines="1"/>
     </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/introduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/portrait"
+        android:layout_marginBottom="20dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="12sp"
+        android:textColor="@color/ninegray"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

@@ -13,7 +13,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-feature android:name="android.hardware.Camera"/>
+
+    <uses-feature android:name="android.hardware.Camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
@@ -26,7 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".center_circle.release.SelectFriendActivity"/>
+        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".center_circle.release.SelectFriendActivity" />
         <activity android:name=".center_circle.release.ReleaseDynamicActivity" />
         <activity android:name=".seller.liveapply.SelectItemActivity" />
         <activity android:name=".seller.shop_shelve.ShelveActivity" />
@@ -42,27 +44,30 @@
 
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/FullScreen"/>
-        <activity android:name=".login.SplashActivity"
+            android:theme="@style/FullScreen" />
+        <activity
+            android:name=".login.SplashActivity"
             android:taskAffinity="com.taijie.yuanyu"
             android:theme="@style/WelcomeStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.ResetPasswordActivity" />
-        <activity android:name=".home.HomeActivity">
-        </activity>
+        <activity android:name=".home.HomeActivity"></activity>
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="1107922776" />
             </intent-filter>
         </activity>
@@ -91,7 +96,6 @@
         <activity android:name=".order.MyOrderActivity" />
         <activity android:name=".order.OrderDetailActivity" />
         <activity android:name=".common.ImageDisplayActivity" />
-        <activity android:name=".search.SearchActivity" />
         <activity android:name=".fenlei.FenLeiResActivity" />
         <activity android:name=".fenlei.FenLeiActivity" />
         <activity android:name=".address_manage.AddOrEditAddressActivity" />
@@ -109,7 +113,6 @@
         <activity android:name=".mine.systemsetting.OpinionOfYouActivity" />
         <activity android:name=".mine.systemsetting.SystemSettingActivity" />
         <activity android:name=".shop_index.ShopIndexSearchActivity" />
-        <activity android:name=".search.SearchResultActivity" />
         <activity android:name=".myinfo.MyInfoActivity" />
         <activity android:name=".seller.order.ShopOrderActivity" />
         <activity android:name=".seller.order.detail.ShopOrderDetailActivity" />
@@ -123,17 +126,20 @@
         <activity android:name=".center_circle.release.GetFriendsActivity" />
         <activity android:name=".center_circle.release.DynamicTypeActivity" />
         <activity android:name=".center_circle.release.ReleaseArticleActivity" />
-        <activity android:name=".chat.ChatActivity"
+        <activity
+            android:name=".chat.ChatActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".mine.my_collect.MyCollectActivity" />
         <activity android:name=".common.ViewImageActivity" />
         <activity android:name=".personal_index.ChangeImageActivity" />
-        <activity android:name=".broadcast.pull.LivePullActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan">
-        </activity>
+        <activity
+            android:name=".broadcast.pull.LivePullActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
         <activity android:name=".broadcast.push.LivePushActivity" />
+        <activity android:name=".center_circle.release.DraftsActivity" />
+        <activity android:name=".search.SearchResultActivity" />
     </application>
 
 </manifest>
