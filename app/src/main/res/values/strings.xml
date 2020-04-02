@@ -239,7 +239,7 @@
     <string name="money" tools:ignore="ExtraTranslation">¥</string>
     <string name="apply_auction">申请拍卖</string>
     <string name="special_name">专场名称</string>
-    <string name="jateall">和田玉</string>
+    <string name="jateall">青花瓷</string>
     <string name="auction_strart_time">开拍时间</string>
     <string name="auction_end_time">结拍时间</string>
     <string name="deposit_setting">保证金设置</string>
