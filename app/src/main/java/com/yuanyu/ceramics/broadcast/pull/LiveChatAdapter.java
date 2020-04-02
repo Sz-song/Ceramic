@@ -47,9 +47,7 @@ public class LiveChatAdapter extends RecyclerView.Adapter<LiveChatAdapter.ViewHo
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
-    }
+    public int getItemCount() { return list.size();}
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.message)

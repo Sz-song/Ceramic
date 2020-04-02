@@ -159,7 +159,12 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         presenter.setCount(daishouhuoCount, bean.getDaishouhuo());
         presenter.setCount(daipingjiaCount, bean.getDaipingjia());
         presenter.setCount(refundCount, bean.getTuikuan());
-        if (bean.getMerchant_status() == 2) {
+        if(bean.getMerchant_status() == 0){
+            sellstatus.setText("商家入驻");
+        }else if(bean.getMerchant_status() == 1){
+            Sp.putString(getContext(),AppConstant.SHOP_ID,bean.getShop_id());
+            sellstatus.setText("进入店铺");
+        }else if (bean.getMerchant_status() == 2) {
             sellstatus.setText("商家入驻(审核中)");
             applyenter.setClickable(false);
         }

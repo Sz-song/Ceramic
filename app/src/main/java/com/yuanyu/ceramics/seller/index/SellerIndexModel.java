@@ -26,7 +26,7 @@ public class SellerIndexModel implements SellerIndexConstract.IMineModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","mine_init");
+        map.put("action","sellermyhome");
         Map data = new HashMap();
         data.put("shopid",shopid);
         map.put("data",data);

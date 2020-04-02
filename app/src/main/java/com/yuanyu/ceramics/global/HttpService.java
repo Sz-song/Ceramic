@@ -89,7 +89,7 @@ public interface HttpService {
     @POST("back/test/api/homepage/faxian.php")
     Observable<BaseResponse<FaxianBean>> homepage(@Body RequestBody body);
     //直播列表
-    @POST("app_api/ceramics/broadcast_list.php")
+    @POST("back/test/api/broadcast/broadcast_list.php")
     Observable<BaseResponse<List<BroadcastBean>>> broadcastlist(@Body RequestBody body);
     //直播列表
     @POST("back/test/api/homepage/get_userinfo.php")
@@ -437,7 +437,7 @@ public interface HttpService {
     @POST("back/test/api/quan/get_draftslist.php")
     Observable<BaseResponse<List<DraftsBean>>> getDrafts(@Body RequestBody body);
     //观众直播初始化
-    @POST("app_api/yuba/change_image.php")
+    @POST("back/test/api/broadcast/getliveroomdata.php")
     Observable<BaseResponse<LivePullBean>> broadcastInit(@Body RequestBody body);
     //直播订阅
     @POST("app_api/yuba/change_image.php")

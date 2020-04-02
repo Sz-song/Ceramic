@@ -22,6 +22,7 @@ import com.tencent.imsdk.TIMGroupManager;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.TIMTextElem;
+import com.tencent.imsdk.TIMUserConfig;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.tencent.imsdk.ext.group.TIMGroupMemberResult;
@@ -49,6 +50,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.tencent.rtmp.TXLiveConstants.PLAY_EVT_GET_MESSAGE;
+
 public class LivePullActivity extends BaseActivity<LivePullPresenter> implements LivePullConstract.ILivePullView {
 
     @BindView(R.id.player_view)
@@ -75,7 +78,9 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
     private LiveChatAdapter adapter;
     private List<LiveChatBean> list;
     private TIMConversation conversation;
-    private String groupId="@TGS#a5GDQRJGE";
+    private String groupId;
+    private String id;
+    private String pushUrl;
 
     @Override
     protected int getLayout() {
@@ -98,6 +103,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
             actionBar.setHomeAsUpIndicator(R.mipmap.back_rd);
             actionBar.setDisplayShowTitleEnabled(false);
         }
+        id=getIntent().getStringExtra("live_id");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
         conversation = TIMManager.getInstance().getConversation(TIMConversationType.Group, groupId);
         livePlayer = new TXLivePlayer(this);
@@ -106,10 +112,12 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         adapter = new LiveChatAdapter(this, list);
         cahtRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         cahtRecyclerview.setAdapter(adapter);
+        presenter.initData(id);
     }
     @Override
     public void initDataSuccess(LivePullBean bean) {
         groupId=bean.getGroupid();
+        pushUrl=bean.getPlayurl();
         pusherShopName.setText(bean.getShop_name());
         GlideApp.with(this)
                 .load(AppConstant.BASE_URL+bean.getShop_portrait())
@@ -126,12 +134,15 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         livePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
         TXLivePlayConfig livePlayConfig = new TXLivePlayConfig();
         //自动模式
-        livePlayConfig.setAutoAdjustCacheTime(true);
         livePlayConfig.setMinAutoAdjustCacheTime(1);
         livePlayConfig.setMaxAutoAdjustCacheTime(5);
+        livePlayConfig.setEnableMessage(true);
         livePlayer.setConfig(livePlayConfig);
-        String flvUrl = "http://play.jadeall.cn/live/123.flv";
-        livePlayer.startPlay(flvUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
+        if(pushUrl!=null&&pushUrl.length()>0){
+            livePlayer.startPlay(pushUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
+        }else {
+            Toast.makeText(this, "播放失败", Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public void showToast(String msg) {

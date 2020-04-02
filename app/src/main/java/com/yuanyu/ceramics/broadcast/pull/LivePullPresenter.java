@@ -98,19 +98,13 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
             }
             return false;
         });
-
         List<String> user = new ArrayList<>();
         user.add(useraccountid);
         TIMGroupManager.getInstance().applyJoinGroup(grounpid, "", new TIMCallBack() {
             @Override
-            public void onError(int i, String s) {
-                L.e("加入聊天室失败: "+s);
-            }
-
+            public void onError(int i, String s) { L.e("加入聊天室失败: "+s);}
             @Override
-            public void onSuccess() {
-                if(view!=null){view.initLivePull();}
-            }
+            public void onSuccess() { if(view!=null){view.initLivePull();}}
         });
     }
 

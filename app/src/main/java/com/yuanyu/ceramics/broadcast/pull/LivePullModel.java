@@ -28,7 +28,7 @@ public class LivePullModel implements LivePullConstract.ILivePullModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","broadcast_init");
+        map.put("action","getliveroomdata");
         Map data = new HashMap();
         data.put("id",id);
         map.put("data",data);

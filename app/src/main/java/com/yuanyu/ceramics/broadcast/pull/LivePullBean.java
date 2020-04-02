@@ -32,4 +32,8 @@ public class LivePullBean {
     public String getCover() {
         return cover;
     }
+
+    public String getPlayurl() {
+        return playurl;
+    }
 }
