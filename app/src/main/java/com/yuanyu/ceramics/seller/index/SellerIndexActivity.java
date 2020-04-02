@@ -85,7 +85,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
     LinearLayout changeuser;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
-    private boolean isinit = false;
+
     @Override
     protected int getLayout() {
         return R.layout.seller_index_activity;
@@ -102,6 +102,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         swipe.setRefreshing(false);
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID)));
+        presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID));
     }
 
 
@@ -109,11 +110,16 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
     public void initDataSuccess(SellerIndexBean bean) {
         swipe.setRefreshing(false);
         GlideApp.with(this)
-                .load(BASE_URL + bean.getPortrait()).placeholder(R.drawable.img_default)
+                .load(BASE_URL + bean.getPortrait()).placeholder(R.drawable.logo_default)
                 .override(100, 100)
                 .into(protrait);
         name.setText(bean.getName());
-        introduce.setText(bean.getIntroduce());
+        if(bean.getIntroduce()!=null&&bean.getIntroduce().length()>0){
+            introduce.setText(bean.getIntroduce());
+        }else {
+            introduce.setText("暂无简介");
+        }
+
     }
 
     @Override

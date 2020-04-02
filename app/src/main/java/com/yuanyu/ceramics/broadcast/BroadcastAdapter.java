@@ -66,6 +66,7 @@ public class BroadcastAdapter extends RecyclerView.Adapter<BroadcastAdapter.View
         });
         holder.itemView.setOnClickListener(view -> {
             Intent intent=new Intent(context, LivePullActivity.class);
+            intent.putExtra("live_id",list.get(position).getId());
             context.startActivity(intent);
         });
     }

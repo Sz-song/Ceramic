@@ -1,7 +1,8 @@
 package com.yuanyu.ceramics.mine;
 
 public class MineBean {
-    private int id;
+    private String id;
+    private String shop_id;
     private String portrait;
     private String name;
     private String fans_num;
@@ -16,7 +17,7 @@ public class MineBean {
     private int daipingjia; //待评价数量
     private int tuikuan; //退款数量
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -70,5 +71,9 @@ public class MineBean {
 
     public int getTuikuan() {
         return tuikuan;
+    }
+
+    public String getShop_id() {
+        return shop_id;
     }
 }

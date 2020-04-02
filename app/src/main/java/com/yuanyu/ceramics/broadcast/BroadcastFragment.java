@@ -120,8 +120,6 @@ public class BroadcastFragment extends BaseFragment<BroadcastFragmentPresenter> 
 
     @Override
     public void initDataFail(ExceptionHandler.ResponeThrowable e) {
-        BroadcastBean broadcastBean=new BroadcastBean("","","","","",true);
-        list.add(broadcastBean);
         adapter.notifyDataSetChanged();
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
         if(isAlive){

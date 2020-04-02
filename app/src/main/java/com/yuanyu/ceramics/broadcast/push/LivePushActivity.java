@@ -23,6 +23,7 @@ import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -328,6 +329,7 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
                 livePopupwindowSharpness.showAtLocation(bottomTool, Gravity.BOTTOM, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics()));
                 break;
             case R.id.shopping:
+
                 break;
             case R.id.add_auction:
                 livePopupWindowAddAuction.showAtLocation(bottomTool, Gravity.BOTTOM, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics()));
@@ -335,10 +337,4 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }
