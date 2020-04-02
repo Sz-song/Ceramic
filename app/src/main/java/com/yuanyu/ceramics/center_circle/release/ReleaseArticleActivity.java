@@ -87,12 +87,10 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);
-//            actionBar.setHomeAsUpIndicator(R.mipmap.back1_gray);
             actionBar.setDisplayShowTitleEnabled(false);
         }
         Intent getintent=getIntent();
         articleId = getintent.getStringExtra("articleid");
-        L.e(articleId+"-----------");
         articleContent.setOnTouchListener((arg0, arg1) -> true);
         content = new ArrayList<>();
         articleTitle.addTextChangedListener(new TextWatcher() {
@@ -217,9 +215,7 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
 
     @Override
     public void uploadImageSuccess(List<String> list) {
-        L.e(imagecover+"000000"+list.size());
         //把图片路径替换成服务器路径
-        L.e(list.size()+"----------"+content.size());
         if (list.size() == 1){
             if (imagecover != null && imagecover.length() > 0){
                 if (imagecover.startsWith("img/")){
@@ -242,12 +238,8 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                     cover = imagecover;
                     int temp = 0;
                     for (int i = 0; i < content.size(); i++) {
-                        L.e((content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/"))+"-----");
                         if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
-                            L.e(temp+"1111111");
-                            L.e(list.get(temp));
                             content.set(i, new ArticleContentBean(1, list.get(temp)));
-                            L.e(content.get(i).getContent());
                             temp++;
                         }
                     }
@@ -255,12 +247,8 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
                     cover = list.get(0);
                     int temp = 1;
                     for (int i = 0; i < content.size(); i++) {
-                        L.e((content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/"))+"-----");
                         if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
-                            L.e(temp+"1111111");
-                            L.e(list.get(temp));
                             content.set(i, new ArticleContentBean(1, list.get(temp)));
-                            L.e(content.get(i).getContent());
                             temp++;
                         }
                     }
@@ -268,12 +256,8 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
             }else {
                 int temp = 0;
                 for (int i = 0; i < content.size(); i++) {
-                    L.e((content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/"))+"-----");
-                    if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
-                        L.e(temp+"1111111");
-                        L.e(list.get(temp));
+                   if (content.get(i).getType() == 1 && !content.get(i).getContent().startsWith("img/")) {
                         content.set(i, new ArticleContentBean(1, list.get(temp)));
-                        L.e(content.get(i).getContent());
                         temp++;
                     }
                 }
@@ -281,9 +265,6 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
 
         }
         String id = "";
-        for (int i = 0; i < content.size(); i++) {
-            L.e(content.get(i)+"----------1");
-        }
 
         if (articleId != null && articleId.length() > 0){
             id = articleId;
@@ -359,16 +340,13 @@ public class ReleaseArticleActivity extends BaseActivity<ReleaseArticlePresenter
         }
         for (int i = 0; i < beans.getContent().size(); i++) {
             if (beans.getContent().get(i).getType() == 0){
-                L.e("000");
                 articleContent.addEditTextAtIndex(index,beans.getContent().get(i).getContent());
                 index++;
             }else {
                 if(i==beans.getContent().size()-1){
-                    L.e("123");
                     articleContent.insertImage(BASE_URL+beans.getContent().get(i).getContent(),320);
                     index++;
                 }else{
-                    L.e("456");
                     if(i!=beans.getContent().size()-1&&beans.getContent().get(i+1).getType() == 0){
                         articleContent.addImageViewAtIndex(index,BASE_URL+beans.getContent().get(i).getContent());
                         index++;

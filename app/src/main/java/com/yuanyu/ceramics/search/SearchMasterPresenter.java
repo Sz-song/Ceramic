@@ -1,27 +1,27 @@
 package com.yuanyu.ceramics.search;
 
-import com.yuanyu.ceramics.base.BaseFragment;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
+
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class SearchMasterPresenter extends BasePresenter<SearchMasterConstract.ISearchMasterView> implements SearchMasterConstract.ISearchMasterPresenter {
     private SearchMasterConstract.ISearchMasterModel model;
-    public SearchMasterPresenter() {model=new SearchMasterModel();}
-
+    SearchMasterPresenter() {model=new SearchMasterModel();}
     @Override
-    public void SearchMasterList(int page, String useraccountid, int type, String search, int outsidetype) {
-        model.SearchMasterList(page,useraccountid,type,search,outsidetype)
+    public void SearchMasterList(String useraccountid, int page, String query) {
+        model.SearchMasterList(useraccountid,page,query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<SearchBean>())
-                .subscribe(new BaseObserver<SearchBean>() {
+                .compose(new HttpServiceInstance.ErrorTransformer<List<SearchMasterBean>>())
+                .subscribe(new BaseObserver<List<SearchMasterBean>>() {
                     @Override
-                    public void onNext(SearchBean bean) {if(view!=null){view.SearchMasterSuccess(bean);}}
+                    public void onNext(List<SearchMasterBean> beans) {if(view!=null){view.SearchMasterSuccess(beans);}}
                     @Override
                     public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.SearchMasterFail(e);}}
                 });

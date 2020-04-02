@@ -28,7 +28,7 @@ public class DraftsModel implements DraftsConstract.IDraftsModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","getdrafts");
+        map.put("action","get_draftslist");
         Map data = new HashMap();
         data.put("useraccountid",useraccountid);
         data.put("page",page);

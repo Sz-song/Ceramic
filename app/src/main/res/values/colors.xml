@@ -19,4 +19,7 @@
     <color name="gold">#ffc746</color>
     <color name="text_gray2">#767676</color>
     <color name="disablebtnbg">#DBDBDB</color>
+    <color name="ninegray">#999999</color>
+    <color name="tab_select">#333333</color>
+    <color name="tab_unselect">#757575</color>
 </resources>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
     android:background="@color/white"
     android:focusableInTouchMode="true"
     android:focusable="true"
-    tools:context=".home.homepage.HomepageFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".home.homepage.HomepageFragment">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -68,29 +68,53 @@
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="@color/white_drak"
-        android:layout_height="wrap_content">
-        <com.androidkun.xtablayout.XTabLayout
-            android:id="@+id/tablelayout"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="40dp"
-            app:xTabDividerWidthWidthText="true"
-            app:xTabIndicatorColor="@color/colorPrimary"
-            app:xTabIndicatorHeight="3dp"
-            app:xTabMode="fixed"
-            app:xTabSelectedTextColor="@color/tab_select"
-            app:xTabSelectedTextSize="14sp"
-            app:xTabTextColor="@color/tab_unselect"
-            android:background="@color/white"
-            app:xTabTextSize="12.5sp">
-        </com.androidkun.xtablayout.XTabLayout>
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
+            android:orientation="horizontal">
+            <TextView
+                android:textColor="@color/blackLight"
+                android:text="@string/hissearch"
+                android:layout_marginStart="25dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/delete_history"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
+                android:padding="5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/delete_gray"/>
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_history"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </androidx.viewpager.widget.ViewPager>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_height="40dp"
+            android:textColor="@color/blackLight"
+            android:text="@string/search_hot"
+            android:layout_marginStart="25dp"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_hot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp"/>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

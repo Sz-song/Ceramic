@@ -95,5 +95,7 @@ dependencies {
     implementation 'com.tencent.imsdk:imsdk:4.6.102'
     //  腾讯直播sdk
     implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
+    //litepal 数据库
+    implementation 'org.litepal.android:java:3.0.0'
 
 }

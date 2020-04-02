@@ -40,7 +40,9 @@ import com.yuanyu.ceramics.order.refund.RefundDetailBean;
 import com.yuanyu.ceramics.order.refund.RefundListBean;
 import com.yuanyu.ceramics.personal_index.PersonalIndexBean;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansBean;
-import com.yuanyu.ceramics.search.SearchBean;
+import com.yuanyu.ceramics.search.SearchItemBean;
+import com.yuanyu.ceramics.search.SearchMasterBean;
+import com.yuanyu.ceramics.search.SearchShopBean;
 import com.yuanyu.ceramics.seller.delivery.CourierBean;
 import com.yuanyu.ceramics.seller.delivery.DeliveryBean;
 import com.yuanyu.ceramics.seller.delivery.WaitDeliveryBean;
@@ -98,15 +100,15 @@ public interface HttpService {
 //    商家首页
     @POST("back/test/api/shangjia/sellermyhome.php")
     Observable<BaseResponse<SellerIndexBean>> sellerinit(@Body RequestBody body);
-    //获取搜索大师
+    //首页商品搜索
     @POST("app_api/home_page/search.php")
-    Observable<BaseResponse<SearchBean>> getSearchDashiResult(@Body RequestBody body);
-    //获取搜索店铺
+    Observable<BaseResponse<List<SearchItemBean>>> getSearchItemList(@Body RequestBody body);
+    //首页店铺搜索
     @POST("app_api/home_page/search.php")
-    Observable<BaseResponse<SearchBean>> getSearchShopResult(@Body RequestBody body);
-    //获取搜索作品
+    Observable<BaseResponse<List<SearchShopBean>>> getSearchShopList(@Body RequestBody body);
+    //首页大师搜索
     @POST("app_api/home_page/search.php")
-    Observable<BaseResponse<SearchBean>> getSearchZuopinResult(@Body RequestBody body);
+    Observable<BaseResponse<List<SearchMasterBean>>> SearchMasterList(@Body RequestBody body);
     //大师列表
     @POST("app_api/ceramics/master_list.php")
     Observable<BaseResponse<List<MasterItemBean>>> master_list(@Body RequestBody body);
@@ -192,10 +194,10 @@ public interface HttpService {
     @POST("back/test/api/quan/releasedynamic.php")
     Observable<BaseResponse<Boolean>>ReleaseDynamic(@Body RequestBody body);
     //    保存动态
-    @POST("app_api/yuba/save_dynamic.php")
+    @POST("back/test/api/quan/save_dynamic.php")
     Observable<BaseResponse<Boolean>>SaveDynamic(@Body RequestBody body);
     //    获取草稿箱动态详情
-    @POST("app_api/yuba/get_dynamic_draft.php")
+    @POST("back/test/api/quan/get_dynamic_draft.php")
     Observable<BaseResponse<DraftsDynamic>>getDynamic(@Body RequestBody body);
     //获取好友列表
     @POST("back/test/api/quan/getfriends.php")
@@ -204,15 +206,15 @@ public interface HttpService {
     @POST("back/test/api/quan/releasearticle.php")
     Observable<BaseResponse<Boolean>>ReleaseArticle(@Body RequestBody body);
     //    获取草稿箱文章详情
-    @POST("app_api/yuba/get_drafts_articledetail.php")
+    @POST("back/test/api/quan/get_drafts_articledetail.php")
     Observable<BaseResponse<DraftsArticle>>getArticle(@Body RequestBody body);
     //    保存文章
-    @POST("app_api/yuba/drafts_article.php")
+    @POST("back/test/api/quan/drafts_article.php")
     Observable<BaseResponse<Boolean>>SaveArticle(@Body RequestBody body);
 
 //    草稿箱
 //    从草稿箱删除动态/文章
-    @POST("app_api/yuba/delete_drafts.php")
+    @POST("back/test/api/quan/delete_drafts.php")
     Observable<BaseResponse<String[]>>deleteDraftsDynamic(@Body RequestBody body);
 
     //评论
@@ -432,7 +434,7 @@ public interface HttpService {
     @POST("app_api/yuba/change_image.php")
     Observable<BaseResponse>changeImage(@Body RequestBody body);
     //    获取草稿箱内容
-    @POST("111")
+    @POST("back/test/api/quan/get_draftslist.php")
     Observable<BaseResponse<List<DraftsBean>>> getDrafts(@Body RequestBody body);
     //观众直播初始化
     @POST("app_api/yuba/change_image.php")
@@ -440,4 +442,7 @@ public interface HttpService {
     //直播订阅
     @POST("app_api/yuba/change_image.php")
     Observable<BaseResponse<List<Boolean>>> subscribeLive(@Body RequestBody body);
+    //获取热门搜索
+    @POST("app_api/home_page/home_hot_search.php")
+    Observable<BaseResponse<List<String>>> getSearchHotList(@Body RequestBody body);
 }

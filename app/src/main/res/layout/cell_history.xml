@@ -4,11 +4,11 @@
     android:layout_height="50dp"
     android:orientation="vertical">
     <TextView
+        android:id="@+id/cell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="45dp"
         android:gravity="center"
-        android:id="@+id/history"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="2dp"
         android:layout_marginLeft="5dp"
@@ -17,7 +17,7 @@
         android:paddingBottom="4dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:textSize="15sp"
-        android:textColor="@color/blackLight"
-        android:background="@drawable/r4_soebebeb"/>
+        android:textSize="14sp"
+        android:textColor="@color/color_666666"
+        android:background="@drawable/search_soblue"/>
 </LinearLayout>

@@ -8,20 +8,18 @@ import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Md5Utils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
-/**
- * Created by cat on 2018/7/26.
- */
+public class SearchShopModel implements SearchShopConstract.ISearchShopModel{
+    private HttpService httpService;
+    SearchShopModel(){httpService = HttpServiceInstance.getInstance();}
 
-public class SearchShopModel {
-    HttpService httpService;
-    public SearchShopModel(){httpService = HttpServiceInstance.getInstance();}
-
-    public Observable<BaseResponse<SearchBean>> getSearchShopResult(int page, String useraccountid, int type, String search, int outsidetype){
+    @Override
+    public Observable<BaseResponse<List<SearchShopBean>>> SearchShopList(String useraccountid, int page, String query) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -29,19 +27,18 @@ public class SearchShopModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","searchresult");
+        map.put("action","search");
         Map data = new HashMap();
-        data.put("page",page);
-        data.put("pagesize","");
-        data.put("intype","");
-        data.put("search",search);
         data.put("useraccountid",useraccountid);
-        data.put("outtype",outsidetype);
+        data.put("query",query);
+        data.put("page",page);
+        data.put("type",1);
+        data.put("page_size",20);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
         L.e("str is "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.getSearchShopResult(body);
+        return httpService.getSearchShopList(body);
     }
 }
