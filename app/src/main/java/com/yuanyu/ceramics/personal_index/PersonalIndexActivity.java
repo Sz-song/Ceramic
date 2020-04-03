@@ -530,11 +530,12 @@ public void onViewClicked(View view) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1002) {//更改头像
-                urlimage = data.getStringExtra("portrait_url");
-                GlideApp.with(PersonalIndexActivity.this)
-                        .load(BASE_URL + urlimage)
-                        .placeholder(R.drawable.logo_default)
-                        .into(titleImage);
+                presenter.getPersonalIndexData(useraccountid, userid);
+//                urlimage = data.getStringExtra("portrait_url");
+//                GlideApp.with(PersonalIndexActivity.this)
+//                        .load(BASE_URL + urlimage)
+//                        .placeholder(R.drawable.logo_default)
+//                        .into(titleImage);
             }
         }
     }
