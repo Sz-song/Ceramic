@@ -57,17 +57,17 @@ public class MyCollectAdapter extends RecyclerView.Adapter<MyCollectAdapter.View
         params3.width = width;
         params3.height = width;
         holder.img3.setLayoutParams(params3);
-        holder.name.setText(list.get(position - 1).getShop_name());
-        holder.slogan.setText(list.get(position - 1).getIntroduce());
-        holder.itemName.setText(list.get(position-1).getItem_name());
-        holder.itemPrice.setText("¥"+list.get(position-1).getPrice());
-        GlideApp.with(context).load(BASE_URL + list.get(position - 1).getProtrait()).placeholder(R.drawable.img_default).override(50, 50).into(holder.avatar);
+        holder.name.setText(list.get(position).getShop_name());
+        holder.slogan.setText(list.get(position).getIntroduce());
+        holder.itemName.setText(list.get(position).getItem_name());
+        holder.itemPrice.setText("¥"+list.get(position).getPrice());
+        GlideApp.with(context).load(BASE_URL + list.get(position).getProtrait()).placeholder(R.drawable.img_default).override(50, 50).into(holder.avatar);
         holder.avatar.setOnClickListener(v -> {
             Intent intent =new Intent(context, ShopIndexActivity.class);
             intent.putExtra(AppConstant.SHOP_ID,list.get(position).getShop_id());
             context.startActivity(intent);
         });
-        switch (list.get(position - 1).getImages().size()) {
+        switch (list.get(position).getImages().size()) {
             case 0:
                 GlideApp.with(context).load(R.drawable.img_default).override(200, 200).into(holder.img1);
                 GlideApp.with(context).load(R.drawable.img_default).override(100, 100).into(holder.img2);
@@ -77,27 +77,27 @@ public class MyCollectAdapter extends RecyclerView.Adapter<MyCollectAdapter.View
                 holder.img3.setOnClickListener(null);
                 break;
             case 1:
-                GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(0)).override(200, 200).into(holder.img1);
+                GlideApp.with(context).load(BASE_URL + list.get(position).getImages().get(0)).override(200, 200).into(holder.img1);
                 GlideApp.with(context).load(R.drawable.img_default).override(100, 100).into(holder.img2);
                 GlideApp.with(context).load(R.drawable.img_default).override(100, 100).into(holder.img3);
-                holder.img1.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
+                holder.img1.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position).getItem_id()));
                 holder.img2.setOnClickListener(null);
                 holder.img3.setOnClickListener(null);
                 break;
             case 2:
-                GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(0)).override(200, 200).into(holder.img1);
-                GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(1)).override(100, 100).into(holder.img2);
-                holder.img1.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
-                holder.img2.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
+                GlideApp.with(context).load(BASE_URL + list.get(position).getImages().get(0)).override(200, 200).into(holder.img1);
+                GlideApp.with(context).load(BASE_URL + list.get(position).getImages().get(1)).override(100, 100).into(holder.img2);
+                holder.img1.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position).getItem_id()));
+                holder.img2.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position).getItem_id()));
                 holder.img3.setOnClickListener(null);
                 break;
             case 3:
-                GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(0)).placeholder(R.drawable.img_default).override(200, 200).into(holder.img1);
-                GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(1)).placeholder(R.drawable.img_default).override(100, 100).into(holder.img2);
-                GlideApp.with(context).load(BASE_URL + list.get(position - 1).getImages().get(2)).placeholder(R.drawable.img_default).override(100, 100).into(holder.img3);
-                holder.img1.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
-                holder.img2.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
-                holder.img3.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position-1).getItem_id()));
+                GlideApp.with(context).load(BASE_URL + list.get(position).getImages().get(0)).placeholder(R.drawable.img_default).override(200, 200).into(holder.img1);
+                GlideApp.with(context).load(BASE_URL + list.get(position).getImages().get(1)).placeholder(R.drawable.img_default).override(100, 100).into(holder.img2);
+                GlideApp.with(context).load(BASE_URL + list.get(position).getImages().get(2)).placeholder(R.drawable.img_default).override(100, 100).into(holder.img3);
+                holder.img1.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position).getItem_id()));
+                holder.img2.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position).getItem_id()));
+                holder.img3.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context,list.get(position).getItem_id()));
                 break;
         }
 

@@ -3,7 +3,7 @@ package com.yuanyu.ceramics.mine.my_collect;
 import java.util.List;
 
 public class MyCollectBean {
-    private String shop_id;
+    private String shopid;
     private String shop_name;
     private String introduce;
     private String protrait;
@@ -13,7 +13,7 @@ public class MyCollectBean {
     private List<String> images;
 
     public String getShop_id() {
-        return shop_id;
+        return shopid;
     }
 
     public String getShop_name() {
