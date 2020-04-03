@@ -94,7 +94,7 @@ public class FocusAndFansFragment extends BaseFragment <FocusAndFansPresenter> i
                         int[] lastPositions = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
                         ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(lastPositions);
                     }
-                    if (lastPosition >= recyclerView.getLayoutManager().getItemCount() - 1) {
+                    if (lastPosition >= recyclerView.getLayoutManager().getItemCount() - 1&&lastPosition>8) {
                         presenter.getFocusAndFansList(Sp.getString(getActivity(), "useraccountid"), userid, focustype, page);
                     }
                 }
@@ -114,6 +114,7 @@ public class FocusAndFansFragment extends BaseFragment <FocusAndFansPresenter> i
     }
     @Override
     public void getFocusAndFansListSuccess(List<FocusAndFansBean> friendBeanslist) {
+        L.e("获取成功");
         dialog.dismiss();
         list.addAll(friendBeanslist);
         if (isAlive) {
@@ -132,6 +133,7 @@ public class FocusAndFansFragment extends BaseFragment <FocusAndFansPresenter> i
 
     @Override
     public void getFocusAndFansListFail(ExceptionHandler.ResponeThrowable e) {
+        L.e("获取成功");
         dialog.dismiss();
         L.e(e.message + e.status);
         if (isAlive) {
@@ -150,12 +152,12 @@ public class FocusAndFansFragment extends BaseFragment <FocusAndFansPresenter> i
     public void focusSuccess(Boolean b, int position) {
         if (b) {
             Toast.makeText(getContext(), "关注成功", Toast.LENGTH_SHORT).show();
-            list.get(position).setIsfocus(true);
+            list.get(position).setIsfocus(1);
             list.get(position).setFans_num(list.get(position).getFans_num()+1);
             adapter.notifyDataSetChanged();
         } else{
             Toast.makeText(getContext(), "取关成功", Toast.LENGTH_SHORT).show();
-            list.get(position).setIsfocus(false);
+            list.get(position).setIsfocus(0);
             list.get(position).setFans_num(list.get(position).getFans_num()-1);
             adapter.notifyDataSetChanged();
         }

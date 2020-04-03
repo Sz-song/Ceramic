@@ -115,7 +115,7 @@ public class FenLeiActivity extends BaseActivity<FenLeiPresenter> implements Fen
             }
             if (show) {
                 recyclerviewSelect.setVisibility(View.VISIBLE);
-                submit.setText("确定");
+                submit.setText("搜索选中条件");
                 submit.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             } else {
                 recyclerviewSelect.setVisibility(View.INVISIBLE);

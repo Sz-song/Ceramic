@@ -46,7 +46,7 @@ public class FocusAndFansAdapter extends RecyclerView.Adapter<FocusAndFansAdapte
         holder.name.setText(list.get(position).getName());
         holder.txt.setText(list.get(position).getTxt());
         holder.fansNum.setText("粉丝:"+list.get(position).getFans_num());
-        if(list.get(position).isIsfocus()){
+        if(list.get(position).isIsfocus() == 1){
             holder.isfocus.setText("已关注");
             holder.isfocus.setTextColor(context.getResources().getColor(R.color.blackLight));
             holder.isfocus.setBackground(context.getResources().getDrawable(R.drawable.r2_sowhite_stlightgray));

@@ -32,7 +32,7 @@ public class FocusAndFansModel implements FocusAndFansConstract.IFocusAndFansMod
         data.put("userid",userid);
         data.put("page",page);
         data.put("type",focustype);
-        data.put("page_size",10);
+        data.put("page_size",20);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);

@@ -125,7 +125,7 @@ public interface HttpService {
     @POST("app_api/ceramics/master_works.php")
     Observable<BaseResponse<List<MasterWorkBean>>> getMasterWorkList(@Body RequestBody body);
     //获取集市商铺
-    @POST("app_api/ceramics/store_center.php")
+    @POST("back/test/api/homepage/store_center.php")
     Observable<BaseResponse<List<StoreCenterBean>>> getStoreCenterList(@Body RequestBody body);
     @POST("app_api/grounding/generate_bond_orders.php")
     Observable<BaseResponse<GenerateOrdersBean>> generateUserBondOrder(@Body RequestBody body);

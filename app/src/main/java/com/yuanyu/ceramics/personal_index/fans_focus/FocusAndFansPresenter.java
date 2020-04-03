@@ -23,7 +23,7 @@ public class FocusAndFansPresenter extends BasePresenter<FocusAndFansConstract.I
                 .compose(new HttpServiceInstance.ErrorTransformer<List<FocusAndFansBean>>())
                 .subscribe(new BaseObserver<List<FocusAndFansBean>>() {
                     @Override
-                    public void onNext(List<FocusAndFansBean> focusAndFansBeans) {view.getFocusAndFansListSuccess(focusAndFansBeans);}
+                    public void onNext(List<FocusAndFansBean> focusAndFansBeans) {if(view!=null){view.getFocusAndFansListSuccess(focusAndFansBeans);}}
                     @Override
                     public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.getFocusAndFansListFail(e);}}
                 });

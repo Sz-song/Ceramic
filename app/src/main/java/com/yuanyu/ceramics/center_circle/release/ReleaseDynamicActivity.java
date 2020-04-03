@@ -212,14 +212,28 @@ public class ReleaseDynamicActivity extends BaseActivity<ReleaseDynamicPresenter
             List<LocalMedia> images = PictureSelector.obtainMultipleResult(data);
             if ((images.size() + adapter.getItemCount()) == imageSize + 1) {
                 mList.remove(adapter.getItemCount() - 1);
-                for (int i = images.size() - 1; i >= 0; i--) {
-                    mList.add(0, images.get(i).getPath());
+                if (mList.size() == 0){
+                    for (int i = images.size() - 1; i >= 0; i--) {
+                        mList.add(0, images.get(i).getPath());
+                    }
+                }else {
+                    for (int i = 0; i < images.size(); i++) {
+                        mList.add(mList.size(), images.get(i).getPath());
+                    }
                 }
+
                 adapter.notifyDataSetChanged();
             } else {
-                for (int i = images.size() - 1; i >= 0; i--) {
-                    mList.add(0, images.get(i).getPath());
+                if (mList.size() == 1){
+                    for (int i = images.size() - 1; i >= 0; i--) {
+                        mList.add(0, images.get(i).getPath());
+                    }
+                }else {
+                    for (int i = 0; i < images.size(); i++) {
+                        mList.add(mList.size()-1, images.get(i).getPath());
+                    }
                 }
+
                 adapter.notifyDataSetChanged();
             }
             if ((mList.size() == 1) && editYuyouquan.getText().toString().trim().length() < 1) {

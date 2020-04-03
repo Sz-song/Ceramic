@@ -9,7 +9,7 @@ public class FocusAndFansFragmentAdapter extends FragmentPagerAdapter {
     private String[] mTitles;
     private String userid;
     FocusAndFansFragmentAdapter(FragmentManager fm, String[] mTitles, String userid){
-        super(fm,FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        super(fm);
         this.mTitles=mTitles;
         this.userid=userid;
     }

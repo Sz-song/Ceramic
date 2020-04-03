@@ -5,7 +5,7 @@ public class FocusAndFansBean {
     private String name;
     private String portrait;
     private String txt;
-    private boolean isfocus;
+    private int isfocus;
     private int fans_num;
 
     public String getId() {
@@ -29,11 +29,11 @@ public class FocusAndFansBean {
         return fans_num;
     }
 
-    public boolean isIsfocus() {
+    public int isIsfocus() {
         return isfocus;
     }
 
-    public void setIsfocus(boolean isfocus) {
+    public void setIsfocus(int isfocus) {
         this.isfocus = isfocus;
     }
 
