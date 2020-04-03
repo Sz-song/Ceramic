@@ -29,7 +29,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/background_gray"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical">
         <FrameLayout
@@ -41,11 +41,18 @@
                 android:layout_height="70dp"
                 android:src="@mipmap/ic_launcher_round"/>
         </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/layer6_r5_p05_00_06">
         <RelativeLayout
             android:id="@+id/relat_version"
             android:layout_width="match_parent"
             android:background="@color/white"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
             <TextView
@@ -83,7 +90,7 @@
         <RelativeLayout
             android:id="@+id/relat_function"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@color/white"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
@@ -115,7 +122,7 @@
         <RelativeLayout
             android:id="@+id/relat_officeweb"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@color/white"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <TextView
@@ -154,7 +161,7 @@
         <RelativeLayout
             android:id="@+id/relat_ruler"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="@color/white"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
@@ -175,5 +182,6 @@
                 android:layout_marginEnd="20dp"
                 android:src="@mipmap/triangle_right" />
         </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

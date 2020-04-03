@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.luck.picture.lib.tools.PictureFileUtils;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.common.LoadingDialog;
@@ -19,18 +20,18 @@ import com.yuanyu.ceramics.utils.L;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class SystemSettingAdapter extends RecyclerView.Adapter<SystemSettingAdapter.ViewHolder> {
     private Context context;
-    private String[] list ;
+    private String[] list;
     private LoadingDialog dialog;
+
     SystemSettingAdapter(Context context, String[] list) {
         this.context = context;
         this.list = list;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,18 +39,24 @@ public class SystemSettingAdapter extends RecyclerView.Adapter<SystemSettingAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.text.setText(list[position]);
+        if (position == list.length - 1) {
+            holder.view.setVisibility(View.GONE);
+        } else {
+            holder.view.setVisibility(View.VISIBLE);
+        }
         holder.cell.setOnClickListener(view -> {
             Intent intent;
-            switch (position){
+            switch (position) {
                 case 0://清除缓存
-                    dialog=new LoadingDialog(context);
+                    dialog = new LoadingDialog(context);
                     dialog.show();
-                    CountDownTimer countDownTimer=new CountDownTimer(1000,1000) {
+                    CountDownTimer countDownTimer = new CountDownTimer(1000, 1000) {
                         @Override
                         public void onTick(long l) {
                         }
+
                         @Override
                         public void onFinish() {
                             dialog.dismiss();
@@ -62,19 +69,19 @@ public class SystemSettingAdapter extends RecyclerView.Adapter<SystemSettingAdap
                     L.e(" CLEAN UP");
                     break;
                 case 1://黑名单管理
-                    intent=new Intent(context,BlackListActivity.class);
+                    intent = new Intent(context, BlackListActivity.class);
                     context.startActivity(intent);
                     break;
                 case 2://"账户安全"
-                    intent=new Intent(context,AccountSecurityActivity.class);
+                    intent = new Intent(context, AccountSecurityActivity.class);
                     context.startActivity(intent);
                     break;
                 case 3://"意见反馈"
-                    intent=new Intent(context,OpinionOfYouActivity.class);
+                    intent = new Intent(context, OpinionOfYouActivity.class);
                     context.startActivity(intent);
                     break;
                 case 4://关于源玉"
-                    intent=new Intent(context,AboutYuanyuActivity.class);
+                    intent = new Intent(context, AboutYuanyuActivity.class);
                     context.startActivity(intent);
                     break;
                 case 5://联系客服
@@ -109,11 +116,13 @@ public class SystemSettingAdapter extends RecyclerView.Adapter<SystemSettingAdap
         return list.length;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text)
         TextView text;
         @BindView(R.id.cell)
         RelativeLayout cell;
+        @BindView(R.id.view)
+        View view;
 
         ViewHolder(View view) {
             super(view);

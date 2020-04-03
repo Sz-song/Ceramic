@@ -31,21 +31,35 @@
         android:id="@+id/recyclerview"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/layer6_r5_p05_00_06"
         android:layout_marginBottom="50dp">
     </androidx.recyclerview.widget.RecyclerView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dividerGray"/>
     <TextView
         android:id="@+id/quit"
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:textSize="17sp"
         android:textColor="@color/white"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:text="退出登录"
         android:background="@color/colorPrimary"/>
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
