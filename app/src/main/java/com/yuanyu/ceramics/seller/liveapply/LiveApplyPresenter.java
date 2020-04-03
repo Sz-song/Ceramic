@@ -63,7 +63,7 @@ public class LiveApplyPresenter extends BasePresenter<LiveApplyConstract.ILiveAp
     }
 
     @Override
-    public void liveApply(String id, String uid, int shop_id, String title, String coverimg, String time, int type, List<ItemBean> item_list) {
+    public void liveApply(String id, String uid, String shop_id, String title, String coverimg, String time,  List<ItemBean> item_list) {
         if(title==null||title.trim().length()==0){
             if(view!=null){view.showToast("请填写直播标题");}
             return;
@@ -73,16 +73,13 @@ public class LiveApplyPresenter extends BasePresenter<LiveApplyConstract.ILiveAp
         }else if(time==null||time.trim().length()==0){
             if(view!=null){view.showToast("请选择开播时间");}
             return;
-        }else if(type<2||type>4){
-            if(view!=null){view.showToast("请选择直播类型");}
-            return;
         }
         List<String> stringList=new ArrayList<>();
         for(int i=0;i<item_list.size();i++){
             stringList.add(item_list.get(i).getId());
         }
-        LiveApplyBean bean = new LiveApplyBean(id,uid,shop_id,title,coverimg,time,type,stringList);
-        model.liveApply(bean)
+
+        model.liveApply( id, uid, shop_id, title, coverimg, time, stringList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<String[]>())

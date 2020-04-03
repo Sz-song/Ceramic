@@ -195,9 +195,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         Sp.putString(this,AppConstant.REFRESH_TOKEN,bean.getRefresh_token());
         Sp.putString(this, AppConstant.USERNAME,bean.getUsername());
         Sp.putString(this,AppConstant.PROTRAIT,bean.getLogo());
-        dialog.dismiss();
-        Intent intent=new Intent(this,HomeActivity.class);
-        startActivity(intent);
+        presenter.IMLogin(bean.getUseraccountid(),bean.getUsersig(),bean.getUsername(),bean.getLogo());
     }
 
     @Override
@@ -229,6 +227,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         L.e(e.status + "  " + e.message);
         getCode.setEnabled(true);
         getCode.setText("获取验证码");
+    }
+
+    @Override
+    public void IMLoginSuccess() {
+        dialog.dismiss();
+        Intent intent=new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -279,6 +285,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
             Toast.makeText(LoginActivity.this, "登陆取消", Toast.LENGTH_SHORT).show();
         }
     }
+
     private class SelfWbAuthListener implements WbAuthListener {
         @Override
         public void onSuccess(final Oauth2AccessToken token) {
@@ -329,5 +336,15 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
             dialog.dismiss();
             Toast.makeText(LoginActivity.this, errorMessage.getErrorMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        L.e("get new intent ");
+        String wxopenid = intent.getStringExtra("wxopenid");
+        String wxheadimg = intent.getStringExtra("wxheadimgurl");
+        String wxnickname = intent.getStringExtra("wxnickname");
+        presenter.thirdLogin("2", wxheadimg, wxnickname, wxopenid);
     }
 }

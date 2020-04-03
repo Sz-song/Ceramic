@@ -47,6 +47,11 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
 
 
     @Override
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void autoLoginSuccess(LoginBean bean) {
         Sp.putString(this, AppConstant.USER_ACCOUNT_ID,bean.getUseraccountid());
         Sp.putString(this,AppConstant.MOBILE,bean.getMobile());
@@ -54,9 +59,7 @@ public class SplashActivity extends BaseActivity<SplashPresenter> implements Spl
         Sp.putString(this, AppConstant.USERNAME,bean.getUsername());
         Sp.putString(this,AppConstant.PROTRAIT,bean.getLogo());
         Sp.putString(this,AppConstant.USERSIG,bean.getUsersig());
-        //设置刷新监听
-        L.e("imsdk login");
-        presenter.IMLogin(bean.getUseraccountid(),bean.getUsersig());
+        presenter.IMLogin(bean.getUseraccountid(),bean.getUsersig(),bean.getUsername(),bean.getLogo());
     }
 
     @Override

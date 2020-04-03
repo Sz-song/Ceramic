@@ -64,7 +64,7 @@ public class LiveApplyModel implements LiveApplyConstract.ILiveApplyModel {
     }
 
     @Override
-    public Observable<BaseResponse<String[]>> liveApply(LiveApplyBean bean) {
+    public Observable<BaseResponse<String[]>> liveApply(String id,String uid,String shop_id,String title,String cover,String time,List<String> item_list ) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -72,8 +72,16 @@ public class LiveApplyModel implements LiveApplyConstract.ILiveApplyModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","applyforbroadcast");
-        map.put("data",bean);
+        map.put("action","insert_live_application");
+        Map data = new HashMap();
+        data.put("id",id);
+        data.put("useraccountid",uid);
+        data.put("shop_id",shop_id);
+        data.put("title",title);
+        data.put("coverimg",cover);
+        data.put("time",time);
+        data.put("item_list",item_list);
+        map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
         RequestBody body=RequestBody.create(MediaType.parse("application/json; charset=utf-8"),str);

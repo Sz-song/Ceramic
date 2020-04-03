@@ -99,7 +99,7 @@ public class ChatActivity extends BaseActivity<ChatPresenter> implements ChatCon
         list = new ArrayList<>();
         userid = getIntent().getStringExtra("userid");
         conversation = TIMManager.getInstance().getConversation(TIMConversationType.C2C, userid);
-        presenter.ConversationInit(conversation);
+        presenter.ConversationInit(conversation,Sp.getString(this,AppConstant.USER_ACCOUNT_ID));
         presenter.getChaterInfo(userid);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
         adapter = new ChatAdapter(this, list);
@@ -146,7 +146,6 @@ public class ChatActivity extends BaseActivity<ChatPresenter> implements ChatCon
         username = bean.getNickname();
         protrait = bean.getProtrait();
         timediff = bean.getNowtime() * 1000 - (new Date().getTime());
-        L.e("tiem diff is: " + timediff);
     }
 
     @Override
@@ -166,33 +165,16 @@ public class ChatActivity extends BaseActivity<ChatPresenter> implements ChatCon
     }
 
     @Override
-    public void receiveMessageSuccess(List<TIMMessage> TIMMessagelist) {//接受消息
-        L.e(TIMMessagelist.size() + "");
-        for (int i = 0; i < TIMMessagelist.size(); i++) {
-            if (TIMMessagelist.get(i).getConversation().getPeer().equals(userid)) {
-                TIMMessage msg = TIMMessagelist.get(i);
-                String senter =msg.getSender();
-                for (int j = 0; j < msg.getElementCount(); ++j) {
-                    TIMElem elem = msg.getElement(j);
-                    //获取当前元素的类型
-                    TIMElemType elemType = elem.getType();
-                    if (elemType == TIMElemType.Text) {
-                        TIMTextElem textElem = (TIMTextElem) elem;
-                        ChatEntity entity;
-                        if(senter.equals(userid)){
-                             entity = new ChatEntity(userid, username, textElem.getText(), protrait, new Date().getTime(), 0,false);
-                        }else{
-                             entity = new ChatEntity(userid, username, textElem.getText(), protrait, new Date().getTime(), 0,true);
-                        }
-                        list.add(entity);
-                        adapter.notifyItemRangeInserted(list.size() - 1, 1);
-                        ((LinearLayoutManager) recyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
-                    } else if (elemType == TIMElemType.Image) {
-                        //处理图片消息
-                    }
-                }
-            }
+    public void receiveMessageSuccess(String msg,boolean issender) {//接受消息
+        ChatEntity entity;
+        if(issender){
+            entity = new ChatEntity(Sp.getString(this,AppConstant.USER_ACCOUNT_ID), Sp.getString(this,AppConstant.USERNAME), msg, Sp.getString(this,AppConstant.PROTRAIT), new Date().getTime(), 0,issender);
+        }else{
+            entity = new ChatEntity(userid, username, msg, protrait, new Date().getTime(), 0,issender);
         }
+        list.add(entity);
+        adapter.notifyItemRangeInserted(list.size() - 1, 1);
+        ((LinearLayoutManager) recyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
     }
 
     @Override

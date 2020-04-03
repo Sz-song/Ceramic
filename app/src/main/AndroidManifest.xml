@@ -27,13 +27,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".search.SearchActivity"></activity>
+        <activity android:name=".search.SearchActivity"/>
         <activity android:name=".center_circle.release.SelectFriendActivity" />
         <activity android:name=".center_circle.release.ReleaseDynamicActivity" />
         <activity android:name=".seller.liveapply.SelectItemActivity" />
         <activity android:name=".seller.shop_shelve.ShelveActivity" />
         <activity android:name=".seller.shop_goods.ShopGoodsActivity" />
-        <activity android:name=".seller.liveapply.LiveApplyActivity" />
+        <activity android:name=".seller.liveapply.LiveApplyActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".item.ItemDetailAcitivity" />
         <activity android:name=".logistics.LogisticsActivity" />
         <activity android:name=".myinfo.EditMyInfoActivity" />

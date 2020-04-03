@@ -7,6 +7,7 @@ import com.yuanyu.ceramics.bazaar.MasterWorkBean;
 import com.yuanyu.ceramics.bazaar.StoreCenterBean;
 import com.yuanyu.ceramics.broadcast.BroadcastBean;
 import com.yuanyu.ceramics.broadcast.pull.LivePullBean;
+import com.yuanyu.ceramics.broadcast.push.LivePushBean;
 import com.yuanyu.ceramics.cart.GoodsBean;
 import com.yuanyu.ceramics.center_circle.release.DraftsArticle;
 import com.yuanyu.ceramics.center_circle.release.DraftsBean;
@@ -378,10 +379,10 @@ public interface HttpService {
     @POST("app_api/shangjia/expresscompany.php")
     Observable<BaseResponse<List<CourierBean>>> getCourierCompany(@Body RequestBody body);
     //获取商家申请直播状态
-    @POST("app_api/broadcast/liveapplystate.php")
+    @POST("back/test/api/broadcast/liveapplystate.php")
     Observable<BaseResponse<LiveApplyStatusBean>> getLiveApplyState(@Body RequestBody body);
     //商家申请直播
-    @POST("app_api/broadcast/insert_live_application.php")
+    @POST("back/test/api/broadcast/insert_live_application.php")
     Observable<BaseResponse<String[]>> liveApply(@Body RequestBody body);
     //直播获取商品列表
     @POST("back/test/api/broadcast/selectitem.php")
@@ -445,4 +446,7 @@ public interface HttpService {
     //获取热门搜索
     @POST("app_api/home_page/home_hot_search.php")
     Observable<BaseResponse<List<String>>> getSearchHotList(@Body RequestBody body);
+    //观众直播初始化
+    @POST("back/test/api/broadcast/shop_get_liveroom.php")
+    Observable<BaseResponse<LivePushBean>> livePushInit(@Body  RequestBody body);
 }

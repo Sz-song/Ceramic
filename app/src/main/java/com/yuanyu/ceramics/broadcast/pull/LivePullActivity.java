@@ -1,7 +1,6 @@
 package com.yuanyu.ceramics.broadcast.pull;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,20 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
-import com.tencent.imsdk.TIMElem;
-import com.tencent.imsdk.TIMElemType;
-import com.tencent.imsdk.TIMGroupManager;
 import com.tencent.imsdk.TIMManager;
-import com.tencent.imsdk.TIMMessage;
-import com.tencent.imsdk.TIMTextElem;
-import com.tencent.imsdk.TIMUserConfig;
-import com.tencent.imsdk.TIMUserProfile;
-import com.tencent.imsdk.TIMValueCallBack;
-import com.tencent.imsdk.ext.group.TIMGroupMemberResult;
-import com.tencent.rtmp.ITXLivePlayListener;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLivePlayConfig;
 import com.tencent.rtmp.TXLivePlayer;
@@ -37,6 +25,8 @@ import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +39,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import static com.tencent.rtmp.TXLiveConstants.PLAY_EVT_GET_MESSAGE;
 
 public class LivePullActivity extends BaseActivity<LivePullPresenter> implements LivePullConstract.ILivePullView {
 
@@ -80,7 +68,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
     private TIMConversation conversation;
     private String groupId;
     private String id;
-    private String pushUrl;
+    private String playUrl;
 
     @Override
     protected int getLayout() {
@@ -105,7 +93,6 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         }
         id=getIntent().getStringExtra("live_id");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
-        conversation = TIMManager.getInstance().getConversation(TIMConversationType.Group, groupId);
         livePlayer = new TXLivePlayer(this);
         list = new ArrayList<>();
         list.add(new LiveChatBean("0", "系统通知", "倡导文明直播，诚信交易，将会对内容进行24小时的在线巡查。任何传播违法、违规、低俗、暴力等不良信息的行为将会导致账号封停。"));
@@ -117,18 +104,20 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
     @Override
     public void initDataSuccess(LivePullBean bean) {
         groupId=bean.getGroupid();
-        pushUrl=bean.getPlayurl();
+        playUrl =bean.getPlayurl();
         pusherShopName.setText(bean.getShop_name());
         GlideApp.with(this)
                 .load(AppConstant.BASE_URL+bean.getShop_portrait())
                 .placeholder(R.drawable.logo_default)
                 .override(50,50)
                 .into(pusherAvatar);
-        presenter.IMLogin(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),Sp.getString(this, AppConstant.USERSIG),bean.getGroupid());
+        presenter.IMLogin(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),Sp.getString(this, AppConstant.USERSIG),Sp.getString(this,AppConstant.USERNAME),bean.getGroupid());
     }
 
     @Override
     public void initLivePull() {
+        L.e("init_push");
+        conversation = TIMManager.getInstance().getConversation(TIMConversationType.Group, groupId);
         livePlayer.setPlayerView(playerView);
         livePlayer.setRenderMode(TXLiveConstants.RENDER_MODE_FULL_FILL_SCREEN);
         livePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
@@ -138,8 +127,8 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         livePlayConfig.setMaxAutoAdjustCacheTime(5);
         livePlayConfig.setEnableMessage(true);
         livePlayer.setConfig(livePlayConfig);
-        if(pushUrl!=null&&pushUrl.length()>0){
-            livePlayer.startPlay(pushUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
+        if(playUrl !=null&& playUrl.length()>0){
+            livePlayer.startPlay(playUrl, TXLivePlayer.PLAY_TYPE_LIVE_FLV); //推荐 FLV
         }else {
             Toast.makeText(this, "播放失败", Toast.LENGTH_SHORT).show();
         }
@@ -165,6 +154,33 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
     }
 
 
+
+
+    @OnClick({R.id.focus,R.id.send, R.id.shopping})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.focus:
+                break;
+            case R.id.send:
+                if(chatInput.getText().toString().length()>0){
+                    if(conversation!=null){
+                        presenter.sentMassage(chatInput.getText().toString(), conversation);
+                        chatInput.setText("");
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if (imm != null){
+                            imm.hideSoftInputFromWindow(chatInput.getWindowToken(), 0);
+                        }
+                    }else{
+                        Toast.makeText(this, "发送失败", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(this, "输入不能为空", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.shopping:
+                break;
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -193,27 +209,5 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         }
         return true;
 
-    }
-
-    @OnClick({R.id.focus,R.id.send, R.id.shopping})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.focus:
-                break;
-            case R.id.send:
-                if(chatInput.getText().toString().length()>0){
-                    presenter.sentMassage(chatInput.getText().toString(), conversation);
-                    chatInput.setText("");
-                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if (imm != null){
-                        imm.hideSoftInputFromWindow(chatInput.getWindowToken(), 0);
-                    }
-                }else{
-                    Toast.makeText(this, "输入不能为空", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.shopping:
-                break;
-        }
     }
 }

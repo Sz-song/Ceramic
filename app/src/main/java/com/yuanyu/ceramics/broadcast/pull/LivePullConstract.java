@@ -22,8 +22,8 @@ public interface LivePullConstract {
     }
     interface ILivePullPresenter{
         void initData(String id);
-        void IMLogin(String useraccountid,String usersig,String groupId);
-        void joinChatGroup(String groupid,String useraccountid);
+        void IMLogin(String useraccountid,String usersig,String nickname,String groupId);
+        void joinChatGroup(String groupid,String useraccountid,String nickname);
         void quitChatGroup(String groupid);
         void sentMassage(String msg, TIMConversation conversation);
     }

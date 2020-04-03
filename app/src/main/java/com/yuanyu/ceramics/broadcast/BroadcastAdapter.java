@@ -15,7 +15,6 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.broadcast.pull.LivePullActivity;
-import com.yuanyu.ceramics.broadcast.push.LivePushActivity;
 import com.yuanyu.ceramics.common.OnPositionClickListener;
 import com.yuanyu.ceramics.global.GlideApp;
 

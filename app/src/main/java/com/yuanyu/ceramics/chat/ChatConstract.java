@@ -17,12 +17,12 @@ public interface ChatConstract {
         void getChaterInfoSuccess(ChatBean bean);
         void sentMassageSuccess(String msg);
         void showToast(String msg);
-        void receiveMessageSuccess(List<TIMMessage> TIMMessagelist);
+        void receiveMessageSuccess(String msg,boolean issender);
     }
 
     interface IChatPresenter {
         void getChaterInfo(String useraccountid);
         void sentMassage(String msg, TIMConversation conversation);
-        void ConversationInit(TIMConversation conversation);
+        void ConversationInit(TIMConversation conversation,String useraccountid);
     }
 }

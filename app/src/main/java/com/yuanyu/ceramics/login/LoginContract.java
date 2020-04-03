@@ -20,12 +20,15 @@ public interface LoginContract {
         void getValidCodeSuccess();
         void getValidCodeFail(ExceptionHandler.ResponeThrowable e);
 
+        void IMLoginSuccess();
+
     }
     interface ILoginPresenter{
         void login(int type, String username, String password);
         void getValidCode(String mobile);
         void getUnionId(UserInfo userInfo, String openId);
         void thirdLogin(String status, String portrait, String nickname, String openid);
+        void IMLogin(String useraccountid,String usersig,String nickname,String logo);
     }
 }
 

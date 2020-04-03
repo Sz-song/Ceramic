@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -69,8 +70,9 @@ public class ChatPresenter extends BasePresenter<ChatConstract.IChatView> implem
         });
     }
 
+
     @Override
-    public void ConversationInit(TIMConversation conversation) {//消息监听器
+    public void ConversationInit(TIMConversation conversation,String useraccountid) {//消息监听器
         conversation.getMessage(10000, conversation.getLastMsg(), new TIMValueCallBack<List<TIMMessage>>() {
             @Override
             public void onError(int i, String s) {
@@ -80,16 +82,54 @@ public class ChatPresenter extends BasePresenter<ChatConstract.IChatView> implem
 
             @Override
             public void onSuccess(List<TIMMessage> timMessages) {
-                List<TIMMessage> list=new ArrayList<>();
+                List<TIMMessage> listmsg=new ArrayList<>();
                 for(int i=timMessages.size();i>0;i--){
-                    list.add(timMessages.get(i-1));
+                    listmsg.add(timMessages.get(i-1));
                 }
-                list.add(conversation.getLastMsg());
-                if(view!=null){view.receiveMessageSuccess(list);}
+                listmsg.add(conversation.getLastMsg());
+                for (int i = 0; i < listmsg.size(); i++) {
+                    TIMMessage msg = listmsg.get(i);
+                    String senter =msg.getSender();
+                    for (int j = 0; j < msg.getElementCount(); ++j) {
+                        TIMElem elem = msg.getElement(j);
+                        //获取当前元素的类型
+                        TIMElemType elemType = elem.getType();
+                        if (elemType == TIMElemType.Text) {
+                            TIMTextElem textElem = (TIMTextElem) elem;
+                            if(senter.equals(useraccountid)){
+                                if(view!=null){view.receiveMessageSuccess(textElem.getText(),true);}
+                            }else{
+                                if(view!=null){view.receiveMessageSuccess(textElem.getText(),false);}
+                            }
+                        } else if (elemType == TIMElemType.Image) {
+                            //处理图片消息
+                        }
+                    }
+                }
             }
         });
         TIMManager.getInstance().addMessageListener(TIMMessagelist -> {//收到新消息
-            if(view!=null){view.receiveMessageSuccess(TIMMessagelist);}
+            for (int i = 0; i < TIMMessagelist.size(); i++) {
+                if (TIMMessagelist.get(i).getConversation().getPeer().equals(conversation.getPeer())) {
+                    TIMMessage msg = TIMMessagelist.get(i);
+                    String senter =msg.getSender();
+                    for (int j = 0; j < msg.getElementCount(); ++j) {
+                        TIMElem elem = msg.getElement(j);
+                        //获取当前元素的类型
+                        TIMElemType elemType = elem.getType();
+                        if (elemType == TIMElemType.Text) {
+                            TIMTextElem textElem = (TIMTextElem) elem;
+                            if(senter.equals(useraccountid)){
+                                if(view!=null){view.receiveMessageSuccess(textElem.getText(),true);}
+                            }else{
+                                if(view!=null){view.receiveMessageSuccess(textElem.getText(),false);}
+                            }
+                        } else if (elemType == TIMElemType.Image) {
+                            //处理图片消息
+                        }
+                    }
+                }
+            }
             return false;
         });
     }

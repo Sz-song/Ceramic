@@ -15,15 +15,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.imsdk.TIMConversation;
+import com.tencent.rtmp.ITXLivePushListener;
 import com.tencent.rtmp.TXLiveBase;
 import com.tencent.rtmp.TXLivePushConfig;
 import com.tencent.rtmp.TXLivePusher;
 import com.tencent.rtmp.ui.TXCloudVideoView;
+import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.broadcast.pull.LiveChatAdapter;
+import com.yuanyu.ceramics.broadcast.pull.LiveChatBean;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.utils.L;
+import com.yuanyu.ceramics.utils.Sp;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +38,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -67,11 +75,19 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
     TextView pusherShopName;
     @BindView(R.id.watch)
     TextView watch;
+    @BindView(R.id.caht_recyclerview)
+    RecyclerView cahtRecyclerview;
     private TXLivePusher livePusher;
     private LivePopupwindowSkinCare livePopupwindowSkinCare;
     private LivePopupwindowFilter livePopupwindowFilter;
     private LivePopupwindowSharpness livePopupwindowSharpness;
     private LivePopupWindowAddAuction livePopupWindowAddAuction;
+    private String id;
+    private String pushUrl;
+    private String groupId;
+    private LiveChatAdapter adapter;
+    private List<LiveChatBean> list;
+    private TIMConversation conversation;
 
     @Override
     protected int getLayout() {
@@ -97,19 +113,12 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
             actionBar.setHomeAsUpIndicator(R.mipmap.back_rd);
             actionBar.setDisplayShowTitleEnabled(false);
         }
-        List<String> permissionList = new ArrayList<>();
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.CAMERA);
-        }
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.RECORD_AUDIO);
-        }
-        if (!permissionList.isEmpty()) {
-            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
-            ActivityCompat.requestPermissions(this, permissions, 1);
-        } else {
-            initLivePush();
-        }
+        id = getIntent().getStringExtra("live_id");
+        list = new ArrayList<>();
+        list.add(new LiveChatBean("0", "系统通知", "倡导文明直播，诚信交易，将会对内容进行24小时的在线巡查。任何传播违法、违规、低俗、暴力等不良信息的行为将会导致账号封停。"));
+        adapter = new LiveChatAdapter(this, list);
+        cahtRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+        cahtRecyclerview.setAdapter(adapter);
         livePopupwindowSkinCare = new LivePopupwindowSkinCare(this);
         livePopupwindowSkinCare.setOnPositionClickListener(position -> {
             if (position == 0) {
@@ -127,9 +136,61 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         livePopupwindowFilter.setOnPositionClickListener(this::switchFilter);
         livePopupwindowSharpness = new LivePopupwindowSharpness(this);
         livePopupwindowSharpness.setOnPositionClickListener(this::switchSharpness);
-        livePopupWindowAddAuction=new LivePopupWindowAddAuction(this);
+        livePopupWindowAddAuction = new LivePopupWindowAddAuction(this);
+        List<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.CAMERA);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.RECORD_AUDIO);
+        }
+        if (!permissionList.isEmpty()) {
+            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(this, permissions, 1);
+        } else {
+            presenter.initData(id);
+        }
+    }
+    @Override
+    public void initDataSuccess(LivePushBean bean) {
+        groupId = bean.getGroupid();
+        pushUrl = bean.getPushurl();
+        pusherShopName.setText(bean.getShop_name());
+        GlideApp.with(this)
+                .load(AppConstant.BASE_URL + bean.getShop_portrait())
+                .placeholder(R.drawable.logo_default)
+                .override(50, 50)
+                .into(pusherAvatar);
+        presenter.IMLogin(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERSIG),Sp.getString(this,AppConstant.USERNAME), bean.getGroupid());
+
     }
 
+    @Override
+    public void initLivePush() {
+        L.e("init push ");
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
+        TXLivePushConfig livePushConfig = new TXLivePushConfig();
+        livePusher = new TXLivePusher(this);
+        livePusher.setConfig(livePushConfig);
+        livePusher.startCameraPreview(pusherView);
+        int ret=livePusher.startPusher(pushUrl.trim());
+        if(ret==-5){
+            Toast.makeText(this, "许可证到期,请联系客服人员", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    @Override
+    public void receiveMessageSuccess(LiveChatBean chatBean) {
+        list.add(chatBean);
+        adapter.notifyItemRangeInserted(list.size() - 1, 1);
+        ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
+    }
+
+    @Override
+    public void showToast(String msg)  {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void switchFilter(int position) {
@@ -261,14 +322,12 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
                 for (int result : grantResults) {
                     if (result != PackageManager.PERMISSION_GRANTED) {
                         Toast.makeText(this, "请同意权限才能使用该功能", Toast.LENGTH_SHORT).show();
-                        finish();
                         return;
                     }
                 }
-                initLivePush();
+                presenter.initData(id);
             } else {
-                Toast.makeText(this, "请开启摄像头权限", Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(this, "请开启摄像头和录音权限", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -276,8 +335,10 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        livePusher.stopPusher();
-        livePusher.stopCameraPreview(true);
+        if (livePusher != null) {
+            livePusher.stopPusher();
+            livePusher.stopCameraPreview(true);
+        }
     }
 
     @Override
@@ -302,16 +363,6 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
 
     }
 
-    @Override
-    public void initLivePush() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
-        TXLivePushConfig livePushConfig = new TXLivePushConfig();
-        livePusher = new TXLivePusher(this);
-        livePusher.setConfig(livePushConfig);
-        livePusher.startCameraPreview(pusherView);
-        String rtmpURL = "rtmp://push.jadeall.cn/live/123?txSecret=2442934948e45281b4ef7938a2688a18&txTime=5E8368FF"; //此处填写您的 rtmp 推流地址
-        livePusher.startPusher(rtmpURL.trim());
-    }
 
     @OnClick({R.id.change_camera, R.id.skin_care, R.id.add_filter, R.id.change_sharpness, R.id.shopping, R.id.add_auction})
     public void onViewClicked(View view) {

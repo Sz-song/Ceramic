@@ -97,5 +97,7 @@ dependencies {
     implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
     //litepal 数据库
     implementation 'org.litepal.android:java:3.0.0'
+    // eventbus
+    implementation 'org.greenrobot:eventbus:3.0.0'
 
 }

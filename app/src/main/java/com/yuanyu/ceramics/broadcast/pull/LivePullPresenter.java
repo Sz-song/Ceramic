@@ -4,6 +4,7 @@ import android.widget.Toast;
 
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMConversation;
+import com.tencent.imsdk.TIMCustomElem;
 import com.tencent.imsdk.TIMElem;
 import com.tencent.imsdk.TIMElemType;
 import com.tencent.imsdk.TIMGroupManager;
@@ -12,6 +13,7 @@ import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.TIMTextElem;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
+import com.tencent.openqq.protocol.imsdk.msg;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
@@ -47,9 +49,9 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
     }
 
     @Override
-    public void IMLogin(String useraccountid, String usersig,String gronpID) {
+    public void IMLogin(String useraccountid, String usersig,String nickname,String gronpID) {
         if(TIMManager.getInstance().getLoginUser().equals(useraccountid)){
-            if(view!=null){joinChatGroup(gronpID,useraccountid);}
+            if(view!=null){joinChatGroup(gronpID,nickname,useraccountid);}
         }else{
             TIMManager.getInstance().login(useraccountid, usersig, new TIMCallBack() {
                 @Override
@@ -59,14 +61,14 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
                 }
                 @Override
                 public void onSuccess() {
-                    if(view!=null){joinChatGroup(gronpID,useraccountid);}
+                    if(view!=null){joinChatGroup(gronpID,nickname,useraccountid);}
                 }
             });
         }
     }
 
     @Override
-    public void joinChatGroup(String grounpid,String useraccountid) {
+    public void joinChatGroup(String grounpid,String nickname,String useraccountid) {
 //      设置新消息监听
         TIMManager.getInstance().addMessageListener(TIMMessagelist -> {//收到新消息
             for (int i = 0; i < TIMMessagelist.size(); i++) {
@@ -90,7 +92,11 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
                                     if(view!=null){
                                         view.receiveMessageSuccess(chatBean);
                                     }
-                               }
+                               }else if(elemType == TIMElemType.Custom){
+                                    TIMCustomElem customElem = (TIMCustomElem) elem;
+
+                                    ((TIMCustomElem) elem).getData();
+                                }
                             }
                         }
                     });
@@ -104,7 +110,22 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
             @Override
             public void onError(int i, String s) { L.e("加入聊天室失败: "+s);}
             @Override
-            public void onSuccess() { if(view!=null){view.initLivePull();}}
+            public void onSuccess() {
+                TIMGroupManager.ModifyMemberInfoParam param = new TIMGroupManager.ModifyMemberInfoParam(grounpid, useraccountid);
+                param.setNameCard(nickname);
+                TIMGroupManager.getInstance().modifyMemberInfo(param, new TIMCallBack() {
+                    @Override
+                    public void onError(int code, String desc) {
+                        L.e("modifyMemberInfo failed, code:" + code + "|msg: " + desc);
+                    }
+
+                    @Override
+                    public void onSuccess() {
+                        L.e("modifyMemberInfo succ");
+                    }
+                });
+                if(view!=null){view.initLivePull();}
+            }
         });
     }
 
