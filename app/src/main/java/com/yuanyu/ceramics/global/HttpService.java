@@ -122,7 +122,7 @@ public interface HttpService {
     @GET("users/show.json")
     Call<ResponseBody> getWeiboData(@QueryMap Map<String,String> params);
     //获取集市大师作品
-    @POST("app_api/ceramics/master_works.php")
+    @POST("back/test/api/homepage/master_works.php")
     Observable<BaseResponse<List<MasterWorkBean>>> getMasterWorkList(@Body RequestBody body);
     //获取集市商铺
     @POST("back/test/api/homepage/store_center.php")
@@ -431,7 +431,7 @@ public interface HttpService {
     @POST("back/test/api/mine/my_collect.php")
     Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(@Body RequestBody body);
     //修改主页背景和头像
-    @POST("app_api/yuba/change_image.php")
+    @POST("back/test/api/mine/change_image.php")
     Observable<BaseResponse>changeImage(@Body RequestBody body);
     //    获取草稿箱内容
     @POST("back/test/api/quan/get_draftslist.php")

@@ -13,6 +13,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.item.ItemDetailAcitivity;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class MasterWorkAdapter extends RecyclerView.Adapter<MasterWorkAdapter.Vi
         holder.name.setText(list.get(position).getName());
         holder.price.setText("¥"+list.get(position).getPrice());
         holder.location.setText(list.get(position).getMaster_name());
-//        holder.itemView.setOnClickListener(v -> ItemDetailActivity.actionStart(context, list.get(position).getId()));
+        holder.itemView.setOnClickListener(v -> ItemDetailAcitivity.actionStart(context, list.get(position).getId()));
     }
 
     @Override

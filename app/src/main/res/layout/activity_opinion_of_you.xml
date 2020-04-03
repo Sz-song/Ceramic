@@ -76,10 +76,11 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="15dp"
             android:textSize="15sp"
-            android:textColorHint="@color/background_gray"
+            android:textColorHint="@color/lightGray"
             android:layout_marginLeft="15dp"
             android:hint="请输入使用过程遇到的问题，以及您宝贵的建议。(优质的提问通常在20-100字之间)"
             android:gravity="top"
+            android:padding="5dp"
             android:background="@drawable/recy_btn_selector"/>
         <EditText
             android:id="@+id/contact_num"
@@ -89,7 +90,9 @@
             android:layout_marginRight="15dp"
             android:layout_marginLeft="15dp"
             android:textSize="14sp"
-            android:textColorHint="@color/background_gray"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:textColorHint="@color/lightGray"
             android:hint="请留下联系方式(手机号、QQ、微信)"
             android:background="@drawable/recy_btn_selector"/>
         <Button
@@ -99,7 +102,7 @@
             android:layout_marginEnd="15dp"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:textColor="@color/blackLight"
+            android:textColor="@color/white"
             android:background="@color/colorPrimary"
             android:text="提交"/>
 
