@@ -49,6 +49,7 @@ import com.yuanyu.ceramics.personal_index.PersonalIndexPopupWindow;
 import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
+import com.yuanyu.ceramics.utils.ShareUiListener;
 import com.yuanyu.ceramics.utils.Sp;
 
 import java.io.File;
@@ -58,6 +59,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jzvd.Jzvd;
+
+import static com.yuanyu.ceramics.AppConstant.QQ_APP_ID;
 
 public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> implements ItemDetailConstract.IItemDetailView {
 
@@ -207,9 +210,9 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
     public void getItemDetailSuccess(ItemDetailBean itemDetailBean) {
         bean.setbean(itemDetailBean);
         //给广告部分添加边距
-        if(bean.getItembean().getIntroducelist() != null){
+        if (bean.getItembean().getIntroducelist() != null) {
             recyclerview.addItemDecoration(new CheckOrderDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 8, ItemDetailAcitivity.this.getResources().getDisplayMetrics()), bean.getItembean().getIntroducelist().size() + 2));
-        }else {
+        } else {
             recyclerview.addItemDecoration(new CheckOrderDecoration((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 8, ItemDetailAcitivity.this.getResources().getDisplayMetrics()), 2));
         }
         canload = false;
@@ -251,11 +254,11 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
             }
         });
         topPrice.setText("¥" + bean.getItembean().getGoodsprice());
-//        GlideApp.with(this)
-//                .load(AppConstant.BASE_URL + bean.getItembean().getGoodslist().get(0))
-//                .override(100, 100)
-//                .placeholder(R.drawable.img_default)
-//                .into(topImage);
+        GlideApp.with(this)
+                .load(AppConstant.BASE_URL + bean.getItembean().getGoodslist().get(0))
+                .override(100, 100)
+                .placeholder(R.drawable.img_default)
+                .into(topImage);
         recyclerview.setLayoutManager(gridLayoutManager);
         itemDetailAdapter = new ItemDetailAdapter(this, bean, adsCellBeanList);
         recyclerview.setAdapter(itemDetailAdapter);
@@ -378,9 +381,9 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
     }
 
     @Override
-    public void loadMoreAdsSuccess(List<AdsCellBean> adsCellBeanList) {
+    public void loadMoreAdsSuccess(List<AdsCellBean> list) {
         canload = true;
-        adsCellBeanList.addAll(adsCellBeanList);
+        adsCellBeanList.addAll(list);
         page++;
         itemDetailAdapter.notifyItemRangeInserted(bean.getItembean().getIntroducelist().size() + adsCellBeanList.size() + 2 - adsCellBeanList.size(), adsCellBeanList.size());
     }
@@ -419,8 +422,8 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
             params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL,filePath);
             params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "返回源玉");
             params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
-//            Tencent mTencent = Tencent.createInstance(QQ_APP_ID, this);
-//            mTencent.shareToQQ(this, params, new ShareUiListener());
+            Tencent mTencent = Tencent.createInstance(QQ_APP_ID, this);
+            mTencent.shareToQQ(this, params, new ShareUiListener());
         }
     }
 

@@ -61,6 +61,7 @@ public class BlackListAdapter extends RecyclerView.Adapter <BlackListAdapter.Vie
                         }
                         @Override
                         public void onNext(Object o) {
+                            Toast.makeText(context, "解除拉黑成功", Toast.LENGTH_SHORT).show();
                             list.remove(position);
                             notifyDataSetChanged();
                         }

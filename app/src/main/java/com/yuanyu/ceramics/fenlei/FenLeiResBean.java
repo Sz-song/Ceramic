@@ -4,10 +4,10 @@ public class FenLeiResBean {
     private String id;
     private String name;
     private String location;
-    private float price;
+    private String price;
     private String image;
     private String shop;
-    public FenLeiResBean(String id, String name, String location, float price, String image, String shop) {
+    public FenLeiResBean(String id, String name, String location, String price, String image, String shop) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -40,11 +40,11 @@ public class FenLeiResBean {
         this.location = location;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
