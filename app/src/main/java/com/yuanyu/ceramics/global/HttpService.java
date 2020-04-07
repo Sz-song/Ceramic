@@ -14,6 +14,7 @@ import com.yuanyu.ceramics.center_circle.release.DraftsBean;
 import com.yuanyu.ceramics.center_circle.release.DraftsDynamic;
 import com.yuanyu.ceramics.chat.ChatBean;
 import com.yuanyu.ceramics.common.DynamicBean;
+import com.yuanyu.ceramics.common.FenleiBean;
 import com.yuanyu.ceramics.common.FriendBean;
 import com.yuanyu.ceramics.common.ResultBean;
 import com.yuanyu.ceramics.common.VideoBean;
@@ -22,6 +23,7 @@ import com.yuanyu.ceramics.dingzhi.DashiCellBean;
 import com.yuanyu.ceramics.dingzhi.DingzhiDetailBean;
 import com.yuanyu.ceramics.dingzhi.GenerateOrdersBean;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiBean;
+import com.yuanyu.ceramics.fenlei.FenLeiResBean;
 import com.yuanyu.ceramics.home.homepage.FaxianBean;
 import com.yuanyu.ceramics.item.AdsCellBean;
 import com.yuanyu.ceramics.item.ItemDetailBean;
@@ -102,13 +104,13 @@ public interface HttpService {
     @POST("back/test/api/shangjia/sellermyhome.php")
     Observable<BaseResponse<SellerIndexBean>> sellerinit(@Body RequestBody body);
     //首页商品搜索
-    @POST("app_api/home_page/search.php")
+    @POST("back/test/api/homepage/home_page_search.php")
     Observable<BaseResponse<List<SearchItemBean>>> getSearchItemList(@Body RequestBody body);
     //首页店铺搜索
-    @POST("app_api/home_page/search.php")
+    @POST("back/test/api/homepage/home_page_search.php")
     Observable<BaseResponse<List<SearchShopBean>>> getSearchShopList(@Body RequestBody body);
     //首页大师搜索
-    @POST("app_api/home_page/search.php")
+    @POST("back/test/api/homepage/home_page_search.php")
     Observable<BaseResponse<List<SearchMasterBean>>> SearchMasterList(@Body RequestBody body);
     //大师列表
     @POST("app_api/ceramics/master_list.php")
@@ -298,10 +300,10 @@ public interface HttpService {
     @POST("back/test/api/mine/applyenter.php")
     Observable<BaseResponse<String[]>> ApplyEnter(@Body RequestBody body);
     //移除黑名单
-    @POST("app_api/home_page/remove_blacklist.php")
+    @POST("back/test/api/homepage/remove_blacklist.php")
     Observable<BaseResponse>removeBlacklist(@Body RequestBody body);
     //黑名单初始化
-    @POST("app_api/home_page/blacklist.php")
+    @POST("back/test/api/homepage/blacklist.php")
     Observable<BaseResponse<List<BlackListBean>>>getBlacklist(@Body RequestBody body);
     //获取版本信息
     @POST("app_api/home_page/get_version.php")
@@ -323,7 +325,7 @@ public interface HttpService {
     @POST("back/test/api/shopping/cart_add.php")
     Observable<BaseResponse<String[]>> addCart(@Body RequestBody body);
     //加载更多广告
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("back/test/api/homepage/loadmoreads.php")
     Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
     //    商家管理获取订单管理getOrdersManage
     @POST("app_api/home_page/loadmoreads.php")
@@ -396,9 +398,9 @@ public interface HttpService {
     //商家获取待发货数据
     @POST("app_api/shangjia/getnodelivery.php")
     Observable<BaseResponse<List<WaitDeliveryBean>>>getWaitDeliveryData(@Body RequestBody body);
-    //获取分类
-    @POST("app_api/home_page/getfenlei.php")
-    Observable<BaseResponse<List<ResultBean>>>getFenleiResult(@Body RequestBody body);
+    //获取分类结果
+    @POST("back/test/api/homepage/getfenlei.php")
+    Observable<BaseResponse<List<FenLeiResBean>>>getFenleiResult(@Body RequestBody body);
     //添加收货地址
     @POST("back/test/api/address/add_address.php")
     Observable<BaseResponse<String[]>> addAddress(@Body RequestBody body);
@@ -444,7 +446,7 @@ public interface HttpService {
     @POST("app_api/yuba/change_image.php")
     Observable<BaseResponse<List<Boolean>>> subscribeLive(@Body RequestBody body);
     //获取热门搜索
-    @POST("app_api/home_page/home_hot_search.php")
+    @POST("back/test/api/homepage/home_hot_search.php")
     Observable<BaseResponse<List<String>>> getSearchHotList(@Body RequestBody body);
     //观众直播初始化
     @POST("back/test/api/broadcast/shop_get_liveroom.php")

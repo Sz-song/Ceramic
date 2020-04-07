@@ -9,9 +9,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tencent.imsdk.TIMFriendshipManager;
+import com.tencent.imsdk.TIMValueCallBack;
+import com.tencent.imsdk.friendship.TIMFriend;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.NormalActivity;
+import com.yuanyu.ceramics.utils.ExceptionHandler;
+import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
+import com.yuanyu.ceramics.utils.Sp;
+import com.yuanyu.ceramics.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,39 +63,39 @@ public class BlackListActivity extends NormalActivity {
     }
 
     private void initlist() {
-//        TIMFriendshipManager.getInstance().getBlackList(new TIMValueCallBack<List<TIMFriend>>() {
-//            @Override
-//            public void onError(int i, String s) {
-//                ToastUtil.toastShortMessage("Error code = " + i + ", desc = " + s);
-//            }
-//
-//            @Override
-//            public void onSuccess(List<TIMFriend> timFriends) {
-//                if (timFriends != null && timFriends.size() > 0) {
-//                    for (TIMFriend friend : timFriends) {
-//                        L.e(friend.getIdentifier()+friend.toString());
-//                    }
-//                }
-//            }
-//        });
-//        int useraccountid= SpUtils.getInt(this,"useraccountid");
-//        model.getBlacklist(useraccountid,page,page_size)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<>())
-//                .subscribe(new BaseObserver<List<BlackListBean>>() {
-//                    @Override
-//                    public void onNext(List<BlackListBean> dynamicList) {
-//                        for(int i=0;i<dynamicList.size();i++){
-//                            list.add(dynamicList.get(i));
-//                        }
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) {
-//                        L.e("response"+e.message+e.status);
-//                    }
-//                });
+        TIMFriendshipManager.getInstance().getBlackList(new TIMValueCallBack<List<TIMFriend>>() {
+            @Override
+            public void onError(int i, String s) {
+                ToastUtils.showToast(BlackListActivity.this,"Error code = " + i + ", desc = " + s);
+            }
+
+            @Override
+            public void onSuccess(List<TIMFriend> timFriends) {
+                if (timFriends != null && timFriends.size() > 0) {
+                    for (TIMFriend friend : timFriends) {
+                        L.e(friend.getIdentifier()+friend.toString());
+                    }
+                }
+            }
+        });
+        String useraccountid= Sp.getString(this,"useraccountid");
+        model.getBlacklist(useraccountid,page,page_size)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<>())
+                .subscribe(new BaseObserver<List<BlackListBean>>() {
+                    @Override
+                    public void onNext(List<BlackListBean> dynamicList) {
+                        for(int i=0;i<dynamicList.size();i++){
+                            list.add(dynamicList.get(i));
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) {
+                        L.e("response"+e.message+e.status);
+                    }
+                });
     }
 
     @Override

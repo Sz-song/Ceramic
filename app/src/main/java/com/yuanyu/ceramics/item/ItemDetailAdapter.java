@@ -56,6 +56,7 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
     }
 
     public ItemDetailAdapter(Context context, ItemDetailBean bean, List<AdsCellBean> adsCellList) {
+        L.e(adsCellList.size()+"---------");
         this.context = context;
         this.bean = bean;
         this.adsCellList = adsCellList;
@@ -76,6 +77,7 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        L.e(viewType+"1111111111");
         if (viewType == 0) {
             return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail, parent, false));
         } else if (viewType == 1) {

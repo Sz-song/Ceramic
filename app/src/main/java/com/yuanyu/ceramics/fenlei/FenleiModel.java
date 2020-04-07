@@ -27,7 +27,7 @@ public class FenleiModel implements FenLeiConstract.IFenleiModel{
         httpService = HttpServiceInstance.getInstance();
     }
 
-    Observable<BaseResponse<List<ResultBean>>> getFenleiRusult(String[] strings, int page, int pagesize) {
+    Observable<BaseResponse<List<FenLeiResBean>>> getFenleiRusult(String[] strings, int page, int pagesize) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -35,10 +35,10 @@ public class FenleiModel implements FenLeiConstract.IFenleiModel{
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","getfenleiresult");
+        map.put("action","getfenlei");
         Map<String, Serializable> data = new HashMap<>();
         data.put("page",page);
-        data.put("pagesize",pagesize);
+        data.put("page_size",pagesize);
         data.put("fenlei",strings[0]);
         data.put("zhonglei",strings[1]);
         data.put("ticai",strings[2]);

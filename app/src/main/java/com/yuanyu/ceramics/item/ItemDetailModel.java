@@ -95,7 +95,7 @@ public class ItemDetailModel implements ItemDetailConstract.IItemDetailModel {
         map.put("action","loadmoreads");
         Map data = new HashMap();
         data.put("page",page);
-        data.put("pagesize",30);
+        data.put("page_size",30);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
