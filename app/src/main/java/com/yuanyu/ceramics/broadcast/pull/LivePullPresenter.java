@@ -2,12 +2,14 @@ package com.yuanyu.ceramics.broadcast.pull;
 
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMCustomElem;
 import com.tencent.imsdk.TIMElem;
 import com.tencent.imsdk.TIMElemType;
 import com.tencent.imsdk.TIMGroupManager;
+import com.tencent.imsdk.TIMGroupMemberInfo;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.TIMTextElem;
@@ -17,6 +19,7 @@ import com.tencent.openqq.protocol.imsdk.msg;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
+import com.yuanyu.ceramics.broadcast.LiveCustomMessage;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
@@ -88,14 +91,19 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
                                 TIMElemType elemType = elem.getType();
                                 if (elemType == TIMElemType.Text) {
                                     TIMTextElem textElem = (TIMTextElem) elem;
-                                    LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), textElem.getText());
+                                    LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), textElem.getText(),0);
                                     if(view!=null){
                                         view.receiveMessageSuccess(chatBean);
                                     }
                                }else if(elemType == TIMElemType.Custom){
                                     TIMCustomElem customElem = (TIMCustomElem) elem;
-
-                                    ((TIMCustomElem) elem).getData();
+                                    Gson gson=new Gson();
+                                    L.e(new String(customElem.getData()));
+                                    LiveCustomMessage customMessage=gson.fromJson(new String(customElem.getData()),LiveCustomMessage.class);
+                                    LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), customMessage.getMsg(),customMessage.getType());
+                                    if(view!=null){
+                                        view.receiveMessageSuccess(chatBean);
+                                    }
                                 }
                             }
                         }
@@ -142,15 +150,30 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
 
 
     @Override
-    public void sentMassage(String msgString, TIMConversation conversation) {
+    public void sentMassage(String msgString, TIMConversation conversation,int type) {
         TIMMessage msg = new TIMMessage();//构造一条消息
-        TIMTextElem elem = new TIMTextElem();//添加文本内容
-        elem.setText(msgString);
-        if(msg.addElement(elem) != 0) {//将elem添加到消息
-            if(view!=null){view.showToast("消息发送失败");}
-            return;
+        if(type==0){//发送聊天信息
+            TIMTextElem elem_msg = new TIMTextElem();//添加文本内容
+            elem_msg.setText(msgString);
+            if(msg.addElement(elem_msg) != 0) {//将elem添加到消息
+                if(view!=null){view.showToast("消息发送失败");}
+                return;
+            }
+        }else if(type==1){
+            TIMCustomElem elem_custom = new TIMCustomElem();
+            elem_custom.setData(msgString.getBytes());//自定义 byte[]
+            if(msg.addElement(elem_custom) != 0) {
+                L.e("进场消息失败");
+                return;
+            }
+        }else if(type==2){
+            TIMCustomElem elem_custom = new TIMCustomElem();
+            elem_custom.setData(msgString.getBytes());//自定义 byte[]
+            if(msg.addElement(elem_custom) != 0) {
+                L.e("退场消息失败");
+                return;
+            }
         }
-        //发送消息
         conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {//发送消息回调
             @Override
             public void onError(int code, String desc) {//发送消息失败
@@ -161,7 +184,24 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
             @Override
             public void onSuccess(TIMMessage msg) {//发送消息成功
                 L.e( "SendMsg ok");
-                if(view!=null){view.sentMassageSuccess(msgString);}
+                if(view!=null){view.sentMassageSuccess(msgString,type);}
+            }
+        });
+    }
+
+    @Override
+    public void  getNumAudience(String groupId) {//获取直播间人数
+        TIMGroupManager.getInstance().getGroupMembers(groupId, new TIMValueCallBack<List<TIMGroupMemberInfo>>() {
+            @Override
+            public void onError(int i, String s) {
+                if(view!=null){getNumAudience(groupId);}
+            }
+
+            @Override
+            public void onSuccess(List<TIMGroupMemberInfo> timGroupMemberInfos) {
+                if(view!=null){
+                    view.getNumAudienceSuccess(timGroupMemberInfos.size());
+                }
             }
         });
     }

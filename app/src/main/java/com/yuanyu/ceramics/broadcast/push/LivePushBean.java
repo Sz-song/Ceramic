@@ -7,7 +7,13 @@ public class LivePushBean {
     private String shop_id;
     private String shop_portrait;
     private String cover;
+    private String title;
     private String pushurl;
+
+
+    public String getTitle() {
+        return title;
+    }
 
     public String getId() {
         return id;

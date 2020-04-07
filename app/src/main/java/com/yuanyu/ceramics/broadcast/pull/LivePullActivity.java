@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
 import com.tencent.imsdk.TIMManager;
@@ -22,11 +23,10 @@ import com.tencent.rtmp.ui.TXCloudVideoView;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.broadcast.LiveCustomMessage;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +69,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
     private String groupId;
     private String id;
     private String playUrl;
+    private int audienceNum=0;
 
     @Override
     protected int getLayout() {
@@ -95,7 +96,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
         livePlayer = new TXLivePlayer(this);
         list = new ArrayList<>();
-        list.add(new LiveChatBean("0", "系统通知", "倡导文明直播，诚信交易，将会对内容进行24小时的在线巡查。任何传播违法、违规、低俗、暴力等不良信息的行为将会导致账号封停。"));
+        list.add(new LiveChatBean("0", "系统通知", "倡导文明直播，诚信交易，将会对内容进行24小时的在线巡查。任何传播违法、违规、低俗、暴力等不良信息的行为将会导致账号封停。",0));
         adapter = new LiveChatAdapter(this, list);
         cahtRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         cahtRecyclerview.setAdapter(adapter);
@@ -132,7 +133,19 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         }else {
             Toast.makeText(this, "播放失败", Toast.LENGTH_SHORT).show();
         }
+        LiveCustomMessage enterMsg=new LiveCustomMessage(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME)+"进入直播间",1);
+        Gson gson=new Gson();
+        String msgJson=gson.toJson(enterMsg);
+        presenter.sentMassage(msgJson, conversation,1);
+        presenter.getNumAudience(groupId);
     }
+
+    @Override
+    public void getNumAudienceSuccess(int num){
+        audienceNum=num;
+        watch.setText(audienceNum+"人");
+    }
+
     @Override
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -140,17 +153,39 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
 
     @Override
     public void receiveMessageSuccess(LiveChatBean chatBean) {
-        list.add(chatBean);
-        adapter.notifyItemRangeInserted(list.size() - 1, 1);
-        ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
+        if(chatBean.getType()==0||chatBean.getType()==1){
+            list.add(chatBean);
+            adapter.notifyItemRangeInserted(list.size() - 1, 1);
+            ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
+        }
+
+        if(chatBean.getType()==1){
+            audienceNum++;
+            watch.setText(audienceNum+"人");
+        }else if(chatBean.getType()==2){
+            audienceNum--;
+            if(audienceNum>0){
+                watch.setText(audienceNum+"人");
+            }else{
+                presenter.getNumAudience(groupId);
+            }
+        }
     }
 
     @Override
-    public void sentMassageSuccess(String msg) {
-        LiveChatBean entity = new LiveChatBean(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME), msg);
-        list.add(entity);
-        adapter.notifyItemRangeInserted(list.size() - 1, 1);
-        ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
+    public void sentMassageSuccess(String msg,int type) {
+        if(type==0){//聊天
+            LiveChatBean entity = new LiveChatBean(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME), msg,0);
+            list.add(entity);
+            adapter.notifyItemRangeInserted(list.size() - 1, 1);
+            ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
+        }else if(type==1){//进场信息
+
+        }else if(type==2){//退场消息
+
+        }else if(type==3){
+
+        }
     }
 
 
@@ -164,7 +199,7 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
             case R.id.send:
                 if(chatInput.getText().toString().length()>0){
                     if(conversation!=null){
-                        presenter.sentMassage(chatInput.getText().toString(), conversation);
+                        presenter.sentMassage(chatInput.getText().toString(), conversation,0);
                         chatInput.setText("");
                         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                         if (imm != null){
@@ -187,6 +222,10 @@ public class LivePullActivity extends BaseActivity<LivePullPresenter> implements
         super.onDestroy();
         if(livePlayer!=null){livePlayer.stopPlay(true); }// true 代表清除最后一帧画面
         playerView.onDestroy();
+        LiveCustomMessage enterMsg=new LiveCustomMessage(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME)+"进入直播间",2);
+        Gson gson=new Gson();
+        String msgJson=gson.toJson(enterMsg);
+        presenter.sentMassage(msgJson, conversation,2);
         presenter.quitChatGroup(groupId);
     }
 

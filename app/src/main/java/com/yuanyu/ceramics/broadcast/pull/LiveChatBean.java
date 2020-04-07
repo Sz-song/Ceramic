@@ -4,11 +4,13 @@ public class LiveChatBean {
     private String useraccountid;
     private String uickname;
     private String message;
+    private int type;
 
-    public LiveChatBean(String useraccountid, String uickname, String message) {
+    public LiveChatBean(String useraccountid, String uickname, String message, int type) {
         this.useraccountid = useraccountid;
         this.uickname = uickname;
         this.message = message;
+        this.type = type;
     }
 
     public String getUseraccountid() {
@@ -21,5 +23,9 @@ public class LiveChatBean {
 
     public String getMessage() {
         return message;
+    }
+
+    public int getType() {
+        return type;
     }
 }

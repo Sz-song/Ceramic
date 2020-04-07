@@ -121,15 +121,6 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
         context.startActivity(intent);
     }
 
-    public static void actionStart(Context context, String id, String price_qiugou, String qiugou_id) {
-        Intent intent = new Intent(context, ItemDetailAcitivity.class);//这里的Target.class是启动目标Activity
-        intent.putExtra("id", id);
-        intent.putExtra("price_qiugou", price_qiugou);
-        intent.putExtra("qiugou_id", qiugou_id);
-        intent.putExtra("type", 4);
-        L.e(qiugou_id);
-        context.startActivity(intent);
-    }
     @Override
     protected int getLayout() {
         return R.layout.activity_item_detail;

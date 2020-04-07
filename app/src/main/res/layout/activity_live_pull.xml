@@ -67,7 +67,6 @@
                     android:layout_toEndOf="@id/pusher_avatar"
                     android:fontFamily="@font/fzqk"
                     android:textSize="10sp"
-                    android:text="1000人"
                     android:layout_marginTop="2dp"/>
                 <Button
                     android:id="@+id/focus"
@@ -93,9 +92,13 @@
         android:layout_gravity="bottom"
         android:layout_marginBottom="60dp"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/enter_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="280dp"
             android:orientation="horizontal">
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/caht_recyclerview"

@@ -17,14 +17,16 @@ public interface LivePullConstract {
         void initDataSuccess(LivePullBean bean);
         void showToast(String msg);
         void receiveMessageSuccess(LiveChatBean chatBean);
-        void sentMassageSuccess(String msg);
+        void sentMassageSuccess(String msg,int type);
         void initLivePull();
+        void getNumAudienceSuccess(int num);
     }
     interface ILivePullPresenter{
         void initData(String id);
         void IMLogin(String useraccountid,String usersig,String nickname,String groupId);
         void joinChatGroup(String groupid,String useraccountid,String nickname);
         void quitChatGroup(String groupid);
-        void sentMassage(String msg, TIMConversation conversation);
+        void sentMassage(String msg, TIMConversation conversation,int type);
+        void getNumAudience(String groupId);
     }
 }

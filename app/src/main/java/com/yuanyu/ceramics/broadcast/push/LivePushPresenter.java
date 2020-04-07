@@ -1,9 +1,17 @@
 package com.yuanyu.ceramics.broadcast.push;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+
+import com.google.gson.Gson;
 import com.tencent.imsdk.TIMCallBack;
+import com.tencent.imsdk.TIMConversation;
+import com.tencent.imsdk.TIMCustomElem;
 import com.tencent.imsdk.TIMElem;
 import com.tencent.imsdk.TIMElemType;
 import com.tencent.imsdk.TIMGroupManager;
+import com.tencent.imsdk.TIMGroupMemberInfo;
 import com.tencent.imsdk.TIMManager;
 import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.TIMTextElem;
@@ -11,11 +19,14 @@ import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
+import com.yuanyu.ceramics.broadcast.LiveCustomMessage;
 import com.yuanyu.ceramics.broadcast.pull.LiveChatBean;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +91,16 @@ public class LivePushPresenter extends BasePresenter<LivePushConstract.ILivePush
                                 TIMElemType elemType = elem.getType();
                                 if (elemType == TIMElemType.Text) {
                                     TIMTextElem textElem = (TIMTextElem) elem;
-                                    LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), textElem.getText());
+                                    LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), textElem.getText(),0);
+                                    if(view!=null){
+                                        view.receiveMessageSuccess(chatBean);
+                                    }
+                                }else if(elemType == TIMElemType.Custom){
+                                    TIMCustomElem customElem = (TIMCustomElem) elem;
+                                    Gson gson=new Gson();
+                                    L.e(new String(customElem.getData()));
+                                    LiveCustomMessage customMessage=gson.fromJson(new String(customElem.getData()),LiveCustomMessage.class);
+                                    LiveChatBean chatBean = new LiveChatBean(timUserProfile.getIdentifier(), timUserProfile.getNickName(), customMessage.getMsg(),customMessage.getType());
                                     if(view!=null){
                                         view.receiveMessageSuccess(chatBean);
                                     }
@@ -125,6 +145,87 @@ public class LivePushPresenter extends BasePresenter<LivePushConstract.ILivePush
             @Override
             public void onSuccess() {}
         });
+    }
+
+    @Override
+    public void sentMassage(String msgString, TIMConversation conversation, int type) {
+        TIMMessage msg = new TIMMessage();//构造一条消息
+        if(type==0){//发送聊天信息
+            TIMTextElem elem_msg = new TIMTextElem();//添加文本内容
+            elem_msg.setText(msgString);
+            if(msg.addElement(elem_msg) != 0) {//将elem添加到消息
+                if(view!=null){view.showToast("消息发送失败");}
+                return;
+            }
+        }else if(type==1){
+            TIMCustomElem elem_custom = new TIMCustomElem();
+            elem_custom.setData(msgString.getBytes());//自定义 byte[]
+            if(msg.addElement(elem_custom) != 0) {
+                L.e("进场消息失败");
+                return;
+            }
+        }else if(type==2){
+            TIMCustomElem elem_custom = new TIMCustomElem();
+            elem_custom.setData(msgString.getBytes());//自定义 byte[]
+            if(msg.addElement(elem_custom) != 0) {
+                L.e("退场消息失败");
+                return;
+            }
+        }
+        conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {//发送消息回调
+            @Override
+            public void onError(int code, String desc) {//发送消息失败
+                L.e("send message failed. code: " + code + " errmsg: " + desc);
+                if(view!=null){view.showToast("消息发送失败");}
+            }
+
+            @Override
+            public void onSuccess(TIMMessage msg) {//发送消息成功
+                L.e( "SendMsg ok");
+                if(view!=null){view.sentMassageSuccess(msgString,type);}
+            }
+        });
+    }
+
+    @Override
+    public void getNumAudience(String groupId) {//获取直播间人数
+        TIMGroupManager.getInstance().getGroupMembers(groupId, new TIMValueCallBack<List<TIMGroupMemberInfo>>() {
+            @Override
+            public void onError(int i, String s) {
+                if(view!=null){getNumAudience(groupId);}
+            }
+
+            @Override
+            public void onSuccess(List<TIMGroupMemberInfo> timGroupMemberInfos) {
+                if(view!=null){
+                    view.getNumAudienceSuccess(timGroupMemberInfos.size());
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void saveScreenshot(Bitmap bitmap, int type) {
+        if (bitmap != null) {
+            try {// 获取内置SD卡路径
+                String sdCardPath = Environment.getExternalStorageDirectory().getPath();
+                // 图片文件路径
+                String filePath = sdCardPath + File.separator + System.currentTimeMillis()+".JPEG";
+                File file = new File(filePath);
+                FileOutputStream os = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, os);
+                os.flush();
+                os.close();
+                Uri uri = Uri.fromFile(file);
+                if(view!=null){view.saveScreenshotSuccess(uri,type,filePath);}
+            } catch (Exception e) {
+                L.e(e.getMessage());
+                if(view!=null){view.saveScreenshotFail(type);}
+            }
+        }else{
+            if(view!=null){view.saveScreenshotFail(type);}
+        }
     }
 
 
