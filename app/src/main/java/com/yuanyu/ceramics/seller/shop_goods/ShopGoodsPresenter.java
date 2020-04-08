@@ -4,6 +4,7 @@ import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
+import com.yuanyu.ceramics.utils.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,9 @@ public class ShopGoodsPresenter extends BasePresenter<ShopGoodsConstract.IShopGo
                 .compose(new HttpServiceInstance.ErrorTransformer<List<ShopGoodsBean>>())
                 .subscribe(new BaseObserver<List<ShopGoodsBean>>() {
                     @Override
-                    public void onNext(List<ShopGoodsBean> shopGoodsBeans) {if (view!=null){view.getShopGoodsSuccess(shopGoodsBeans);}}
+                    public void onNext(List<ShopGoodsBean> shopGoodsBeans) {
+                        if (view!=null){view.getShopGoodsSuccess(shopGoodsBeans);}
+                    }
                     @Override
                     public void onError(ExceptionHandler.ResponeThrowable e) {if (view!=null){view.getShopGoodsFail(e);} }
                 });

@@ -269,7 +269,7 @@ public interface HttpService {
     @POST("app_api/home_page/receivedelivery.php")
     Observable<BaseResponse<String[]>>confirmReceived(@Body RequestBody body);
 //    我的订单
-    @POST("app_api/wujia/waitpay.php")
+    @POST("back/test/api/mine/waitpay.php")
     Observable<BaseResponse<List<MyOrderFragmentBean>>>getOrderList(@Body RequestBody body);
     //提醒发货
     @POST("app_api/wujia/reminddelivery.php")
@@ -358,13 +358,13 @@ public interface HttpService {
     @POST("back/test/api/shangjia/waitreview.php")
     Observable<BaseResponse<List<ShelveAuditBean>>>getWaitReviewResult(@Body RequestBody body);
     //商家删除商品
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("back/test/api/shangjia/delete_commidity.php")
     Observable<BaseResponse<String[]>>DeleteResult(@Body RequestBody body);
     //我的商品 重新申请上架获取商品信息
     @POST("back/test/api/shangjia/reonsale.php")
     Observable<BaseResponse<ShelvingDetailBean>>getReOnSaleData(@Body RequestBody body);
     //我的商品 下架接口
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("back/test/api/shangjia/upsale.php")
     Observable<BaseResponse<String[]>>shopGoodsOffShelves(@Body RequestBody body);
     //我的商品接口
     @POST("back/test/api/shangjia/mycommodity.php")
