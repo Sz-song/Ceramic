@@ -3,7 +3,6 @@ package com.yuanyu.ceramics.seller.shop_goods;
 import com.google.gson.Gson;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
-import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Md5Utils;
@@ -55,7 +54,7 @@ public class ShopGoodsModel implements ShopGoodsConstract.IShopGoodsModel{
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","warehousedelete");
+        map.put("action","delete_commidity");
         Map data = new HashMap();
         data.put("shopid",shopid);
         data.put("id",id);
@@ -65,7 +64,7 @@ public class ShopGoodsModel implements ShopGoodsConstract.IShopGoodsModel{
         String str=gson.toJson(map);
         L.e("str is"+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.getWareHouseDeleteResult(body);
+        return httpService.DeleteResult(body);
     }
 
     @Override

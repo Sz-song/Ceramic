@@ -484,7 +484,10 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         } else if (Double.parseDouble(price.getText().toString()) < 0.01) {
             Toast.makeText(getContext(), "价格不能为0", Toast.LENGTH_SHORT).show();
             return true;
-        } else if (length.getText().toString().trim().length() == 0) {
+        } else if (weight.getText().toString().trim().length() == 0) {
+            Toast.makeText(getContext(), "请输入重量", Toast.LENGTH_SHORT).show();
+            return true;
+        }else if (length.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请输入长度", Toast.LENGTH_SHORT).show();
             return true;
         } else if (width.getText().toString().trim().length() == 0) {
@@ -493,10 +496,7 @@ public class ShelvingFragment extends BaseFragment<ShelvingPrestenter> implement
         } else if (height.getText().toString().trim().length() == 0) {
             Toast.makeText(getContext(), "请输入高度", Toast.LENGTH_SHORT).show();
             return true;
-        } else if (weight.getText().toString().trim().length() == 0) {
-            Toast.makeText(getContext(), "请输入重量", Toast.LENGTH_SHORT).show();
-            return true;
-        } else {
+        }  else {
             bean.setTitle(inputTitleEdit.getText().toString());
             bean.setDescription(inputContentEdit.getText().toString());
             bean.setArtisan(artisan.getText().toString().trim());

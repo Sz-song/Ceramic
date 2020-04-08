@@ -236,7 +236,7 @@ public interface HttpService {
     @POST("back/test/api/commodity/shop_dynamic.php")
     Observable<BaseResponse<List<DynamicBean>>> getShopDynamic(@Body RequestBody body);
     //店铺内分类搜索
-    @POST("app_api/home_page/shop_fenlei.php")
+    @POST("back/test/api/homepage/shop_fenlei.php")
     Observable<BaseResponse<List<ResultBean>>> getShopFenleiData(@Body RequestBody body);
     //用户访问店铺首页
     @POST("back/test/api/homepage/shophead.php")
@@ -328,17 +328,17 @@ public interface HttpService {
     @POST("back/test/api/homepage/loadmoreads.php")
     Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
     //    商家管理获取订单管理getOrdersManage
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("123")
     Observable<BaseResponse<List<ShopOrderBean>>> getOrdersManage(@Body RequestBody body);
     //    shopGetOrderDetail
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("123")
     Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
 //    getLogisticsTracing
     //快递递踪
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("123")
     Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
 //    modityOrderPrice商家修改未支付订单价格
-    @POST("app_api/home_page/loadmoreads.php")
+    @POST("123")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
 
 
@@ -357,9 +357,9 @@ public interface HttpService {
     //商品上架审核状态接口
     @POST("back/test/api/shangjia/waitreview.php")
     Observable<BaseResponse<List<ShelveAuditBean>>>getWaitReviewResult(@Body RequestBody body);
-    //删除仓库物品
+    //商家删除商品
     @POST("app_api/home_page/loadmoreads.php")
-    Observable<BaseResponse<String[]>>getWareHouseDeleteResult(@Body RequestBody body);
+    Observable<BaseResponse<String[]>>DeleteResult(@Body RequestBody body);
     //我的商品 重新申请上架获取商品信息
     @POST("back/test/api/shangjia/reonsale.php")
     Observable<BaseResponse<ShelvingDetailBean>>getReOnSaleData(@Body RequestBody body);
@@ -368,7 +368,7 @@ public interface HttpService {
     Observable<BaseResponse<String[]>>shopGoodsOffShelves(@Body RequestBody body);
     //我的商品接口
     @POST("back/test/api/shangjia/mycommodity.php")
-    Observable<BaseResponse<List<ShopGoodsBean>>>getShopGoodsList(@Body RequestBody body);
+    Observable<BaseResponse<List<com.yuanyu.ceramics.seller.shop_goods.ShopGoodsBean>>>getShopGoodsList(@Body RequestBody body);
     //商家获取商品详情
     @POST("back/test/api/shangjia/get_shop_goodsdetail.php")
     Observable<BaseResponse<ShelvingDetailBean>> getShopGoodsDetail(@Body RequestBody body);
@@ -436,6 +436,9 @@ public interface HttpService {
     //修改主页背景和头像
     @POST("back/test/api/mine/change_image.php")
     Observable<BaseResponse>changeImage(@Body RequestBody body);
+//    商家更换头像
+    @POST("back/test/api/shangjia/replaceportrait.php")
+    Observable<BaseResponse<String[]>>getImagePortraitResult(@Body RequestBody body);
     //    获取草稿箱内容
     @POST("back/test/api/quan/get_draftslist.php")
     Observable<BaseResponse<List<DraftsBean>>> getDrafts(@Body RequestBody body);

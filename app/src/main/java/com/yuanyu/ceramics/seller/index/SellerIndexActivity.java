@@ -9,11 +9,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
@@ -25,6 +28,7 @@ import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
+import com.yuanyu.ceramics.personal_index.ChangeImageActivity;
 import com.yuanyu.ceramics.seller.liveapply.LiveApplyActivity;
 import com.yuanyu.ceramics.seller.order.ShopOrderActivity;
 import com.yuanyu.ceramics.seller.shop_goods.ShopGoodsActivity;
@@ -32,10 +36,18 @@ import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 import static com.yuanyu.ceramics.AppConstant.DAIFAHUO;
@@ -47,6 +59,7 @@ import static com.yuanyu.ceramics.MyApplication.getContext;
 public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> implements SellerIndexConstract.IMineView {
 
     private static final int CHANGE_PORTRAIT = 1000;
+    private boolean isinit = false;
     @BindView(R.id.image_head)
     ImageView imageHead;
     @BindView(R.id.system_setting)
@@ -101,7 +114,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         ButterKnife.bind(this);
         swipe.setRefreshing(false);
         swipe.setColorSchemeResources(R.color.colorPrimary);
-        swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID)));
+        swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(this, AppConstant.SHOP_ID)));
         presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID));
     }
 
@@ -113,6 +126,12 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 .load(BASE_URL + bean.getPortrait()).placeholder(R.drawable.logo_default)
                 .override(100, 100)
                 .into(protrait);
+        GlideApp.with(getContext())
+                .load(AppConstant.BASE_URL + bean.getPortrait())
+                .optionalTransform(new BlurTransformation(10))
+                .override(300, 200)
+                .placeholder(R.drawable.sellerbgimg)
+                .into(imageHead);
         name.setText(bean.getName());
         if(bean.getIntroduce()!=null&&bean.getIntroduce().length()>0){
             introduce.setText(bean.getIntroduce());
@@ -128,21 +147,44 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         swipe.setRefreshing(false);
     }
 
-    @OnClick({R.id.protrait,R.id.introduce, R.id.mine_relat, R.id.all_order, R.id.nopay, R.id.nofahuo, R.id.yifahuo, R.id.yishouhuo, R.id.refund, R.id.commodity, R.id.my_dingzhi, R.id.liveapply, R.id.message, R.id.contactkf, R.id.changeuser})
+    @Override
+    public void replaceImageSuccess(String image, int type) {
+        Toast.makeText(getContext(), "更换成功", Toast.LENGTH_SHORT).show();
+        if (type == 0) {
+            GlideApp.with(getContext())
+                    .load(AppConstant.BASE_URL + image)
+                    .override(100, 100)
+                    .placeholder(R.drawable.logo_default)
+                    .into(protrait);
+            GlideApp.with(getContext())
+                    .load(AppConstant.BASE_URL + image)
+                    .optionalTransform(new BlurTransformation(10))
+                    .override(300, 200)
+                    .placeholder(R.drawable.sellerbgimg)
+                    .into(imageHead);
+        }
+    }
+
+    @Override
+    public void replaceImageFail(ExceptionHandler.ResponeThrowable e) {
+        Toast.makeText(getContext(), "更换失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnClick({R.id.protrait,R.id.introduce, R.id.mine_relat, R.id.all_order, R.id.nopay, R.id.nofahuo, R.id.yifahuo, R.id.yishouhuo, R.id.refund, R.id.commodity, R.id.my_dingzhi, R.id.liveapply, R.id.message, R.id.contactkf, R.id.changeuser,R.id.system_setting})
     public void onViewClicked(View view) {
         Intent intent;
         ReplacePortraitPopupWindow portraitPopupWindow;
         switch (view.getId()) {
             case R.id.protrait:
             case R.id.mine_relat:
-                portraitPopupWindow = new ReplacePortraitPopupWindow(getContext());
+                portraitPopupWindow = new ReplacePortraitPopupWindow(this);
                 portraitPopupWindow.showAtLocation(swipe, Gravity.BOTTOM, 0, 0);
                 portraitPopupWindow.setPortraitClickListener(v -> {
-//                    PictureSelector.create(getActivity()).openGallery(PictureMimeType.ofImage())
-//                            .loadImageEngine(GlideEngine.createGlideEngine())
-//                              .maxSelectNum(1)
-//                            .forResult(CHANGE_PORTRAIT);
-//                    portraitPopupWindow.dismiss();
+                    PictureSelector.create(SellerIndexActivity.this).openGallery(PictureMimeType.ofImage())
+                            .loadImageEngine(GlideEngine.createGlideEngine())
+                              .maxSelectNum(1)
+                            .forResult(CHANGE_PORTRAIT);
+                    portraitPopupWindow.dismiss();
                 });
                 portraitPopupWindow.setIntroduceClickListener(v -> {
                     Intent intent1=new Intent(getContext(),ShopChangeIntroduceActivity.class);
@@ -153,7 +195,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 });
                 break;
             case R.id.introduce:
-                portraitPopupWindow = new ReplacePortraitPopupWindow(getContext());
+                portraitPopupWindow = new ReplacePortraitPopupWindow(this);
                 portraitPopupWindow.showAtLocation(swipe, Gravity.BOTTOM, 0, 0);
                 portraitPopupWindow.setPortraitClickListener(v -> {
 
@@ -215,8 +257,47 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 intent = new Intent(this, SystemSettingActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.system_setting:
+                intent = new Intent(getContext(), SystemSettingActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void setWechatPay(PortraitEvent portraitEvent) {
+//        if (portraitEvent.getCode() == CHANGE_PORTRAIT) {
+//            ArrayList<String> images = new ArrayList<>();
+//            images.add(portraitEvent.getPortrait());
+//            presenter.compressImage(getContext(), images, 0, Sp.getString(getContext(), AppConstant.SHOP_ID));
+//        }
+//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && data != null) {
+            ArrayList<String> images = new ArrayList<>();
+            List<LocalMedia> temp = PictureSelector.obtainMultipleResult(data);
+            for (LocalMedia localMedia : temp) images.add(localMedia.getPath());
+            for (int i = 0; i < images.size(); i++) {
+                L.e(images.get(i));
+            }
+            presenter.compressImage(getContext(), images, 0, Sp.getString(getContext(), AppConstant.SHOP_ID));
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isinit) {
+            presenter.initData(Sp.getString(getContext(), AppConstant.SHOP_ID));
+        }
+        isinit = true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
 }

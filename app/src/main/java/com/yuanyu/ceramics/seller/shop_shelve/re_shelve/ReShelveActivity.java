@@ -587,7 +587,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                     List<String> imageList = new ArrayList<>();
                     if (list.get(list.size() - 1).getType() == 2) {
                         for (int i = 1; i < list.size(); i++) {
-                            if (list.get(i).getUrl().startsWith("img/")) {
+                            if (list.get(i).getUrl().startsWith("back/")) {
                                 bean.getImages().add(list.get(i).getUrl());
                             } else {
                                 imageList.add(list.get(i).getUrl());
@@ -595,7 +595,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                         }
                     } else if (list.get(list.size() - 1).getType() == 0) {
                         for (int i = 1; i < list.size() - 1; i++) {
-                            if (list.get(i).getUrl().startsWith("img/")) {
+                            if (list.get(i).getUrl().startsWith("back/")) {
                                 bean.getImages().add(list.get(i).getUrl());
                             } else {
                                 imageList.add(list.get(i).getUrl());

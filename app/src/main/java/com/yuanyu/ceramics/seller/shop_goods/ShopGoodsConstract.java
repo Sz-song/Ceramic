@@ -9,7 +9,7 @@ import io.reactivex.Observable;
 
 public interface ShopGoodsConstract {
     interface IShopGoodsModel {
-        Observable<BaseResponse<List<com.yuanyu.ceramics.shop_index.ShopGoodsBean>>> getShopGoodsList(String shopid, int page, int type);
+        Observable<BaseResponse<List<ShopGoodsBean>>> getShopGoodsList(String shopid, int page, int type);
         Observable<BaseResponse<String[]>> shopGoodsDelete(String shopid, String id);
         Observable<BaseResponse<String[]>> shopGoodsOffShelves(String shopid, String id);
     }

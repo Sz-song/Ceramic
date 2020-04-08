@@ -139,7 +139,7 @@ public class ShopIndexActivity extends BaseActivity<ShopIndexPresenter> implemen
         }
         pathList=new ArrayList<>();
         Intent intent = getIntent();
-        shopid = intent.getStringExtra(AppConstant.SHOP_ID);
+        shopid = intent.getStringExtra("shopid");
         ShopIndexFragmentAdapter fragmentAdapter = new ShopIndexFragmentAdapter(getSupportFragmentManager(), shopid);
         viewpager.setAdapter(fragmentAdapter);
         tablelayout.setupWithViewPager(viewpager);

@@ -6,10 +6,10 @@ package com.yuanyu.ceramics.seller.shop_goods;
 
 public class ShopGoodsBean {
     private String id;
-    private String image;
+    private String portrait;
     private String name;
-    private String artist; //匠人
-    private String num;// 数量
+    private String jiangren; //匠人
+    private String salenum;// 数量
     private String price;
     private int type;  // 1已上架 2已下架 3已售罄
 
@@ -18,7 +18,7 @@ public class ShopGoodsBean {
     }
 
     public String getImage() {
-        return image;
+        return portrait;
     }
 
     public String getName() {
@@ -26,11 +26,11 @@ public class ShopGoodsBean {
     }
 
     public String getArtist() {
-        return artist;
+        return jiangren;
     }
 
     public String getNum() {
-        return num;
+        return salenum;
     }
 
     public String getPrice() {
@@ -41,12 +41,12 @@ public class ShopGoodsBean {
         return type;
     }
 
-    public ShopGoodsBean(String id, String image, String name, String artist, String num, String price, int type) {
+    public ShopGoodsBean(String id, String portrait, String name, String jiangren, String salenum, String price, int type) {
         this.id = id;
-        this.image = image;
+        this.portrait = portrait;
         this.name = name;
-        this.artist = artist;
-        this.num = num;
+        this.jiangren = jiangren;
+        this.salenum = salenum;
         this.price = price;
         this.type = type;
     }

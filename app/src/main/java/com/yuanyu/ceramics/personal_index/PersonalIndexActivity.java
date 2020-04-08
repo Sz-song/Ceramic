@@ -47,6 +47,7 @@ import com.yuanyu.ceramics.common.ViewImageActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.myinfo.MyInfoActivity;
 import com.yuanyu.ceramics.personal_index.fans_focus.FocusAndFansActicity;
+import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HelpUtils;
 import com.yuanyu.ceramics.utils.L;
@@ -118,6 +119,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
     private String userid;//被查看人 id
     private String fans_num;
     private String urlimage;
+    private String shopid;
     private LoadingDialog loaddialog;
     private List<String> pathList;
     public static void actionStart(Context context, String userid) {
@@ -188,6 +190,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
                 .into(titleImage);
         title.setText(bean.getName());
         toolbarTitle.setText(bean.getName() + "的主页");
+        shopid = bean.getShopid();
         if (bean.getType() != 3) {
             ordinaryUser.setVisibility(View.VISIBLE);
             GlideApp.with(PersonalIndexActivity.this)
@@ -314,7 +317,7 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
         }
     }
 
-@OnClick({R.id.show_more,R.id.focus_num,R.id.portrait,R.id.contact})
+@OnClick({R.id.show_more,R.id.focus_num,R.id.portrait,R.id.contact,R.id.shop})
 public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -345,6 +348,15 @@ public void onViewClicked(View view) {
                 break;
             case R.id.contact: //私信此人
                 ChatActivity.navToChat(this,userid);
+                break;
+            case R.id.shop://进入店铺
+                if (null != shopid && shopid.length() > 0) {
+                    intent = new Intent(PersonalIndexActivity.this, ShopIndexActivity.class);
+                    intent.putExtra("shopid", shopid + "");
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(this, "该用户的店铺尚未开张", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
         }

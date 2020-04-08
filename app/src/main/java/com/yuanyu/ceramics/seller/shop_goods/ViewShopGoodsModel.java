@@ -30,7 +30,7 @@ public class ViewShopGoodsModel implements ViewShopGoodsConstract.IViewShopGoods
         map.put("signature",signature);
         map.put("action","get_shop_goodsdetail");
         Map data = new HashMap();
-        data.put("shopid",shopid);
+        data.put("shop_id",shopid);
         data.put("id",id);
         map.put("data",data);
         Gson gson=new Gson();

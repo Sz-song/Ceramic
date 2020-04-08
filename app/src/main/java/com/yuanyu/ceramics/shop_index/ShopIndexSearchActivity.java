@@ -53,9 +53,7 @@ public class ShopIndexSearchActivity extends AppCompatActivity {
     private ShopIndexModel model = new ShopIndexModel();
     private String feilei;
     private String zhonglei;
-    private String pise;
     private String ticai;
-    private String chanzhaung;
     private String min_price;
     private String max_price;
     private String min_weight;
@@ -78,9 +76,7 @@ public class ShopIndexSearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         feilei = intent.getStringExtra("feilei");
         zhonglei = intent.getStringExtra("zhonglei");
-        pise = intent.getStringExtra("pise");
         ticai = intent.getStringExtra("ticai");
-        chanzhaung = intent.getStringExtra("chanzhaung");
         min_price = intent.getStringExtra("min_price");
         max_price = intent.getStringExtra("max_price");
         min_weight = intent.getStringExtra("min_weight");
@@ -127,7 +123,7 @@ public class ShopIndexSearchActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        model.getShopFenleiData(page, feilei, zhonglei, pise, ticai, chanzhaung, min_price, max_price, min_weight, max_weight, shop_id)
+        model.getShopFenleiData(page, feilei, zhonglei, ticai, min_price, max_price, min_weight, max_weight, shop_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<List<ResultBean>>())

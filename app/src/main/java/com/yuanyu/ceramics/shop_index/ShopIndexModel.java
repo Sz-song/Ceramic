@@ -21,7 +21,7 @@ public class ShopIndexModel implements ShopIndexConstract.IShopIndexModel{
     private HttpService httpService;
     public ShopIndexModel(){httpService = HttpServiceInstance.getInstance();}
 
-    public Observable<BaseResponse<List<ResultBean>>> getShopFenleiData(int page, String feilei, String zhonglei, String pise, String ticai, String chanzhaung, String min_price, String max_price, String min_weight, String max_weight, String shop_id){
+    public Observable<BaseResponse<List<ResultBean>>> getShopFenleiData(int page, String feilei, String zhonglei, String ticai,String min_price, String max_price, String min_weight, String max_weight, String shop_id){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -35,9 +35,7 @@ public class ShopIndexModel implements ShopIndexConstract.IShopIndexModel{
         data.put("page_size",10);
         data.put("fenlei",feilei);
         data.put("zhonglei",zhonglei);
-        data.put("pise",pise);
         data.put("ticai",ticai);
-        data.put("chanzhuang",chanzhaung);
         data.put("min_price",min_price);
         data.put("max_price",max_price );
         data.put("min_weight",min_weight);

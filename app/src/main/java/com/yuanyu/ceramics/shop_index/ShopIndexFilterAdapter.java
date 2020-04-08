@@ -30,17 +30,13 @@ import butterknife.ButterKnife;
 public class ShopIndexFilterAdapter extends RecyclerView.Adapter {
     private Context context;
     private List<List<FenleiBean>> list = new ArrayList<>();
-    private String[] strings = new String[]{"分类", "种类", "皮色", "题材", "产状"};
-    private String[] fenlei_str = new String[]{"原石", "挂件", "吊坠", "把件", "摆件", "器皿", "手镯" , "手串（链）", "项链", "饰品","杂项"};
-    private String[] zhonglei_str = new String[]{"白玉", "碧玉", "墨玉", "青玉", "青花", "糖玉", "黄口料","黄沁", "其它"};
-    private String[] pise_str = new String[]{"黄皮", "红皮", "黑皮", "秋梨皮", "虎皮", "其它"};
+    private String[] strings = new String[]{"分类", "种类", "外观"};
+    private String[] fenlei_str = new String[]{"花瓶", "雕塑品", "园林陶艺", "器皿", "相框", "壁画", "陈设品" ,"其它"};
+    private String[] zhonglei_str = new String[]{"素瓷", "青瓷", "黑瓷", "白瓷", "青白瓷", "其它"};
     private String[] ticai_str = new String[]{"神佛","瑞兽", "仿古",  "山水", "人物", "花鸟", "动物","其它"};
-    private String[] chanzhuang_str = new String[]{"山料", "籽料"};
     private List<FenleiBean> fenlei_list = new ArrayList<>();
     private List<FenleiBean> zhonglei_list = new ArrayList<>();
-    private List<FenleiBean> pise_list = new ArrayList<>();
     private List<FenleiBean> ticai_list = new ArrayList<>();
-    private List<FenleiBean> chanzhuang_list = new ArrayList<>();
     private String priceLow = "";
     private String priceHight = "";
     private String weightLow = "";
@@ -338,28 +334,18 @@ public class ShopIndexFilterAdapter extends RecyclerView.Adapter {
         for (int i = 0; i < zhonglei_str.length; i++) {
             zhonglei_list.add(new FenleiBean(zhonglei_str[i], false));
         }
-        for (int i = 0; i < pise_str.length; i++) {
-            pise_list.add(new FenleiBean(pise_str[i], false));
-        }
         for (int i = 0; i < ticai_str.length; i++) {
             ticai_list.add(new FenleiBean(ticai_str[i], false));
         }
-        for (int i = 0; i < chanzhuang_str.length; i++) {
-            chanzhuang_list.add(new FenleiBean(chanzhuang_str[i], false));
-        }
         list.add(fenlei_list);
         list.add(zhonglei_list);
-        list.add(pise_list);
         list.add(ticai_list);
-        list.add(chanzhuang_list);
     }
 
     public void reset() {
         fenlei_list.clear();
         zhonglei_list.clear();
         ticai_list.clear();
-        pise_list.clear();
-        chanzhuang_list.clear();
         list.clear();
         initList();
         priceLow = "";
@@ -382,9 +368,7 @@ public class ShopIndexFilterAdapter extends RecyclerView.Adapter {
             intent.putExtra("max_weight", weightHight);
             intent.putExtra("feilei", getString(list.get(0)));
             intent.putExtra("zhonglei", getString(list.get(1)));
-            intent.putExtra("pise", getString(list.get(2)));
-            intent.putExtra("ticai", getString(list.get(3)));
-            intent.putExtra("chanzhaung", getString(list.get(4)));
+            intent.putExtra("ticai", getString(list.get(2)));
             intent.putExtra("shop_id", shop_id);
             context.startActivity(intent);
         }

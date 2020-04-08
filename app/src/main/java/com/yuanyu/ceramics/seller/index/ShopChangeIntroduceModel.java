@@ -28,7 +28,7 @@ public class ShopChangeIntroduceModel implements ShopChangeIntroduceConstract.IS
         map.put("signature",signature);
         map.put("action","change_shop_introduce");
         Map data = new HashMap();
-        data.put("shopid",shop_id);
+        data.put("shop_id",shop_id);
         data.put("introduce",introduce);
         map.put("data",data);
         Gson gson=new Gson();

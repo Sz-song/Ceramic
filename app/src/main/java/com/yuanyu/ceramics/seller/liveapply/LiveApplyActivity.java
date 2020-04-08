@@ -153,9 +153,9 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
             liveTitle.setFocusableInTouchMode(false);
             liveSubmit.setVisibility(View.GONE);
             if (!bean.getStart_time().equals("")) {
-//                liveTime.setText(Md5Utils.getStrMin(bean.getStart_time()));
+                liveTime.setText(Md5Utils.getStrMin(bean.getStart_time()));
             } else {
-                liveTime.setText(now);
+                liveTime.setText("");
             }
 
             adapter.setCan_select(false);
@@ -176,7 +176,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
             liveTitle.setFocusableInTouchMode(false);
             liveSubmit.setVisibility(View.VISIBLE);
             if (!bean.getStart_time().equals("")) {
-//                liveTime.setText(Md5Utils.getStrMin(bean.getStart_time()));
+                liveTime.setText(Md5Utils.getStrMin(bean.getStart_time()));
             } else {
                 liveTime.setText(now);
             }

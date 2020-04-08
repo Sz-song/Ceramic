@@ -138,6 +138,7 @@ public class ShopGoodsFragment extends BaseFragment<ShopGoodsPresenter> implemen
 
     @Override
     public void getShopGoodsSuccess(List<ShopGoodsBean> beans) {
+        L.e("获取成功");
         list.addAll(beans);
         enable=true;
         if(isAlive){
@@ -191,6 +192,7 @@ public class ShopGoodsFragment extends BaseFragment<ShopGoodsPresenter> implemen
 
     @Override
     public void getShopGoodsFail(ExceptionHandler.ResponeThrowable e) {
+        L.e("获取失败");
         enable=true;
         L.e(e.message+"  "+e.status);
         if(isAlive) {

@@ -23,7 +23,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:id="@+id/image_head"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/sellerbgimg"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                                 android:id="@+id/name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="30dp"
-                                android:textColor="@color/blackLight"
+                                android:textColor="@color/white"
                                 android:layout_marginTop="10dp"
                                 android:textSize="15sp"
                                 android:gravity="center"
@@ -81,7 +81,8 @@
                                 android:textSize="12sp"
                                 android:gravity="center"
                                 android:layout_toEndOf="@id/protrait"
-                                android:layout_below="@+id/name"/>
+                                android:layout_below="@+id/name"
+                                android:textColor="@color/white"/>
 <!--                            <ImageView-->
 <!--                                android:layout_width="8dp"-->
 <!--                                android:src="@mipmap/triangle_right"-->

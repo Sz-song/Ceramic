@@ -141,6 +141,7 @@
         <activity android:name=".broadcast.push.LivePushActivity" />
         <activity android:name=".center_circle.release.DraftsActivity" />
         <activity android:name=".search.SearchResultActivity" />
+        <activity android:name=".seller.index.ShopChangeIntroduceActivity" />
     </application>
 
 </manifest>

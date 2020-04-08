@@ -53,7 +53,7 @@ public class PhotoVedioAdapter extends RecyclerView.Adapter<PhotoVedioAdapter.Vi
                     .placeholder(R.drawable.img_default)
                     .into(holder.image);
         }else {
-            if(list.get(position).getUrl().startsWith("img/")){
+            if(list.get(position).getUrl().startsWith("back/")){
                 GlideApp.with(context)
                         .load(AppConstant.BASE_URL+list.get(position).getUrl())
                         .override(100,100)

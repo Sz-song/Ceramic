@@ -37,6 +37,7 @@
             android:id="@+id/tablelayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:paddingRight="20dp"
             app:xTabTextSize="15sp"
             app:xTabSelectedTextSize="17sp"
             app:xTabIndicatorColor="@color/colorPrimary"

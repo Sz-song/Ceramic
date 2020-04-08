@@ -188,7 +188,7 @@
                 app:xTabMode="fixed"
                 app:xTabDividerWidthWidthText="true"
                 app:xTabSelectedTextColor="@color/colorPrimary"
-                app:xTabTextColor="@color/lineGray">
+                app:xTabTextColor="@color/ninegray">
             </com.androidkun.xtablayout.XTabLayout>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.viewpager.widget.ViewPager

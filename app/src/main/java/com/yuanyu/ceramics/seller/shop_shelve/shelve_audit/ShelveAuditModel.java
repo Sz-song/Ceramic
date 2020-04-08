@@ -55,7 +55,7 @@ public class ShelveAuditModel implements ShelveAuditConstract.IShelveAuditModel{
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","warehousedelete");
+        map.put("action","delete_commidity");
         Map data = new HashMap();
         data.put("shopid",shopid);
         data.put("id",id);
@@ -65,6 +65,6 @@ public class ShelveAuditModel implements ShelveAuditConstract.IShelveAuditModel{
         String str=gson.toJson(map);
         L.e("str is "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.getWareHouseDeleteResult(body);
+        return httpService.DeleteResult(body);
     }
 }
