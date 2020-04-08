@@ -373,7 +373,6 @@ public interface HttpService {
     @POST("back/test/api/shangjia/get_shop_goodsdetail.php")
     Observable<BaseResponse<ShelvingDetailBean>> getShopGoodsDetail(@Body RequestBody body);
 
-
     //查看快递类型
     @POST("app_api/shangjia/ExpRecommend.php")
     Observable<BaseResponse<List<CourierBean>>> getCourierData(@Body RequestBody body);
@@ -454,4 +453,7 @@ public interface HttpService {
     //观众直播初始化
     @POST("back/test/api/broadcast/shop_get_liveroom.php")
     Observable<BaseResponse<LivePushBean>> livePushInit(@Body  RequestBody body);
+    //结束直播
+    @POST("back/test/api/broadcast/finishlivecast.php")
+    Observable<BaseResponse<String[]>> finishLive(@Body  RequestBody body);
 }

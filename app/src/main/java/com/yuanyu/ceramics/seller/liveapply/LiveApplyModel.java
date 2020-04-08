@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
+import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Md5Utils;
 
 import java.io.File;
@@ -84,6 +85,7 @@ public class LiveApplyModel implements LiveApplyConstract.ILiveApplyModel {
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
+        L.e(str);
         RequestBody body=RequestBody.create(MediaType.parse("application/json; charset=utf-8"),str);
         return httpService.liveApply(body);
     }

@@ -33,6 +33,7 @@ import com.yuanyu.ceramics.broadcast.LiveCustomMessage;
 import com.yuanyu.ceramics.broadcast.pull.LiveChatAdapter;
 import com.yuanyu.ceramics.broadcast.pull.LiveChatBean;
 import com.yuanyu.ceramics.common.OnNoDataListener;
+import com.yuanyu.ceramics.common.OnStringCallback;
 import com.yuanyu.ceramics.common.SharePosterPopupWindow;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.L;
@@ -90,9 +91,10 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
     private LivePopupwindowSkinCare livePopupwindowSkinCare;
     private LivePopupwindowFilter livePopupwindowFilter;
     private LivePopupwindowSharpness livePopupwindowSharpness;
-    private LivePopupWindowAddAuction livePopupWindowAddAuction;
+//    private LivePopupWindowAddAuction livePopupWindowAddAuction;
     private LivePopupwindowMore livePopupwindowMore;
     private SharePosterPopupWindow posterPopupWindow;
+    private LivePopupwindowItem livePopupwindowItem;
     private String id;
     private String pushUrl;
     private String groupId;
@@ -151,7 +153,7 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         livePopupwindowFilter.setOnPositionClickListener(this::switchFilter);
         livePopupwindowSharpness = new LivePopupwindowSharpness(this);
         livePopupwindowSharpness.setOnPositionClickListener(this::switchSharpness);
-        livePopupWindowAddAuction = new LivePopupWindowAddAuction(this);
+//        livePopupWindowAddAuction = new LivePopupWindowAddAuction(this);
         livePopupwindowMore =new LivePopupwindowMore(this);
         livePopupwindowMore.setOnShareListener(() -> {
             if(posterPopupWindow!=null){
@@ -182,6 +184,14 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
                 .placeholder(R.drawable.logo_default)
                 .override(50, 50)
                 .into(pusherAvatar);
+        itemList = new ArrayList<>();
+        itemList.addAll(bean.getList());
+        if(itemList!=null&&itemList.size()>0){
+            presenter.setItemPosition(groupId,itemList.get(0).getId());
+        }
+        livePopupwindowItem = new LivePopupwindowItem(this, 1, itemList, bean.getShop_id(), bean.getShop_name(), bean.getShop_portrait());
+        livePopupwindowItem.setOnChangeItemListenner(str -> presenter.setItemPosition(groupId,str));
+
         presenter.IMLogin(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERSIG),Sp.getString(this,AppConstant.USERNAME), bean.getGroupid());
         posterPopupWindow=new SharePosterPopupWindow(this,this,bean.getShop_portrait(),bean.getShop_name(),"直播分享",bean.getTitle(),bean.getCover(),"YuanyuMiniprogram/html/page/commodityDetail/commodityDetail.html?id=" +id ,"/pagesA/commodity_detail/commodity_detail?id="+ id);
         posterPopupWindow.setSavaImageListener((bitmap,type) -> {
@@ -200,6 +210,7 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         conversation = TIMManager.getInstance().getConversation(TIMConversationType.Group, groupId);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//保持屏幕常亮
         TXLivePushConfig livePushConfig = new TXLivePushConfig();
+        livePushConfig.setVideoFPS(40);
         livePusher = new TXLivePusher(this);
         livePusher.setConfig(livePushConfig);
         livePusher.startCameraPreview(pusherView);
@@ -207,7 +218,8 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         if(ret==-5){
             Toast.makeText(this, "许可证到期,请联系客服人员", Toast.LENGTH_SHORT).show();
             finish();
-        } LiveCustomMessage enterMsg=new LiveCustomMessage(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME)+"进入直播间",1);
+        }
+        LiveCustomMessage enterMsg=new LiveCustomMessage(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME)+"进入直播间",1);
         Gson gson=new Gson();
         String msgJson=gson.toJson(enterMsg);
         presenter.sentMassage(msgJson, conversation,1);
@@ -371,17 +383,11 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
 
     @Override
     public void sentMassageSuccess(String msg, int type) {
-        if(type==0){//聊天
-            LiveChatBean entity = new LiveChatBean(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME), msg,0);
+        if(type==0||type==1){//聊天
+            LiveChatBean entity = new LiveChatBean(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), Sp.getString(this, AppConstant.USERNAME), msg,type);
             list.add(entity);
             adapter.notifyItemRangeInserted(list.size() - 1, 1);
             ((LinearLayoutManager) cahtRecyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
-        }else if(type==1){//进场信息
-
-        }else if(type==2){//退场消息
-
-        }else if(type==3){
-
         }
     }
 
@@ -408,6 +414,14 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         }else{
             Toast.makeText(this, "分享失败", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void setItemPositionSuccess(String item_id) {
+        LiveCustomMessage enterMsg=new LiveCustomMessage(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), item_id,3);
+        Gson gson=new Gson();
+        String msgJson=gson.toJson(enterMsg);
+        presenter.sentMassage(msgJson, conversation,3);//切换商品
     }
 
     @Override
@@ -446,6 +460,7 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
         String msgJson=gson.toJson(enterMsg);
         presenter.sentMassage(msgJson, conversation,2);
         presenter.quitChatGroup(groupId);
+        presenter.finishLive(id);
         for(int i=0;i<pathList.size();i++){
             try {
                 File file = new File(pathList.get(i));
@@ -485,7 +500,7 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
     }
 
 
-    @OnClick({R.id.change_camera, R.id.skin_care, R.id.add_filter, R.id.change_sharpness, R.id.shopping, R.id.add_auction})
+    @OnClick({R.id.change_camera, R.id.skin_care, R.id.add_filter, R.id.change_sharpness, R.id.shopping})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.change_camera:
@@ -501,11 +516,13 @@ public class LivePushActivity extends BaseActivity<LivePushPresenter> implements
                 livePopupwindowSharpness.showAtLocation(bottomTool, Gravity.BOTTOM, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics()));
                 break;
             case R.id.shopping:
-
+                if (livePopupwindowItem != null) {
+                    livePopupwindowItem.showAtLocation(pusherView, Gravity.BOTTOM, 0, 0);
+                }
                 break;
-            case R.id.add_auction:
-                livePopupWindowAddAuction.showAtLocation(bottomTool, Gravity.BOTTOM, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics()));
-                break;
+//            case R.id.add_auction:
+//                livePopupWindowAddAuction.showAtLocation(bottomTool, Gravity.BOTTOM, 0, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics()));
+//                break;
         }
     }
 

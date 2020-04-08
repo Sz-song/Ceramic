@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_gray"
+        android:layout_marginBottom="50dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <LinearLayout
             android:orientation="vertical"
@@ -148,6 +149,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="50dp"
+        android:background="@color/white"
         android:layout_gravity="bottom">
         <View
             android:layout_width="match_parent"

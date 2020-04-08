@@ -17,7 +17,7 @@ public class ShopGoodsBean {
         return id;
     }
 
-    public String getImage() {
+    public String getPortrait() {
         return portrait;
     }
 
@@ -41,13 +41,4 @@ public class ShopGoodsBean {
         return type;
     }
 
-    public ShopGoodsBean(String id, String portrait, String name, String jiangren, String salenum, String price, int type) {
-        this.id = id;
-        this.portrait = portrait;
-        this.name = name;
-        this.jiangren = jiangren;
-        this.salenum = salenum;
-        this.price = price;
-        this.type = type;
-    }
 }

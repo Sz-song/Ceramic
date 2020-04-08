@@ -3,6 +3,7 @@ package com.yuanyu.ceramics.broadcast.pull;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMMessage;
 import com.yuanyu.ceramics.base.BaseResponse;
+import com.yuanyu.ceramics.broadcast.push.LiveItemBean;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public interface LivePullConstract {
         void sentMassageSuccess(String msg,int type);
         void initLivePull();
         void getNumAudienceSuccess(int num);
+        void changeItem(String item_id);
     }
     interface ILivePullPresenter{
         void initData(String id);
@@ -28,5 +30,6 @@ public interface LivePullConstract {
         void quitChatGroup(String groupid);
         void sentMassage(String msg, TIMConversation conversation,int type);
         void getNumAudience(String groupId);
+        void getItemPosition(String groupId);
     }
 }

@@ -23,9 +23,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by cat on 2018/8/15.
- */
 
 public class ShopGoodsAdapter extends RecyclerView.Adapter<ShopGoodsAdapter.ViewHolder> {
     private List<ShopGoodsBean> list;
@@ -55,7 +52,7 @@ public class ShopGoodsAdapter extends RecyclerView.Adapter<ShopGoodsAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         GlideApp.with(context)
-                .load(AppConstant.BASE_URL+list.get(position).getImage())
+                .load(AppConstant.BASE_URL+list.get(position).getPortrait())
                 .override(100,100)
                 .placeholder(R.drawable.img_default)
                 .into(holder.image);

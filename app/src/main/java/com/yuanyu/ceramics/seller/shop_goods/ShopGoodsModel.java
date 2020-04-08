@@ -6,17 +6,13 @@ import com.yuanyu.ceramics.global.HttpService;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Md5Utils;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
-/**
- * Created by cat on 2018/9/17.
- */
+
 
 public class ShopGoodsModel implements ShopGoodsConstract.IShopGoodsModel{
     private HttpService httpService;

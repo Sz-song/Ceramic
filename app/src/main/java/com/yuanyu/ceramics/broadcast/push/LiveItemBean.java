@@ -6,6 +6,7 @@ public class LiveItemBean {
     private String price;
     private String image;
 
+
     public String getId() {
         return id;
     }

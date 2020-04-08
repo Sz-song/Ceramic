@@ -12,6 +12,7 @@ import io.reactivex.Observable;
 public interface LivePushConstract {
     interface ILivePushModel{
         Observable<BaseResponse<LivePushBean>> initData(String id);
+        Observable<BaseResponse<String[]>> finishLive(String id);
     }
     interface ILivePushView{
         void initDataSuccess(LivePushBean bean);
@@ -24,6 +25,7 @@ public interface LivePushConstract {
         void sentMassageSuccess(String msg,int type);
         void saveScreenshotSuccess(Uri uri, int type, String filePath);
         void saveScreenshotFail(int type);
+        void setItemPositionSuccess(String item_id);
     }
     interface ILivePushPresenter{
         void initData(String id);
@@ -33,5 +35,7 @@ public interface LivePushConstract {
         void sentMassage(String msg, TIMConversation conversation, int type);
         void getNumAudience(String groupId);
         void saveScreenshot(Bitmap bitmap,int type);
+        void setItemPosition(String groupId, String item_id);
+        void finishLive(String live_id);
     }
 }

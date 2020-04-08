@@ -41,6 +41,7 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.cart.GoodsBean;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.AppBarStateChangeListener;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.SharePosterPopupWindow;
@@ -460,13 +461,13 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 }
                 break;
             case R.id.sixin:
-//                if(null!=Sp.getString(this,AppConstant.MOBILE)&&Sp.getString(this,AppConstant.MOBILE).length()>8) {
-//                    ChatActivity.navToChat(this, bean.getItembean().getSowaccountid(), TIMConversationType.C2C);
-//                }else{
+                if(null!=Sp.getString(this,AppConstant.MOBILE)&&Sp.getString(this,AppConstant.MOBILE).length()>8) {
+                    ChatActivity.navToChat(this, bean.getItembean().getSowaccountid());
+                }else{
 //                    intent = new Intent(this, BindPhoneActivity.class);
 //                    intent.putExtra("type",1);
 //                    startActivity(intent);
-//                }
+                }
                 break;
             case R.id.dianpu:
                 intent = new Intent(this, ShopIndexActivity.class);

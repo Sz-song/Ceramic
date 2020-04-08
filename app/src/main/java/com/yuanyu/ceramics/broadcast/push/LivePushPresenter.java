@@ -27,8 +27,11 @@ import com.yuanyu.ceramics.utils.L;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -171,6 +174,13 @@ public class LivePushPresenter extends BasePresenter<LivePushConstract.ILivePush
                 L.e("退场消息失败");
                 return;
             }
+        } else if(type==3){//商家切换商品
+            TIMCustomElem elem_custom = new TIMCustomElem();
+            elem_custom.setData(msgString.getBytes());//自定义 byte[]
+            if(msg.addElement(elem_custom) != 0) {
+                L.e("退场消息失败");
+                return;
+            }
         }
         conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {//发送消息回调
             @Override
@@ -228,5 +238,40 @@ public class LivePushPresenter extends BasePresenter<LivePushConstract.ILivePush
         }
     }
 
+    @Override
+    public void setItemPosition(String groupId,String item_id) {
+        TIMGroupManager.ModifyGroupInfoParam param = new TIMGroupManager.ModifyGroupInfoParam(groupId);
+        Map<String, byte[]> customInfo = new HashMap<>();
+        try {
+            customInfo.put("item_id", item_id.getBytes("utf-8"));
+            param.setCustomInfo(customInfo);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        TIMGroupManager.getInstance().modifyGroupInfo(param, new TIMCallBack() {
+            @Override
+            public void onError(int code, String desc) {
+                L.e("modify group info failed, code:" + code +"|desc:" + desc);
+                if(view!=null){view.showToast("商品展示设置失败");}
+            }
+            @Override
+            public void onSuccess() {
+                if(view!=null){view.setItemPositionSuccess(item_id);}
+            }
+        });
+    }
 
+    @Override
+    public void finishLive(String live_id) {
+        model.finishLive(live_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<String[]>())
+                .subscribe(new BaseObserver<String[]>() {
+                    @Override
+                    public void onNext(String[] strings) {if(view!=null){view.showToast("直播结束");}}
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) { L.e(e.message+"  "+e.status); }
+                });
+    }
 }

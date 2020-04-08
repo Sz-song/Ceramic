@@ -288,7 +288,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
                 break;
             case R.id.live_submit:
                 if (status == 2 || status == 3) {
-                    if (cover.startsWith("img")) {
+                    if (cover.startsWith("back")) {
                         String time = Md5Utils.getTimeMin(liveTime.getText().toString());
                         presenter.liveApply(id, Sp.getString(LiveApplyActivity.this, "useraccountid"), Sp.getString(LiveApplyActivity.this, AppConstant.SHOP_ID), liveTitle.getText().toString(), cover, time, list);
                     } else {
@@ -304,6 +304,7 @@ public class LiveApplyActivity extends BaseActivity<LiveApplyPresenter> implemen
                     Intent intent=new Intent(this, LivePushActivity.class);
                     intent.putExtra("live_id",id);
                     startActivity(intent);
+                    finish();
                 }
                 break;
             case R.id.live_time:

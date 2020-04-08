@@ -1,5 +1,7 @@
 package com.yuanyu.ceramics.broadcast.push;
 
+import java.util.List;
+
 public class LivePushBean {
     private String id;
     private String groupid;
@@ -9,7 +11,11 @@ public class LivePushBean {
     private String cover;
     private String title;
     private String pushurl;
+    private List<LiveItemBean> list;
 
+    public List<LiveItemBean> getList() {
+        return list;
+    }
 
     public String getTitle() {
         return title;

@@ -121,6 +121,7 @@
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="10dp"
+                android:visibility="gone"
                 android:background="@drawable/r5_sowhite">
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/item_image"
@@ -149,18 +150,18 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
                 <TextView
-                    android:id="@+id/add_price"
+                    android:id="@+id/buy_fast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_margin="10dp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
                     android:paddingBottom="3dp"
                     android:paddingTop="3dp"
                     android:background="@drawable/r15_sowhite_stpri"
-                    android:text="加价"
+                    android:text="立即购买"
                     android:textColor="@color/colorPrimary"
                     android:textSize="12sp" />
             </RelativeLayout>

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.common.OnPositionClickListener;
+import com.yuanyu.ceramics.common.OnStringCallback;
 import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 
 import java.util.List;
@@ -27,8 +29,13 @@ public class LivePopupwindowItem extends PopupWindow {
     private RecyclerView recyclerview;
     private Context context;
     private View view;
+    private OnStringCallback onChangeItemListenner;
 
-    public LivePopupwindowItem(Context context, int type, List<LiveItemBean> list, String shop_id, String shop_name, String image, String image1) {
+    public void setOnChangeItemListenner(OnStringCallback onChangeItemListenner) {
+        this.onChangeItemListenner = onChangeItemListenner;
+    }
+
+    public LivePopupwindowItem(Context context, int type, List<LiveItemBean> list, String shop_id, String shop_name, String image) {
         super(context);
         this.context = context;
         this.view = LayoutInflater.from(context).inflate(R.layout.popup_live_item, null);
@@ -56,6 +63,7 @@ public class LivePopupwindowItem extends PopupWindow {
         });
         recyclerview.setLayoutManager(new LinearLayoutManager(context));
         LiveItemAdapter adapter = new LiveItemAdapter(context, list, type);
+        adapter.setOnChangeItemListenner(item_id -> onChangeItemListenner.callback(item_id));
         recyclerview.setAdapter(adapter);
     }
 }

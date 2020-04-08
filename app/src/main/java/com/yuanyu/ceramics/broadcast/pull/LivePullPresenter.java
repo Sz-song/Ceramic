@@ -15,6 +15,8 @@ import com.tencent.imsdk.TIMMessage;
 import com.tencent.imsdk.TIMTextElem;
 import com.tencent.imsdk.TIMUserProfile;
 import com.tencent.imsdk.TIMValueCallBack;
+import com.tencent.imsdk.ext.group.TIMGroupDetailInfo;
+import com.tencent.imsdk.ext.group.TIMGroupDetailInfoResult;
 import com.tencent.openqq.protocol.imsdk.msg;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.base.BaseObserver;
@@ -201,6 +203,30 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
             public void onSuccess(List<TIMGroupMemberInfo> timGroupMemberInfos) {
                 if(view!=null){
                     view.getNumAudienceSuccess(timGroupMemberInfos.size());
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getItemPosition(String groupId) {
+        ArrayList<String> groupList = new ArrayList<>();
+        groupList.add(groupId);
+        TIMGroupManager.getInstance().getGroupInfo(groupList, new TIMValueCallBack<List<TIMGroupDetailInfoResult>>() {
+            @Override
+            public void onError(int i, String s) {
+
+            }
+
+            @Override
+            public void onSuccess(List<TIMGroupDetailInfoResult> timGroupDetailInfoResults) {
+                for(int i=0;i<timGroupDetailInfoResults.size();i++){
+                    if(timGroupDetailInfoResults.get(i).getGroupId().equals(groupId)){
+                        if(timGroupDetailInfoResults.get(i).getCustom().get("item_id")!=null&&view!=null){
+                            view.changeItem(new String(timGroupDetailInfoResults.get(i).getCustom().get("item_id")));
+                        }
+                        L.e("item_id is"+new String(timGroupDetailInfoResults.get(i).getCustom().get("item_id")));
+                    }
                 }
             }
         });

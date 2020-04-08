@@ -1,5 +1,9 @@
 package com.yuanyu.ceramics.broadcast.pull;
 
+import com.yuanyu.ceramics.broadcast.push.LiveItemBean;
+
+import java.util.List;
+
 public class LivePullBean {
     private String id;
     private String groupid;
@@ -8,6 +12,7 @@ public class LivePullBean {
     private String shop_portrait;
     private String cover;
     private String playurl;
+    private List<LiveItemBean> list;
 
     public String getId() {
         return id;
@@ -35,5 +40,9 @@ public class LivePullBean {
 
     public String getPlayurl() {
         return playurl;
+    }
+
+    public List<LiveItemBean> getList() {
+        return list;
     }
 }
