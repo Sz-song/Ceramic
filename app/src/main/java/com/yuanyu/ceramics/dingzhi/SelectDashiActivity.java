@@ -73,7 +73,7 @@ public class SelectDashiActivity extends NormalActivity {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
                     lastPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
-                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1) {
+                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1&&lastPosition>8) {
                         loadData();
                     }
                 }

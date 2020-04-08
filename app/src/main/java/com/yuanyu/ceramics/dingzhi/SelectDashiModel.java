@@ -19,13 +19,7 @@ import okhttp3.RequestBody;
 
 public class SelectDashiModel {
     private HttpService httpService;
-
     public SelectDashiModel(){httpService = HttpServiceInstance.getInstance();}
-    /**
-     * 获取大师
-     * @param page
-     * @return
-     */
     public Observable<BaseResponse<List<DashiCellBean>>> chooseDashi(int page){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
@@ -37,7 +31,7 @@ public class SelectDashiModel {
         map.put("action", "getmasterorshop");
         Map data = new HashMap();
         data.put("page",page);
-        data.put("page_size","");
+        data.put("page_size",20);
         map.put("data", data);
         Gson gson = new Gson();
         String str = gson.toJson(map);

@@ -173,32 +173,7 @@
                             android:background="@drawable/r2_soblue"
                             android:textSize="11.5sp"/>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:textStyle="bold"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:textColor="@color/blackLight"
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/user_birthday"/>
-                        <TextView
-                            android:id="@+id/birthday"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:maxLines="1"
-                            android:textSize="13sp"
-                            android:textColor="@color/blackLight"
-                            android:gravity="center_vertical"/>
-                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="40dp"

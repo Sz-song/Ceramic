@@ -18,31 +18,36 @@ public class DingzhiPublishDetailPresenter extends BasePresenter<DingzhiPublishD
     DingzhiPublishDetailPresenter() {model=new DingzhiPublishDetailModel();}
 
     @Override
-    public void initData(List<FenleiTypeBean> fenleiList, List<FenleiTypeBean> ticaiList) {
-        fenleiList.add(new FenleiTypeBean("原石"));
-        fenleiList.add(new FenleiTypeBean("挂件"));
+    public void initData(List<FenleiTypeBean> fenleiList, List<FenleiTypeBean> zhonglei ,List<FenleiTypeBean> waiguanList) {
+        fenleiList.add(new FenleiTypeBean("花瓶"));
+        fenleiList.add(new FenleiTypeBean("雕塑品"));
         fenleiList.add(new FenleiTypeBean("吊坠"));
-        fenleiList.add(new FenleiTypeBean("把件"));
-        fenleiList.add(new FenleiTypeBean("摆件"));
+        fenleiList.add(new FenleiTypeBean("园林陶瓷"));
         fenleiList.add(new FenleiTypeBean("器皿"));
-        fenleiList.add(new FenleiTypeBean("手镯"));
-        fenleiList.add(new FenleiTypeBean("手串（链）"));
-        fenleiList.add(new FenleiTypeBean("项链"));
-        fenleiList.add(new FenleiTypeBean("饰品"));
-        fenleiList.add(new FenleiTypeBean("杂项"));
+        fenleiList.add(new FenleiTypeBean("相框"));
+        fenleiList.add(new FenleiTypeBean("壁画"));
+        fenleiList.add(new FenleiTypeBean("陈设品"));
+        fenleiList.add(new FenleiTypeBean("其他"));
 
-        ticaiList.add(new FenleiTypeBean("神佛"));
-        ticaiList.add(new FenleiTypeBean("瑞兽"));
-        ticaiList.add(new FenleiTypeBean("仿古"));
-        ticaiList.add(new FenleiTypeBean("山水"));
-        ticaiList.add(new FenleiTypeBean("人物"));
-        ticaiList.add(new FenleiTypeBean("花鸟"));
-        ticaiList.add(new FenleiTypeBean("动物"));
-        ticaiList.add(new FenleiTypeBean("其它"));
+        zhonglei.add(new FenleiTypeBean("素瓷"));
+        zhonglei.add(new FenleiTypeBean("青瓷"));
+        zhonglei.add(new FenleiTypeBean("黑瓷"));
+        zhonglei.add(new FenleiTypeBean("白瓷"));
+        zhonglei.add(new FenleiTypeBean("青白瓷"));
+        zhonglei.add(new FenleiTypeBean("其它"));
+
+        waiguanList.add(new FenleiTypeBean("神佛"));
+        waiguanList.add(new FenleiTypeBean("瑞兽"));
+        waiguanList.add(new FenleiTypeBean("仿古"));
+        waiguanList.add(new FenleiTypeBean("山水"));
+        waiguanList.add(new FenleiTypeBean("人物"));
+        waiguanList.add(new FenleiTypeBean("花鸟"));
+        waiguanList.add(new FenleiTypeBean("动物"));
+        waiguanList.add(new FenleiTypeBean("其它"));
     }
 
     @Override
-    public void dingzhiPublish(String useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai) {
+    public void dingzhiPublish(String useraccountid, String master_id, String detail, String useage,  int priceType, String fenlei, String zhonglei,String waiguan) {
         try {
             if(Integer.parseInt(master_id)<1){
                 if(view!=null){view.showToast("请选择合作大师");}
@@ -60,11 +65,15 @@ public class DingzhiPublishDetailPresenter extends BasePresenter<DingzhiPublishD
             if(view!=null){view.showToast("请选择分类");}
             return;
         }
-        if(ticai.trim().length()==0){
-            if(view!=null){view.showToast("请选择题材");}
+        if(zhonglei.trim().length()==0){
+            if(view!=null){view.showToast("请选择种类");}
             return;
         }
-        model.dingzhiPublish(useraccountid,master_id,detail,useage,birthday,priceType,fenlei,ticai)
+        if(waiguan.trim().length()==0){
+            if(view!=null){view.showToast("请选择外观");}
+            return;
+        }
+        model.dingzhiPublish(useraccountid,master_id,detail,useage,priceType,fenlei,zhonglei,waiguan)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<String[]>())

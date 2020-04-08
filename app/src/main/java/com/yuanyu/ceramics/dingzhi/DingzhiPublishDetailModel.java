@@ -19,7 +19,7 @@ public class DingzhiPublishDetailModel implements DingzhiPublishDetailConstract.
     private HttpService httpService;
     DingzhiPublishDetailModel(){httpService = HttpServiceInstance.getInstance();}
     @Override
-    public Observable<BaseResponse<String[]>> dingzhiPublish(String useraccountid, String master_id, String detail, String useage, String birthday, int priceType, String fenlei, String ticai) {
+    public Observable<BaseResponse<String[]>> dingzhiPublish(String useraccountid, String master_id, String detail, String useage,  int priceType, String fenlei, String zhonglei,String waiguan) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);
@@ -33,10 +33,10 @@ public class DingzhiPublishDetailModel implements DingzhiPublishDetailConstract.
         data.put("master_id",master_id);
         data.put("detail",detail);
         data.put("useage",useage);
-        data.put("birthday",birthday);
+        data.put("zhonglei",zhonglei);
         data.put("priceType",priceType);
         data.put("fenlei",fenlei);
-        data.put("ticai",ticai);
+        data.put("waiguan",waiguan);
         map.put("data",data);
         Gson gson = new Gson();
         String str = gson.toJson(map);

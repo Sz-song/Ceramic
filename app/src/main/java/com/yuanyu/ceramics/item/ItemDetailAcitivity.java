@@ -225,8 +225,6 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
             }
             if (bean.getItembean().isIscollected()) {
                 shoucangImg.setBackgroundResource(R.drawable.collectedblue);
-                shoucangImg.setMaxWidth(25);
-                shoucangImg.setMaxHeight(25);
             }
             if (Integer.parseInt(bean.getStore_num()) < 1) {
                 addCart.setVisibility(View.GONE);
@@ -360,8 +358,6 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
         if (b) {
             Toast.makeText(this, "收藏成功", Toast.LENGTH_SHORT).show();
             shoucangImg.setBackgroundResource(R.drawable.collectedblue);
-            shoucangImg.setMaxWidth(25);
-            shoucangImg.setMaxHeight(25);
         } else {
             Toast.makeText(this, "取消收藏成功", Toast.LENGTH_SHORT).show();
             shoucangImg.setBackgroundResource(R.drawable.shoucang);

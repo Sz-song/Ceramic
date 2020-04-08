@@ -176,19 +176,23 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
                 return;
             }
         }
-        conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {//发送消息回调
-            @Override
-            public void onError(int code, String desc) {//发送消息失败
-                L.e("send message failed. code: " + code + " errmsg: " + desc);
-                if(view!=null){view.showToast("消息发送失败");}
-            }
+        if(conversation!=null){
+            conversation.sendMessage(msg, new TIMValueCallBack<TIMMessage>() {//发送消息回调
+                @Override
+                public void onError(int code, String desc) {//发送消息失败
+                    L.e("send message failed. code: " + code + " errmsg: " + desc);
+                    if(view!=null){view.showToast("消息发送失败");}
+                }
 
-            @Override
-            public void onSuccess(TIMMessage msg) {//发送消息成功
-                L.e( "SendMsg ok");
-                if(view!=null){view.sentMassageSuccess(msgString,type);}
-            }
-        });
+                @Override
+                public void onSuccess(TIMMessage msg) {//发送消息成功
+                    L.e( "SendMsg ok");
+                    if(view!=null){view.sentMassageSuccess(msgString,type);}
+                }
+            });
+        }else{
+            L.e("conversation is null");
+        }
     }
 
     @Override
