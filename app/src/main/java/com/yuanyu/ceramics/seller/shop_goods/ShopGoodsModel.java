@@ -74,7 +74,7 @@ public class ShopGoodsModel implements ShopGoodsConstract.IShopGoodsModel{
         map.put("signature",signature);
         map.put("action","upsale");
         Map data = new HashMap();
-        data.put("shopid",shopid);
+        data.put("shop_id",shopid);
         data.put("id",id);
         map.put("data",data);
         Gson gson=new Gson();
