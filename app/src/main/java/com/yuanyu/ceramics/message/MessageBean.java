@@ -46,4 +46,16 @@ public class MessageBean {
     public void setLastMsg(String lastMsg) {
         this.lastMsg = lastMsg;
     }
+
+    public void setUseraccountid(String useraccountid) {
+        this.useraccountid = useraccountid;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }

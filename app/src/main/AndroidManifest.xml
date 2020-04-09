@@ -142,6 +142,7 @@
         <activity android:name=".center_circle.release.DraftsActivity" />
         <activity android:name=".search.SearchResultActivity" />
         <activity android:name=".seller.index.ShopChangeIntroduceActivity" />
+        <activity android:name=".seller.message_shop.MessageShopActivity" />
     </application>
 
 </manifest>

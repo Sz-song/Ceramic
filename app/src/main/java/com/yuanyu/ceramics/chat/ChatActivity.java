@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.imsdk.TIMCallBack;
 import com.tencent.imsdk.TIMConversation;
 import com.tencent.imsdk.TIMConversationType;
 import com.tencent.imsdk.TIMElem;
@@ -120,6 +121,15 @@ public class ChatActivity extends BaseActivity<ChatPresenter> implements ChatCon
                 }
             }
         });
+        if(conversation!=null){
+            conversation.setReadMessage(conversation.getLastMsg(), new TIMCallBack() {
+                @Override
+                public void onError(int i, String s) {L.e(i+s+"已读");}
+
+                @Override
+                public void onSuccess() {L.e("已读");}
+            });
+        }
     }
 
     @OnClick({R.id.voice_input_switch, R.id.face_btn, R.id.more_btn, R.id.send_btn})
@@ -175,6 +185,13 @@ public class ChatActivity extends BaseActivity<ChatPresenter> implements ChatCon
         list.add(entity);
         adapter.notifyItemRangeInserted(list.size() - 1, 1);
         ((LinearLayoutManager) recyclerview.getLayoutManager()).scrollToPositionWithOffset(list.size() - 1, 0);
+        conversation.setReadMessage(conversation.getLastMsg(), new TIMCallBack() {
+            @Override
+            public void onError(int i, String s) {}
+
+            @Override
+            public void onSuccess() {}
+        });
     }
 
     @Override

@@ -43,7 +43,7 @@ public class MessageFragment extends BaseFragment<MessagePresenter> implements M
     SwipeRefreshLayout swipe;
     private List<MessageBean> list;
     private MessageAdapter adapter;
-    private boolean canreflash;
+    private boolean isInit=false;
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -58,33 +58,27 @@ public class MessageFragment extends BaseFragment<MessagePresenter> implements M
     @Override
     protected void initEvent(View view) {
         list = new ArrayList<>();
-        canreflash=true;
         adapter = new MessageAdapter(getContext(), list);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setAdapter(adapter);
         swipe.setColorSchemeResources(R.color.colorPrimary);
-        swipe.setOnRefreshListener(() -> {
-            if(canreflash){
-                canreflash=false;
-                list.clear();
-                adapter.notifyDataSetChanged();
-                presenter.initData();
-            }
-        });
+        swipe.setOnRefreshListener(() -> presenter.initData());
     }
 
     @Override
     protected void initData() {
-        canreflash=false;
         presenter.initData();
     }
 
     @Override
     public void initDataSuccess(List<MessageBean> beans) {
-        list.addAll(beans);
-        adapter.notifyDataSetChanged();
-        swipe.setRefreshing(false);
-        canreflash=true;
+        if(!(list.size()==beans.size()&&list.containsAll(beans))){
+            list.clear();
+            list.addAll(beans);
+            adapter.notifyDataSetChanged();
+            swipe.setRefreshing(false);
+        }
+
     }
 
     @Override
@@ -92,17 +86,20 @@ public class MessageFragment extends BaseFragment<MessagePresenter> implements M
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
         L.e(e.status + "  " + e.message);
         swipe.setRefreshing(false);
-        canreflash=true;
     }
 
     @Override
-    public void receiveMessageSuccess() {
-        if(canreflash) {
-            canreflash = false;
-            list.clear();
-            adapter.notifyDataSetChanged();
-            presenter.initData();
-        }
+    public void receiveMessageSuccess(String msg,String sender) {
+        presenter.initData();
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(isInit){
+            presenter.initData();
+        }
+        isInit=true;
+    }
 }

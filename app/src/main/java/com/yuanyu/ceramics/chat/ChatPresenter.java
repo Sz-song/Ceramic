@@ -86,7 +86,9 @@ public class ChatPresenter extends BasePresenter<ChatConstract.IChatView> implem
                 for(int i=timMessages.size();i>0;i--){
                     listmsg.add(timMessages.get(i-1));
                 }
-                listmsg.add(conversation.getLastMsg());
+                if(conversation.getLastMsg()!=null){
+                    listmsg.add(conversation.getLastMsg());
+                }
                 for (int i = 0; i < listmsg.size(); i++) {
                     TIMMessage msg = listmsg.get(i);
                     String senter =msg.getSender();
