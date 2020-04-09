@@ -71,7 +71,7 @@ public class DingzhiPublishDetailActivity extends BaseActivity<DingzhiPublishDet
     View divider;
     @BindView(R.id.root)
     CoordinatorLayout root;
-    private int master_id = 0; //指定大师id
+    private String master_id= ""; //指定大师id
     private String useage = "自用";
     private int priceType = 0;
     private SelectPopupWindow popup;
@@ -147,11 +147,11 @@ public class DingzhiPublishDetailActivity extends BaseActivity<DingzhiPublishDet
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000 && resultCode == RESULT_OK) {
-            if (Sp.getInt(this, AppConstant.USER_ACCOUNT_ID) == data.getIntExtra("id", 0)) {
+            if (Sp.getString(this, AppConstant.USER_ACCOUNT_ID) .equals(data.getStringExtra("id"))) {
                 Toast.makeText(this, "请不要选择自己", Toast.LENGTH_SHORT).show();
             } else {
                 masterName.setText(data.getStringExtra("name"));
-                master_id = data.getIntExtra("id", 0);
+                master_id = data.getStringExtra("id");
             }
 
         }
@@ -221,7 +221,7 @@ public class DingzhiPublishDetailActivity extends BaseActivity<DingzhiPublishDet
                 break;
             case R.id.submit:
                 dialog.show();
-                presenter.dingzhiPublish(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), master_id + "", introduceDetail.getText().toString(), useage, priceType, fenlei.getText().toString(), zhonglei.getText().toString(),waiguan.getText().toString());
+                presenter.dingzhiPublish(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), master_id , introduceDetail.getText().toString(), useage, priceType, fenlei.getText().toString(), zhonglei.getText().toString(),waiguan.getText().toString());
                 break;
         }
     }

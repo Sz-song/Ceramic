@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -19,6 +20,7 @@ import com.yuanyu.ceramics.base.BaseFragment;
 import com.yuanyu.ceramics.common.CommonDialog;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
+import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import java.util.ArrayList;
@@ -57,9 +59,17 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
     @Override
     protected void initEvent(View view) {
         if (getArguments() != null) {
-            status = getArguments().getInt("status");
+            status = getArguments().getInt("type");
         }
+        page=0;
         list = new ArrayList<>();
+        swipe.setColorSchemeResources(R.color.colorPrimary);
+        swipe.setOnRefreshListener(() -> {
+            page=0;
+            list.clear();
+            adapter.notifyDataSetChanged();
+            presenter.getOrderList(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID),page,status);
+        });
         GlideApp.with(this).load(R.drawable.nodata_img).into(nodataImg);
         nodata.setText("暂无数据");
         adapter = new MyOrderAdapter(getContext(), list, false);
@@ -128,8 +138,21 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
 //                Toast.makeText(getContext(), "已提醒发货", Toast.LENGTH_SHORT).show();
 //            }
         });
-
+        recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setAdapter(adapter);
+        recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                int lastPosition;
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                    lastPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1&&lastPosition>9) {
+                        presenter.getOrderList(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID),page,status);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -140,11 +163,15 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
     @Override
     public void getOrderListSuccess(List<MyOrderFragmentBean> listbean) {
         list.addAll(listbean);
-        adapter.notifyItemRangeInserted(list.size() - list.size(), list.size());
+        adapter.notifyItemRangeInserted(list.size() - listbean.size(), listbean.size());
         swipe.setRefreshing(false);
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        page++;
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 
@@ -152,9 +179,12 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
     public void getOrderListFail(ExceptionHandler.ResponeThrowable e) {
         swipe.setRefreshing(false);
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 
@@ -163,18 +193,24 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
         Toast.makeText(getContext(), "订单已取消", Toast.LENGTH_SHORT).show();
         list.remove(position);
         adapter.notifyDataSetChanged();
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void cancelOrderFail(ExceptionHandler.ResponeThrowable e) {
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 
@@ -183,18 +219,24 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
         Toast.makeText(getContext(), "订单已删除", Toast.LENGTH_SHORT).show();
         list.remove(position);
         adapter.notifyDataSetChanged();
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void deleteOrderFail(ExceptionHandler.ResponeThrowable e) {
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 
@@ -213,18 +255,24 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
         Toast.makeText(getContext(), "收货成功", Toast.LENGTH_SHORT).show();
         list.remove(position);
         adapter.notifyDataSetChanged();
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void confirmReceivedFail(ExceptionHandler.ResponeThrowable e) {
         Toast.makeText(getContext(), e.message, Toast.LENGTH_SHORT).show();
-        if (list.size() == 0){
-            nodata.setVisibility(View.VISIBLE);
+        if (list.size() == 0) {
             nodataImg.setVisibility(View.VISIBLE);
+            nodata.setVisibility(View.VISIBLE);
+        } else {
+            nodataImg.setVisibility(View.GONE);
+            nodata.setVisibility(View.GONE);
         }
     }
 }

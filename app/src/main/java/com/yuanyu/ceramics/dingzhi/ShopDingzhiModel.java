@@ -31,7 +31,7 @@ public class ShopDingzhiModel implements ShopDingzhiFragmentConstract.IShopDingz
         map.put("action","seller_getdingzhi");
         Map data = new HashMap();
         data.put("page",page);
-        data.put("page_size",10);
+        data.put("page_size",20);
         data.put("shop_id",shop_id);
         data.put("type",type);
         map.put("data",data);

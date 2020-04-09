@@ -133,7 +133,7 @@ public interface HttpService {
     @POST("app_api/grounding/generate_bond_orders.php")
     Observable<BaseResponse<GenerateOrdersBean>> generateUserBondOrder(@Body RequestBody body);
     //店铺定制列表
-    @POST("app_api/shangjia/seller_getdingzhi.php")
+    @POST("back/test/api/dingzhi/seller_getdingzhi.php")
     Observable<BaseResponse<List<MyDingzhiBean>>> getShopDingzhiList(@Body RequestBody body);
     //定制详情
     @POST("back/test/api/dingzhi/dingzhi_detail.php")

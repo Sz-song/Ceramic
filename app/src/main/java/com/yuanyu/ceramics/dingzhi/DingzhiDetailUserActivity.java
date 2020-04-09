@@ -1,15 +1,14 @@
 package com.yuanyu.ceramics.dingzhi;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -22,11 +21,17 @@ import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 import com.yuanyu.ceramics.utils.TimeUtils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import static com.yuanyu.ceramics.AppConstant.WECHAT_APP_ID;
 
 
@@ -50,16 +55,16 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
     TextView usageScenarios;
     @BindView(R.id.about_price)
     TextView aboutPrice;
-    @BindView(R.id.birthday)
-    TextView birthday;
-    @BindView(R.id.chanzhuang)
-    TextView chanzhuang;
     @BindView(R.id.fenlei)
     TextView fenlei;
-    @BindView(R.id.ticai)
-    TextView ticai;
+    @BindView(R.id.zhonglei)
+    TextView zhonglei;
+    @BindView(R.id.waiguan)
+    TextView waiguan;
     @BindView(R.id.view_negotiation_history)
     TextView viewNegotiationHistory;
+    @BindView(R.id.negotiation_linear)
+    LinearLayout negotiationLinear;
     @BindView(R.id.dingzhi_num)
     TextView dingzhiNum;
     @BindView(R.id.creat_time)
@@ -72,18 +77,18 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
     TextView payTime;
     @BindView(R.id.delivery_time)
     TextView deliveryTime;
+    @BindView(R.id.view_courier)
+    TextView viewCourier;
     @BindView(R.id.receive_time)
     TextView receiveTime;
     @BindView(R.id.submit)
     Button submit;
-    @BindView(R.id.divider)
-    View divider;
-    @BindView(R.id.negotiation_linear)
-    LinearLayout negotiationLinear;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
-    @BindView(R.id.view_courier)
-    TextView viewCourier;
+    @BindView(R.id.divider)
+    View divider;
+
+
     private LoadingDialog dialog;
     private String id;
     private String master_id;
@@ -92,7 +97,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
     private AddressBean address;
     private String courier_id;
     private String courier_num;
-    private String price_pay="";
+    private String price_pay = "";
 
     @Override
     protected int getLayout() {
@@ -128,8 +133,8 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         isInit = true;
         master_id = detailBean.getMaster_id();
         statusCode = detailBean.getStatus();
-        courier_id=detailBean.getCourier_id();
-        courier_num=detailBean.getCourier_num();
+        courier_id = detailBean.getCourier_id();
+        courier_num = detailBean.getCourier_num();
         dialog.dismiss();
         swipe.setRefreshing(false);
         dingzhiDetail.setText(detailBean.getDetail());
@@ -137,28 +142,20 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         L.e("status is: " + statusCode);
         if (detailBean.getPrice().equals("0")) {
             aboutPrice.setText("1000-5000");
-            chanzhuang.setText("山料");
         } else if (detailBean.getPrice().equals("1")) {
             aboutPrice.setText("5001-50000");
-            chanzhuang.setText("籽料");
         } else if (detailBean.getPrice().equals("2")) {
             aboutPrice.setText("50000以上");
-            chanzhuang.setText("籽料");
         } else {
             aboutPrice.setText("1000-5000");
-            chanzhuang.setText("山料");
-        }
-        if (detailBean.getBirthday() != null && detailBean.getBirthday().length() > 0) {
-            birthday.setText(detailBean.getBirthday());
-        } else {
-            birthday.setText("用户未填写");
         }
         fenlei.setText(detailBean.getFenlei());
-        ticai.setText(detailBean.getTicai());
+        zhonglei.setText(detailBean.getZhonglei());
+        waiguan.setText(detailBean.getWaiguan());
         try {
-            price_pay=(Float.parseFloat(detailBean.getMaster_price()) / 2)+"";
-        }catch (Exception e){
-            price_pay="";
+            price_pay = (Float.parseFloat(detailBean.getMaster_price()) / 2) + "";
+        } catch (Exception e) {
+            price_pay = "";
         }
         switch (detailBean.getStatus()) {
             //0 正在审核，1 平台审核成功 2，平台审核失败，3，大师拒绝接单，4，大师接单未缴纳保证金，5商家接单缴纳了保证金，6,支付尾款未发货，7商家发货，8买家收货
@@ -360,7 +357,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick({R.id.contact_master, R.id.view_negotiation_history, R.id.submit,R.id.view_courier})
+    @OnClick({R.id.contact_master, R.id.view_negotiation_history, R.id.submit, R.id.view_courier})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.contact_master:
@@ -432,7 +429,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         switch (requestCode) {
             case 1000:
                 if (resultCode == RESULT_OK) {
-                    if (data.getIntExtra("paytype",-1)==0) {
+                    if (data.getIntExtra("paytype", -1) == 0) {
                         dialog.show();
                         //支付宝支付
                         if (statusCode == 4) {
@@ -440,7 +437,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
                         } else if (statusCode == 5) {
                             presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 1, 0, address);
                         }
-                    } else if (data.getIntExtra("paytype",-1)==1) {
+                    } else if (data.getIntExtra("paytype", -1) == 1) {
                         dialog.show();
                         //微信支付
                         if (statusCode == 4) {
@@ -448,7 +445,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
                         } else if (statusCode == 5) {
                             presenter.generateBondOrder(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 1, 1, address);
                         }
-                    }else if (data.getIntExtra("paytype",-1)==3) {
+                    } else if (data.getIntExtra("paytype", -1) == 3) {
                         dialog.show();
                         //微信支付
                         if (statusCode == 4) {
@@ -569,5 +566,12 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

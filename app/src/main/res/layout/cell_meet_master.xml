@@ -66,7 +66,7 @@
                 </LinearLayout>
             </LinearLayout>
             <TextView
-                android:id="@+id/consult"
+                android:id="@+id/view_master"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -78,7 +78,7 @@
                 android:textColor="@color/colorPrimary"
                 android:background="@drawable/r2_sowhite_stpri"
                 android:layout_centerInParent="true"
-                android:text="咨询"
+                android:text="查看"
                 />
         </RelativeLayout>
         <TextView

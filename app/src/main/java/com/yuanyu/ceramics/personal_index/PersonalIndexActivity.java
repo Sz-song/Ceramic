@@ -42,6 +42,7 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.chat.ChatActivity;
+import com.yuanyu.ceramics.common.AppBarStateChangeListener;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.ViewImageActivity;
 import com.yuanyu.ceramics.global.GlideApp;
@@ -84,8 +85,6 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
     TextView fansNum;
     @BindView(R.id.show_more)
     ImageView showMore;
-    @BindView(R.id.ordinary_user)
-    RelativeLayout ordinaryUser;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.title_image)
@@ -151,24 +150,20 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
         pathList = new ArrayList<>();
         WbSdk.install(this,new AuthInfo(this, AppConstant.APP_KEY, AppConstant.REDIRECT_URL,AppConstant.SCOPE));
         Jzvd.WIFI_TIP_DIALOG_SHOWED = true;//关闭4G流量监控
-//        appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-//            @Override
-//            public void onStateChanged(AppBarLayout appBarLayout, State state) {
-//                if (state == State.EXPANDED) {
-//                    if (usertype == 3) {
-//                        titleRelat.setVisibility(View.GONE);
-//                    }
-//                    titleImage.setVisibility(View.GONE);
-//                    toolbarTitle.setVisibility(View.VISIBLE);
-//                    title.setVisibility(View.GONE);
-//                } else if (state == State.COLLAPSED) {
-//                    titleRelat.setVisibility(View.VISIBLE);
-//                    titleImage.setVisibility(View.VISIBLE);
-//                    toolbarTitle.setVisibility(View.GONE);
-//                    title.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
+        appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if (state == State.EXPANDED) {
+                    titleImage.setVisibility(View.GONE);
+                    toolbarTitle.setVisibility(View.VISIBLE);
+                    title.setVisibility(View.GONE);
+                } else if (state == State.COLLAPSED) {
+                    titleImage.setVisibility(View.VISIBLE);
+                    toolbarTitle.setVisibility(View.GONE);
+                    title.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         useraccountid = Sp.getString(this, "useraccountid");
         Intent intent = getIntent();
         userid = intent.getStringExtra("userid");
@@ -191,57 +186,50 @@ public class PersonalIndexActivity extends BaseActivity<PersonalIndexPresenter> 
         title.setText(bean.getName());
         toolbarTitle.setText(bean.getName() + "的主页");
         shopid = bean.getShopid();
-        if (bean.getType() != 3) {
-            ordinaryUser.setVisibility(View.VISIBLE);
-            GlideApp.with(PersonalIndexActivity.this)
-                    .load(BASE_URL + bean.getPortrait())
-                    .placeholder(R.drawable.logo_default)
-                    .into(portrait);
-            titleImage.setVisibility(View.GONE);
-            toolbarTitle.setVisibility(View.VISIBLE);
-            title.setVisibility(View.GONE);
-            name.setText(bean.getName());
-            focusNum.setText("关注  " + HelpUtils.getReadNum(bean.getFocus_num()));
-            fansNum.setText("粉丝  " + HelpUtils.getReadNum(bean.getFans_num()));
-            if (bean.getContent() != null && bean.getContent().length() > 0) {
-                introduce.setText(bean.getContent());
-            } else {
-                introduce.setText("这家伙很懒，暂无简介");
-            }
-            if (bean.getIsfollow() == 1) {
-                focus.setText("已关注");
-            } else {
-                focus.setText("+ 关注");
-            }
-            if (userid.equals(useraccountid)) {//自己进入自己主页
-                if (bean.getShopid() != null && bean.getShopid().length() > 0) {
-                    bottomRelat.setVisibility(View.VISIBLE);
-                    CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomRelat.getLayoutParams();
-                    CoordinatorLayout.LayoutParams layoutParams1 = (CoordinatorLayout.LayoutParams) viewpager.getLayoutParams();
-                    layoutParams1.setMargins(0, 0, 0, layoutParams.height);
-                    viewpager.setLayoutParams(layoutParams1);
-                    shop.setVisibility(View.VISIBLE);
-                    contact.setVisibility(View.GONE);
-                    focus.setVisibility(View.GONE);
-                } else {
-                    bottomRelat.setVisibility(View.GONE);
-                }
-            } else if (userid != useraccountid) {
+        GlideApp.with(PersonalIndexActivity.this)
+                .load(BASE_URL + bean.getPortrait())
+                .placeholder(R.drawable.logo_default)
+                .into(portrait);
+        titleImage.setVisibility(View.GONE);
+        toolbarTitle.setVisibility(View.VISIBLE);
+        title.setVisibility(View.GONE);
+        name.setText(bean.getName());
+        focusNum.setText("关注  " + HelpUtils.getReadNum(bean.getFocus_num()));
+        fansNum.setText("粉丝  " + HelpUtils.getReadNum(bean.getFans_num()));
+        if (bean.getContent() != null && bean.getContent().length() > 0) {
+            introduce.setText(bean.getContent());
+        } else {
+            introduce.setText("这家伙很懒，暂无简介");
+        }
+        if (bean.getIsfollow() == 1) {
+            focus.setText("已关注");
+        } else {
+            focus.setText("+ 关注");
+        }
+        if (userid.equals(useraccountid)) {//自己进入自己主页
+            if (bean.getShopid() != null && bean.getShopid().length() > 0) {
                 bottomRelat.setVisibility(View.VISIBLE);
                 CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomRelat.getLayoutParams();
                 CoordinatorLayout.LayoutParams layoutParams1 = (CoordinatorLayout.LayoutParams) viewpager.getLayoutParams();
                 layoutParams1.setMargins(0, 0, 0, layoutParams.height);
                 viewpager.setLayoutParams(layoutParams1);
-                if (bean.getShopid() != null && bean.getShopid().length() > 0) {
-                    shop.setVisibility(View.VISIBLE);
-                } else {
-                    shop.setVisibility(View.GONE);
-                }
+                shop.setVisibility(View.VISIBLE);
+                contact.setVisibility(View.GONE);
+                focus.setVisibility(View.GONE);
+            } else {
+                bottomRelat.setVisibility(View.GONE);
             }
-        } else {
-            ordinaryUser.setVisibility(View.GONE);
-            bottomRelat.setVisibility(View.GONE);
-            titleRelat.setVisibility(View.GONE);
+        } else if (userid != useraccountid) {
+            bottomRelat.setVisibility(View.VISIBLE);
+            CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomRelat.getLayoutParams();
+            CoordinatorLayout.LayoutParams layoutParams1 = (CoordinatorLayout.LayoutParams) viewpager.getLayoutParams();
+            layoutParams1.setMargins(0, 0, 0, layoutParams.height);
+            viewpager.setLayoutParams(layoutParams1);
+            if (bean.getShopid() != null && bean.getShopid().length() > 0) {
+                shop.setVisibility(View.VISIBLE);
+            } else {
+                shop.setVisibility(View.GONE);
+            }
         }
         loaddialog.dismiss();
     }

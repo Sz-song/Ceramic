@@ -95,17 +95,14 @@ public class FaxianAdapter extends RecyclerView.Adapter {
                 context.startActivity(intent);
             });
             ((ViewHolder0) holder).storeCenter.setOnClickListener(v -> {
-                L.e("123");
                 Intent intent = new Intent(context, BazaarActivity.class);
                 context.startActivity(intent);
             });
             ((ViewHolder0) holder).meetMaster.setOnClickListener(v -> {
-                L.e("123");
                 Intent intent = new Intent(context, MeetMasterActivity.class);
                 context.startActivity(intent);
             });
             ((ViewHolder0) holder).cooperation.setOnClickListener(v -> {
-                L.e("123");
                 Intent intent = new Intent(context, CooperationActivity.class);
                 context.startActivity(intent);
             });

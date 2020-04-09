@@ -5,9 +5,9 @@ public class DingzhiDetailBean {
     private String id;//定制id
     private String detail;//定制详情
     private String price;//定制大概价格
-    private String birthday;//生辰八字
     private String fenlei;//分类
-    private String ticai;//题材
+    private String zhonglei;//种类
+    private String waiguan;//外观
     private String useage;//用处
     private String master_name;//大师名
     private String master_id;//大师id
@@ -72,16 +72,16 @@ public class DingzhiDetailBean {
         return price;
     }
 
-    public String getBirthday() {
-        return birthday;
-    }
-
     public String getFenlei() {
         return fenlei;
     }
 
-    public String getTicai() {
-        return ticai;
+    public String getZhonglei() {
+        return zhonglei;
+    }
+
+    public String getWaiguan() {
+        return waiguan;
     }
 
     public String getUseage() {

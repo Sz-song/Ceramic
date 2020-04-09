@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
 
 import java.util.List;
 import butterknife.BindView;
@@ -41,7 +42,7 @@ public class SelectDashiAdapter extends RecyclerView.Adapter<SelectDashiAdapter.
         holder.detail.setText(mList.get(position).getDetail());
         holder.choose.setOnClickListener(view -> listener.choose(position));
         holder.itemView.setOnClickListener(v -> listener.choose(position));
-//        holder.visit.setOnClickListener(view -> PersonalIndexActivity.actionStart(mContext,mList.get(position).getId()));
+        holder.visit.setOnClickListener(view -> PersonalIndexActivity.actionStart(mContext,mList.get(position).getId()));
     }
 
     @Override

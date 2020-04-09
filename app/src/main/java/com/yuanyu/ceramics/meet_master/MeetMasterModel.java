@@ -15,10 +15,12 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
 
-public class MeetMasterModel {
+public class MeetMasterModel implements MeetMasterConstract.IMeetMasterModel{
     private HttpService httpService;
     MeetMasterModel(){httpService = HttpServiceInstance.getInstance();}
-    Observable<BaseResponse<List<MeetMasterBean>>> getMasterStudio(int page){
+
+    @Override
+    public Observable<BaseResponse<List<MeetMasterBean>>> initData(String useraccountid,int page) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

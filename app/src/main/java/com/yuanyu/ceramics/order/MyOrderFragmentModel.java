@@ -31,7 +31,7 @@ public class MyOrderFragmentModel implements MyOrderFragmentConstract.IOrderFrag
         map.put("action","waitpay");
         Map data = new HashMap();
         data.put("page",page);
-        data.put("page_size","");
+        data.put("page_size",20);
         data.put("useraccountid",useraccountid);
         data.put("type",status);
         map.put("data",data);

@@ -23,6 +23,7 @@ import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.GlideEngine;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
+import com.yuanyu.ceramics.dingzhi.ShopDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
@@ -241,7 +242,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 startActivity(intent);
                 break;
             case R.id.my_dingzhi:
-                intent = new Intent(this, MyDingzhiActivity.class);
+                intent = new Intent(this, ShopDingzhiActivity.class);
                 startActivity(intent);
                 break;
             case R.id.liveapply:

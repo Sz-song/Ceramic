@@ -1,6 +1,7 @@
 package com.yuanyu.ceramics.dingzhi;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -34,6 +31,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -69,20 +69,24 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
     TextView aboutPrice;
     @BindView(R.id.birthday)
     TextView birthday;
-    @BindView(R.id.chanzhuang)
-    TextView chanzhuang;
     @BindView(R.id.fenlei)
     TextView fenlei;
-    @BindView(R.id.ticai)
-    TextView ticai;
+    @BindView(R.id.zhonglei)
+    TextView zhonglei;
+    @BindView(R.id.waiguan)
+    TextView waiguan;
     @BindView(R.id.cancel_order)
     TextView cancelOrder;
     @BindView(R.id.confirm_order)
     TextView confirmOrder;
+    @BindView(R.id.choose_linear)
+    LinearLayout chooseLinear;
     @BindView(R.id.set_price)
     EditText setPrice;
     @BindView(R.id.set_end_time)
     TextView setEndTime;
+    @BindView(R.id.input_linear)
+    LinearLayout inputLinear;
     @BindView(R.id.set_linear)
     LinearLayout setLinear;
     @BindView(R.id.set_price_txt)
@@ -91,16 +95,6 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
     TextView setEndTimeTxt;
     @BindView(R.id.set_linear_txt)
     LinearLayout setLinearTxt;
-    @BindView(R.id.submit)
-    Button submit;
-    @BindView(R.id.swipe)
-    SwipeRefreshLayout swipe;
-    @BindView(R.id.divider)
-    View divider;
-    @BindView(R.id.choose_linear)
-    LinearLayout chooseLinear;
-    @BindView(R.id.input_linear)
-    LinearLayout inputLinear;
     @BindView(R.id.select_courier)
     TextView selectCourier;
     @BindView(R.id.courier_num)
@@ -109,6 +103,12 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
     ImageView scanner;
     @BindView(R.id.courier_linear)
     LinearLayout courierLinear;
+    @BindView(R.id.submit)
+    Button submit;
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout swipe;
+    @BindView(R.id.divider)
+    View divider;
     private LoadingDialog dialog;
     private String id;
     private boolean isInit = false;
@@ -116,8 +116,8 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
     private String user_id;
     private CustomDatePicker endTimePicker;
     private SimpleDateFormat sdf;
-    private String endtime="";
-    private String courier_id="";
+    private String endtime = "";
+    private String courier_id = "";
     private String view_courier_id;
     private String courier_num;
 
@@ -167,8 +167,8 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
         isInit = true;
         statusCode = detailBean.getStatus();
         user_id = detailBean.getUseraccountid();
-        view_courier_id=detailBean.getCourier_id();
-        courier_num=detailBean.getCourier_num();
+        view_courier_id = detailBean.getCourier_id();
+        courier_num = detailBean.getCourier_num();
         dialog.dismiss();
         swipe.setRefreshing(false);
         dingzhiDetail.setText(detailBean.getDetail());
@@ -181,24 +181,16 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
         name.setText(detailBean.getName());
         if (detailBean.getPrice().equals("0")) {
             aboutPrice.setText("1000-5000");
-            chanzhuang.setText("山料");
         } else if (detailBean.getPrice().equals("1")) {
             aboutPrice.setText("5001-50000");
-            chanzhuang.setText("籽料");
         } else if (detailBean.getPrice().equals("2")) {
             aboutPrice.setText("50000以上");
-            chanzhuang.setText("籽料");
         } else {
             aboutPrice.setText("1000-5000");
-            chanzhuang.setText("山料");
-        }
-        if (detailBean.getBirthday() != null && detailBean.getBirthday().length() > 0) {
-            birthday.setText(detailBean.getBirthday());
-        } else {
-            birthday.setText("用户未填写");
         }
         fenlei.setText(detailBean.getFenlei());
-        ticai.setText(detailBean.getTicai());
+        zhonglei.setText(detailBean.getZhonglei());
+        waiguan.setText(detailBean.getWaiguan());
         L.e("status is: " + detailBean.getStatus());
         switch (detailBean.getStatus()) {
             //0 正在审核，1 平台审核成功 2，平台审核失败，3，大师拒绝接单，4，大师接单未缴纳保证金，5商家接单缴纳了保证金，6,支付尾款未发货，7商家发货，8买家收货
@@ -406,17 +398,17 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
                     case 6://发货
                         if (isInit) {
                             isInit = false;
-                            presenter.dingzhiCourier(id, Sp.getString(this, AppConstant.SHOP_ID),courier_id,courierNum.getText().toString());
+                            presenter.dingzhiCourier(id, Sp.getString(this, AppConstant.SHOP_ID), courier_id, courierNum.getText().toString());
                         }
                         break;
                     case 7://查看物流
-                        if(courier_num!=null&&courier_num.length()>0&&view_courier_id!=null&&view_courier_id.length()>0){
+                        if (courier_num != null && courier_num.length() > 0 && view_courier_id != null && view_courier_id.length() > 0) {
 //                            Intent intent=new Intent(this,LogisticsTracingActivity.class);
 //                            intent.putExtra("image","");
 //                            intent.putExtra("logistics",courier_num);
 //                            intent.putExtra("logistics_id",view_courier_id);
 //                            startActivity(intent);
-                        }else{
+                        } else {
                             Toast.makeText(this, "物流信息有误", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -444,11 +436,11 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case 1002:
-                if (resultCode == RESULT_OK && data.getIntExtra("type", -1) ==1) {
+                if (resultCode == RESULT_OK && data.getIntExtra("type", -1) == 1) {
                     selectCourier.setText(data.getStringExtra("courier_name") + "\b\b");
-                    courier_id=data.getStringExtra("courier_id");
+                    courier_id = data.getStringExtra("courier_id");
                 }
                 break;
             default:
@@ -458,8 +450,8 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
         if (scanResult != null) {
             if (scanResult.getContents() != null && scanResult.getContents().length() > 0) {
                 String result = scanResult.getContents();
-                DeleteDialog dialog =new DeleteDialog(this) ;
-                dialog.setTitle("是否将"+result+"填入快递单号");
+                DeleteDialog dialog = new DeleteDialog(this);
+                dialog.setTitle("是否将" + result + "填入快递单号");
                 dialog.setNoOnclickListener(dialog::dismiss);
                 dialog.setYesOnclickListener(() -> {
                     courierNum.setText(result);
@@ -476,5 +468,12 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }

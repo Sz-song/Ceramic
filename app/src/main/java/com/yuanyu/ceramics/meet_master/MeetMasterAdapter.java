@@ -23,44 +23,32 @@ import butterknife.ButterKnife;
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 
 public class MeetMasterAdapter extends RecyclerView.Adapter<MeetMasterAdapter.ViewHolder> {
-    @BindView(R.id.avatar)
-    RoundedImageView avatar;
-    @BindView(R.id.name)
-    TextView name;
-    @BindView(R.id.focus)
-    TextView focus;
-    @BindView(R.id.fans)
-    TextView fans;
-    @BindView(R.id.consult)
-    TextView consult;
-    @BindView(R.id.intro)
-    TextView intro;
     private Context context;
     private List<MeetMasterBean> list;
 
-    public MeetMasterAdapter(Context context, List<MeetMasterBean> list) {
+    MeetMasterAdapter(Context context, List<MeetMasterBean> list) {
         this.context = context;
         this.list= list;
     }
 
-    //    加载布局文件
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_meet_master, parent, false));
     }
-
-    //每个布局长啥样
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        GlideApp.with(context).load(BASE_URL+list.get(position).getShop_avatar()).placeholder(R.drawable.img_default).override(200,200).into(holder.avatar);
-        holder.fans.setText(list.get(position).getFansnum()+"粉丝");
-        holder.focus.setText(list.get(position).getFocusnum()+"关注");
-        holder.name.setText(list.get(position).getShop_name());
-        if (!list.get(position).getShop_slogan().equals("")) holder.intro.setText(list.get(position).getShop_slogan());
-        holder.consult.setOnClickListener(view -> {
-            PersonalIndexActivity.actionStart(context,list.get(position).getUseraccountid());
-        });
+        GlideApp.with(context).load(BASE_URL+list.get(position).getPortrait()).placeholder(R.drawable.img_default).override(200,200).into(holder.avatar);
+        holder.fans.setText(list.get(position).getFans_num()+"粉丝");
+        holder.focus.setText(list.get(position).getFocus_num()+"关注");
+        holder.name.setText(list.get(position).getName());
+        if (list.get(position)!=null&&list.get(position).getIntroduce().equals("")) {
+            holder.intro.setText("暂无简介");
+        }else{
+            holder.intro.setText(list.get(position).getIntroduce());
+        }
+        holder.itemView.setOnClickListener(view -> PersonalIndexActivity.actionStart(context,list.get(position).getUseraccountid()));
+        holder.viewMaster.setOnClickListener(view -> PersonalIndexActivity.actionStart(context,list.get(position).getUseraccountid()));
     }
 
     //加载多少个布局
@@ -78,8 +66,8 @@ public class MeetMasterAdapter extends RecyclerView.Adapter<MeetMasterAdapter.Vi
         TextView focus;
         @BindView(R.id.fans)
         TextView fans;
-        @BindView(R.id.consult)
-        TextView consult;
+        @BindView(R.id.view_master)
+        TextView viewMaster;
         @BindView(R.id.intro)
         TextView intro;
 

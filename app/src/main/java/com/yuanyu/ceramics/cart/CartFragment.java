@@ -85,7 +85,6 @@ public class CartFragment extends BaseFragment<CartPresenter> implements CartCon
             presenter.deleteCartItem(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID),str);
         });
         adapter.setOnReflashListener(() -> reflesh());
-        presenter.getGoodsdata(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID));
         recyclerview.setAdapter(adapter);
     }
 

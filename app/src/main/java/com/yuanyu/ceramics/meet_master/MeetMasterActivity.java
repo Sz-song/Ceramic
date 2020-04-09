@@ -1,35 +1,25 @@
 package com.yuanyu.ceramics.meet_master;
 
-import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
+import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
-import com.yuanyu.ceramics.base.BaseObserver;
-import com.yuanyu.ceramics.base.BasePresenter;
-import com.yuanyu.ceramics.base.NormalActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
-import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
-
+import com.yuanyu.ceramics.utils.Sp;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
-public class MeetMasterActivity extends BaseActivity {
+public class MeetMasterActivity extends BaseActivity<MeetMasterPresenter> implements MeetMasterConstract.IMeetMasterView {
     private MeetMasterAdapter adapter;
     private List<MeetMasterBean> mList = new ArrayList<>();
-    private MeetMasterModel model = new MeetMasterModel();
-    private boolean recycleState;
     private int page = 0;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -44,9 +34,8 @@ public class MeetMasterActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter initPresent() {
-        return new BasePresenter() {
-        };
+    protected MeetMasterPresenter initPresent() {
+        return new MeetMasterPresenter() {};
     }
 
     @Override
@@ -63,7 +52,7 @@ public class MeetMasterActivity extends BaseActivity {
             L.e("initdata page "+page);
             mList.clear();
             adapter.notifyDataSetChanged();
-            loadData();
+            presenter.initData(Sp.getString(this,AppConstant.USER_ACCOUNT_ID),page);
         });
         adapter = new MeetMasterAdapter(this,mList);
         recyclerview.setAdapter(adapter);
@@ -76,46 +65,13 @@ public class MeetMasterActivity extends BaseActivity {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
                     lastPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
-                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1&&recycleState) {
-                        loadData();
+                    if (lastPosition == recyclerView.getLayoutManager().getItemCount() - 1&&lastPosition>8) {
+                        presenter.initData(Sp.getString(MeetMasterActivity.this,AppConstant.USER_ACCOUNT_ID),page);
                     }
                 }
             }
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                recycleState = dy > 0;
-            }
         });
-        loadData();
-    }
-
-    private void loadData(){
-        model.getMasterStudio(page).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<List<MeetMasterBean>>())
-                .subscribe(new BaseObserver<List<MeetMasterBean>>() {
-                    @Override
-                    public void onError(ExceptionHandler.ResponeThrowable e) {
-                        if (!isDestroyed()){
-                            L.e(e.message+e.status);
-                            swipe.setRefreshing(false);
-                        }
-
-                    }
-
-                    @Override
-                    public void onNext(List<MeetMasterBean> list) {
-                        if (!isDestroyed()){
-                            page++;
-                            swipe.setRefreshing(false);
-                            for (MeetMasterBean bean : list) mList.add(bean);
-                            adapter.notifyDataSetChanged();
-                        }
-
-                    }
-                });
-
+        presenter.initData(Sp.getString(this,AppConstant.USER_ACCOUNT_ID),page);
     }
 
     @Override
@@ -123,7 +79,20 @@ public class MeetMasterActivity extends BaseActivity {
         if (item.getItemId() == android.R.id.home) {
             finish();
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void initDataSuccess(List<MeetMasterBean> list) {
+            page++;
+            swipe.setRefreshing(false);
+            mList.addAll(list);
+            adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void initDataFail(ExceptionHandler.ResponeThrowable e) {
+            L.e(e.message+e.status);
+            swipe.setRefreshing(false);
     }
 }

@@ -47,12 +47,6 @@ public class BazaarActivity extends NormalActivity {
         viewpager.setCurrentItem(getIntent().getIntExtra("position",0));
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

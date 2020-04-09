@@ -184,30 +184,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:gravity="center_vertical"
-                            android:text="@string/chanzhuang"
-                            android:textColor="@color/blackLight"
-                            android:textStyle="bold"
-                            android:textSize="13sp" />
-                        <TextView
-                            android:id="@+id/chanzhuang"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical|end"
-                            android:textColor="@color/blackLight"
-                            android:textStyle="bold"
-                            android:textSize="11.5sp"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="40dp"
-                            android:gravity="center_vertical"
                             android:text="@string/fenlei"
                             android:textColor="@color/blackLight"
                             android:textStyle="bold"
@@ -232,12 +208,36 @@
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
                             android:gravity="center_vertical"
-                            android:text="@string/ticai"
+                            android:text="@string/zhonglei"
                             android:textColor="@color/blackLight"
                             android:textStyle="bold"
                             android:textSize="13sp" />
                         <TextView
-                            android:id="@+id/ticai"
+                            android:id="@+id/zhonglei"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical|end"
+                            android:textColor="@color/blackLight"
+                            android:textStyle="bold"
+                            android:textSize="11.5sp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:gravity="center_vertical"
+                            android:text="@string/waiguan"
+                            android:textColor="@color/blackLight"
+                            android:textStyle="bold"
+                            android:textSize="13sp" />
+                        <TextView
+                            android:id="@+id/waiguan"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
