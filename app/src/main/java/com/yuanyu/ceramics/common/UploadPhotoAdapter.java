@@ -73,7 +73,7 @@ public class UploadPhotoAdapter extends RecyclerView.Adapter<UploadPhotoAdapter.
                     .into(holder.ivImage);
             holder.cancel.setVisibility(View.GONE);
         }
-        else if (image.contains("img/")){
+        else if (image.contains("back/")){
             GlideApp.with(mContext)
                     .load(BASE_URL+image)
                     .override(100,100)

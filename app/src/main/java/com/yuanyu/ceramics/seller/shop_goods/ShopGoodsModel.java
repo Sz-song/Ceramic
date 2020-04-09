@@ -52,7 +52,7 @@ public class ShopGoodsModel implements ShopGoodsConstract.IShopGoodsModel{
         map.put("signature",signature);
         map.put("action","delete_commidity");
         Map data = new HashMap();
-        data.put("shopid",shopid);
+        data.put("shop_id",shopid);
         data.put("id",id);
         data.put("type",1);
         map.put("data",data);

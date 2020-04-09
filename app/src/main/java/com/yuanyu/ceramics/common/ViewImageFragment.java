@@ -79,7 +79,7 @@ public class ViewImageFragment extends BaseFragment {
                     .into(photoview);
         }
         photoview.setOnLongClickListener(view1 -> {
-            if(url.startsWith("img/")) {
+            if(url.startsWith("back/")) {
                 final CommonDialog2 dialog2 = new CommonDialog2(getContext(), "保存图片", "确定", "取消");
                 dialog2.show();
                 dialog2.setNoOnclick(() -> dialog2.dismiss());

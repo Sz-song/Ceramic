@@ -27,14 +27,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".search.SearchActivity"/>
+        <activity android:name=".cart.CheckOrderActivity"></activity>
+        <activity android:name=".mine.dashiattestation.DashiAttestationActivity" />
+        <activity android:name=".search.SearchActivity" />
         <activity android:name=".center_circle.release.SelectFriendActivity" />
         <activity android:name=".center_circle.release.ReleaseDynamicActivity" />
         <activity android:name=".seller.liveapply.SelectItemActivity" />
         <activity android:name=".seller.shop_shelve.ShelveActivity" />
         <activity android:name=".seller.shop_goods.ShopGoodsActivity" />
-        <activity android:name=".seller.liveapply.LiveApplyActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".seller.liveapply.LiveApplyActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".item.ItemDetailAcitivity" />
         <activity android:name=".logistics.LogisticsActivity" />
         <activity android:name=".myinfo.EditMyInfoActivity" />
@@ -58,7 +61,7 @@
         </activity>
         <activity android:name=".login.RegisterActivity" />
         <activity android:name=".login.ResetPasswordActivity" />
-        <activity android:name=".home.HomeActivity"></activity>
+        <activity android:name=".home.HomeActivity" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -137,7 +140,7 @@
         <activity android:name=".personal_index.ChangeImageActivity" />
         <activity
             android:name=".broadcast.pull.LivePullActivity"
-            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".broadcast.push.LivePushActivity" />
         <activity android:name=".center_circle.release.DraftsActivity" />
         <activity android:name=".search.SearchResultActivity" />

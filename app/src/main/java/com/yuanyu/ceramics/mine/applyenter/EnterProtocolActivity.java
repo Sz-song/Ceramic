@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.NormalActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
+import com.yuanyu.ceramics.mine.dashiattestation.DashiAttestationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,10 +107,10 @@ public class EnterProtocolActivity extends NormalActivity {
                     Intent intent = new Intent(this, ApplyEnterActivity.class);
                     startActivity(intent);
                }
-//                else if (type == 1) {
-//                    Intent intent = new Intent(this, DashiAttestationActivity.class);
-//                    startActivity(intent);
-//                }
+                else if (type == 1) {
+                    Intent intent = new Intent(this, DashiAttestationActivity.class);
+                    startActivity(intent);
+                }
                 finish();
                 break;
         }

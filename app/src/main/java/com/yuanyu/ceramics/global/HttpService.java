@@ -299,6 +299,9 @@ public interface HttpService {
     //申请入驻
     @POST("back/test/api/mine/applyenter.php")
     Observable<BaseResponse<String[]>> ApplyEnter(@Body RequestBody body);
+//    申请大师
+    @POST("123")
+    Observable<BaseResponse<String[]>> MasterAttestation(@Body RequestBody body);
     //移除黑名单
     @POST("back/test/api/homepage/remove_blacklist.php")
     Observable<BaseResponse>removeBlacklist(@Body RequestBody body);
@@ -328,7 +331,7 @@ public interface HttpService {
     @POST("back/test/api/homepage/loadmoreads.php")
     Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(@Body RequestBody body);
     //    商家管理获取订单管理getOrdersManage
-    @POST("123")
+    @POST("back/test/api/shangjia/ordermanage.php")
     Observable<BaseResponse<List<ShopOrderBean>>> getOrdersManage(@Body RequestBody body);
     //    shopGetOrderDetail
     @POST("123")
@@ -456,4 +459,14 @@ public interface HttpService {
     //结束直播
     @POST("back/test/api/broadcast/finishlivecast.php")
     Observable<BaseResponse<String[]>> finishLive(@Body  RequestBody body);
+
+    //生成订单
+    @POST("123")
+    Observable<BaseResponse<com.yuanyu.ceramics.cart.GenerateOrdersBean>> generateOrders(@Body RequestBody body);
+    //发送支付宝付款数据sendAliPay
+    @POST("123")
+    Observable<BaseResponse<Boolean>> sendAliPay(@Body RequestBody body);
+    //通知异常订单
+    @POST("123")
+    Observable<BaseResponse<String[]>> notify_order_exception(@Body RequestBody body);
 }

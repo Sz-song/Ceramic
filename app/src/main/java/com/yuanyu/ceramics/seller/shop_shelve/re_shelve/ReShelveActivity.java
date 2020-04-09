@@ -201,6 +201,7 @@ public class ReShelveActivity extends BaseActivity<ReShelvePresenter> implements
                     break;
                 case 2://图片预览
                     intent = new Intent(ReShelveActivity.this, ImageDisplayActivity.class);
+                    L.e(list.get(position).getUrl()+"image---");
                     intent.putExtra("image", list.get(position).getUrl());
                     intent.putExtra("position", position);
                     startActivityForResult(intent, DISPLAY_IMAGE);

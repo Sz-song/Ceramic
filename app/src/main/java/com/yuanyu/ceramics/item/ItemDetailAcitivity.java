@@ -40,6 +40,7 @@ import com.tencent.tauth.Tencent;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.cart.CheckOrderActivity;
 import com.yuanyu.ceramics.cart.GoodsBean;
 import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.AppBarStateChangeListener;
@@ -494,17 +495,16 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                             GoodsBean goodsBean = new GoodsBean(itemid, bean.getStorebean().getStudioheadimg(), bean.getStorebean().getStorename(), bean.getStorebean().getShop_id(),
                                     bean.getItembean().getGoodslist().get(0), bean.getItembean().getGoodsname(), "", bean.getItembean().getGoodsprice(), true, true, true);
                             payList.add(goodsBean);
-//                            intent = new Intent(this, CheckOrderActivity.class);
-//                            intent.putExtra("totalPrice", bean.getItembean().getGoodsprice());
-//                            intent.putExtra("listSize", payList.size());
-//                            intent.putExtra("type", type);
-//                            intent.putExtra("tag", 0);
-//                            intent.putExtra("qiugou_id", qiugou_id);
-//                            for (int i = 0; i < payList.size(); i++) {
-//                                intent.putExtra("payList" + i, payList.get(i));
-//                            }
-//                            finish();
-//                            startActivityForResult(intent, 3);
+                            intent = new Intent(this, CheckOrderActivity.class);
+                            intent.putExtra("totalPrice", bean.getItembean().getGoodsprice());
+                            intent.putExtra("listSize", payList.size());
+                            intent.putExtra("type", type);
+                            intent.putExtra("tag", 0);
+                            for (int i = 0; i < payList.size(); i++) {
+                                intent.putExtra("payList" + i, payList.get(i));
+                            }
+                            finish();
+                            startActivityForResult(intent, 3);
                         } else if (status == 1) {
                             Toast.makeText(this, "该商品已售罄", Toast.LENGTH_SHORT).show();
                         } else if (status == 2) {
