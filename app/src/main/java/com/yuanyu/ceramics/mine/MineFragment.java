@@ -1,7 +1,6 @@
 package com.yuanyu.ceramics.mine;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +113,8 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     TextView refundCount;
     @BindView(R.id.sellstatus)
     TextView sellstatus;
+    @BindView(R.id.dashi)
+    TextView dashi;
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -130,7 +131,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         swipe.setRefreshing(false);
         swipe.setColorSchemeResources(R.color.colorPrimary);
         swipe.setOnRefreshListener(() -> presenter.initData(Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID)));
-        if (Sp.getString(getContext(), AppConstant.SHOP_ID, "").length()>0){
+        if (Sp.getString(getContext(), AppConstant.SHOP_ID, "").length() > 0) {
             sellstatus.setText("进入店铺");
         } else {
             sellstatus.setText("商家入驻");
@@ -159,14 +160,22 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         presenter.setCount(daishouhuoCount, bean.getDaishouhuo());
         presenter.setCount(daipingjiaCount, bean.getDaipingjia());
         presenter.setCount(refundCount, bean.getTuikuan());
-        if(bean.getMerchant_status() == 0){
+        if (bean.getMerchant_status() == 0) {
             sellstatus.setText("商家入驻");
-        }else if(bean.getMerchant_status() == 1){
-            Sp.putString(getContext(),AppConstant.SHOP_ID,bean.getShop_id());
+        } else if (bean.getMerchant_status() == 1) {
+            Sp.putString(getContext(), AppConstant.SHOP_ID, bean.getShop_id());
             sellstatus.setText("进入店铺");
-        }else if (bean.getMerchant_status() == 2) {
+        } else if (bean.getMerchant_status() == 2) {
             sellstatus.setText("商家入驻(审核中)");
             applyenter.setClickable(false);
+        }
+        if (bean.getDashi_status() == 2) {
+            dashi.setText("大师认证（审核中）");
+            dashiattesta.setClickable(false);
+        } else if (bean.getDashi_status() == 1) {
+            dashi.setText("大师主页");
+            dashiattesta.setClickable(true);
+            dashiattesta.setOnClickListener(view -> PersonalIndexActivity.actionStart(getContext(), Sp.getString(getContext(), AppConstant.USER_ACCOUNT_ID)));
         }
     }
 
@@ -239,6 +248,9 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 startActivity(intent);
                 break;
             case R.id.dashiattesta:
+                intent = new Intent(this.getContext(), EnterProtocolActivity.class);
+                intent.putExtra("type", 1);
+                startActivity(intent);
                 break;
             case R.id.applyenter:
                 if (Sp.getString(getContext(), AppConstant.SHOP_ID).equals("")) {

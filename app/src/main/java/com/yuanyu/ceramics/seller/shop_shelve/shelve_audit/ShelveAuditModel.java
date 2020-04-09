@@ -57,7 +57,7 @@ public class ShelveAuditModel implements ShelveAuditConstract.IShelveAuditModel{
         map.put("signature",signature);
         map.put("action","delete_commidity");
         Map data = new HashMap();
-        data.put("shopid",shopid);
+        data.put("shop_id",shopid);
         data.put("id",id);
         data.put("type",2);
         map.put("data",data);

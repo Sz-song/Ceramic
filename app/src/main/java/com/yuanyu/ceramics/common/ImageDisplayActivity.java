@@ -49,7 +49,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
         title.setText("图片预览");
         intent = getIntent();
         String image = intent.getStringExtra("image");
-        if (image.startsWith("img/")) {
+        if (image.startsWith("back/")) {
             GlideApp.with(this)
                     .load(BASE_URL + image)
                     .fitCenter()
