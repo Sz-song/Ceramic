@@ -94,12 +94,12 @@ dependencies {
     //腾讯即时聊天 imsdk
     implementation 'com.tencent.imsdk:imsdk:4.6.102'
     //  腾讯直播sdk
-    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release'
+    implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:7.1.8771'
     //litepal 数据库
     implementation 'org.litepal.android:java:3.0.0'
     // eventbus
     implementation 'org.greenrobot:eventbus:3.0.0'
     // 支付宝 SDK AAR 包所需的配置
-    compile (name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
+    implementation (name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
 
 }
