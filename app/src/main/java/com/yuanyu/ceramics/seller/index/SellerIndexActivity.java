@@ -25,12 +25,10 @@ import com.yuanyu.ceramics.common.GlideEngine;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.dingzhi.ShopDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
-import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
-import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
-import com.yuanyu.ceramics.personal_index.ChangeImageActivity;
 import com.yuanyu.ceramics.seller.liveapply.LiveApplyActivity;
+import com.yuanyu.ceramics.seller.message_shop.MessageShopActivity;
 import com.yuanyu.ceramics.seller.order.ShopOrderActivity;
 import com.yuanyu.ceramics.seller.shop_goods.ShopGoodsActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
@@ -38,8 +36,6 @@ import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +45,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
-import static com.yuanyu.ceramics.AppConstant.DAIFAHUO;
-import static com.yuanyu.ceramics.AppConstant.DAIFUKUAN;
-import static com.yuanyu.ceramics.AppConstant.DAIPINGJIA;
-import static com.yuanyu.ceramics.AppConstant.DAISHOUHUO;
 import static com.yuanyu.ceramics.MyApplication.getContext;
 
 public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> implements SellerIndexConstract.IMineView {
@@ -250,6 +241,8 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 startActivity(intent);
                 break;
             case R.id.message:
+                intent=new Intent(this, MessageShopActivity.class);
+                startActivity(intent);
                 break;
             case R.id.contactkf:
 
@@ -264,14 +257,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 break;
         }
     }
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void setWechatPay(PortraitEvent portraitEvent) {
-//        if (portraitEvent.getCode() == CHANGE_PORTRAIT) {
-//            ArrayList<String> images = new ArrayList<>();
-//            images.add(portraitEvent.getPortrait());
-//            presenter.compressImage(getContext(), images, 0, Sp.getString(getContext(), AppConstant.SHOP_ID));
-//        }
-//    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

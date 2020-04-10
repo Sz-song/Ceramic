@@ -118,21 +118,18 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
         user.add(useraccountid);
         TIMGroupManager.getInstance().applyJoinGroup(grounpid, "", new TIMCallBack() {
             @Override
-            public void onError(int i, String s) { L.e("加入聊天室失败: "+s);}
+            public void onError(int i, String s) {
+                if(view!=null){view.showToast("加入聊天室失败: "+s);}
+            }
             @Override
             public void onSuccess() {
                 TIMGroupManager.ModifyMemberInfoParam param = new TIMGroupManager.ModifyMemberInfoParam(grounpid, useraccountid);
                 param.setNameCard(nickname);
                 TIMGroupManager.getInstance().modifyMemberInfo(param, new TIMCallBack() {
                     @Override
-                    public void onError(int code, String desc) {
-                        L.e("modifyMemberInfo failed, code:" + code + "|msg: " + desc);
-                    }
-
+                    public void onError(int code, String desc) { L.e("modifyMemberInfo failed, code:" + code + "|msg: " + desc);}
                     @Override
-                    public void onSuccess() {
-                        L.e("modifyMemberInfo succ");
-                    }
+                    public void onSuccess() { L.e("modifyMemberInfo succ");}
                 });
                 if(view!=null){view.initLivePull();}
             }
@@ -229,7 +226,6 @@ public class LivePullPresenter extends BasePresenter<LivePullConstract.ILivePull
                         if(timGroupDetailInfoResults.get(i).getCustom().get("item_id")!=null&&view!=null){
                             view.changeItem(new String(timGroupDetailInfoResults.get(i).getCustom().get("item_id")));
                         }
-                        L.e("item_id is"+new String(timGroupDetailInfoResults.get(i).getCustom().get("item_id")));
                     }
                 }
             }

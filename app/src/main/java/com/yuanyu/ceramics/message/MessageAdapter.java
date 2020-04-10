@@ -25,7 +25,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private Context context;
     private List<MessageBean> list;
 
-    MessageAdapter(Context context, List<MessageBean> list) {
+    public MessageAdapter(Context context, List<MessageBean> list) {
         this.context = context;
         this.list = list;
     }
