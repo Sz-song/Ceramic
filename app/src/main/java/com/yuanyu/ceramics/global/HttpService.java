@@ -59,6 +59,7 @@ import com.yuanyu.ceramics.seller.shop_shelve.shelve_audit.ShelveAuditBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
 import com.yuanyu.ceramics.shop_index.ShopIndexBean;
 import com.yuanyu.ceramics.shop_index.ShopPinglunBean;
+import com.yuanyu.ceramics.wxapi.WXBean;
 
 import java.util.List;
 import java.util.Map;
@@ -257,16 +258,16 @@ public interface HttpService {
     @POST("back/test/api/quan/square_dynamic_article.php")
     Observable<BaseResponse<List<DynamicBean>>> getSquareDynamicArticle(@Body RequestBody body);
     //订单详情
-    @POST("app_api/wujia/ordermoremsg.php")
+    @POST("back/test/api/order/ordermoremsg.php")
     Observable<BaseResponse<OrderDetailBean>>getOrderDetailData(@Body RequestBody body);
     //取消订单
-    @POST("app_api/home_page/cancelorder.php")
+    @POST("back/test/api/order/cancelorder.php")
     Observable<BaseResponse<String[]>>cancelOrder(@Body RequestBody body);
     //删除订单
-    @POST("app_api/home_page/deleteorder.php")
+    @POST("back/test/api/order/deleteorder.php")
     Observable<BaseResponse<String[]>>deleteOrder(@Body RequestBody body);
     //确认收货
-    @POST("app_api/home_page/receivedelivery.php")
+    @POST("back/test/api/order/receivedelivery.php")
     Observable<BaseResponse<String[]>>confirmReceived(@Body RequestBody body);
 //    我的订单
     @POST("back/test/api/mine/waitpay.php")
@@ -461,12 +462,24 @@ public interface HttpService {
     Observable<BaseResponse<String[]>> finishLive(@Body  RequestBody body);
 
     //生成订单
-    @POST("123")
+    @POST("back/test/api/homepage/generate_orders.php")
     Observable<BaseResponse<com.yuanyu.ceramics.cart.GenerateOrdersBean>> generateOrders(@Body RequestBody body);
-    //发送支付宝付款数据sendAliPay
+    //发送支付宝付款数据sendAliPay  不需要
     @POST("123")
     Observable<BaseResponse<Boolean>> sendAliPay(@Body RequestBody body);
-    //通知异常订单
+    //通知异常订单   不需要
     @POST("123")
     Observable<BaseResponse<String[]>> notify_order_exception(@Body RequestBody body);
+    //获取客服
+    @POST("123")
+    Observable<BaseResponse<String>>getCustomerService(@Body RequestBody body);
+    //获取订单价格
+    @POST("123")
+    Observable<BaseResponse<String>> getAllprice(@Body RequestBody body);
+    //微信登录
+    @POST("123")
+    Observable<BaseResponse<WXBean>> WeChatLogin(@Body RequestBody body);
+    //微信登录
+    @POST("123")
+    Observable<BaseResponse<WXBean>> WeChatBind(@Body RequestBody body);
 }

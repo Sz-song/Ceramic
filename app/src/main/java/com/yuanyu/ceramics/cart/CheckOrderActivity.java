@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -31,9 +32,11 @@ import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
+import com.yuanyu.ceramics.common.PayResult;
 import com.yuanyu.ceramics.common.SelectPayTypeActivity;
 import com.yuanyu.ceramics.item.AdsCellBean;
 import com.yuanyu.ceramics.item.CheckOrderDecoration;
+import com.yuanyu.ceramics.large_payment.LargePaymentActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
@@ -55,6 +58,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.yuanyu.ceramics.AppConstant.DAIFAHUO;
+import static com.yuanyu.ceramics.AppConstant.DAIFUKUAN;
 import static com.yuanyu.ceramics.AppConstant.WECHAT_APP_ID;
 
 public class CheckOrderActivity extends BaseActivity<CheckOrderPresenter> implements CheckOrderConstract.ICheckOrderView{
@@ -279,40 +283,40 @@ public class CheckOrderActivity extends BaseActivity<CheckOrderPresenter> implem
 
     //唤起支付宝
     private void alipay(final String orderInfo) {
-//        Runnable payRunnable = () -> {
-//            //新建任务
-//            PayTask alipay = new PayTask(CheckOrderActivity.this);
-//            //获取支付结果
-//            Map<String, String> result = alipay.payV2(orderInfo, true);
-//            Message msg = new Message();
-//            msg.what = SDK_PAY_FLAG;
-//            msg.obj = result;
-//            mHandler.sendMessage(msg);
-//        };
-//        Thread payThread = new Thread(payRunnable);// 必须异步调用
-//        payThread.start();
+        Runnable payRunnable = () -> {
+            //新建任务
+            PayTask alipay = new PayTask(CheckOrderActivity.this);
+            //获取支付结果
+            Map<String, String> result = alipay.payV2(orderInfo, true);
+            Message msg = new Message();
+            msg.what = SDK_PAY_FLAG;
+            msg.obj = result;
+            mHandler.sendMessage(msg);
+        };
+        Thread payThread = new Thread(payRunnable);// 必须异步调用
+        payThread.start();
     }
     //支付宝支付结果
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-//            if (msg.what == SDK_PAY_FLAG) {
-//                PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-//                //同步获取结果
-//                String resultInfo = payResult.getResult();
-//                Gson gson = new Gson();
-//                AliPayResultInfo payResultInfo = gson.fromJson(resultInfo, AliPayResultInfo.class);
-//                String resultStatus = payResult.getResultStatus();
-//                // 判断resultStatus 为9000则代表支付成功
-//                if (TextUtils.equals(resultStatus, "9000")) {
-//                    presenter.sendAliPay(SpUtils.getInt(CheckOrderActivity.this, "useraccountid"), order_list, payResultInfo.getAlipay_trade_app_pay_response().getOut_trade_no(), payResultInfo.getAlipay_trade_app_pay_response().getTrade_no());
-//                } else {
-//                    finish();
-//                    dialog.dismiss();
-//                    MyOrderActivity.actionStart(CheckOrderActivity.this, DAIFUKUAN);
-//                }
-//            }
+            if (msg.what == SDK_PAY_FLAG) {
+                PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                //同步获取结果
+                String resultInfo = payResult.getResult();
+                Gson gson = new Gson();
+                AliPayResultInfo payResultInfo = gson.fromJson(resultInfo, AliPayResultInfo.class);
+                String resultStatus = payResult.getResultStatus();
+                // 判断resultStatus 为9000则代表支付成功
+                if (TextUtils.equals(resultStatus, "9000")) {
+//                    presenter.sendAliPay(Sp.getString(CheckOrderActivity.this, "useraccountid"), order_list, payResultInfo.getAlipay_trade_app_pay_response().getOut_trade_no(), payResultInfo.getAlipay_trade_app_pay_response().getTrade_no());
+                } else {
+                    finish();
+                    dialog.dismiss();
+                    MyOrderActivity.actionStart(CheckOrderActivity.this, DAIFUKUAN);
+                }
+            }
         }
     };
 
@@ -326,23 +330,28 @@ public class CheckOrderActivity extends BaseActivity<CheckOrderPresenter> implem
     }
     @Override
     public void getAddressDataSuccess(List<AddressManageBean> addressBeans) {
+        dialog.dismiss();
         addressBeanlist.addAll(addressBeans);
         adapter.notifyDataSetChanged();
         presenter.loadMoreAds(page);
+        presenter.initList(payList,list,order_num);
     }
 
     @Override
     public void getAddressDataFail(ExceptionHandler.ResponeThrowable e) {
+        dialog.dismiss();
         L.e(e.status + " " + e.message);
         Toast.makeText(this, "地址获取失败", Toast.LENGTH_SHORT).show();
+        presenter.initList(payList,list,order_num);
     }
 
     @Override
     public void loadMoreAdsSuccess(List<AdsCellBean> adsCellBeans) {
-        L.e("获取成功");
+        L.e("获取推荐成功");
         adsCellBeanList.addAll(adsCellBeans);
         page++;
         adapter.notifyItemRangeInserted(payList.size() + adsCellBeanList.size() + 2 - list.size(), list.size());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -366,11 +375,11 @@ public class CheckOrderActivity extends BaseActivity<CheckOrderPresenter> implem
                 dialog.dismiss();
                 presenter.initOrdernum(generateOrdersBean.getOrder_list(),list);
                 tag=1;
-//                Intent intent=new Intent(CheckOrderActivity.this,LargePaymentActivity.class);
-//                intent.putExtra("price",totalPrice+"");
-//                intent.putExtra("type",0);
-//                intent.putStringArrayListExtra("list",(ArrayList<String>) presenter.getOrderList(list));
-//                startActivity(intent);
+                Intent intent=new Intent(CheckOrderActivity.this, LargePaymentActivity.class);
+                intent.putExtra("price",totalPrice+"");
+                intent.putExtra("type",0);
+                intent.putStringArrayListExtra("list",(ArrayList<String>) presenter.getOrderList(list));
+                startActivity(intent);
                 break;
         }
     }

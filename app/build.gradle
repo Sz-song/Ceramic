@@ -99,6 +99,7 @@ dependencies {
     implementation 'org.litepal.android:java:3.0.0'
     // eventbus
     implementation 'org.greenrobot:eventbus:3.0.0'
-
+    // 支付宝 SDK AAR 包所需的配置
+    compile (name: 'alipaySdk-15.7.4-20200228192259', ext: 'aar')
 
 }

@@ -45,11 +45,6 @@ public class CheckOrderAdapter extends RecyclerView.Adapter {
     private List<AddressManageBean> addresslist;
     private AddressManageBean addressBean;
     private OnSetAddressLinster onSetAddressLinster;
-    private OnPositionClickListener onSelectCouponsLinster;
-
-    public void setOnSelectCouponsLinster(OnPositionClickListener onSelectCouponsLinster) {
-        this.onSelectCouponsLinster = onSelectCouponsLinster;
-    }
 
     public CheckOrderAdapter(Context context, List<GoodsBean> goodsList, List<AdsCellBean> adsCellList, List<AddressManageBean> addresslist) {
         this.context = context;
@@ -132,13 +127,6 @@ public class CheckOrderAdapter extends RecyclerView.Adapter {
             }
             if (position == goodsList.size()) {
                 ((ViewHolder1) holder).massage.setVisibility(View.VISIBLE);
-            }
-            if(goodsList.get(position-1).isCan_coupons()){
-                ((ViewHolder1) holder).couponsLinear.setVisibility(View.VISIBLE);
-                ((ViewHolder1) holder).coupons.setText(goodsList.get(position-1).getCoupons_txt());
-                ((ViewHolder1) holder).couponsLinear.setOnClickListener(v -> onSelectCouponsLinster.callback(position-1));
-            }else{
-                ((ViewHolder1) holder).couponsLinear.setVisibility(View.GONE);
             }
             ((ViewHolder1) holder).studioName.setText(goodsList.get(position - 1).getShopname());
             ((ViewHolder1) holder).mingcheng.setText(goodsList.get(position - 1).getCommodityname());

@@ -56,7 +56,6 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
     }
 
     public ItemDetailAdapter(Context context, ItemDetailBean bean, List<AdsCellBean> adsCellList) {
-        L.e(adsCellList.size()+"---------");
         this.context = context;
         this.bean = bean;
         this.adsCellList = adsCellList;
@@ -77,7 +76,6 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        L.e(viewType+"1111111111");
         if (viewType == 0) {
             return new ViewHolder1(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail, parent, false));
         } else if (viewType == 1) {
@@ -179,13 +177,13 @@ public class ItemDetailAdapter extends RecyclerView.Adapter {
             }
             ((ViewHolder1) holder).enterStore.setOnClickListener(view -> {
                 Intent intent1 = new Intent(context, ShopIndexActivity.class);
-                intent1.putExtra(AppConstant.SHOP_ID, bean.getStorebean().getShop_id() + "");
+                intent1.putExtra("shopid", bean.getStorebean().getShop_id() + "");
                 L.e("shopid is" + bean.getStorebean().getShop_id());
                 context.startActivity(intent1);
             });
             ((ViewHolder1) holder).store.setOnClickListener(view -> {
                 Intent intent = new Intent(context, ShopIndexActivity.class);
-                intent.putExtra(AppConstant.SHOP_ID, bean.getStorebean().getShop_id() + "");
+                intent.putExtra("shopid", bean.getStorebean().getShop_id() + "");
                 L.e("shopid is" + bean.getStorebean().getShop_id());
                 context.startActivity(intent);
             });

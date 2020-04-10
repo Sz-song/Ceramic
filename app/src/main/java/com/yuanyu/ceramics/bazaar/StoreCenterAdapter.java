@@ -1,6 +1,7 @@
 package com.yuanyu.ceramics.bazaar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.yuanyu.ceramics.common.CantScrollGirdLayoutManager;
 import com.yuanyu.ceramics.common.SquareImageView;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.item.ItemDetailAcitivity;
+import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 
 import java.util.List;
 
@@ -50,16 +52,16 @@ public class StoreCenterAdapter extends RecyclerView.Adapter<StoreCenterAdapter.
         holder.name.setText(list.get(position).getName());
         holder.introduce.setText(list.get(position).getIntroduce());
         holder.enterStore.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, ShopIndexActivity.class);
-//            intent.putExtra("shopid", list.get(position).getShop_id());
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, ShopIndexActivity.class);
+            intent.putExtra("shopid", list.get(position).getShop_id());
+            context.startActivity(intent);
         });
         holder.recyclerview.setLayoutManager(new CantScrollGirdLayoutManager(context,3));
         holder.recyclerview.setAdapter(new StoreCenterItemAdapter(context,list.get(position).getList()));
         holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, ShopIndexActivity.class);
-//            intent.putExtra("shopid", list.get(position).getShop_id());
-//            context.startActivity(intent);
+            Intent intent = new Intent(context, ShopIndexActivity.class);
+            intent.putExtra("shopid", list.get(position).getShop_id());
+            context.startActivity(intent);
         });
     }
 

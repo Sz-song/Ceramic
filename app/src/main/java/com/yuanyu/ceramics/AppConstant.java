@@ -14,7 +14,8 @@ public class AppConstant {
     public static final String USER_ACCOUNT_ID = "useraccountid";//用户ID,用户在数据库索引id
     public static final String USERNAME = "username";//用户昵称
     public static final String PROTRAIT = "protrait";//用户头像
-    public static final String WECHAT_APP_ID = "wx4d8c30a755824341";
+    public static final String WECHAT_APP_ID = "wx4507b09176ec42f4";
+
     public static final int IM_APP_ID = 1400186194;//腾讯即时聊天app_id
     public static final String SALT = "#j@#*djYUANYU";
     //我的订单

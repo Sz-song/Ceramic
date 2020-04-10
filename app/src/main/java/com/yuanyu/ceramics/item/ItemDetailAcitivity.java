@@ -231,7 +231,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 addCart.setVisibility(View.GONE);
                 buyFast.setText("已售罄");
                 buyFast.setTextColor(this.getResources().getColor(R.color.white));
-                buyFast.setBackgroundResource(R.color.background_gray);
+                buyFast.setBackgroundResource(R.color.lightGray);
                 status = 1;
             }
         } catch (Exception e) {
@@ -241,7 +241,7 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
             addCart.setVisibility(View.GONE);
             buyFast.setText("已下架");
             buyFast.setTextColor(this.getResources().getColor(R.color.white));
-            buyFast.setBackgroundResource(R.color.background_gray);
+            buyFast.setBackgroundResource(R.color.lightGray);
             status = 2;
         }
         gridLayoutManager = new GridLayoutManager(this, 2);
@@ -468,7 +468,8 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 break;
             case R.id.dianpu:
                 intent = new Intent(this, ShopIndexActivity.class);
-                intent.putExtra(AppConstant.SHOP_ID, bean.getStorebean().getShop_id() + "");
+                L.e(bean.getStorebean().getShop_id() + "---------");
+                intent.putExtra("shopid", bean.getStorebean().getShop_id() + "");
                 startActivity(intent);
                 break;
             case R.id.add_cart:
@@ -486,7 +487,6 @@ public class ItemDetailAcitivity extends BaseActivity<ItemDetailPresenter> imple
                 break;
             case R.id.buy_fast:
                 if(null!=Sp.getString(this,AppConstant.MOBILE)&&Sp.getString(this,AppConstant.MOBILE).length()>8) {
-
                     if (Sp.getString(this, AppConstant.SHOP_ID).trim().equals(bean.getStorebean().getShop_id() + "")) {
                         Toast.makeText(this, "此商品为您店里的商品", Toast.LENGTH_SHORT).show();
                     } else {
