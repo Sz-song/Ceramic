@@ -54,6 +54,7 @@ import com.yuanyu.ceramics.seller.liveapply.LiveApplyStatusBean;
 import com.yuanyu.ceramics.seller.liveapply.bean.SelectItemBean;
 import com.yuanyu.ceramics.seller.order.ShopOrderBean;
 import com.yuanyu.ceramics.seller.order.detail.ShopOrderDetailBean;
+import com.yuanyu.ceramics.seller.refund.RefundBean;
 import com.yuanyu.ceramics.seller.shop_shelve.ShelvingDetailBean;
 import com.yuanyu.ceramics.seller.shop_shelve.shelve_audit.ShelveAuditBean;
 import com.yuanyu.ceramics.shop_index.ShopGoodsBean;
@@ -280,19 +281,19 @@ public interface HttpService {
     @Multipart
     Observable<BaseResponse<List<String>>> uploadImage(@Part("data")RequestBody body, @Part MultipartBody.Part[] part);
     //申请退款
-    @POST("app_api/wujia/submitrefund.php")
+    @POST("back/test/api/order/submitrefund.php")
     Observable<BaseResponse> submitRefund(@Body RequestBody body);
     //吾家退款订单
-    @POST("app_api/wujia/refundwujia.php")
+    @POST("back/test/api/order/refundwujia.php")
     Observable<BaseResponse<List<RefundListBean>>>getWujiaRefundData(@Body RequestBody body);
-    //退款详情
-    @POST("app_api/wujia/refundwujiamoremsg.php")
+    //用户查看退款详情
+    @POST("back/test/api/order/refundwujiamoremsg.php")
     Observable<BaseResponse<RefundDetailBean>>refundDetail(@Body RequestBody body);
     //取消退款/售后申请
-    @POST("app_api/wujia/cancel_refund.php")
+    @POST("back/test/api/order/cancel_refund.php")
     Observable<BaseResponse<String[]>> CancelRefund(@Body RequestBody body);
     //退货退款填写退款物流单号
-    @POST("app_api/wujia/add_refund_logistics.php")
+    @POST("back/test/api/order/add_refund_logistics.php")
     Observable<BaseResponse<String[]>> InputLogistics(@Body RequestBody body);
     //关注和粉丝列表
     @POST("back/test/api/quan/focusandfans.php")
@@ -301,7 +302,7 @@ public interface HttpService {
     @POST("back/test/api/mine/applyenter.php")
     Observable<BaseResponse<String[]>> ApplyEnter(@Body RequestBody body);
 //    申请大师
-    @POST("123")
+    @POST("back/test/api//mine/masterattestation.php")
     Observable<BaseResponse<String[]>> MasterAttestation(@Body RequestBody body);
     //移除黑名单
     @POST("back/test/api/homepage/remove_blacklist.php")
@@ -334,17 +335,27 @@ public interface HttpService {
     //    商家管理获取订单管理getOrdersManage
     @POST("back/test/api/shangjia/ordermanage.php")
     Observable<BaseResponse<List<ShopOrderBean>>> getOrdersManage(@Body RequestBody body);
+
+    //商家查看退款详情
+    @POST("back/test/api/order/refundmoremsg.php")
+    Observable<BaseResponse<com.yuanyu.ceramics.seller.refund.refund_detail.RefundDetailBean>> getRefundDetail(@Body RequestBody body);
+
+    //商家退款审核
+    @POST("back/test/api/order/refundreview.php")
+    Observable<BaseResponse<Boolean>>RefundReview(@Body RequestBody body);
     //    shopGetOrderDetail
-    @POST("123")
+    @POST("back/test/api/order/sellordermoremsg.php")
     Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
 //    getLogisticsTracing
     //快递递踪
     @POST("123")
     Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
 //    modityOrderPrice商家修改未支付订单价格
-    @POST("123")
+    @POST("back/test/api/order/change_order_price.php")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
-
+    //商家退款接口
+    @POST("back/test/api/order/refund.php")
+    Observable<BaseResponse<List<RefundBean>>>getRefundResult(@Body RequestBody body);
 
 //    修改商家店铺简介
     @POST("back/test/api/shangjia/change_shop_introduce.php")
@@ -393,13 +404,13 @@ public interface HttpService {
     @POST("back/test/api/broadcast/selectitem.php")
     Observable<BaseResponse<SelectItemBean>> selectItem(@Body RequestBody body);
     //商家发货
-    @POST("app_api/shangjia/shopdelivery.php")
+    @POST("back/test/api/order/shopdelivery.php")
     Observable<BaseResponse<String>>Delivery(@Body RequestBody body);
     //商家发货获取收货人信息
     @POST("app_api/shangjia/getdeliverymsg.php")
     Observable<BaseResponse<DeliveryBean>>getDeliveryData(@Body RequestBody body);
     //商家获取待发货数据
-    @POST("app_api/shangjia/getnodelivery.php")
+    @POST("back/test/api/shangjia/getnodelivery.php")
     Observable<BaseResponse<List<WaitDeliveryBean>>>getWaitDeliveryData(@Body RequestBody body);
     //获取分类结果
     @POST("back/test/api/homepage/getfenlei.php")
@@ -464,22 +475,10 @@ public interface HttpService {
     //生成订单
     @POST("back/test/api/homepage/generate_orders.php")
     Observable<BaseResponse<com.yuanyu.ceramics.cart.GenerateOrdersBean>> generateOrders(@Body RequestBody body);
-    //发送支付宝付款数据sendAliPay  不需要
-    @POST("123")
-    Observable<BaseResponse<Boolean>> sendAliPay(@Body RequestBody body);
-    //通知异常订单   不需要
-    @POST("123")
-    Observable<BaseResponse<String[]>> notify_order_exception(@Body RequestBody body);
     //获取客服
-    @POST("123")
+    @POST("back/test/api/mine/getcustomerservice.php")
     Observable<BaseResponse<String>>getCustomerService(@Body RequestBody body);
-    //获取订单价格
-    @POST("123")
+    //大额支付获取订单价格
+    @POST("back/test/api/order/allprice.php")
     Observable<BaseResponse<String>> getAllprice(@Body RequestBody body);
-    //微信登录
-    @POST("123")
-    Observable<BaseResponse<WXBean>> WeChatLogin(@Body RequestBody body);
-    //微信登录
-    @POST("123")
-    Observable<BaseResponse<WXBean>> WeChatBind(@Body RequestBody body);
 }

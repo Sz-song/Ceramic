@@ -13,6 +13,7 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.common.SquareImageView;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.item.ItemDetailAcitivity;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ShopGoodsAdapter extends RecyclerView.Adapter<ShopGoodsAdapter.View
                 .into(holder.image);
         holder.name.setText(list.get(position).getName());
         holder.price.setText("¥"+list.get(position).getPrice());
-//        holder.itemView.setOnClickListener(view -> ItemDetailActivity.actionStart(context, list.get(position).getId()));
+        holder.itemView.setOnClickListener(view -> ItemDetailAcitivity.actionStart(context, list.get(position).getId()));
     }
 
     @Override

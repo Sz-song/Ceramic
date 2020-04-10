@@ -105,4 +105,43 @@ public class Md5Utils {
         }
         return re_time;
     }
+    // 剩余时间 传入long型字符串
+    public static String TimeRemain(String finish,String system) {
+        try {
+            long RemainTime=Long.parseLong(finish)-Long.parseLong(system);
+            StringBuilder stringBuilder=new StringBuilder("剩余: ");
+            long day=RemainTime/(24*60*60);
+            if(day>0){
+                stringBuilder.append(day).append("天 ");
+            }
+            long hour=(RemainTime%(24*60*60))/(60*60);
+            if(hour>0){
+                stringBuilder.append(hour).append("时 ");
+            }
+            long min=RemainTime/60;
+            if(day==0&&hour==0){
+                stringBuilder.append(min).append("分钟 ");
+            }
+            if(RemainTime<=0){
+                return "";
+            }
+            return stringBuilder.toString();
+        }catch (Exception e){
+            return "";
+        }
+    }
+    //时间转化
+    public static String CountTime(String timestr) {
+        try {
+            long time = Long.parseLong(timestr + "000");
+            Date date = new Date(time);
+            if (date.getMinutes() > 9) {
+                return ((1900 + date.getYear()) + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes());
+            } else {
+                return ((1900 + date.getYear()) + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":0" + date.getMinutes());
+            }
+        } catch (Exception e) {
+            return "";
+        }
+    }
 }

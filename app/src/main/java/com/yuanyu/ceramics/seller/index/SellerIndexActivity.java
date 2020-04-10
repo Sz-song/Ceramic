@@ -30,6 +30,7 @@ import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.seller.liveapply.LiveApplyActivity;
 import com.yuanyu.ceramics.seller.message_shop.MessageShopActivity;
 import com.yuanyu.ceramics.seller.order.ShopOrderActivity;
+import com.yuanyu.ceramics.seller.refund.RefundActivity;
 import com.yuanyu.ceramics.seller.shop_goods.ShopGoodsActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
@@ -225,7 +226,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 startActivity(intent);
                 break;
             case R.id.refund:
-                intent = new Intent(this, RefundListActivity.class);
+                intent = new Intent(this, RefundActivity.class);
                 startActivity(intent);
                 break;
             case R.id.commodity:

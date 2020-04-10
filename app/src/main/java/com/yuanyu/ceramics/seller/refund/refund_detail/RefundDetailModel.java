@@ -1,48 +1,31 @@
-package com.yuanyu.ceramics.cart;
+package com.yuanyu.ceramics.seller.refund.refund_detail;
 
 import com.google.gson.Gson;
-import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
-import com.yuanyu.ceramics.item.AdsCellBean;
+import com.yuanyu.ceramics.logistics.LogisticsBean;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Md5Utils;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
-public class CheckOrderModel implements CheckOrderConstract.ICheckOrderModel {
+/**
+ * Created by cat on 2018/9/21.
+ */
+
+public class RefundDetailModel implements RefundDetailConstract.IRefundDetailModel{
     private HttpService httpService;
-    CheckOrderModel(){httpService = HttpServiceInstance.getInstance();}
-
-
-    @Override
-    public Observable<BaseResponse<List<AddressManageBean>>> getAddressData(String useraccountid) {
-        String timestamp = Md5Utils.getTimeStamp();
-        String randomstr = Md5Utils.getRandomString(10);
-        String signature = Md5Utils.getSignature(timestamp,randomstr);
-        Map map = new HashMap();
-        map.put("timestamp",timestamp);
-        map.put("randomstr",randomstr);
-        map.put("signature",signature);
-        map.put("action","address");
-        Map data = new HashMap();
-        data.put("useraccountid",useraccountid);
-        map.put("data",data);
-        Gson gson=new Gson();
-        String str=gson.toJson(map);
-        L.e("str is"+str);
-        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.getAddressData(body);
+    RefundDetailModel(){
+        httpService = HttpServiceInstance.getInstance();
     }
 
     @Override
-    public Observable<BaseResponse<List<AdsCellBean>>> loadMoreAds(int page) {
+    public Observable<BaseResponse<RefundDetailBean>> getRefundDetailData(String shopid, String ordernum) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -50,20 +33,21 @@ public class CheckOrderModel implements CheckOrderConstract.ICheckOrderModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","loadmoreads");
+        map.put("action","refundmoremsg");
         Map data = new HashMap();
-        data.put("page",""+page);
-        data.put("page_size",30);
+        data.put("shopid",shopid);
+        data.put("ordernum",ordernum);
+
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
-        L.e("loadmoreads is "+str);
+        L.e("refundmoremsg is "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.loadMoreAds(body);
+        return httpService.getRefundDetail(body);
     }
 
     @Override
-    public Observable<BaseResponse<GenerateOrdersBean>> generateOrders(String useraccountid, int paytype, int type, int tag, String name, String address, String province, String city, String area, String tel, List<SumOrderBean> list) {
+    public Observable<BaseResponse<Boolean>> RefundReview(String shopid, String ordernum, int type, String reason) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);
@@ -71,25 +55,38 @@ public class CheckOrderModel implements CheckOrderConstract.ICheckOrderModel {
         map.put("timestamp",timestamp);
         map.put("randomstr",randomstr);
         map.put("signature",signature);
-        map.put("action","generate_orders");
+        map.put("action","refundreview");
         Map data = new HashMap();
-        data.put("useraccountid",useraccountid);
-        data.put("name",name);
-        data.put("address",address);
-        data.put("province",province);
-        data.put("city",city);
-        data.put("area",area);
-        data.put("tel",tel);
-        data.put("paytype",paytype);
+        data.put("shopid",shopid);
+        data.put("ordernum",ordernum);
         data.put("type",type);
-        data.put("tag", tag);
-        data.put("list",list);
+        data.put("reason",reason);
         map.put("data",data);
         Gson gson=new Gson();
         String str=gson.toJson(map);
         L.e("str is "+str);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-        return httpService.generateOrders(body);
+        return httpService.RefundReview(body);
     }
 
+    @Override
+    public Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(String couriernum, String courierid) {
+        String timestamp = Md5Utils.getTimeStamp();
+        String randomstr = Md5Utils.getRandomString(10);
+        String signature = Md5Utils.getSignature(timestamp,randomstr);
+        Map map = new HashMap();
+        map.put("timestamp",timestamp);
+        map.put("randomstr",randomstr);
+        map.put("signature",signature);
+        map.put("action","express_tracking");
+        Map data = new HashMap();
+        data.put("couriernum",couriernum);
+        data.put("courierid",courierid);
+        map.put("data",data);
+        Gson gson=new Gson();
+        String str=gson.toJson(map);
+        L.e("str is "+str);
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        return httpService.getLogisticsTracing(body);
+    }
 }

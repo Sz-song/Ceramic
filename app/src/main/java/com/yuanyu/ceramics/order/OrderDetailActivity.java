@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
 
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -27,13 +28,28 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.base.BasePresenter;
+import com.yuanyu.ceramics.cart.AliPayResultInfo;
+import com.yuanyu.ceramics.cart.GenerateOrdersBean;
 import com.yuanyu.ceramics.common.LoadingDialog;
+import com.yuanyu.ceramics.common.PayResult;
+import com.yuanyu.ceramics.common.SelectPayTypeActivity;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.item.ItemDetailAcitivity;
+import com.yuanyu.ceramics.large_payment.LargePaymentActivity;
+import com.yuanyu.ceramics.logistics.LogisticsActivity;
+import com.yuanyu.ceramics.logistics.LogisticsBean;
+import com.yuanyu.ceramics.order.refund.ApplyRefundActivity;
+import com.yuanyu.ceramics.order.refund.RefundDetailWujiaActivity;
+import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 import com.yuanyu.ceramics.utils.TimeUtils;
+import com.yuanyu.ceramics.wxapi.WechatEvent;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -45,6 +61,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.yuanyu.ceramics.AppConstant.DAIFAHUO;
+import static com.yuanyu.ceramics.AppConstant.DAIFUKUAN;
 import static com.yuanyu.ceramics.AppConstant.WECHAT_APP_ID;
 
 public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> implements OrderDetailConstract.IOrderDetailView {
@@ -144,7 +162,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     protected void initEvent() {
         ButterKnife.bind(this);
-//        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
         dialog = new LoadingDialog(this);
         dialog.show();
         setSupportActionBar(toolbar);
@@ -205,10 +223,10 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 btnWhite.setOnClickListener(v -> presenter.cancelOrder(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), orderId));
                 //付款
                 btnRed.setOnClickListener(v -> {
-//                    Intent intent=new Intent(this,SelectPayTypeActivity.class);
-//                    intent.putExtra("price",price_pay);
-//                    intent.putExtra("title","选择支付方式");
-//                    startActivityForResult(intent,1000);
+                    Intent intent=new Intent(this, SelectPayTypeActivity.class);
+                    intent.putExtra("price",price_pay);
+                    intent.putExtra("title","选择支付方式");
+                    startActivityForResult(intent,1000);
                 });
                 break;
             case AppConstant.DAIFAHUO:
@@ -228,14 +246,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 btnRed.setVisibility(View.GONE);
                 btnWhite.setText("申请退款");
                 btnWhite.setOnClickListener(v -> {
-//                    Intent intent = new Intent(this, ApplyRefundActivity.class);
-//                    intent.putExtra("order_num", orderId);
-//                    intent.putExtra("id", bean.getItem_list().get(0).getId());
-//                    intent.putExtra("image", bean.getItem_list().get(0).getImage());
-//                    intent.putExtra("name", bean.getItem_list().get(0).getName());
-//                    intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
-//                    intent.putExtra("price", bean.getItem_list().get(0).getPrice());
-//                    startActivityForResult(intent, REFUND);
+                    Intent intent = new Intent(this, ApplyRefundActivity.class);
+                    intent.putExtra("order_num", orderId);
+                    intent.putExtra("id", bean.getItem_list().get(0).getId());
+                    intent.putExtra("image", bean.getItem_list().get(0).getImage());
+                    intent.putExtra("name", bean.getItem_list().get(0).getName());
+                    intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
+                    intent.putExtra("price", bean.getItem_list().get(0).getPrice());
+                    startActivityForResult(intent, REFUND);
                 });
                 break;
             case AppConstant.DAISHOUHUO:
@@ -257,14 +275,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 btnRed.setVisibility(View.VISIBLE);
                 btnWhite.setText("申请退款");
                 btnWhite.setOnClickListener(v -> {
-//                    Intent intent = new Intent(this, ApplyRefundActivity.class);
-//                    intent.putExtra("order_num", orderId);
-//                    intent.putExtra("id", bean.getItem_list().get(0).getId());
-//                    intent.putExtra("image", bean.getItem_list().get(0).getImage());
-//                    intent.putExtra("name", bean.getItem_list().get(0).getName());
-//                    intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
-//                    intent.putExtra("price", bean.getItem_list().get(0).getPrice());
-//                    startActivityForResult(intent, REFUND);
+                    Intent intent = new Intent(this, ApplyRefundActivity.class);
+                    intent.putExtra("order_num", orderId);
+                    intent.putExtra("id", bean.getItem_list().get(0).getId());
+                    intent.putExtra("image", bean.getItem_list().get(0).getImage());
+                    intent.putExtra("name", bean.getItem_list().get(0).getName());
+                    intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
+                    intent.putExtra("price", bean.getItem_list().get(0).getPrice());
+                    startActivityForResult(intent, REFUND);
                 });
                 btnRed.setText("确认收货");
                 btnRed.setOnClickListener(v -> presenter.comfirmReceived(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), orderId));
@@ -277,7 +295,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 payTime.setVisibility(View.VISIBLE);
                 deliveryTime.setVisibility(View.VISIBLE);
                 receiveTime.setVisibility(View.VISIBLE);
-//                presenter.getLogisticsTracing(bean.getLogistiscnum(), bean.getLogisticscompany());
+                presenter.getLogisticsTracing(bean.getLogistiscnum(), bean.getLogisticscompany());
                 payTime.setText("付款时间: " + TimeUtils.CountTime(bean.getPay_time()));
                 deliveryTime.setText("发货时间: " + TimeUtils.CountTime(bean.getDelivery_time()));
                 receiveTime.setText("收货时间: " + TimeUtils.CountTime(bean.getFinish_time()));
@@ -285,14 +303,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     btnRed.setVisibility(View.VISIBLE);
                     btnWhite.setText("申请售后");
                     btnWhite.setOnClickListener(v -> {
-//                        Intent intent = new Intent(this, ApplyRefundActivity.class);
-//                        intent.putExtra("order_num", orderId);
-//                        intent.putExtra("id", bean.getItem_list().get(0).getId());
-//                        intent.putExtra("image", bean.getItem_list().get(0).getImage());
-//                        intent.putExtra("name", bean.getItem_list().get(0).getName());
-//                        intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
-//                        intent.putExtra("price", bean.getItem_list().get(0).getPrice());
-//                        startActivityForResult(intent, REFUND);
+                        Intent intent = new Intent(this, ApplyRefundActivity.class);
+                        intent.putExtra("order_num", orderId);
+                        intent.putExtra("id", bean.getItem_list().get(0).getId());
+                        intent.putExtra("image", bean.getItem_list().get(0).getImage());
+                        intent.putExtra("name", bean.getItem_list().get(0).getName());
+                        intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
+                        intent.putExtra("price", bean.getItem_list().get(0).getPrice());
+                        startActivityForResult(intent, REFUND);
                     });
                 } else {
                     btnWhite.setVisibility(View.GONE);
@@ -331,14 +349,14 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     btnRed.setVisibility(View.VISIBLE);
                     btnWhite.setText("申请售后");
                     btnWhite.setOnClickListener(v -> {
-//                        Intent intent = new Intent(this, ApplyRefundActivity.class);
-//                        intent.putExtra("order_num", orderId);
-//                        intent.putExtra("id", bean.getItem_list().get(0).getId());
-//                        intent.putExtra("image", bean.getItem_list().get(0).getImage());
-//                        intent.putExtra("name", bean.getItem_list().get(0).getName());
-//                        intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
-//                        intent.putExtra("price", bean.getItem_list().get(0).getPrice());
-//                        startActivityForResult(intent, REFUND);
+                        Intent intent = new Intent(this, ApplyRefundActivity.class);
+                        intent.putExtra("order_num", orderId);
+                        intent.putExtra("id", bean.getItem_list().get(0).getId());
+                        intent.putExtra("image", bean.getItem_list().get(0).getImage());
+                        intent.putExtra("name", bean.getItem_list().get(0).getName());
+                        intent.putExtra("original_price", bean.getItem_list().get(0).getOriginal_price());
+                        intent.putExtra("price", bean.getItem_list().get(0).getPrice());
+                        startActivityForResult(intent, REFUND);
                     });
                     btnRed.setText("联系客服");
                 } else {
@@ -374,9 +392,9 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             btnWhite.setVisibility(View.VISIBLE);
             btnWhite.setText("查看售后");
             btnWhite.setOnClickListener(v -> {
-//                Intent intent=new Intent(this,RefundDetailWujiaActivity.class);
-//                intent.putExtra("refund_num",bean.getOrdernum());
-//                startActivity(intent);
+                Intent intent=new Intent(this, RefundDetailWujiaActivity.class);
+                intent.putExtra("refund_num",bean.getOrdernum());
+                startActivity(intent);
             });
         }
         receiverName.setText("收货人: " + bean.getName());
@@ -402,26 +420,26 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         orderTime.setText("下单时间: " + TimeUtils.CountTime(bean.getCreat_time()));
         //查看物流
         logisticsLinear.setOnClickListener(view -> {
-//            Intent intent = new Intent(this, LogisticsTracingActivity.class);
-//            intent.putExtra("image", image);
-//            intent.putExtra("logistics", logistics);
-//            intent.putExtra("logistics_id", logistics_id);
-//            startActivity(intent);
+            Intent intent = new Intent(this, LogisticsActivity.class);
+            intent.putExtra("image", image);
+            intent.putExtra("logistics", logistics);
+            intent.putExtra("logistics_id", logistics_id);
+            startActivity(intent);
         });
 //        contactShop.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getShop_userid(), TIMConversationType.C2C));
-//        shopName.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, ShopIndexActivity.class);
-//            intent.putExtra("shopid", bean.getShop_id());
-//            startActivity(intent);
-//        });
-//        shopPortrait.setOnClickListener(v -> {
-//            Intent intent = new Intent(this, ShopIndexActivity.class);
-//            intent.putExtra("shopid", bean.getShop_id());
-//            startActivity(intent);
-//        });
-//        if(type==3||type==4){
-//            item.setOnClickListener(v -> ItemDetailActivity.actionStart(this, bean.getItem_list().get(0).getId()));
-//        }
+        shopName.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ShopIndexActivity.class);
+            intent.putExtra("shopid", bean.getShop_id());
+            startActivity(intent);
+        });
+        shopPortrait.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ShopIndexActivity.class);
+            intent.putExtra("shopid", bean.getShop_id());
+            startActivity(intent);
+        });
+        if(type==3||type==4){
+            item.setOnClickListener(v -> ItemDetailAcitivity.actionStart(this, bean.getItem_list().get(0).getId()));
+        }
         dialog.dismiss();
     }
 
@@ -433,37 +451,37 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         dialog.dismiss();
     }
 
-//    @Override
-//    public void getLogisticsTracingSuccess(LogisticsBean bean) {
-//        switch (bean.getState()) {
-//            case "2":
-//                logisticsStatus.setText("运输中");
-//                break;
-//            case "3":
-//                logisticsStatus.setText("已签收");
-//                break;
-//            case "4":
-//                logisticsStatus.setText("问题件");
-//                break;
-//            default:
-//                logisticsStatus.setText("处理中");
-//                break;
-//        }
-//        if (bean.getTraces().size() > 0) {
-//            logisticsNew.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptStation());
-//            logisticsTime.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptTime());
-//        } else {
-//            logisticsNew.setText("暂无物流信息");
-//        }
-//
-//    }
-//
-//    @Override
-//    public void getLogisticsTracingFail(ExceptionHandler.ResponeThrowable e) {
-//        logisticsLinear.setVisibility(View.GONE);
-//        viewLine.setVisibility(View.GONE);
-//        Toast.makeText(this, "物流信息出错", Toast.LENGTH_SHORT).show();
-//    }
+    @Override
+    public void getLogisticsTracingSuccess(LogisticsBean bean) {
+        switch (bean.getState()) {
+            case "2":
+                logisticsStatus.setText("运输中");
+                break;
+            case "3":
+                logisticsStatus.setText("已签收");
+                break;
+            case "4":
+                logisticsStatus.setText("问题件");
+                break;
+            default:
+                logisticsStatus.setText("处理中");
+                break;
+        }
+        if (bean.getTraces().size() > 0) {
+            logisticsNew.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptStation());
+            logisticsTime.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptTime());
+        } else {
+            logisticsNew.setText("暂无物流信息");
+        }
+
+    }
+
+    @Override
+    public void getLogisticsTracingFail(ExceptionHandler.ResponeThrowable e) {
+        logisticsLinear.setVisibility(View.GONE);
+        viewLine.setVisibility(View.GONE);
+        Toast.makeText(this, "物流信息出错", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void cancelOrderSuccess() {
@@ -489,64 +507,35 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show();
     }
 
-//    @Override
-//    public void generateOrdersSuccess(GenerateOrdersBean bean, int paytype) {
-//        switch (paytype) {
-//            case 0:
-//                alipay(bean.getOrder_data());//Alipay
-//                break;
-//            case 1:
-//                dialog.dismiss();
-//                wechatpay(bean.getOrder_data());//Wechatpay
-//                break;
-//            case 3://Yuanyupay
-//                dialog.dismiss();
-//                List<String> strings=new ArrayList<>();
-//                strings.add(orderId);
-//                Intent intent=new Intent(this,LargePaymentActivity.class);
-//                intent.putExtra("price",price_pay);
-//                intent.putExtra("type",0);
-//                intent.putStringArrayListExtra("list",(ArrayList<String>) strings);
-//                startActivity(intent);
-//                break;
-//        }
-//    }
-//
-//    @Override
-//    public void generateOrdersFail(ExceptionHandler.ResponeThrowable e) {
-//        dialog.dismiss();
-//        L.e(e.message + e.status);
-//        Toast.makeText(this, "支付异常", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void sendAlipaySuccess(Boolean aboolean) {
-//        dialog.dismiss();
-//        if (aboolean) {
-//            Toast.makeText(OrderDetailActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-//            finish();
-//        } else {
-//            Toast.makeText(OrderDetailActivity.this, "订单异常", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    @Override
-//    public void sendAlipayFail(ExceptionHandler.ResponeThrowable e, String out_trade_no, String trade_no) {
-//        dialog.dismiss();
-//        Toast.makeText(OrderDetailActivity.this, "订单异常", Toast.LENGTH_SHORT).show();
-//        presenter.notifyOrderException(orderId, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), out_trade_no, trade_no);
-//    }
-//
-//    @Override
-//    public void notifyOrderExceptionSuccess() {
-//        Toast.makeText(OrderDetailActivity.this, "订单异常，请联系客服获取详情", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void notifyOrderExceptionFail(ExceptionHandler.ResponeThrowable e) {
-//        L.e(e.status + "  " + e.message);
-//        Toast.makeText(OrderDetailActivity.this, "异常订单，请联系客服", Toast.LENGTH_SHORT).show();
-//    }
+    @Override
+    public void generateOrdersSuccess(GenerateOrdersBean bean, int paytype) {
+        switch (paytype) {
+            case 0:
+                alipay(bean.getOrder_data());//Alipay
+                break;
+            case 1:
+                dialog.dismiss();
+                wechatpay(bean.getOrder_data());//Wechatpay
+                break;
+            case 3://Yuanyupay
+                dialog.dismiss();
+                List<String> strings=new ArrayList<>();
+                strings.add(orderId);
+                Intent intent=new Intent(this, LargePaymentActivity.class);
+                intent.putExtra("price",price_pay);
+                intent.putExtra("type",0);
+                intent.putStringArrayListExtra("list",(ArrayList<String>) strings);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void generateOrdersFail(ExceptionHandler.ResponeThrowable e) {
+        dialog.dismiss();
+        L.e(e.message + e.status);
+        Toast.makeText(this, "支付异常", Toast.LENGTH_SHORT).show();
+    }
 
     private void wechatpay(String orderInfo) {
         try {
@@ -571,72 +560,74 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         }
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void setWechatPay(WechatEvent wechatEvent) {
-//        L.e("wechatevent is " + wechatEvent.getCode() + "  tr " + wechatEvent.getTransaction() + "  openid " + wechatEvent.getOpenId());
-//        switch (wechatEvent.getCode()) {
-//            case 0:
-//                L.e("支付成功");
-////                setAliPay(wxOutTradeNo,wechatEvent.getTransaction());
-//                Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
-//                MyOrderActivity.actionStart(this, DAIFAHUO);
-//                finish();
-//                break;
-//            case -1:
-//                L.e("支付失败");
-//                Toast.makeText(this, "支付失败", Toast.LENGTH_SHORT).show();
-//                break;
-//            case -2:
-//                L.e("支付取消");
-//                Toast.makeText(this, "支付取消", Toast.LENGTH_SHORT).show();
-//                MyOrderActivity.actionStart(this, DAIFUKUAN);
-//                finish();
-//                break;
-//        }
-//    }
-//
-//    private void alipay(final String orderInfo) {
-//        Runnable payRunnable = () -> {
-//            //新建任务
-//            PayTask alipay = new PayTask(OrderDetailActivity.this);
-//            //获取支付结果
-//            Map<String, String> result = alipay.payV2(orderInfo, true);
-//            Message msg = new Message();
-//            msg.what = SDK_PAY_FLAG;
-//            msg.obj = result;
-//            mHandler.sendMessage(msg);
-//        };
-//        // 必须异步调用
-//        Thread payThread = new Thread(payRunnable);
-//        payThread.start();
-//    }
-//
-//    @SuppressLint("HandlerLeak")
-//    private Handler mHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            switch (msg.what) {
-//                case SDK_PAY_FLAG:
-//                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-//                    //同步获取结果
-//                    String resultInfo = payResult.getResult();
-//                    Gson gson = new Gson();
-//                    AliPayResultInfo payResultInfo = gson.fromJson(resultInfo, AliPayResultInfo.class);
-//                    String resultStatus = payResult.getResultStatus();
-//                    // 判断resultStatus 为9000则代表支付成功
-//                    if (TextUtils.equals(resultStatus, "9000")) {
-//                        List<String> order_list = new ArrayList<>();
-//                        order_list.add(orderId);
-//                        presenter.sendAlipay(Sp.getInt(OrderDetailActivity.this, AppConstant.USER_ACCOUNT_ID), order_list, payResultInfo.getAlipay_trade_app_pay_response().getOut_trade_no(), payResultInfo.getAlipay_trade_app_pay_response().getTrade_no());
-//                    } else {
-//                        dialog.dismiss();
-//                        Toast.makeText(OrderDetailActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-//                    }
-//                    break;
-//            }
-//        }
-//    };
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setWechatPay(WechatEvent wechatEvent) {
+        L.e("wechatevent is " + wechatEvent.getCode() + "  tr " + wechatEvent.getTransaction() + "  openid " + wechatEvent.getOpenId());
+        switch (wechatEvent.getCode()) {
+            case 0:
+                L.e("支付成功");
+//                setAliPay(wxOutTradeNo,wechatEvent.getTransaction());
+                Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+                MyOrderActivity.actionStart(this, DAIFAHUO);
+                finish();
+                break;
+            case -1:
+                L.e("支付失败");
+                Toast.makeText(this, "支付失败", Toast.LENGTH_SHORT).show();
+                break;
+            case -2:
+                L.e("支付取消");
+                Toast.makeText(this, "支付取消", Toast.LENGTH_SHORT).show();
+                MyOrderActivity.actionStart(this, DAIFUKUAN);
+                finish();
+                break;
+        }
+    }
+
+    private void alipay(final String orderInfo) {
+        Runnable payRunnable = () -> {
+            //新建任务
+            PayTask alipay = new PayTask(OrderDetailActivity.this);
+            //获取支付结果
+            Map<String, String> result = alipay.payV2(orderInfo, true);
+            Message msg = new Message();
+            msg.what = SDK_PAY_FLAG;
+            msg.obj = result;
+            mHandler.sendMessage(msg);
+        };
+        // 必须异步调用
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case SDK_PAY_FLAG:
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    //同步获取结果
+                    String resultInfo = payResult.getResult();
+                    Gson gson = new Gson();
+                    AliPayResultInfo payResultInfo = gson.fromJson(resultInfo, AliPayResultInfo.class);
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为9000则代表支付成功
+                    L.e(TextUtils.equals(resultStatus, "9000")+"----------");
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        List<String> order_list = new ArrayList<>();
+                        order_list.add(orderId);
+                        dialog.dismiss();
+                        Toast.makeText(OrderDetailActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        dialog.dismiss();
+                        Toast.makeText(OrderDetailActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -644,26 +635,26 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
         if (requestCode == REFUND || requestCode == EVULATE) {
             if (resultCode == RESULT_OK) finish();
         }
-//        switch (requestCode) {
-//            case 1000:
-//                if (resultCode == RESULT_OK) {
-//                    if (data.getIntExtra("paytype", -1) == 0) {
-//                        dialog.show();
-//                        //支付宝支付
-//                        presenter.generateOrders(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 0, type, 1, qiugou_id, name_str, address, province, city, area, telnum, presenter.initOrderList(commodityId, orderId, comment, shopId));
-//                    } else if (data.getIntExtra("paytype", -1) == 1) {
-//                        dialog.show();
-//                        //微信支付
-//                        presenter.generateOrders(Sp.getInt(this, AppConstant.USER_ACCOUNT_ID), 1, type, 1, qiugou_id, name_str, address, province, city, area, telnum, presenter.initOrderList(commodityId, orderId, comment, shopId));
-//                    } else if (data.getIntExtra("paytype", -1) == 3) {
-//                        Toast.makeText(this, "大额支付", Toast.LENGTH_SHORT).show();
-//                        dialog.show();
-//                        //大额支付
-//                        presenter.generateOrders(Sp.getInt(this, "useraccountid"), 3, type, 1, qiugou_id, name_str, address, province, city, area, telnum, presenter.initOrderList(commodityId, orderId, comment, shopId));
-//                    }
-//                }
-//                break;
-//        }
+        switch (requestCode) {
+            case 1000:
+                if (resultCode == RESULT_OK) {
+                    if (data.getIntExtra("paytype", -1) == 0) {
+                        dialog.show();
+                        //支付宝支付
+                        presenter.generateOrders(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 0, type, 1, qiugou_id, name_str, address, province, city, area, telnum, presenter.initOrderList(commodityId, orderId, comment, shopId));
+                    } else if (data.getIntExtra("paytype", -1) == 1) {
+                        dialog.show();
+                        //微信支付
+                        presenter.generateOrders(Sp.getString(this, AppConstant.USER_ACCOUNT_ID), 1, type, 1, qiugou_id, name_str, address, province, city, area, telnum, presenter.initOrderList(commodityId, orderId, comment, shopId));
+                    } else if (data.getIntExtra("paytype", -1) == 3) {
+                        Toast.makeText(this, "大额支付", Toast.LENGTH_SHORT).show();
+                        dialog.show();
+                        //大额支付
+                        presenter.generateOrders(Sp.getString(this, "useraccountid"), 3, type, 1, qiugou_id, name_str, address, province, city, area, telnum, presenter.initOrderList(commodityId, orderId, comment, shopId));
+                    }
+                }
+                break;
+        }
     }
 
     @Override
@@ -677,6 +668,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().unregister(this);
     }
 }

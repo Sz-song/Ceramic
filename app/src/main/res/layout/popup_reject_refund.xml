@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popupwindow3">
+    <EditText
+        android:id="@+id/reject_reason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_margin="10dp"
+        android:gravity="start|top"
+        android:textSize="14sp"
+        android:hint="请您输入拒绝理由..."
+        android:minHeight="150dp"/>
+    <TextView
+        android:id="@+id/summit"
+        android:layout_width="65dp"
+        android:text="发送"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_gravity="end"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/r5_sored"
+        android:layout_height="30dp" />
+</LinearLayout>

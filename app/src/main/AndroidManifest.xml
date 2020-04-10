@@ -161,6 +161,11 @@
                 <data android:scheme="wx4507b09176ec42f4" />
             </intent-filter>
         </activity>
+        <activity android:name=".mine.dashiattestation.SubmitSuccessActivity" />
+        <activity android:name=".order.refund.ApplyRefundActivity" />
+        <activity android:name=".order.refund.RefundDetailWujiaActivity" />
+        <activity android:name=".seller.refund.RefundActivity" />
+        <activity android:name=".seller.refund.refund_detail.RefundDetailActivity" />
     </application>
 
 </manifest>

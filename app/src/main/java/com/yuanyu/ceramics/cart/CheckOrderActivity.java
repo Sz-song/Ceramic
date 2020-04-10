@@ -38,6 +38,7 @@ import com.yuanyu.ceramics.item.AdsCellBean;
 import com.yuanyu.ceramics.item.CheckOrderDecoration;
 import com.yuanyu.ceramics.large_payment.LargePaymentActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
+import com.yuanyu.ceramics.order.OrderDetailActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -310,6 +311,8 @@ public class CheckOrderActivity extends BaseActivity<CheckOrderPresenter> implem
                 String resultStatus = payResult.getResultStatus();
                 // 判断resultStatus 为9000则代表支付成功
                 if (TextUtils.equals(resultStatus, "9000")) {
+                    dialog.dismiss();
+                    Toast.makeText(CheckOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
 //                    presenter.sendAliPay(Sp.getString(CheckOrderActivity.this, "useraccountid"), order_list, payResultInfo.getAlipay_trade_app_pay_response().getOut_trade_no(), payResultInfo.getAlipay_trade_app_pay_response().getTrade_no());
                 } else {
                     finish();
@@ -390,35 +393,6 @@ public class CheckOrderActivity extends BaseActivity<CheckOrderPresenter> implem
         Toast.makeText(CheckOrderActivity.this, e.message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void sendAliPaySuccess(Boolean b) {
-        if(b) {
-            dialog.dismiss();
-            Toast.makeText(CheckOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-            finish();
-        }else {
-            dialog.dismiss();
-            Toast.makeText(CheckOrderActivity.this, "订单异常", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void sendAliPayFail(ExceptionHandler.ResponeThrowable e, String out_trade_no, String trade_no) {
-        dialog.dismiss();
-        Toast.makeText(CheckOrderActivity.this, "订单异常", Toast.LENGTH_SHORT).show();
-        presenter.notify_order_exception(order_list,Sp.getString(this,AppConstant.USER_ACCOUNT_ID)+"",out_trade_no,trade_no);
-    }
-
-    @Override
-    public void notify_order_exceptionSuccess() {
-        Toast.makeText(this, "订单异常，请联系客服", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void notify_order_exceptionFail(ExceptionHandler.ResponeThrowable e) {
-        L.e(e.status+" "+e.message);
-        Toast.makeText(CheckOrderActivity.this, "异常订单通知失败，请联系客服", Toast.LENGTH_SHORT).show();
-    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

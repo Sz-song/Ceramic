@@ -168,7 +168,8 @@ public class LargePaymentActivity extends BaseActivity {
                 break;
             case R.id.contact_kefu:
                 if (CustomerService != null && CustomerService.length() > 0) {
-//                    ChatActivity.navToChat(this, CustomerService, TIMConversationType.C2C);
+                    L.e(CustomerService);
+                    ChatActivity.navToChat(this, CustomerService);
                 } else {
                     Toast.makeText(this, "客服繁忙，请稍后再试", Toast.LENGTH_SHORT).show();
                 }

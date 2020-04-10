@@ -99,42 +99,6 @@ public class CheckOrderPresenter extends BasePresenter<CheckOrderConstract.IChec
     }
 
     @Override
-    public void sendAliPay(String useraccountid, List<String> order_list, String out_trade_no, String trade_no) {
-        model.sendAliPay(useraccountid,order_list,out_trade_no,trade_no)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
-                .subscribe(new BaseObserver<Boolean>() {
-                    @Override
-                    public void onNext(Boolean aBoolean) {
-                        if(view!=null){view.sendAliPaySuccess(aBoolean);}
-                    }
-                    @Override
-                    public void onError(ExceptionHandler.ResponeThrowable e) {
-                        if(view!=null){view.sendAliPayFail(e,out_trade_no,trade_no);}
-                    }
-                });
-    }
-
-    @Override
-    public void notify_order_exception(List<String> order_list, String useraccountid, String out_trade_no, String trade_no) {
-        model.notify_order_exception(order_list,useraccountid,out_trade_no,trade_no)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<String[]>())
-                .subscribe(new BaseObserver<String[]>() {
-                    @Override
-                    public void onNext(String[] strings) {
-                        if(view!=null){view.notify_order_exceptionSuccess();}
-                    }
-                    @Override
-                    public void onError(ExceptionHandler.ResponeThrowable e) {
-                        if(view!=null){view.notify_order_exceptionFail(e);}
-                    }
-                });
-    }
-
-    @Override
     public void initOrdernum(List<String> stringList, List<SumOrderBean> list) {
         for(int i=0;i<list.size();i++){
             for(int j=0;j<list.get(i).getItem_list().size();j++){
