@@ -142,66 +142,104 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     tools:ignore="DisableBaselineAlignment">
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/nopay"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/daifukuan_image"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
+                            android:layout_centerHorizontal="true"
                             android:src="@drawable/seller_nopay" />
                         <TextView
+                            android:layout_below="@+id/daifukuan_image"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
-                            android:text="@string/nopay"/>
-                    </LinearLayout>
-                    <LinearLayout
+                            android:text="@string/nopay"
+                            tools:ignore="SmallSp"/>
+                        <TextView
+                            android:id="@+id/daifukuan_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/daifukuan_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
+                            tools:ignore="SmallSp" />
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:id="@+id/nofahuo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/daifahuo_image"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/seller_nofahuo" />
+                            android:src="@drawable/seller_nofahuo"
+                            android:layout_centerHorizontal="true"/>
                         <TextView
+                            android:layout_below="@id/daifahuo_image"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
                             android:text="@string/nofahuo"/>
-                    </LinearLayout>
-                    <LinearLayout
+                        <TextView
+                            android:id="@+id/daifahuo_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/daifahuo_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
+                            tools:ignore="SmallSp" />
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:id="@+id/yifahuo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/yifahuo_image"
                             android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/seller_alfahuo" />
+                            android:src="@drawable/seller_alfahuo"
+                            android:layout_centerHorizontal="true"/>
                         <TextView
+                            android:layout_below="@id/yifahuo_image"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
                             android:text="@string/yifahuo"/>
-                    </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -212,46 +250,66 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     tools:ignore="DisableBaselineAlignment">
-                    <LinearLayout
+                    <RelativeLayout
                         android:id="@+id/yishouhuo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/yishouhuo_image"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
-                            android:src="@drawable/seller_yishouhuo" />
+                            android:src="@drawable/seller_yishouhuo"
+                            android:layout_centerHorizontal="true"/>
                         <TextView
+                            android:layout_below="@id/yishouhuo_image"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
                             android:text="@string/yishouhuo"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:id="@+id/refund"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
                         <ImageView
+                            android:id="@+id/refund_image"
                             android:layout_width="35dp"
                             android:layout_height="30dp"
                             android:layout_margin="5dp"
                             android:layout_gravity="center_horizontal"
+                            android:layout_centerHorizontal="true"
                             android:src="@drawable/seller_refund" />
                         <TextView
+                            android:layout_below="@+id/refund_image"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_horizontal"
                             android:textSize="12sp"
                             android:textColor="@color/blackLight"
                             android:text="@string/refund"/>
-                    </LinearLayout>
+                        <TextView
+                            android:id="@+id/refund_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignStart="@+id/refund_image"
+                            android:layout_marginStart="20dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            android:padding="2dp"
+                            android:minWidth="18dp"
+                            android:visibility="gone"
+                            android:background="@drawable/background_red_dot"
+                            tools:ignore="SmallSp" />
+                    </RelativeLayout>
                     <View
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

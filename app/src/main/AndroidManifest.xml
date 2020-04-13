@@ -166,6 +166,8 @@
         <activity android:name=".order.refund.RefundDetailWujiaActivity" />
         <activity android:name=".seller.refund.RefundActivity" />
         <activity android:name=".seller.refund.refund_detail.RefundDetailActivity" />
+        <activity android:name=".seller.evaluationmanage.EvaluationDetailActivity" />
+        <activity android:name=".seller.evaluationmanage.EvaluationManageActivity" />
     </application>
 
 </manifest>

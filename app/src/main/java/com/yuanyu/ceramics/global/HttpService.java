@@ -49,6 +49,7 @@ import com.yuanyu.ceramics.search.SearchShopBean;
 import com.yuanyu.ceramics.seller.delivery.CourierBean;
 import com.yuanyu.ceramics.seller.delivery.DeliveryBean;
 import com.yuanyu.ceramics.seller.delivery.WaitDeliveryBean;
+import com.yuanyu.ceramics.seller.evaluationmanage.EvaluationManageBean;
 import com.yuanyu.ceramics.seller.index.SellerIndexBean;
 import com.yuanyu.ceramics.seller.liveapply.LiveApplyStatusBean;
 import com.yuanyu.ceramics.seller.liveapply.bean.SelectItemBean;
@@ -481,4 +482,13 @@ public interface HttpService {
     //大额支付获取订单价格
     @POST("back/test/api/order/allprice.php")
     Observable<BaseResponse<String>> getAllprice(@Body RequestBody body);
+    //举报
+    @POST("123")
+    Observable<BaseResponse<String[]>> submitReport(@Body RequestBody body);
+    //获取商家评论
+    @POST("123")
+    Observable<BaseResponse<List<EvaluationManageBean>>>getEvaluation(@Body RequestBody body);
+    //商家回复replyEvaluation
+    @POST("123")
+    Observable<BaseResponse<String[]>>replyEvaluation(@Body RequestBody body);
 }

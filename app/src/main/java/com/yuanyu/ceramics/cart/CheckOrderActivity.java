@@ -313,6 +313,7 @@ public class CheckOrderActivity extends BaseActivity<CheckOrderPresenter> implem
                 if (TextUtils.equals(resultStatus, "9000")) {
                     dialog.dismiss();
                     Toast.makeText(CheckOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                    finish();
 //                    presenter.sendAliPay(Sp.getString(CheckOrderActivity.this, "useraccountid"), order_list, payResultInfo.getAlipay_trade_app_pay_response().getOut_trade_no(), payResultInfo.getAlipay_trade_app_pay_response().getTrade_no());
                 } else {
                     finish();

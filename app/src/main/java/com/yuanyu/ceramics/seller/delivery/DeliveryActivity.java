@@ -464,7 +464,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         bookingCourier.setVisibility(View.VISIBLE);
         booking.setVisibility(View.VISIBLE);
         bookingTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
-        bookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_red));
+        bookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_blue));
         unbookingTxt.setTextColor(getResources().getColor(R.color.gray));
         unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_gray));
         deliveryType = true;
@@ -479,7 +479,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         bookingTxt.setTextColor(getResources().getColor(R.color.gray));
         bookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_gray));
         unbookingTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
-        unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_red));
+        unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_blue));
         deliveryType = false;
         L.e("statusis" + deliveryType + "");
     }
