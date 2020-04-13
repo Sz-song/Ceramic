@@ -1,11 +1,16 @@
 package com.yuanyu.ceramics.personal_index;
 
+import com.tencent.imsdk.TIMFriendshipManager;
+import com.tencent.imsdk.TIMValueCallBack;
+import com.tencent.imsdk.friendship.TIMFriendResult;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.common.DynamicBean;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
+import com.yuanyu.ceramics.utils.L;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -77,17 +82,33 @@ public class PersonalFragmentPersenter extends BasePresenter<PersonalFragmentCon
     }
 
     @Override
-    public void blackList(String useraccountid, String userid) {
-        model.blackList(useraccountid,userid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
-                .subscribe(new BaseObserver<Boolean>() {
-                    @Override
-                    public void onNext(Boolean b) {if(view!=null){view.blackListSuccess(b);}}
-                    @Override
-                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.blackListFail(e);}}
-                });
+    public void blackList(String useraccountid, String blackUser) {
+        List<String> users=new ArrayList<>();
+        users.add(blackUser);
+        TIMFriendshipManager.getInstance().addBlackList(users, new TIMValueCallBack<List<TIMFriendResult>>() {
+            @Override
+            public void onError(int i, String s) {
+                L.e("error code:"+i+"  msg:"+ s);
+            }
+            @Override
+            public void onSuccess(List<TIMFriendResult> timFriendResults) {
+                model.blackList(useraccountid,blackUser)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                        .subscribe(new BaseObserver<Boolean>() {
+                            @Override
+                            public void onNext(Boolean aBoolean) {
+                                if(view!=null){view.blackListSuccess(aBoolean);}
+                            }
+                            @Override
+                            public void onError(ExceptionHandler.ResponeThrowable e) {
+                                if(view!=null){view.blackListFail(e);}
+                                L.e(e.message);
+                            }
+                        });
+            }
+        });
     }
     @Override
     public void deleteDynamic(String useraccountid, String dynamic_id, int position) {

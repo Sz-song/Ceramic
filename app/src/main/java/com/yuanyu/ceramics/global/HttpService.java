@@ -306,7 +306,7 @@ public interface HttpService {
     Observable<BaseResponse<String[]>> MasterAttestation(@Body RequestBody body);
     //移除黑名单
     @POST("back/test/api/homepage/remove_blacklist.php")
-    Observable<BaseResponse>removeBlacklist(@Body RequestBody body);
+    Observable<BaseResponse<String[]>>removeBlacklist(@Body RequestBody body);
     //黑名单初始化
     @POST("back/test/api/homepage/blacklist.php")
     Observable<BaseResponse<List<BlackListBean>>>getBlacklist(@Body RequestBody body);

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseObserver;
+import com.yuanyu.ceramics.common.OnPositionClickListener;
+import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.Sp;
@@ -29,7 +31,11 @@ import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 public class BlackListAdapter extends RecyclerView.Adapter <BlackListAdapter.ViewHolder>{
     private List<BlackListBean> list;
     private Context context;
-    private SystemSettingModel model;
+    private OnPositionClickListener onRemoveBlacklist;
+
+    void setOnRemoveBlacklist(OnPositionClickListener onRemoveBlacklist) {
+        this.onRemoveBlacklist = onRemoveBlacklist;
+    }
 
     BlackListAdapter(List<BlackListBean> list, Context context) {
         this.list = list;
@@ -39,34 +45,18 @@ public class BlackListAdapter extends RecyclerView.Adapter <BlackListAdapter.Vie
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
-        view = LayoutInflater.from(context).inflate(R.layout.cell_blacklist, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.cell_blacklist, parent, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(context).load(BASE_URL+list.get(position).getPortrait()).into(holder.image);
+        GlideApp.with(context)
+                .load(BASE_URL+list.get(position).getPortrait())
+                .override(50,50)
+                .placeholder(R.drawable.logo_default)
+                .into(holder.image);
         holder.name.setText(list.get(position).getName());
-        holder.remove.setOnClickListener(view -> {
-            model=new SystemSettingModel();
-            model.removeBlacklist(Sp.getString(context,"useraccountid"),list.get(position).getBlackuserid())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .compose(new HttpServiceInstance.ErrorTransformer<>())
-                    .subscribe(new BaseObserver() {
-                        @Override
-                        public void onError(ExceptionHandler.ResponeThrowable e) {
-                            Toast.makeText(context, "解除拉黑失败，稍后再试", Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onNext(Object o) {
-                            Toast.makeText(context, "解除拉黑成功", Toast.LENGTH_SHORT).show();
-                            list.remove(position);
-                            notifyDataSetChanged();
-                        }
-                    });
-        });
+        holder.remove.setOnClickListener(view -> onRemoveBlacklist.callback(position));
     }
 
     @Override

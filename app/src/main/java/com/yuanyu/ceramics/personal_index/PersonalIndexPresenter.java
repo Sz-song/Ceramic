@@ -4,6 +4,9 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 
+import com.tencent.imsdk.TIMFriendshipManager;
+import com.tencent.imsdk.TIMValueCallBack;
+import com.tencent.imsdk.friendship.TIMFriendResult;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
@@ -12,6 +15,8 @@ import com.yuanyu.ceramics.utils.L;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -52,17 +57,33 @@ public class PersonalIndexPresenter extends BasePresenter<PersonalIndexConstract
     }
 
     @Override
-    public void addBlacklist(String useraccountid, String userid) {
-        model.addBlacklist(useraccountid,userid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
-                .subscribe(new BaseObserver<Boolean>() {
-                    @Override
-                    public void onNext(Boolean b) {if(view!=null){view.addBlacklistSuccess(b);}}
-                    @Override
-                    public void onError(ExceptionHandler.ResponeThrowable e) {if(view!=null){view.addBlacklistFail(e);}}
-                });
+    public void addBlacklist(String useraccountid, String blackUser) {
+        List<String> users=new ArrayList<>();
+        users.add(blackUser);
+        TIMFriendshipManager.getInstance().addBlackList(users, new TIMValueCallBack<List<TIMFriendResult>>() {
+            @Override
+            public void onError(int i, String s) {
+                L.e("error code:"+i+"  msg:"+ s);
+            }
+            @Override
+            public void onSuccess(List<TIMFriendResult> timFriendResults) {
+                model.addBlacklist(useraccountid,blackUser)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .compose(new HttpServiceInstance.ErrorTransformer<Boolean>())
+                        .subscribe(new BaseObserver<Boolean>() {
+                            @Override
+                            public void onNext(Boolean aBoolean) {
+                                if(view!=null){view.addBlacklistSuccess(aBoolean);}
+                            }
+                            @Override
+                            public void onError(ExceptionHandler.ResponeThrowable e) {
+                                if(view!=null){view.addBlacklistFail(e);}
+                                L.e(e.message);
+                            }
+                        });
+            }
+        });
     }
 
     @Override
