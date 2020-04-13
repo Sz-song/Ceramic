@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.common.ReportActivity;
 import com.yuanyu.ceramics.home.HomeActivity;
 
 
@@ -92,7 +93,7 @@ public class PersonalIndexPopupWindow extends PopupWindow {
         });
         report.setOnClickListener(view -> {
 //            ReportActivity.actionStart(context,id,type);
-            dismiss();
+//            dismiss();
         });
     }
     public void HideIndex(){

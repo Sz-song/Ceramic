@@ -319,7 +319,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 }
                 btnRed.setText("立即评价");
                 btnRed.setOnClickListener(view -> {
-                    Intent intent = new Intent(this, EvaluationManageActivity.class);
+                    Intent intent = new Intent(this, EvaluationActivity.class);
                     intent.putExtra("order_num", orderId);
                     intent.putExtra("commodity_id", commodityId);
                     L.e("shop id is:" + shopId);

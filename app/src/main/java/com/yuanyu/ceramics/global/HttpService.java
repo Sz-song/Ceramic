@@ -486,9 +486,12 @@ public interface HttpService {
     @POST("123")
     Observable<BaseResponse<String[]>> submitReport(@Body RequestBody body);
     //获取商家评论
-    @POST("123")
+    @POST("back/test/commodity/evaluationmanage.php")
     Observable<BaseResponse<List<EvaluationManageBean>>>getEvaluation(@Body RequestBody body);
     //商家回复replyEvaluation
     @POST("123")
     Observable<BaseResponse<String[]>>replyEvaluation(@Body RequestBody body);
+    //提交订单评价
+    @POST("123")
+    Observable<BaseResponse<String[]>>submitEvulation(@Body RequestBody body);
 }

@@ -168,6 +168,7 @@
         <activity android:name=".seller.refund.refund_detail.RefundDetailActivity" />
         <activity android:name=".seller.evaluationmanage.EvaluationDetailActivity" />
         <activity android:name=".seller.evaluationmanage.EvaluationManageActivity" />
+        <activity android:name=".common.ReportActivity" />
     </application>
 
 </manifest>
