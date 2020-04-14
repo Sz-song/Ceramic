@@ -22,8 +22,7 @@ public class CommonModel {
     public CommonModel(){httpService = HttpServiceInstance.getInstance();}
 
 
-    //定制页面初始化
-    public Observable<BaseResponse<String[]>> submitReport(int useraccountid, String id, int type, String content, String contact, List<String> images){
+    public Observable<BaseResponse<String[]>> submitReport(String useraccountid, String id, int type, String content, String contact, List<String> images){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

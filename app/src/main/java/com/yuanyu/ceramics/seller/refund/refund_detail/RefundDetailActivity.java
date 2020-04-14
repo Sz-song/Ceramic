@@ -16,6 +16,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.CommonDialog2;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.SquareImageView;
@@ -344,10 +345,10 @@ public class RefundDetailActivity extends BaseActivity<RefundDetailPresenter> im
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.contact_user:
-//                ChatActivity.navToChat(this, userid, TIMConversationType.C2C);
+                ChatActivity.navToChat(this, userid);
                 break;
             case R.id.contact_kefu:
-//                ChatActivity.navToChat(this, customer_service, TIMConversationType.C2C);
+                ChatActivity.navToChat(this, customer_service);
                 break;
             case R.id.rejected1:
                 RefundRejectPopupWindow popupWindow1 = new RefundRejectPopupWindow(this);
@@ -369,7 +370,7 @@ public class RefundDetailActivity extends BaseActivity<RefundDetailPresenter> im
                 });
                 break;
             case R.id.sixin0:
-//                ChatActivity.navToChat(this, userid, TIMConversationType.C2C);
+                ChatActivity.navToChat(this, userid);
                 break;
             case R.id.agree0:
                 CommonDialog2 dialog2 = new CommonDialog2(this, "确认同意退款", "确定", "取消");

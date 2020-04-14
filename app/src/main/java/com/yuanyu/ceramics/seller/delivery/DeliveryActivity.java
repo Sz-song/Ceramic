@@ -20,6 +20,7 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddOrEditAddressActivity;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
+import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.DeleteDialog;
 import com.yuanyu.ceramics.common.LoadingDialog;
@@ -256,7 +257,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         if (enable) {
             Intent intent = new Intent(this, AddOrEditAddressActivity.class);
             intent.putExtra("type", "2");
-            AddressBean addressBean = new AddressBean
+            AddressManageBean addressBean = new AddressManageBean
                     (deliveryBean.getReceive_name(),
                             deliveryBean.getReceive_tel(),
                             deliveryBean.getReceive_province(),

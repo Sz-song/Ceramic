@@ -69,17 +69,20 @@ public class ReportActivity extends BaseActivity {
     List<File> file=new ArrayList<>();
     @Override
     protected int getLayout() {
-        return 0;
+        return R.layout.activity_report;
     }
 
     @Override
     protected BasePresenter initPresent() {
-        return null;
+        return new BasePresenter() {
+        };
     }
 
     @Override
     protected void initEvent() {
-
+        ButterKnife.bind(this);
+        initView();
+        initRecycle();
     }
     public static void actionStart(Context context, String id, int type) {
         Log.d("ReportActivity", "actionStart: "+id+"----"+type);
@@ -88,15 +91,6 @@ public class ReportActivity extends BaseActivity {
         intent.putExtra("type", type);
         /** 举报类型* -1其他，0动态，1帖子，2作品，3文章，4评论,5人，6群，7商品，8拍品，9直播，10店铺（工作室）11.店铺恶评**/
         context.startActivity(intent);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report);
-        ButterKnife.bind(this);
-        initView();
-        initRecycle();
     }
 
     private void initView() {
@@ -245,7 +239,7 @@ public class ReportActivity extends BaseActivity {
                 });
     }
     private void submit() {
-        model.submitReport(Sp.getInt(this, "useraccountid"), id, type, content.getText().toString(), contact.getText().toString(), listimages)
+        model.submitReport(Sp.getString(this, "useraccountid"), id, type, content.getText().toString(), contact.getText().toString(), listimages)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<String[]>())

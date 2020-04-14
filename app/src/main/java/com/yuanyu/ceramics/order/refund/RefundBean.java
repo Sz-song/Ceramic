@@ -3,7 +3,7 @@ package com.yuanyu.ceramics.order.refund;
 import java.util.List;
 
 public class RefundBean {
-    private int uid;//用户id
+    private String uid;//用户id
     private String order_num;//订单编号
     private String id;//商品id
     private String status;//货物状态
@@ -12,7 +12,7 @@ public class RefundBean {
     private String illustrate;//退款说明
     private List<String> pic_list;//图片list
 
-    public RefundBean(int uid, String order_num, String id, String status, String reason, String price, String illustrate, List<String> pic_list) {
+    public RefundBean(String uid, String order_num, String id, String status, String reason, String price, String illustrate, List<String> pic_list) {
         this.uid = uid;
         this.order_num = order_num;
         this.id = id;
@@ -23,11 +23,11 @@ public class RefundBean {
         this.pic_list = pic_list;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 

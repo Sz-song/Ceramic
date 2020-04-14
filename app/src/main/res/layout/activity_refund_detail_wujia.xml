@@ -333,7 +333,7 @@
                         android:minHeight="30dp"
                         android:padding="5dp"
                         android:text="@string/apply_again"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/white"
                         android:textSize="13sp" />
                 </LinearLayout>
 

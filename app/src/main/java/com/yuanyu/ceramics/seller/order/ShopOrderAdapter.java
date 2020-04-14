@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.common.SquareImageView;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.logistics.LogisticsActivity;
+import com.yuanyu.ceramics.seller.delivery.DeliveryActivity;
 import com.yuanyu.ceramics.seller.order.detail.ShopOrderDetailActivity;
+import com.yuanyu.ceramics.seller.refund.refund_detail.RefundDetailActivity;
 import com.yuanyu.ceramics.utils.TimeUtils;
 
 import java.util.List;
@@ -69,9 +72,9 @@ public class ShopOrderAdapter extends RecyclerView.Adapter<ShopOrderAdapter.View
             holder.orderBtn2.setVisibility(View.GONE);
             holder.orderBtn1.setText("发货");
             holder.orderBtn1.setOnClickListener(view -> {
-//                Intent intent=new Intent(context,DeliveryActivity.class);
-//                intent.putExtra("ordernum",list.get(position).getOrdernum());
-//                context.startActivity(intent);
+                Intent intent=new Intent(context, DeliveryActivity.class);
+                intent.putExtra("ordernum",list.get(position).getOrdernum());
+                context.startActivity(intent);
             });
         } else if (list.get(position).getType() == 3) {//已发货订单
             holder.content.setVisibility(View.GONE);
@@ -82,18 +85,18 @@ public class ShopOrderAdapter extends RecyclerView.Adapter<ShopOrderAdapter.View
             holder.orderBtn1.setVisibility(View.VISIBLE);
             holder.orderBtn1.setText("查看物流");
             holder.orderBtn1.setOnClickListener(view -> {
-//                Intent intent=new Intent(context,LogisticsTracingActivity.class);
-//                intent.putExtra("image",list.get(position).getImage());
-//                intent.putExtra("logistics",list.get(position).getLogisticsnum());
-//                intent.putExtra("logistics_id",list.get(position).getLogisticscompany());
-//                context.startActivity(intent);
+                Intent intent=new Intent(context, LogisticsActivity.class);
+                intent.putExtra("image",list.get(position).getImage());
+                intent.putExtra("logistics",list.get(position).getLogisticsnum());
+                intent.putExtra("logistics_id",list.get(position).getLogisticscompany());
+                context.startActivity(intent);
             });
             holder.orderBtn2.setVisibility(View.VISIBLE);
             holder.orderBtn2.setText("重新发货");
             holder.orderBtn2.setOnClickListener(view -> {
-//                Intent intent=new Intent(context,DeliveryActivity.class);
-//                intent.putExtra("ordernum",list.get(position).getOrdernum());
-//                context.startActivity(intent);
+                Intent intent=new Intent(context,DeliveryActivity.class);
+                intent.putExtra("ordernum",list.get(position).getOrdernum());
+                context.startActivity(intent);
             });
         } else if (list.get(position).getType() == 4) {//待评价（已收货）
             holder.content.setVisibility(View.VISIBLE);
@@ -129,9 +132,9 @@ public class ShopOrderAdapter extends RecyclerView.Adapter<ShopOrderAdapter.View
             holder.content.setText("退款售后订单");
             holder.bottomRelat.setVisibility(View.GONE);
             holder.itemView.setOnClickListener(view -> {
-//                Intent intent=new Intent(context,RefundDetailActivity.class);
-//                intent.putExtra("ordernum",list.get(position).getOrdernum());
-//                context.startActivity(intent);
+                Intent intent=new Intent(context, RefundDetailActivity.class);
+                intent.putExtra("ordernum",list.get(position).getOrdernum());
+                context.startActivity(intent);
             });
         }
     }
