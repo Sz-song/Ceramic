@@ -92,8 +92,8 @@ public class PersonalIndexPopupWindow extends PopupWindow {
             dismiss();
         });
         report.setOnClickListener(view -> {
-//            ReportActivity.actionStart(context,id,type);
-//            dismiss();
+            ReportActivity.actionStart(context,id,type);
+            dismiss();
         });
     }
     public void HideIndex(){

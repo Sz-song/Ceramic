@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -81,6 +82,7 @@ public class ReportActivity extends BaseActivity {
 
     }
     public static void actionStart(Context context, String id, int type) {
+        Log.d("ReportActivity", "actionStart: "+id+"----"+type);
         Intent intent = new Intent(context, ReportActivity.class);//这里的Target.class是启动目标Activity
         intent.putExtra("id", id);//被举报事物的id
         intent.putExtra("type", type);
