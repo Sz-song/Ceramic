@@ -275,7 +275,7 @@ public interface HttpService {
     @POST("back/test/api/mine/waitpay.php")
     Observable<BaseResponse<List<MyOrderFragmentBean>>> getOrderList(@Body RequestBody body);
     //提醒发货
-    @POST("123")
+    @POST("back/test/api/order/reminddelivery.php")
     Observable<BaseResponse<String[]>> remindDelivery(@Body RequestBody body);
     //上传图片
     @POST("back/test/api/upload/upload.php")
@@ -349,7 +349,7 @@ public interface HttpService {
     Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
 //    getLogisticsTracing
     //快递递踪
-    @POST("123")
+    @POST("back/test/api/order/express_tracking.php")
     Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
 //    modityOrderPrice商家修改未支付订单价格
     @POST("back/test/api/order/change_order_price.php")
@@ -390,10 +390,10 @@ public interface HttpService {
     Observable<BaseResponse<ShelvingDetailBean>> getShopGoodsDetail(@Body RequestBody body);
 
     //查看快递类型
-    @POST("app_api/shangjia/ExpRecommend.php")
+    @POST("123")
     Observable<BaseResponse<List<CourierBean>>> getCourierData(@Body RequestBody body);
     //获取所有快递
-    @POST("app_api/shangjia/expresscompany.php")
+    @POST("back/test/api/order/expresscompany.php")
     Observable<BaseResponse<List<CourierBean>>> getCourierCompany(@Body RequestBody body);
     //获取商家申请直播状态
     @POST("back/test/api/broadcast/liveapplystate.php")

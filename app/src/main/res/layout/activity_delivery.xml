@@ -307,6 +307,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_weight="1"
                     android:layout_margin="8dp"
+                    android:visibility="gone"
                     android:background="@drawable/layer3_r2_p05_00_08">
                     <TextView
                         android:id="@+id/booking_txt"
@@ -361,7 +362,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_margin="8dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@drawable/layer3_r2_p05_00_08">
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -428,6 +429,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
+                android:visibility="gone"
                 android:background="@drawable/layer3_r2_p05_00_08">
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -459,6 +461,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="8dp"
+                android:visibility="gone"
                 android:background="@drawable/layer3_r2_p05_00_08">
                 <RelativeLayout
                     android:layout_width="match_parent"

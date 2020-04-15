@@ -1,10 +1,6 @@
 package com.yuanyu.ceramics.seller.index;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -98,15 +94,15 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
     // 定义一个变量，来标识是否退出
-    private static boolean isExit = false;
-    @SuppressLint("HandlerLeak")
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            isExit = false;
-        }
-    };
+//    private static boolean isExit = false;
+//    @SuppressLint("HandlerLeak")
+//    Handler mHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            isExit = false;
+//        }
+//    };
 
     @Override
     protected int getLayout() {
@@ -305,25 +301,25 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exit();
-            return false;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            exit();
+//            return false;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
     private void exit() {
-        if (!isExit) {
-            isExit = true;
-            Toast.makeText(this, "再按一次退出程序",
-                    Toast.LENGTH_SHORT).show();
-            // 利用handler延迟发送更改状态信息
-//            mHandler.sendEmptyMessageDelayed(0, 2000);
-        } else {
-            finish();
-            System.exit(0);
-        }
+//        if (!isExit) {
+//            isExit = true;
+//            Toast.makeText(this, "再按一次退出程序",
+//                    Toast.LENGTH_SHORT).show();
+//            // 利用handler延迟发送更改状态信息
+////            mHandler.sendEmptyMessageDelayed(0, 2000);
+//        } else {
+//            finish();
+//            System.exit(0);
+//        }
     }
 }
