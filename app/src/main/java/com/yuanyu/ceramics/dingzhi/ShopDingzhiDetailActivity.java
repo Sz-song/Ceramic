@@ -17,11 +17,14 @@ import com.google.zxing.integration.android.IntentResult;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.DeleteDialog;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.ScanActivity;
 import com.yuanyu.ceramics.common.view.CustomDatePicker;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.logistics.LogisticsActivity;
+import com.yuanyu.ceramics.seller.delivery.CourierListActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -348,9 +351,9 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.contact_user:
-//                if (isInit) {
-//                    ChatActivity.navToChat(this, user_id, TIMConversationType.C2C);
-//                }
+                if (isInit) {
+                    ChatActivity.navToChat(this, user_id);
+                }
                 break;
             case R.id.cancel_order:
                 DeleteDialog deleteDialog = new DeleteDialog(this);
@@ -403,11 +406,11 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
                         break;
                     case 7://查看物流
                         if (courier_num != null && courier_num.length() > 0 && view_courier_id != null && view_courier_id.length() > 0) {
-//                            Intent intent=new Intent(this,LogisticsTracingActivity.class);
-//                            intent.putExtra("image","");
-//                            intent.putExtra("logistics",courier_num);
-//                            intent.putExtra("logistics_id",view_courier_id);
-//                            startActivity(intent);
+                            Intent intent=new Intent(this, LogisticsActivity.class);
+                            intent.putExtra("image","");
+                            intent.putExtra("logistics",courier_num);
+                            intent.putExtra("logistics_id",view_courier_id);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(this, "物流信息有误", Toast.LENGTH_SHORT).show();
                         }
@@ -415,9 +418,9 @@ public class ShopDingzhiDetailActivity extends BaseActivity<ShopDingzhiDetailPre
                 }
                 break;
             case R.id.select_courier:
-//                Intent intent = new Intent(this, CourierListActivity.class);
-//                intent.putExtra("type", 1);//自己发货
-//                startActivityForResult(intent, 1002);
+                Intent intent = new Intent(this, CourierListActivity.class);
+                intent.putExtra("type", 1);//自己发货
+                startActivityForResult(intent, 1002);
                 break;
             case R.id.scanner:
                 IntentIntegrator integrator = new IntentIntegrator(this);

@@ -169,6 +169,7 @@ public class RefundDetailActivity extends BaseActivity<RefundDetailPresenter> im
             refundingBottom1.setVisibility(View.GONE);
             finishTime.setVisibility(View.GONE);
             if (bean.getLogisticsnum() != null && bean.getLogisticsnum().length() > 0) {
+                item_image=bean.getSale_portrait();
                 refundDeliver.setVisibility(View.GONE);
                 logistics.setVisibility(View.VISIBLE);
                 presenter.getLogisticsTracing(bean.getLogisticsnum(), bean.getLogisticscompany());
@@ -184,6 +185,7 @@ public class RefundDetailActivity extends BaseActivity<RefundDetailPresenter> im
             refundingBottom0.setVisibility(View.GONE);
             refundingBottom1.setVisibility(View.GONE);
             if (bean.getLogisticsnum() != null && bean.getLogisticsnum().length() > 0) {
+                item_image=bean.getSale_portrait();
                 refundDeliver.setVisibility(View.GONE);
                 logistics.setVisibility(View.VISIBLE);
                 presenter.getLogisticsTracing(bean.getLogisticsnum(), bean.getLogisticscompany());

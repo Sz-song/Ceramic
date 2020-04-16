@@ -249,7 +249,7 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
             if(bean.getLogisticsnum()!=null&&bean.getLogisticsnum().length()>0){
                 topStatus.setVisibility(View.GONE);
                 logistics.setVisibility(View.VISIBLE);
-//                presenter.getLogisticsTracing(bean.getLogisticsnum(), bean.getLogisticscompany());
+                presenter.getLogisticsTracing(bean.getLogisticsnum(), bean.getLogisticscompany());
                 rejectLinear.setVisibility(View.GONE);
                 btnLinear.setVisibility(View.VISIBLE);
                 contactShop.setVisibility(View.VISIBLE);

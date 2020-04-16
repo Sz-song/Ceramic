@@ -83,7 +83,8 @@ public class EvaluationActivity extends BaseActivity {
 
     @Override
     protected BasePresenter initPresent() {
-        return null;
+        return new BasePresenter() {
+        };
     }
 
     @Override

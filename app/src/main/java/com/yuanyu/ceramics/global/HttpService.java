@@ -142,22 +142,22 @@ public interface HttpService {
     @POST("back/test/api/dingzhi/dingzhi_detail.php")
     Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(@Body RequestBody body);
     //生成定制保证金(尾款)订单
-    @POST("app_api/home_page/generate_dingzhi_orders.php")
+    @POST("back/test/api/dingzhi/generate_dingzhi_orders.php")
     Observable<BaseResponse<String>> generateDingzhiBondOrder(@Body RequestBody body);
     //用户保证金支付
     @POST("app_api/home_page/dingzhi_bondpay.php")
     Observable<BaseResponse<Boolean>> dingzhiBondPay(@Body RequestBody body);
     //商家接受定制订单
-    @POST("app_api/home_page/confirm_order.php")
+    @POST("123")
     Observable<BaseResponse<Boolean>> confirmDingzhiOrder(@Body  RequestBody body);
-    //商家接受定制订单
-    @POST("app_api/home_page/cancel_dingzhi_order.php")
+    //商家拒绝定制订单
+    @POST("123")
     Observable<BaseResponse<Boolean>> cancelDingzhiOrder(@Body  RequestBody body);
     //定制发货
-    @POST("app_api/home_page/dingzhi_courier.php")
+    @POST("back/test/api/dingzhi/dingzhi_courier.php")
     Observable<BaseResponse<Boolean>> dingzhiCourier(@Body  RequestBody body);
     //定制确认收货
-    @POST("app_api/home_page/dingzhi_receive.php")
+    @POST("back/test/api/dingzhi/dingzhi_receive.php")
     Observable<BaseResponse<Boolean>> dingzhiConfirmReceipt(@Body RequestBody body);
     //发布定制需求
     @POST("back/test/api/dingzhi/publishdingzhi.php")
@@ -492,6 +492,6 @@ public interface HttpService {
     @POST("123")
     Observable<BaseResponse<String[]>> replyEvaluation(@Body RequestBody body);
     //提交订单评价
-    @POST("back/test/commodity/evaluateitem.php")
+    @POST("back/test/api/commodity/evaluateitem.php")
     Observable<BaseResponse<String[]>> submitEvulation(@Body RequestBody body);
 }
