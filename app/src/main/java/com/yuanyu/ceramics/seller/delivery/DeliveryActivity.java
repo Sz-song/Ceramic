@@ -163,6 +163,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         dialog.show();
         enable = false;
         presenter.getDeliveryMsg(deliveryBean.getOrdernum(), Sp.getString(this, AppConstant.SHOP_ID));
+//        暂时没有上门取件开始
         unbookingCourier.setVisibility(View.VISIBLE);
         bookingCourier.setVisibility(View.GONE);
         booking.setVisibility(View.GONE);
@@ -171,6 +172,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         unbookingTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
         unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_blue));
         deliveryType = false;
+        //        暂时没有上门取件结束
         L.e("statusis" + deliveryType + "");
     }
 
