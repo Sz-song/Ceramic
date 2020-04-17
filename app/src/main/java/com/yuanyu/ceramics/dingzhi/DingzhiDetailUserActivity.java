@@ -1,7 +1,11 @@
 package com.yuanyu.ceramics.dingzhi;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -9,25 +13,43 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
+import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
+import com.yuanyu.ceramics.address_manage.AddressManageActivity;
+import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.cart.AliPayResultInfo;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.DeleteDialog;
 import com.yuanyu.ceramics.common.LoadingDialog;
+import com.yuanyu.ceramics.common.PayResult;
+import com.yuanyu.ceramics.common.SelectPayTypeActivity;
+import com.yuanyu.ceramics.large_payment.LargePaymentActivity;
+import com.yuanyu.ceramics.logistics.LogisticsActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
 import com.yuanyu.ceramics.utils.TimeUtils;
+import com.yuanyu.ceramics.wxapi.WechatEvent;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -94,7 +116,7 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
     private String master_id;
     private int statusCode;
     private boolean isInit = false;
-    private AddressBean address;
+    private AddressManageBean address;
     private String courier_id;
     private String courier_num;
     private String price_pay = "";
@@ -299,23 +321,23 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
     }
 
     @Override
-    public void generateBondOrderSuccess(String s, int paytype) {
+    public void generateBondOrderSuccess(GenerateOrdersBean s, int paytype) {
         dialog.dismiss();
         switch (paytype) {
             case 0://Alipay
-//                alipay(s);
+                alipay(s.getOrder_data());
                 break;
             case 1://Wechatpay
-                wechatpay(s);
+                wechatpay(s.getOrder_data());
                 break;
             case 3://Yuanyupay
-//                List<String> strings=new ArrayList<>();
-//                strings.add(id);
-//                Intent intent=new Intent(this,LargePaymentActivity.class);
-//                intent.putExtra("price",price_pay);
-//                intent.putExtra("type",1);
-//                intent.putStringArrayListExtra("list",(ArrayList<String>) strings);
-//                startActivity(intent);
+                List<String> strings=new ArrayList<>();
+                strings.add(id);
+                Intent intent=new Intent(this, LargePaymentActivity.class);
+                intent.putExtra("price",price_pay);
+                intent.putExtra("type",1);
+                intent.putStringArrayListExtra("list",(ArrayList<String>) strings);
+                startActivity(intent);
                 break;
         }
     }
@@ -362,12 +384,12 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         switch (view.getId()) {
             case R.id.contact_master:
                 if (isInit) {
-//                    ChatActivity.navToChat(this, master_id, TIMConversationType.C2C);
+                    ChatActivity.navToChat(this, master_id);
                 }
                 break;
             case R.id.view_negotiation_history:
                 if (isInit) {
-//                    ChatActivity.navToChat(this, master_id, TIMConversationType.C2C);
+                    ChatActivity.navToChat(this, master_id);
                 }
                 break;
             case R.id.submit:
@@ -375,22 +397,22 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
                     Intent intent;
                     switch (statusCode) {
                         case 4://支付保证金
-//                            intent = new Intent(this, SelectPayTypeActivity.class);
-//                            intent.putExtra("price",price_pay);
-//                            startActivityForResult(intent, 1000);
-//                            break;
-//                        case 5://支付尾款
-//                            DeleteDialog deleteDialog = new DeleteDialog(this);
-//                            deleteDialog.setTitle("请选择收货地址");
-//                            deleteDialog.setNoOnclickListener(deleteDialog::dismiss);
-//                            deleteDialog.setYesOnclickListener(() -> {
-//                                Intent intent1 = new Intent(DingzhiDetailUserActivity.this, AddressManageActivity.class);
-//                                intent1.putExtra("finish", "1");
-//                                startActivityForResult(intent1, 1001);
-//                                deleteDialog.dismiss();
-//
-//                            });
-//                            deleteDialog.show();
+                            intent = new Intent(this, SelectPayTypeActivity.class);
+                            intent.putExtra("price",price_pay);
+                            startActivityForResult(intent, 1000);
+                            break;
+                        case 5://支付尾款
+                            DeleteDialog deleteDialog = new DeleteDialog(this);
+                            deleteDialog.setTitle("请选择收货地址");
+                            deleteDialog.setNoOnclickListener(deleteDialog::dismiss);
+                            deleteDialog.setYesOnclickListener(() -> {
+                                Intent intent1 = new Intent(DingzhiDetailUserActivity.this, AddressManageActivity.class);
+                                intent1.putExtra("finish", "1");
+                                startActivityForResult(intent1, 1001);
+                                deleteDialog.dismiss();
+
+                            });
+                            deleteDialog.show();
                             break;
                         case 7://确认收货
                             DeleteDialog deleteDialog1 = new DeleteDialog(this);
@@ -410,15 +432,15 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
                 }
                 break;
             case R.id.view_courier:
-//                if(courier_num!=null&&courier_num.length()>0&&courier_id!=null&&courier_id.length()>0){
-//                    Intent intent=new Intent(this,LogisticsTracingActivity.class);
-//                    intent.putExtra("image","");
-//                    intent.putExtra("logistics",courier_num);
-//                    intent.putExtra("logistics_id",courier_id);
-//                    startActivity(intent);
-//                }else{
-//                    Toast.makeText(this, "暂无快递信息", Toast.LENGTH_SHORT).show();
-//                }
+                if(courier_num!=null&&courier_num.length()>0&&courier_id!=null&&courier_id.length()>0){
+                    Intent intent=new Intent(this, LogisticsActivity.class);
+                    intent.putExtra("image","");
+                    intent.putExtra("logistics",courier_num);
+                    intent.putExtra("logistics_id",courier_id);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(this, "暂无快递信息", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -458,12 +480,12 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
                 break;
             case 1001:
                 if (resultCode == RESULT_OK) {
-//                    if (null != data.getSerializableExtra("addressbean")) {
-//                        address = (AddressBean) data.getSerializableExtra("addressbean");
-//                        Intent intent = new Intent(this, SelectPayTypeActivity.class);
-//                        intent.putExtra("price",price_pay);
-//                        startActivityForResult(intent, 1000);
-//                    }
+                    if (null != data.getSerializableExtra("addressbean")) {
+                        address = (AddressManageBean) data.getSerializableExtra("addressbean");
+                        Intent intent = new Intent(this, SelectPayTypeActivity.class);
+                        intent.putExtra("price",price_pay);
+                        startActivityForResult(intent, 1000);
+                    }
                 }
                 break;
             default:
@@ -471,48 +493,51 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         }
     }
 
-//    private void alipay(final String orderInfo) {
-//        Runnable payRunnable = () -> {
-//            //新建任务
-//            PayTask alipay = new PayTask(this);
-//            //获取支付结果
-//            Map<String, String> result = alipay.payV2(orderInfo, true);
-//            Message msg = new Message();
-//            msg.what = SDK_PAY_FLAG;
-//            msg.obj = result;
-//            mHandler.sendMessage(msg);
-//        };
-//        Thread payThread = new Thread(payRunnable);
-//        payThread.start();
-//    }
+    private void alipay(final String orderInfo) {
+        Runnable payRunnable = () -> {
+            //新建任务
+            PayTask alipay = new PayTask(this);
+            //获取支付结果
+            Map<String, String> result = alipay.payV2(orderInfo, true);
+            Message msg = new Message();
+            msg.what = SDK_PAY_FLAG;
+            msg.obj = result;
+            mHandler.sendMessage(msg);
+        };
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
+    }
 
-//    @SuppressLint("HandlerLeak")
-//    private Handler mHandler = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            super.handleMessage(msg);
-//            switch (msg.what) {
-//                case SDK_PAY_FLAG:
-//                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-//                    //同步获取结果
-//                    String resultInfo = payResult.getResult();
-//                    Gson gson = new Gson();
-//                    AliPayResultInfo payResultInfo = gson.fromJson(resultInfo, AliPayResultInfo.class);
-//                    String resultStatus = payResult.getResultStatus();
-//                    if (TextUtils.equals(resultStatus, "9000")) {
+    @SuppressLint("HandlerLeak")
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case SDK_PAY_FLAG:
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    //同步获取结果
+                    String resultInfo = payResult.getResult();
+                    Gson gson = new Gson();
+                    AliPayResultInfo payResultInfo = gson.fromJson(resultInfo, AliPayResultInfo.class);
+                    String resultStatus = payResult.getResultStatus();
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                            Toast.makeText(DingzhiDetailUserActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                            dialog.show();
+                            presenter.dingzhiDetail(id, Sp.getString(DingzhiDetailUserActivity.this, AppConstant.USER_ACCOUNT_ID));
 //                        if (statusCode == 4) {
 //                            presenter.BondPay(id, 0, payResultInfo.getAlipay_trade_app_pay_response().getOut_trade_no(), payResultInfo.getAlipay_trade_app_pay_response().getTrade_no());
 //                        } else if (statusCode == 5) {
 //                            presenter.BondPay(id, 1, payResultInfo.getAlipay_trade_app_pay_response().getOut_trade_no(), payResultInfo.getAlipay_trade_app_pay_response().getTrade_no());
 //                        }
-//                    } else {
-//                        Toast.makeText(DingzhiDetailUserActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-//                        L.e(payResult.toString());
-//                    }
-//                    break;
-//            }
-//        }
-//    };
+                    } else {
+                        Toast.makeText(DingzhiDetailUserActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                        L.e(payResult.toString());
+                    }
+                    break;
+            }
+        }
+    };
 
     private void wechatpay(String orderInfo) {
         try {
@@ -537,28 +562,28 @@ public class DingzhiDetailUserActivity extends BaseActivity<DingzhiDetailUserPre
         }
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void setWechatPay(WechatEvent wechatEvent) {
-//        L.e("wechatevent is " + wechatEvent.getCode() + "  tr " + wechatEvent.getTransaction() + "  openid " + wechatEvent.getOpenId());
-//        switch (wechatEvent.getCode()) {
-//            case 0:
-//                L.e("支付成功");
-//                Toast.makeText(DingzhiDetailUserActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-//                dialog.show();
-//                presenter.dingzhiDetail(id, Sp.getInt(this, AppConstant.USER_ACCOUNT_ID));
-//                break;
-//            case -1:
-//                L.e("支付失败");
-//                Toast.makeText(DingzhiDetailUserActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-//                break;
-//            case -2:
-//                L.e("支付取消");
-//                Toast.makeText(DingzhiDetailUserActivity.this, "支付取消", Toast.LENGTH_SHORT).show();
-//                break;
-//            default:
-//                Toast.makeText(DingzhiDetailUserActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void setWechatPay(WechatEvent wechatEvent) {
+        L.e("wechatevent is " + wechatEvent.getCode() + "  tr " + wechatEvent.getTransaction() + "  openid " + wechatEvent.getOpenId());
+        switch (wechatEvent.getCode()) {
+            case 0:
+                L.e("支付成功");
+                Toast.makeText(DingzhiDetailUserActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                dialog.show();
+                presenter.dingzhiDetail(id, Sp.getString(this, AppConstant.USER_ACCOUNT_ID));
+                break;
+            case -1:
+                L.e("支付失败");
+                Toast.makeText(DingzhiDetailUserActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+                break;
+            case -2:
+                L.e("支付取消");
+                Toast.makeText(DingzhiDetailUserActivity.this, "支付取消", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(DingzhiDetailUserActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
