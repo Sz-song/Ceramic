@@ -18,9 +18,11 @@ import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseFragment;
 import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.invite_newer.InviteNewerActivity;
 import com.yuanyu.ceramics.mine.applyenter.EnterProtocolActivity;
 import com.yuanyu.ceramics.mine.my_collect.MyCollectActivity;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
+import com.yuanyu.ceramics.mycoins.MyCoinsActivity;
 import com.yuanyu.ceramics.order.MyOrderActivity;
 import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.personal_index.PersonalIndexActivity;
@@ -115,6 +117,10 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
     TextView sellstatus;
     @BindView(R.id.dashi)
     TextView dashi;
+    @BindView(R.id.coins)
+    LinearLayout coins;
+    @BindView(R.id.invite)
+    LinearLayout invite;
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container) {
@@ -185,7 +191,7 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
         swipe.setRefreshing(false);
     }
 
-    @OnClick({R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.mine_relat, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_dingzhi, R.id.my_collect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting})
+    @OnClick({R.id.fans, R.id.focus, R.id.dynamic, R.id.protrait, R.id.mine_relat, R.id.all_order, R.id.daifukuan, R.id.daifahuo, R.id.daishouhuo, R.id.daipingjia, R.id.refund, R.id.address, R.id.my_dingzhi, R.id.my_collect, R.id.dashiattesta, R.id.applyenter, R.id.system_setting,R.id.coins,R.id.invite})
     public void onViewClicked(View view) {
         Intent intent;
         switch (view.getId()) {
@@ -264,6 +270,14 @@ public class MineFragment extends BaseFragment<MinePresenter> implements MineCon
                 break;
             case R.id.system_setting:
                 intent = new Intent(getContext(), SystemSettingActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.coins:
+                intent = new Intent(getContext(), MyCoinsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.invite:
+                intent = new Intent(getContext(), InviteNewerActivity.class);
                 startActivity(intent);
                 break;
         }

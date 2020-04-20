@@ -7,6 +7,7 @@ public class AppConstant {
     public static final String REFRESH_TOKEN = "refresh_token";//30天过期
     public static final String USERSIG = "usersig";
     public static String BASE_URL="http://132.232.95.104/";
+    public static final String WEBSITE = "https://www.jadeall.cn/";
     public static String QQ_APP_ID="1107922776";
     public static final String MOBILE = "mobile";//用户手机号
     public static final String PASSWORD = "password";//用户密码

@@ -36,6 +36,9 @@ import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
 import com.yuanyu.ceramics.mine.my_collect.MyCollectBean;
 import com.yuanyu.ceramics.mine.systemsetting.BlackListBean;
+import com.yuanyu.ceramics.mycoins.ExchangeCoinsBean;
+import com.yuanyu.ceramics.mycoins.GetCoinsBean;
+import com.yuanyu.ceramics.mycoins.MyCoinsDetailBean;
 import com.yuanyu.ceramics.myinfo.MyInfoBean;
 import com.yuanyu.ceramics.order.MyOrderFragmentBean;
 import com.yuanyu.ceramics.order.OrderDetailBean;
@@ -494,4 +497,19 @@ public interface HttpService {
     //提交订单评价
     @POST("back/test/api/commodity/evaluateitem.php")
     Observable<BaseResponse<String[]>> submitEvulation(@Body RequestBody body);
+    //获取我的金豆
+    @POST("123")
+    Observable<BaseResponse<String>> getMyCoinsDate(@Body RequestBody body);
+    //获取我的金豆任务
+    @POST("123")
+    Observable<BaseResponse<GetCoinsBean>> getGetCoinsTask(@Body RequestBody body);
+    //换金豆兑换比例
+    @POST("123")
+    Observable<BaseResponse<List<ExchangeCoinsBean>>> getMyCoinsExchange(@Body RequestBody body);
+    //兑换金币
+    @POST("123")
+    Observable<BaseResponse<Boolean>> ExchangeCoins(@Body RequestBody body);
+    //金币明细
+    @POST("123")
+    Observable<BaseResponse<List<MyCoinsDetailBean>>> getMyCoinsDetail(@Body RequestBody body);
 }
