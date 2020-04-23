@@ -510,6 +510,6 @@ public interface HttpService {
     @POST("123")
     Observable<BaseResponse<Boolean>> ExchangeCoins(@Body RequestBody body);
     //金币明细
-    @POST("123")
+    @POST("back/test/api/coins/coins_detail.php")
     Observable<BaseResponse<List<MyCoinsDetailBean>>> getMyCoinsDetail(@Body RequestBody body);
 }
