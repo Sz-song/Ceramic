@@ -92,7 +92,7 @@ dependencies {
     implementation 'com.github.guoxiaoxing:phoenix-compress-video:1.0.15'
     implementation 'com.github.sunhapper:SpEditTool:0.2.3'
     //腾讯即时聊天 imsdk
-    implementation 'com.tencent.imsdk:imsdk:4.6.102'
+    implementation 'com.tencent.imsdk:imsdk:4.7.10'
     //  腾讯直播sdk
     implementation 'com.tencent.liteavsdk:LiteAVSDK_Smart:7.1.8771'
     //litepal 数据库

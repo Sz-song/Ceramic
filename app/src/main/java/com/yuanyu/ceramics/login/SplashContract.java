@@ -8,7 +8,6 @@ public interface SplashContract {
     interface ISplashModel {
         Observable<BaseResponse<LoginBean>> autoLogin(String token);
         Observable<BaseResponse<TokenBean>> refreshToken(String refresh_token);
-
     }
     interface ISplashView {
         void showToast(String msg);
