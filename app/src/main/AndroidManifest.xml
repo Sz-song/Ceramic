@@ -28,7 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".cart.CheckOrderActivity"></activity>
+        <activity android:name=".cart.CheckOrderActivity"/>
         <activity android:name=".mine.dashiattestation.DashiAttestationActivity" />
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".center_circle.release.SelectFriendActivity" />
