@@ -1,6 +1,7 @@
 package com.yuanyu.ceramics.seller.index;
 
 import android.content.Context;
+import android.widget.TextView;
 
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
@@ -27,5 +28,6 @@ public interface SellerIndexConstract {
         void compressImage(Context context, List<String> image, int type, String shop_id);
         void uploadImage(List<File> images,int type,String shop_id);
         void replaceImage(String shopid,int type,String image);
+        void setCount(TextView view, int count);
     }
 }

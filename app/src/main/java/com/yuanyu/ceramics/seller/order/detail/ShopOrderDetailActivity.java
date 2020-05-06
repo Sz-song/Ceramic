@@ -16,13 +16,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 
+import com.tencent.imsdk.TIMConversationType;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.SquareImageView;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.logistics.LogisticsActivity;
 import com.yuanyu.ceramics.logistics.LogisticsBean;
+import com.yuanyu.ceramics.seller.delivery.DeliveryActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -368,21 +372,21 @@ public class ShopOrderDetailActivity extends BaseActivity<ShopOrderDetailPresent
         Intent intent;
         switch (view.getId()) {
             case R.id.logistics:
-//                intent = new Intent(this, LogisticsTracingActivity.class);
-//                intent.putExtra("image", detailBean.getImage());
-//                intent.putExtra("logistics", detailBean.getLogisticsnum());
-//                intent.putExtra("logistics_id", detailBean.getLogisticsid());
-//                startActivity(intent);
+                intent = new Intent(this, LogisticsActivity.class);
+                intent.putExtra("image", detailBean.getImage());
+                intent.putExtra("logistics", detailBean.getLogisticsnum());
+                intent.putExtra("logistics_id", detailBean.getLogisticsid());
+                startActivity(intent);
                 break;
             case R.id.contact:
-//                if (detailBean != null && detailBean.getUseraccountid() != null && detailBean.getUseraccountid().length() > 0) {
-//                    ChatActivity.navToChat(this, detailBean.getUseraccountid(), TIMConversationType.C2C);
-//                }
+                if (detailBean != null && detailBean.getUseraccountid() != null && detailBean.getUseraccountid().length() > 0) {
+                    ChatActivity.navToChat(this, detailBean.getUseraccountid());
+                }
                 break;
             case R.id.delivery:
-//                intent = new Intent(this, DeliveryActivity.class);
-//                intent.putExtra("ordernum", ordernum);
-//                startActivityForResult(intent, 1000);
+                intent = new Intent(this, DeliveryActivity.class);
+                intent.putExtra("ordernum", ordernum);
+                startActivityForResult(intent, 1000);
                 break;
             case R.id.modify_price:
                 if(modifyPricePopupwindow!=null){

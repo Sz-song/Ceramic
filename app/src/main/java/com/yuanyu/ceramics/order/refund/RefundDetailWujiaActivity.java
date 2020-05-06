@@ -20,11 +20,15 @@ import com.google.zxing.integration.android.IntentResult;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.base.BaseActivity;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.CantScrollGirdLayoutManager;
 import com.yuanyu.ceramics.common.DeleteDialog;
 import com.yuanyu.ceramics.common.ScanActivity;
 import com.yuanyu.ceramics.common.SquareImageViewAdapter;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.logistics.LogisticsActivity;
+import com.yuanyu.ceramics.logistics.LogisticsBean;
+import com.yuanyu.ceramics.seller.delivery.CourierListActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Sp;
@@ -245,7 +249,7 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
             if(bean.getLogisticsnum()!=null&&bean.getLogisticsnum().length()>0){
                 topStatus.setVisibility(View.GONE);
                 logistics.setVisibility(View.VISIBLE);
-//                presenter.getLogisticsTracing(bean.getLogisticsnum(), bean.getLogisticscompany());
+                presenter.getLogisticsTracing(bean.getLogisticsnum(), bean.getLogisticscompany());
                 rejectLinear.setVisibility(View.GONE);
                 btnLinear.setVisibility(View.VISIBLE);
                 contactShop.setVisibility(View.VISIBLE);
@@ -273,32 +277,32 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
     }
 
 
-//    @Override
-//    public void getLogisticsTracingSuccess(LogisticsBean bean) {
-//        switch (bean.getState()) {
-//            case "2": logisticsStatus.setText("运输中");
-//                break;
-//            case "3": logisticsStatus.setText("已签收");
-//                break;
-//            case "4": logisticsStatus.setText("问题件");
-//                break;
-//            default: logisticsStatus.setText("处理中");
-//                break;
-//        }
-//        if (bean.getTraces().size() > 0) {
-//            logisticsNew.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptStation());
-//            logisticsTime.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptTime());
-//        } else {
-//            logisticsNew.setText("暂无物流信息");
-//        }
-//
-//    }
-//
-//    @Override
-//    public void getLogisticsTracingFail(ExceptionHandler.ResponeThrowable e) {
-//        logistics.setVisibility(View.GONE);
-//        Toast.makeText(this, "物流信息出错", Toast.LENGTH_SHORT).show();
-//    }
+    @Override
+    public void getLogisticsTracingSuccess(LogisticsBean bean) {
+        switch (bean.getState()) {
+            case "2": logisticsStatus.setText("运输中");
+                break;
+            case "3": logisticsStatus.setText("已签收");
+                break;
+            case "4": logisticsStatus.setText("问题件");
+                break;
+            default: logisticsStatus.setText("处理中");
+                break;
+        }
+        if (bean.getTraces().size() > 0) {
+            logisticsNew.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptStation());
+            logisticsTime.setText(bean.getTraces().get(bean.getTraces().size() - 1).getAcceptTime());
+        } else {
+            logisticsNew.setText("暂无物流信息");
+        }
+
+    }
+
+    @Override
+    public void getLogisticsTracingFail(ExceptionHandler.ResponeThrowable e) {
+        logistics.setVisibility(View.GONE);
+        Toast.makeText(this, "物流信息出错", Toast.LENGTH_SHORT).show();
+    }
 
     @Override
     public void CancelRefundSuccess() {
@@ -368,17 +372,17 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
             Intent intent;
             switch (view.getId()) {
                 case R.id.logistics:
-//                    intent = new Intent(this, LogisticsTracingActivity.class);
-//                    intent.putExtra("image", image);
-//                    intent.putExtra("logistics", logisticsnum);
-//                    intent.putExtra("logistics_id", logistics_id);
-//                    startActivity(intent);
+                    intent = new Intent(this, LogisticsActivity.class);
+                    intent.putExtra("image", image);
+                    intent.putExtra("logistics", logisticsnum);
+                    intent.putExtra("logistics_id", logistics_id);
+                    startActivity(intent);
                     break;
                 case R.id.contact_shop:
-//                    ChatActivity.navToChat(this, shop_userid, TIMConversationType.C2C);
+                    ChatActivity.navToChat(this, shop_userid);
                     break;
                 case R.id.contact_kefu:
-//                    ChatActivity.navToChat(this, customer_service, TIMConversationType.C2C);
+                    ChatActivity.navToChat(this, customer_service);
                     break;
                 case R.id.cancel_apply:
                     presenter.CancelRefund(Sp.getString(this, AppConstant.USER_ACCOUNT_ID),orderid);
@@ -389,9 +393,9 @@ public class RefundDetailWujiaActivity extends BaseActivity<RefundDetailWujiaPre
                     startActivity(intent);
                     break;
                 case R.id.select_logistics:
-//                    intent = new Intent(this, CourierListActivity.class);
-//                    intent.putExtra("type",1);//自己发货
-//                    startActivityForResult(intent, COURIER_CODE);
+                    intent = new Intent(this, CourierListActivity.class);
+                    intent.putExtra("type",1);//自己发货
+                    startActivityForResult(intent, COURIER_CODE);
                     break;
                 case R.id.scanner:
                     IntentIntegrator integrator = new IntentIntegrator(this);

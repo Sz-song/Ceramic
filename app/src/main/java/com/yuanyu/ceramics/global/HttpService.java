@@ -36,6 +36,9 @@ import com.yuanyu.ceramics.message.MessageBean;
 import com.yuanyu.ceramics.mine.MineBean;
 import com.yuanyu.ceramics.mine.my_collect.MyCollectBean;
 import com.yuanyu.ceramics.mine.systemsetting.BlackListBean;
+import com.yuanyu.ceramics.mycoins.ExchangeCoinsBean;
+import com.yuanyu.ceramics.mycoins.GetCoinsBean;
+import com.yuanyu.ceramics.mycoins.MyCoinsDetailBean;
 import com.yuanyu.ceramics.myinfo.MyInfoBean;
 import com.yuanyu.ceramics.order.MyOrderFragmentBean;
 import com.yuanyu.ceramics.order.OrderDetailBean;
@@ -49,6 +52,7 @@ import com.yuanyu.ceramics.search.SearchShopBean;
 import com.yuanyu.ceramics.seller.delivery.CourierBean;
 import com.yuanyu.ceramics.seller.delivery.DeliveryBean;
 import com.yuanyu.ceramics.seller.delivery.WaitDeliveryBean;
+import com.yuanyu.ceramics.seller.evaluationmanage.EvaluationManageBean;
 import com.yuanyu.ceramics.seller.index.SellerIndexBean;
 import com.yuanyu.ceramics.seller.liveapply.LiveApplyStatusBean;
 import com.yuanyu.ceramics.seller.liveapply.bean.SelectItemBean;
@@ -141,22 +145,22 @@ public interface HttpService {
     @POST("back/test/api/dingzhi/dingzhi_detail.php")
     Observable<BaseResponse<DingzhiDetailBean>> dingzhiDetail(@Body RequestBody body);
     //生成定制保证金(尾款)订单
-    @POST("app_api/home_page/generate_dingzhi_orders.php")
-    Observable<BaseResponse<String>> generateDingzhiBondOrder(@Body RequestBody body);
+    @POST("back/test/api/dingzhi/generate_dingzhi_orders.php")
+    Observable<BaseResponse<GenerateOrdersBean>> generateDingzhiBondOrder(@Body RequestBody body);
     //用户保证金支付
     @POST("app_api/home_page/dingzhi_bondpay.php")
     Observable<BaseResponse<Boolean>> dingzhiBondPay(@Body RequestBody body);
     //商家接受定制订单
-    @POST("app_api/home_page/confirm_order.php")
+    @POST("back/test/api/dingzhi/confirm_order.php")
     Observable<BaseResponse<Boolean>> confirmDingzhiOrder(@Body  RequestBody body);
-    //商家接受定制订单
-    @POST("app_api/home_page/cancel_dingzhi_order.php")
+    //商家拒绝定制订单
+    @POST("back/test/api/dingzhi/cancel_dingzhi_order.php")
     Observable<BaseResponse<Boolean>> cancelDingzhiOrder(@Body  RequestBody body);
     //定制发货
-    @POST("app_api/home_page/dingzhi_courier.php")
+    @POST("back/test/api/dingzhi/dingzhi_courier.php")
     Observable<BaseResponse<Boolean>> dingzhiCourier(@Body  RequestBody body);
     //定制确认收货
-    @POST("app_api/home_page/dingzhi_receive.php")
+    @POST("back/test/api/dingzhi/dingzhi_receive.php")
     Observable<BaseResponse<Boolean>> dingzhiConfirmReceipt(@Body RequestBody body);
     //发布定制需求
     @POST("back/test/api/dingzhi/publishdingzhi.php")
@@ -175,56 +179,56 @@ public interface HttpService {
     Observable<BaseResponse<PersonalIndexBean>> PersonalIndex(@Body RequestBody body);
     //关注与取关
     @POST("back/test/api/quan/focusandchancel.php")
-    Observable<BaseResponse<Boolean>>Focus(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> Focus(@Body RequestBody body);
     //添加黑名单
     @POST("back/test/api/homepage/add_blacklist.php")
-    Observable<BaseResponse<Boolean>>addBlacklist(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> addBlacklist(@Body RequestBody body);
     //个人动态文章
     @POST("back/test/api/quan/personal_dynamic_article.php")
     Observable<BaseResponse<List<DynamicBean>>> getPersonalDynamicArticle(@Body RequestBody body);
     //点赞
     @POST("back/test/api/quan/dianzan.php")
-    Observable<BaseResponse<String []>>dianZan(@Body RequestBody body);
+    Observable<BaseResponse<String []>> dianZan(@Body RequestBody body);
     //查看个人资料
     @POST("back/test/api/mine/view_userinfo.php")
-    Observable<BaseResponse<MyInfoBean>>viewUserInfo(@Body RequestBody body);
+    Observable<BaseResponse<MyInfoBean>> viewUserInfo(@Body RequestBody body);
     //询问昵称是否占用
     @POST("back/test/api/mine/view_username.php")
-    Observable<BaseResponse<Boolean>>viewUsername(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> viewUsername(@Body RequestBody body);
     //修改个人资料
     @POST("back/test/api/mine/edit_userinfo.php")
-    Observable<BaseResponse<String[]>>editUserinfo(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> editUserinfo(@Body RequestBody body);
 
     //发布动态
     @POST("back/test/api/quan/releasedynamic.php")
-    Observable<BaseResponse<Boolean>>ReleaseDynamic(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> ReleaseDynamic(@Body RequestBody body);
     //    保存动态
     @POST("back/test/api/quan/save_dynamic.php")
-    Observable<BaseResponse<Boolean>>SaveDynamic(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> SaveDynamic(@Body RequestBody body);
     //    获取草稿箱动态详情
     @POST("back/test/api/quan/get_dynamic_draft.php")
-    Observable<BaseResponse<DraftsDynamic>>getDynamic(@Body RequestBody body);
+    Observable<BaseResponse<DraftsDynamic>> getDynamic(@Body RequestBody body);
     //获取好友列表
     @POST("back/test/api/quan/getfriends.php")
-    Observable<BaseResponse<List<FriendBean>>>getFriends(@Body RequestBody body);
+    Observable<BaseResponse<List<FriendBean>>> getFriends(@Body RequestBody body);
     //发布文章
     @POST("back/test/api/quan/releasearticle.php")
-    Observable<BaseResponse<Boolean>>ReleaseArticle(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> ReleaseArticle(@Body RequestBody body);
     //    获取草稿箱文章详情
     @POST("back/test/api/quan/get_drafts_articledetail.php")
-    Observable<BaseResponse<DraftsArticle>>getArticle(@Body RequestBody body);
+    Observable<BaseResponse<DraftsArticle>> getArticle(@Body RequestBody body);
     //    保存文章
     @POST("back/test/api/quan/drafts_article.php")
-    Observable<BaseResponse<Boolean>>SaveArticle(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> SaveArticle(@Body RequestBody body);
 
 //    草稿箱
 //    从草稿箱删除动态/文章
     @POST("back/test/api/quan/delete_drafts.php")
-    Observable<BaseResponse<String[]>>deleteDraftsDynamic(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> deleteDraftsDynamic(@Body RequestBody body);
 
     //评论
     @POST("app_api/yuba/releasepinglun.php")
-    Observable<BaseResponse<String>>pingLun(@Body RequestBody body);
+    Observable<BaseResponse<String>> pingLun(@Body RequestBody body);
     //删除动态
     @POST("back/test/api/quan/delete_dynamic.php")
     Observable<BaseResponse<String[]>> DeleteDynamic(@Body RequestBody body);
@@ -242,7 +246,7 @@ public interface HttpService {
     Observable<BaseResponse<List<ResultBean>>> getShopFenleiData(@Body RequestBody body);
     //用户访问店铺首页
     @POST("back/test/api/homepage/shophead.php")
-    Observable<BaseResponse<ShopIndexBean>>getUserShopIndexResult(@Body RequestBody body);
+    Observable<BaseResponse<ShopIndexBean>> getUserShopIndexResult(@Body RequestBody body);
     //收藏商品、店铺collectItem
     @POST("back/test/api/mine/add_collection.php")
     Observable<BaseResponse<Boolean>> collectItem(@Body RequestBody body);
@@ -260,22 +264,22 @@ public interface HttpService {
     Observable<BaseResponse<List<DynamicBean>>> getSquareDynamicArticle(@Body RequestBody body);
     //订单详情
     @POST("back/test/api/order/ordermoremsg.php")
-    Observable<BaseResponse<OrderDetailBean>>getOrderDetailData(@Body RequestBody body);
+    Observable<BaseResponse<OrderDetailBean>> getOrderDetailData(@Body RequestBody body);
     //取消订单
     @POST("back/test/api/order/cancelorder.php")
-    Observable<BaseResponse<String[]>>cancelOrder(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> cancelOrder(@Body RequestBody body);
     //删除订单
     @POST("back/test/api/order/deleteorder.php")
-    Observable<BaseResponse<String[]>>deleteOrder(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> deleteOrder(@Body RequestBody body);
     //确认收货
     @POST("back/test/api/order/receivedelivery.php")
-    Observable<BaseResponse<String[]>>confirmReceived(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> confirmReceived(@Body RequestBody body);
 //    我的订单
     @POST("back/test/api/mine/waitpay.php")
-    Observable<BaseResponse<List<MyOrderFragmentBean>>>getOrderList(@Body RequestBody body);
+    Observable<BaseResponse<List<MyOrderFragmentBean>>> getOrderList(@Body RequestBody body);
     //提醒发货
-    @POST("app_api/wujia/reminddelivery.php")
-    Observable<BaseResponse<String[]>>remindDelivery(@Body RequestBody body);
+    @POST("back/test/api/order/reminddelivery.php")
+    Observable<BaseResponse<String[]>> remindDelivery(@Body RequestBody body);
     //上传图片
     @POST("back/test/api/upload/upload.php")
     @Multipart
@@ -285,13 +289,13 @@ public interface HttpService {
     Observable<BaseResponse> submitRefund(@Body RequestBody body);
     //吾家退款订单
     @POST("back/test/api/order/refundwujia.php")
-    Observable<BaseResponse<List<RefundListBean>>>getWujiaRefundData(@Body RequestBody body);
+    Observable<BaseResponse<List<RefundListBean>>> getWujiaRefundData(@Body RequestBody body);
     //用户查看退款详情
     @POST("back/test/api/order/refundwujiamoremsg.php")
-    Observable<BaseResponse<RefundDetailBean>>refundDetail(@Body RequestBody body);
+    Observable<BaseResponse<RefundDetailBean>> refundDetail(@Body RequestBody body);
     //取消退款/售后申请
     @POST("back/test/api/order/cancel_refund.php")
-    Observable<BaseResponse<String[]>> CancelRefund(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> CancelRefund(@Body RequestBody body);
     //退货退款填写退款物流单号
     @POST("back/test/api/order/add_refund_logistics.php")
     Observable<BaseResponse<String[]>> InputLogistics(@Body RequestBody body);
@@ -306,10 +310,10 @@ public interface HttpService {
     Observable<BaseResponse<String[]>> MasterAttestation(@Body RequestBody body);
     //移除黑名单
     @POST("back/test/api/homepage/remove_blacklist.php")
-    Observable<BaseResponse<String[]>>removeBlacklist(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> removeBlacklist(@Body RequestBody body);
     //黑名单初始化
     @POST("back/test/api/homepage/blacklist.php")
-    Observable<BaseResponse<List<BlackListBean>>>getBlacklist(@Body RequestBody body);
+    Observable<BaseResponse<List<BlackListBean>>> getBlacklist(@Body RequestBody body);
     //获取版本信息
     @POST("app_api/home_page/get_version.php")
     Observable<BaseResponse<Integer>> getVersion(@Body RequestBody body);
@@ -342,20 +346,20 @@ public interface HttpService {
 
     //商家退款审核
     @POST("back/test/api/order/refundreview.php")
-    Observable<BaseResponse<Boolean>>RefundReview(@Body RequestBody body);
+    Observable<BaseResponse<Boolean>> RefundReview(@Body RequestBody body);
     //    shopGetOrderDetail
     @POST("back/test/api/order/sellordermoremsg.php")
     Observable<BaseResponse<ShopOrderDetailBean>> shopGetOrderDetail(@Body RequestBody body);
 //    getLogisticsTracing
     //快递递踪
-    @POST("123")
+    @POST("back/test/api/order/express_tracking.php")
     Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(@Body RequestBody body);
 //    modityOrderPrice商家修改未支付订单价格
     @POST("back/test/api/order/change_order_price.php")
     Observable<BaseResponse<Boolean>> modityOrderPrice(@Body RequestBody body);
     //商家退款接口
     @POST("back/test/api/order/refund.php")
-    Observable<BaseResponse<List<RefundBean>>>getRefundResult(@Body RequestBody body);
+    Observable<BaseResponse<List<RefundBean>>> getRefundResult(@Body RequestBody body);
 
 //    修改商家店铺简介
     @POST("back/test/api/shangjia/change_shop_introduce.php")
@@ -363,7 +367,7 @@ public interface HttpService {
 
     //商品上架接口
     @POST("back/test/api/shangjia/shangjiaapply.php")
-    Observable<BaseResponse<String[]>>Shelve(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> Shelve(@Body RequestBody body);
     //上传视频
     @POST("back/test/api/upload/upload_video.php")
     @Multipart
@@ -371,16 +375,16 @@ public interface HttpService {
                                                     @Part MultipartBody.Part[] part);
     //商品上架审核状态接口
     @POST("back/test/api/shangjia/waitreview.php")
-    Observable<BaseResponse<List<ShelveAuditBean>>>getWaitReviewResult(@Body RequestBody body);
+    Observable<BaseResponse<List<ShelveAuditBean>>> getWaitReviewResult(@Body RequestBody body);
     //商家删除商品
     @POST("back/test/api/shangjia/delete_commidity.php")
-    Observable<BaseResponse<String[]>>DeleteResult(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> DeleteResult(@Body RequestBody body);
     //我的商品 重新申请上架获取商品信息
     @POST("back/test/api/shangjia/reonsale.php")
-    Observable<BaseResponse<ShelvingDetailBean>>getReOnSaleData(@Body RequestBody body);
+    Observable<BaseResponse<ShelvingDetailBean>> getReOnSaleData(@Body RequestBody body);
     //我的商品 下架接口
     @POST("back/test/api/shangjia/upsale.php")
-    Observable<BaseResponse<String[]>>shopGoodsOffShelves(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> shopGoodsOffShelves(@Body RequestBody body);
     //我的商品接口
     @POST("back/test/api/shangjia/mycommodity.php")
     Observable<BaseResponse<List<com.yuanyu.ceramics.seller.shop_goods.ShopGoodsBean>>>getShopGoodsList(@Body RequestBody body);
@@ -389,10 +393,10 @@ public interface HttpService {
     Observable<BaseResponse<ShelvingDetailBean>> getShopGoodsDetail(@Body RequestBody body);
 
     //查看快递类型
-    @POST("app_api/shangjia/ExpRecommend.php")
+    @POST("123")
     Observable<BaseResponse<List<CourierBean>>> getCourierData(@Body RequestBody body);
     //获取所有快递
-    @POST("app_api/shangjia/expresscompany.php")
+    @POST("back/test/api/order/expresscompany.php")
     Observable<BaseResponse<List<CourierBean>>> getCourierCompany(@Body RequestBody body);
     //获取商家申请直播状态
     @POST("back/test/api/broadcast/liveapplystate.php")
@@ -405,16 +409,16 @@ public interface HttpService {
     Observable<BaseResponse<SelectItemBean>> selectItem(@Body RequestBody body);
     //商家发货
     @POST("back/test/api/order/shopdelivery.php")
-    Observable<BaseResponse<String>>Delivery(@Body RequestBody body);
+    Observable<BaseResponse<String>> Delivery(@Body RequestBody body);
     //商家发货获取收货人信息
-    @POST("app_api/shangjia/getdeliverymsg.php")
-    Observable<BaseResponse<DeliveryBean>>getDeliveryData(@Body RequestBody body);
+    @POST("back/test/api/shangjia/getdeliverymsg.php")
+    Observable<BaseResponse<DeliveryBean>> getDeliveryData(@Body RequestBody body);
     //商家获取待发货数据
     @POST("back/test/api/shangjia/getnodelivery.php")
-    Observable<BaseResponse<List<WaitDeliveryBean>>>getWaitDeliveryData(@Body RequestBody body);
+    Observable<BaseResponse<List<WaitDeliveryBean>>> getWaitDeliveryData(@Body RequestBody body);
     //获取分类结果
     @POST("back/test/api/homepage/getfenlei.php")
-    Observable<BaseResponse<List<FenLeiResBean>>>getFenleiResult(@Body RequestBody body);
+    Observable<BaseResponse<List<FenLeiResBean>>> getFenleiResult(@Body RequestBody body);
     //添加收货地址
     @POST("back/test/api/address/add_address.php")
     Observable<BaseResponse<String[]>> addAddress(@Body RequestBody body);
@@ -449,10 +453,10 @@ public interface HttpService {
     Observable<BaseResponse<List<MyCollectBean>>> getMyCollect(@Body RequestBody body);
     //修改主页背景和头像
     @POST("back/test/api/mine/change_image.php")
-    Observable<BaseResponse>changeImage(@Body RequestBody body);
+    Observable<BaseResponse> changeImage(@Body RequestBody body);
 //    商家更换头像
     @POST("back/test/api/shangjia/replaceportrait.php")
-    Observable<BaseResponse<String[]>>getImagePortraitResult(@Body RequestBody body);
+    Observable<BaseResponse<String[]>> getImagePortraitResult(@Body RequestBody body);
     //    获取草稿箱内容
     @POST("back/test/api/quan/get_draftslist.php")
     Observable<BaseResponse<List<DraftsBean>>> getDrafts(@Body RequestBody body);
@@ -477,8 +481,35 @@ public interface HttpService {
     Observable<BaseResponse<com.yuanyu.ceramics.cart.GenerateOrdersBean>> generateOrders(@Body RequestBody body);
     //获取客服
     @POST("back/test/api/mine/getcustomerservice.php")
-    Observable<BaseResponse<String>>getCustomerService(@Body RequestBody body);
+    Observable<BaseResponse<String>> getCustomerService(@Body RequestBody body);
     //大额支付获取订单价格
     @POST("back/test/api/order/allprice.php")
     Observable<BaseResponse<String>> getAllprice(@Body RequestBody body);
+    //举报
+    @POST("back/test/api/homepage/report.php")
+    Observable<BaseResponse<String[]>> submitReport(@Body RequestBody body);
+    //获取商家评论
+    @POST("back/test/commodity/evaluationmanage.php")
+    Observable<BaseResponse<List<EvaluationManageBean>>> getEvaluation(@Body RequestBody body);
+    //商家回复replyEvaluation
+    @POST("123")
+    Observable<BaseResponse<String[]>> replyEvaluation(@Body RequestBody body);
+    //提交订单评价
+    @POST("back/test/api/commodity/evaluateitem.php")
+    Observable<BaseResponse<String[]>> submitEvulation(@Body RequestBody body);
+    //获取我的金豆
+    @POST("123")
+    Observable<BaseResponse<String>> getMyCoinsDate(@Body RequestBody body);
+    //获取我的金豆任务
+    @POST("123")
+    Observable<BaseResponse<GetCoinsBean>> getGetCoinsTask(@Body RequestBody body);
+    //换金豆兑换比例
+    @POST("123")
+    Observable<BaseResponse<List<ExchangeCoinsBean>>> getMyCoinsExchange(@Body RequestBody body);
+    //兑换金币
+    @POST("123")
+    Observable<BaseResponse<Boolean>> ExchangeCoins(@Body RequestBody body);
+    //金币明细
+    @POST("back/test/api/coins/coins_detail.php")
+    Observable<BaseResponse<List<MyCoinsDetailBean>>> getMyCoinsDetail(@Body RequestBody body);
 }

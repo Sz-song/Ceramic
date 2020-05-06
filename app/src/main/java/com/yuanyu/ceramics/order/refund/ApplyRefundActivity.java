@@ -230,7 +230,7 @@ public class ApplyRefundActivity extends BaseActivity<ApplyRefundPresenter> impl
 
     @Override
     public void uploadImageSuccess(List<String> list) {
-        RefundBean bean = new RefundBean(Sp.getInt(ApplyRefundActivity.this, AppConstant.USER_ACCOUNT_ID), orderNum, item_id, refundType.getText().toString(), refundReason.getText().toString(),price, note.getText().toString(), list);
+        RefundBean bean = new RefundBean(Sp.getString(ApplyRefundActivity.this, AppConstant.USER_ACCOUNT_ID), orderNum, item_id, refundType.getText().toString(), refundReason.getText().toString(),price, note.getText().toString(), list);
         presenter.submitRefund(bean);
     }
 

@@ -118,4 +118,11 @@
     <style name="ableRea">
         <item name="android:background">@drawable/ablebtnbg</item>
     </style>
+    <style name="edittext_transparent">
+        <item name="android:textColorHint">@color/lightGray</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/blackLight</item>
+
+    </style>
 </resources>

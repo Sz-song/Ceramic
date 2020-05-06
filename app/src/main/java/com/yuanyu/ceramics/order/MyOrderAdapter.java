@@ -16,6 +16,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.global.GlideApp;
+import com.yuanyu.ceramics.logistics.LogisticsActivity;
 import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.TimeUtils;
@@ -139,11 +140,11 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
                 holder.yiwancheng.setVisibility(View.GONE);
                 holder.aletFahuo.setVisibility(View.GONE);
                 holder.delivery.setOnClickListener(view -> {
-//                    Intent intent = new Intent(context,LogisticsTracingActivity.class);
-//                    intent.putExtra("logistics",mList.get(position).getLogisticsnum());
-//                    intent.putExtra("image", mList.get(position).getItem_list().get(0).getImage());
-//                    intent.putExtra("logistics_id", mList.get(position).getLogisticscompany());
-//                    context.startActivity(intent);
+                    Intent intent = new Intent(context, LogisticsActivity.class);
+                    intent.putExtra("logistics",mList.get(position).getLogisticsnum());
+                    intent.putExtra("image", mList.get(position).getItem_list().get(0).getImage());
+                    intent.putExtra("logistics_id", mList.get(position).getLogisticscompany());
+                    context.startActivity(intent);
                 });
                 holder.confirm.setOnClickListener(view -> confirmListener.confirm(position));
                 break;
@@ -155,18 +156,18 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
                 holder.yiwancheng.setVisibility(View.GONE);
                 holder.aletFahuo.setVisibility(View.GONE);
                 holder.delivery2.setOnClickListener(view -> {
-//                    Intent intent = new Intent(context,LogisticsTracingActivity.class);
-//                    intent.putExtra("logistics",mList.get(position).getLogisticsnum());
-//                    intent.putExtra("image", mList.get(position).getItem_list().get(0).getImage());
-//                    intent.putExtra("logistics_id", mList.get(position).getLogisticscompany());
-//                    context.startActivity(intent);
+                    Intent intent = new Intent(context,LogisticsActivity.class);
+                    intent.putExtra("logistics",mList.get(position).getLogisticsnum());
+                    intent.putExtra("image", mList.get(position).getItem_list().get(0).getImage());
+                    intent.putExtra("logistics_id", mList.get(position).getLogisticscompany());
+                    context.startActivity(intent);
                 });
                 holder.evaluate.setOnClickListener(view -> {
-//                    Intent intent = new Intent(context,EvaluationActivity.class);
-//                    intent.putExtra("order_num",mList.get(position).getOrdernum());
-//                    intent.putExtra("commodity_id",mList.get(position).getItem_list().get(0).getId());
-//                    intent.putExtra("shop_id",mList.get(position).getShopid());
-//                    context.startActivity(intent);
+                    Intent intent = new Intent(context,EvaluationActivity.class);
+                    intent.putExtra("order_num",mList.get(position).getOrdernum());
+                    intent.putExtra("commodity_id",mList.get(position).getItem_list().get(0).getId());
+                    intent.putExtra("shop_id",mList.get(position).getShopid());
+                    context.startActivity(intent);
                 });
                 break;
             case AppConstant.YIPINGJIA:

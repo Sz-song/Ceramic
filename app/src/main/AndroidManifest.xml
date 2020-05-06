@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-feature android:name="android.hardware.Camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -27,8 +28,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".cart.CheckOrderActivity"/>
+        tools:ignore="GoogleAppIndexingWarning"
+        android:requestLegacyExternalStorage="true">
+        <activity android:name=".common.NewerGuideActivity"></activity>
+        <activity android:name=".invite_newer.InviteNewerActivity" />
+        <activity android:name=".mycoins.MyCoinsDetailActivity" />
+        <activity android:name=".mycoins.MyCoinsActivity" />
+        <activity android:name=".cart.CheckOrderActivity" />
         <activity android:name=".mine.dashiattestation.DashiAttestationActivity" />
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".center_circle.release.SelectFriendActivity" />
@@ -157,7 +163,9 @@
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:scheme="wx4507b09176ec42f4" />
             </intent-filter>
         </activity>
@@ -166,6 +174,10 @@
         <activity android:name=".order.refund.RefundDetailWujiaActivity" />
         <activity android:name=".seller.refund.RefundActivity" />
         <activity android:name=".seller.refund.refund_detail.RefundDetailActivity" />
+        <activity android:name=".seller.evaluationmanage.EvaluationDetailActivity" />
+        <activity android:name=".seller.evaluationmanage.EvaluationManageActivity" />
+        <activity android:name=".common.ReportActivity" />
+        <activity android:name=".order.EvaluationActivity" />
     </application>
 
 </manifest>

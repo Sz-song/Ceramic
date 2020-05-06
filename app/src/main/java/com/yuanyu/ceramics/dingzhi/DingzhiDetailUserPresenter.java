@@ -1,5 +1,6 @@
 package com.yuanyu.ceramics.dingzhi;
 
+import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
@@ -29,14 +30,14 @@ public class DingzhiDetailUserPresenter extends BasePresenter<DingzhiDetailUserC
     }
 
     @Override
-    public void generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressBean bean) {
+    public void generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressManageBean bean) {
         model.generateBondOrder(dingzhi_id,useraccountid,type,paytype, bean)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<String>())
-                .subscribe(new BaseObserver<String>() {
+                .subscribe(new BaseObserver<GenerateOrdersBean>() {
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(GenerateOrdersBean s) {
                         if(view!=null){view.generateBondOrderSuccess(s,paytype);}
                     }
                     @Override

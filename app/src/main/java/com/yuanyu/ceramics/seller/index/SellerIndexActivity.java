@@ -1,9 +1,8 @@
 package com.yuanyu.ceramics.seller.index;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,20 +12,16 @@ import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.bumptech.glide.Glide;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
-import com.yuanyu.ceramics.address_manage.AddressManageActivity;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.GlideEngine;
-import com.yuanyu.ceramics.dingzhi.MyDingzhiActivity;
 import com.yuanyu.ceramics.dingzhi.ShopDingzhiActivity;
 import com.yuanyu.ceramics.global.GlideApp;
 import com.yuanyu.ceramics.mine.systemsetting.SystemSettingActivity;
-import com.yuanyu.ceramics.order.refund.RefundListActivity;
 import com.yuanyu.ceramics.seller.liveapply.LiveApplyActivity;
 import com.yuanyu.ceramics.seller.message_shop.MessageShopActivity;
 import com.yuanyu.ceramics.seller.order.ShopOrderActivity;
@@ -46,12 +41,19 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import jp.wasabeef.glide.transformations.BlurTransformation;
+
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
 import static com.yuanyu.ceramics.MyApplication.getContext;
 
 public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> implements SellerIndexConstract.IMineView {
 
     private static final int CHANGE_PORTRAIT = 1000;
+    @BindView(R.id.daifukuan_count)
+    TextView daifukuanCount;
+    @BindView(R.id.daifahuo_count)
+    TextView daifahuoCount;
+    @BindView(R.id.refund_count)
+    TextView refundCount;
     private boolean isinit = false;
     @BindView(R.id.image_head)
     ImageView imageHead;
@@ -68,15 +70,15 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
     @BindView(R.id.all_order)
     TextView allOrder;
     @BindView(R.id.nopay)
-    LinearLayout nopay;
+    RelativeLayout nopay;
     @BindView(R.id.nofahuo)
-    LinearLayout nofahuo;
+    RelativeLayout nofahuo;
     @BindView(R.id.yifahuo)
-    LinearLayout yifahuo;
+    RelativeLayout yifahuo;
     @BindView(R.id.yishouhuo)
-    LinearLayout yishouhuo;
+    RelativeLayout yishouhuo;
     @BindView(R.id.refund)
-    LinearLayout refund;
+    RelativeLayout refund;
     @BindView(R.id.commodity)
     LinearLayout commodity;
     @BindView(R.id.my_dingzhi)
@@ -91,6 +93,16 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
     LinearLayout changeuser;
     @BindView(R.id.swipe)
     SwipeRefreshLayout swipe;
+    // 定义一个变量，来标识是否退出
+//    private static boolean isExit = false;
+//    @SuppressLint("HandlerLeak")
+//    Handler mHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            isExit = false;
+//        }
+//    };
 
     @Override
     protected int getLayout() {
@@ -120,18 +132,20 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 .override(100, 100)
                 .into(protrait);
         GlideApp.with(getContext())
-                .load(AppConstant.BASE_URL + bean.getPortrait())
+                .load(BASE_URL + bean.getPortrait())
                 .optionalTransform(new BlurTransformation(10))
                 .override(300, 200)
                 .placeholder(R.drawable.sellerbgimg)
                 .into(imageHead);
         name.setText(bean.getName());
-        if(bean.getIntroduce()!=null&&bean.getIntroduce().length()>0){
+        if (bean.getIntroduce() != null && bean.getIntroduce().length() > 0) {
             introduce.setText(bean.getIntroduce());
-        }else {
+        } else {
             introduce.setText("暂无简介");
         }
-
+        presenter.setCount(daifukuanCount, bean.getNopay());
+        presenter.setCount(daifahuoCount, bean.getFahuo());
+        presenter.setCount(refundCount, bean.getRefund());
     }
 
     @Override
@@ -145,12 +159,12 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         Toast.makeText(getContext(), "更换成功", Toast.LENGTH_SHORT).show();
         if (type == 0) {
             GlideApp.with(getContext())
-                    .load(AppConstant.BASE_URL + image)
+                    .load(BASE_URL + image)
                     .override(100, 100)
                     .placeholder(R.drawable.logo_default)
                     .into(protrait);
             GlideApp.with(getContext())
-                    .load(AppConstant.BASE_URL + image)
+                    .load(BASE_URL + image)
                     .optionalTransform(new BlurTransformation(10))
                     .override(300, 200)
                     .placeholder(R.drawable.sellerbgimg)
@@ -163,7 +177,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         Toast.makeText(getContext(), "更换失败", Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick({R.id.protrait,R.id.introduce, R.id.mine_relat, R.id.all_order, R.id.nopay, R.id.nofahuo, R.id.yifahuo, R.id.yishouhuo, R.id.refund, R.id.commodity, R.id.my_dingzhi, R.id.liveapply, R.id.message, R.id.contactkf, R.id.changeuser,R.id.system_setting})
+    @OnClick({R.id.protrait, R.id.introduce, R.id.mine_relat, R.id.all_order, R.id.nopay, R.id.nofahuo, R.id.yifahuo, R.id.yishouhuo, R.id.refund, R.id.commodity, R.id.my_dingzhi, R.id.liveapply, R.id.message, R.id.contactkf, R.id.changeuser, R.id.system_setting})
     public void onViewClicked(View view) {
         Intent intent;
         ReplacePortraitPopupWindow portraitPopupWindow;
@@ -175,13 +189,13 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 portraitPopupWindow.setPortraitClickListener(v -> {
                     PictureSelector.create(SellerIndexActivity.this).openGallery(PictureMimeType.ofImage())
                             .loadImageEngine(GlideEngine.createGlideEngine())
-                              .maxSelectNum(1)
+                            .maxSelectNum(1)
                             .forResult(CHANGE_PORTRAIT);
                     portraitPopupWindow.dismiss();
                 });
                 portraitPopupWindow.setIntroduceClickListener(v -> {
-                    Intent intent1=new Intent(getContext(),ShopChangeIntroduceActivity.class);
-                    intent1.putExtra("introduce",introduce.getText().toString());
+                    Intent intent1 = new Intent(getContext(), ShopChangeIntroduceActivity.class);
+                    intent1.putExtra("introduce", introduce.getText().toString());
                     getContext().startActivity(intent1);
                     portraitPopupWindow.dismiss();
                     portraitPopupWindow.dismiss();
@@ -194,8 +208,8 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
 
                 });
                 portraitPopupWindow.setIntroduceClickListener(v -> {
-                    Intent intent1=new Intent(getContext(),ShopChangeIntroduceActivity.class);
-                    intent1.putExtra("introduce",introduce.getText().toString());
+                    Intent intent1 = new Intent(getContext(), ShopChangeIntroduceActivity.class);
+                    intent1.putExtra("introduce", introduce.getText().toString());
                     getContext().startActivity(intent1);
                     portraitPopupWindow.dismiss();
                 });
@@ -242,7 +256,7 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
                 startActivity(intent);
                 break;
             case R.id.message:
-                intent=new Intent(this, MessageShopActivity.class);
+                intent = new Intent(this, MessageShopActivity.class);
                 startActivity(intent);
                 break;
             case R.id.contactkf:
@@ -287,5 +301,25 @@ public class SellerIndexActivity extends BaseActivity<SellerIndexPresenter> impl
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            exit();
+//            return false;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
+    private void exit() {
+//        if (!isExit) {
+//            isExit = true;
+//            Toast.makeText(this, "再按一次退出程序",
+//                    Toast.LENGTH_SHORT).show();
+//            // 利用handler延迟发送更改状态信息
+////            mHandler.sendEmptyMessageDelayed(0, 2000);
+//        } else {
+//            finish();
+//            System.exit(0);
+//        }
+    }
 }

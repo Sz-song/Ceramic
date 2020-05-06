@@ -30,6 +30,7 @@ import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.base.BasePresenter;
 import com.yuanyu.ceramics.cart.AliPayResultInfo;
 import com.yuanyu.ceramics.cart.GenerateOrdersBean;
+import com.yuanyu.ceramics.chat.ChatActivity;
 import com.yuanyu.ceramics.common.LoadingDialog;
 import com.yuanyu.ceramics.common.PayResult;
 import com.yuanyu.ceramics.common.SelectPayTypeActivity;
@@ -40,6 +41,7 @@ import com.yuanyu.ceramics.logistics.LogisticsActivity;
 import com.yuanyu.ceramics.logistics.LogisticsBean;
 import com.yuanyu.ceramics.order.refund.ApplyRefundActivity;
 import com.yuanyu.ceramics.order.refund.RefundDetailWujiaActivity;
+import com.yuanyu.ceramics.seller.evaluationmanage.EvaluationManageActivity;
 import com.yuanyu.ceramics.shop_index.ShopIndexActivity;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.L;
@@ -269,7 +271,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 payTime.setVisibility(View.VISIBLE);
                 deliveryTime.setVisibility(View.VISIBLE);
                 receiveTime.setVisibility(View.GONE);
-//                presenter.getLogisticsTracing(bean.getLogistiscnum(), bean.getLogisticscompany());
+                presenter.getLogisticsTracing(bean.getLogistiscnum(), bean.getLogisticscompany());
                 payTime.setText("付款时间: " + TimeUtils.CountTime(bean.getPay_time()));
                 deliveryTime.setText("发货时间: " + TimeUtils.CountTime(bean.getDelivery_time()));
                 btnRed.setVisibility(View.VISIBLE);
@@ -317,12 +319,12 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 }
                 btnRed.setText("立即评价");
                 btnRed.setOnClickListener(view -> {
-//                    Intent intent = new Intent(this, EvaluationActivity.class);
-//                    intent.putExtra("order_num", orderId);
-//                    intent.putExtra("commodity_id", commodityId);
-//                    L.e("shop id is:" + shopId);
-//                    intent.putExtra("shop_id", shopId);
-//                    startActivityForResult(intent, EVULATE);
+                    Intent intent = new Intent(this, EvaluationActivity.class);
+                    intent.putExtra("order_num", orderId);
+                    intent.putExtra("commodity_id", commodityId);
+                    L.e("shop id is:" + shopId);
+                    intent.putExtra("shop_id", shopId);
+                    startActivityForResult(intent, EVULATE);
                 });
                 break;
             case AppConstant.TUIKUAN:
@@ -335,7 +337,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 viewLine.setVisibility(View.GONE);
                 btnRed.setVisibility(View.VISIBLE);
                 btnRed.setText("联系客服");
-//                btnRed.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getCustomer_service(), TIMConversationType.C2C));
+                btnRed.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getCustomer_service()));
                 break;
             case AppConstant.YIPINGJIA:
                 orderStatus.setText("订单已签收");
@@ -363,7 +365,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     btnWhite.setVisibility(View.GONE);
                     btnRed.setText("联系客服");
                 }
-//                btnRed.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getCustomer_service(), TIMConversationType.C2C));
+                btnRed.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getCustomer_service()));
                 break;
             case AppConstant.YIQUXIAO:
                 if (bean.getCancel_type() == 0) {
@@ -384,7 +386,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                 viewLine.setVisibility(View.GONE);
                 btnRed.setVisibility(View.GONE);
                 btnWhite.setText("联系客服");
-//                btnWhite.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getCustomer_service(), TIMConversationType.C2C));
+                btnWhite.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getCustomer_service()));
                 break;
                 default:
         }
@@ -426,7 +428,7 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
             intent.putExtra("logistics_id", logistics_id);
             startActivity(intent);
         });
-//        contactShop.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getShop_userid(), TIMConversationType.C2C));
+        contactShop.setOnClickListener(v -> ChatActivity.navToChat(this, bean.getShop_userid()));
         shopName.setOnClickListener(v -> {
             Intent intent = new Intent(this, ShopIndexActivity.class);
             intent.putExtra("shopid", bean.getShop_id());
@@ -614,7 +616,6 @@ public class OrderDetailActivity extends BaseActivity<OrderDetailPresenter> impl
                     AliPayResultInfo payResultInfo = gson.fromJson(resultInfo, AliPayResultInfo.class);
                     String resultStatus = payResult.getResultStatus();
                     // 判断resultStatus 为9000则代表支付成功
-                    L.e(TextUtils.equals(resultStatus, "9000")+"----------");
                     if (TextUtils.equals(resultStatus, "9000")) {
                         List<String> order_list = new ArrayList<>();
                         order_list.add(orderId);

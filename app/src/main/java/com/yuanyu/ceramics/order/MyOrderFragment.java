@@ -43,6 +43,7 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
     private int page;
     private MyOrderAdapter adapter;
     private List<MyOrderFragmentBean> list;
+    private boolean isRemind=true;
 
 
 
@@ -132,11 +133,11 @@ public class MyOrderFragment extends BaseFragment<MyOrderFragmentPresenter> impl
             });
         });
         adapter.setFahuoListener(position -> {
-//            if (isRemind) {
-//                remindDelivery(position);
-//            } else {
-//                Toast.makeText(getContext(), "已提醒发货", Toast.LENGTH_SHORT).show();
-//            }
+            if (isRemind) {
+                presenter.remindDelivery(Sp.getString(getContext(),AppConstant.USER_ACCOUNT_ID),list.get(position).getOrdernum(),position);
+            } else {
+                Toast.makeText(getContext(), "已提醒发货", Toast.LENGTH_SHORT).show();
+            }
         });
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setAdapter(adapter);

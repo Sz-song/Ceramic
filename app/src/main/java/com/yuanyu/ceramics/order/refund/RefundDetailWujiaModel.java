@@ -3,6 +3,7 @@ package com.yuanyu.ceramics.order.refund;
 import com.google.gson.Gson;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
+import com.yuanyu.ceramics.logistics.LogisticsBean;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 import com.yuanyu.ceramics.utils.L;
 import com.yuanyu.ceramics.utils.Md5Utils;
@@ -37,29 +38,29 @@ public class RefundDetailWujiaModel implements RefundDetailWujiaConstract.IRefun
         return httpService.refundDetail(body);
     }
 
-//    @Override
-//    public Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(String couriernum, String courierid) {
-//        String timestamp = Md5Utils.getTimeStamp();
-//        String randomstr = Md5Utils.getRandomString(10);
-//        String signature = Md5Utils.getSignature(timestamp,randomstr);
-//        Map map = new HashMap();
-//        map.put("timestamp",timestamp);
-//        map.put("randomstr",randomstr);
-//        map.put("signature",signature);
-//        map.put("action","express_tracking");
-//        Map data = new HashMap();
-//        data.put("couriernum",couriernum);
-//        data.put("courierid",courierid);
-//        map.put("data",data);
-//        Gson gson=new Gson();
-//        String str=gson.toJson(map);
-//        L.e("str is "+str);
-//        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
-//        return httpService.getLogisticsTracing(body);
-//    }
+    @Override
+    public Observable<BaseResponse<LogisticsBean>> getLogisticsTracing(String couriernum, String courierid) {
+        String timestamp = Md5Utils.getTimeStamp();
+        String randomstr = Md5Utils.getRandomString(10);
+        String signature = Md5Utils.getSignature(timestamp,randomstr);
+        Map map = new HashMap();
+        map.put("timestamp",timestamp);
+        map.put("randomstr",randomstr);
+        map.put("signature",signature);
+        map.put("action","express_tracking");
+        Map data = new HashMap();
+        data.put("couriernum",couriernum);
+        data.put("courierid",courierid);
+        map.put("data",data);
+        Gson gson=new Gson();
+        String str=gson.toJson(map);
+        L.e("str is "+str);
+        RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
+        return httpService.getLogisticsTracing(body);
+    }
 
     @Override
-    public Observable<BaseResponse<String[]>> CancelRefund(String useraccountid, String ordernum) {
+    public Observable<BaseResponse<Boolean>> CancelRefund(String useraccountid, String ordernum) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp, randomstr);

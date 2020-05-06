@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.yuanyu.ceramics.AppConstant.BASE_URL;
+import static com.yuanyu.ceramics.AppConstant.WEBSITE;
 
 
 public class EnterProtocolActivity extends NormalActivity {
@@ -59,10 +60,10 @@ public class EnterProtocolActivity extends NormalActivity {
         webview.getSettings().setJavaScriptEnabled(true);
         if (type == 0) {
             title.setText("入驻协议");
-            webview.loadUrl(BASE_URL + "rule_html/merchant_entry_agreement.html");
+            webview.loadUrl(WEBSITE + "rule_html/merchant_entry_agreement.html");
         } else if (type == 1) {
             title.setText("大师入驻协议");
-            webview.loadUrl(BASE_URL + "rule_html/master_entry_agreement.html");
+            webview.loadUrl(WEBSITE + "rule_html/master_entry_agreement.html");
         }
         webview.setWebViewClient(new WebViewClient() {
             @Override

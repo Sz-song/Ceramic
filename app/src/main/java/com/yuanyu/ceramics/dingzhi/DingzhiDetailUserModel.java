@@ -1,6 +1,7 @@
 package com.yuanyu.ceramics.dingzhi;
 
 import com.google.gson.Gson;
+import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseResponse;
 import com.yuanyu.ceramics.global.HttpService;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
@@ -40,7 +41,7 @@ public class DingzhiDetailUserModel implements DingzhiDetailUserConstact.IDingzh
     }
 
     @Override
-    public Observable<BaseResponse<String>> generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressBean bean) {
+    public Observable<BaseResponse<GenerateOrdersBean>> generateBondOrder(String dingzhi_id, String useraccountid, int type, int paytype, AddressManageBean bean) {
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
         String signature = Md5Utils.getSignature(timestamp,randomstr);

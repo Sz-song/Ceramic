@@ -20,6 +20,7 @@ import com.yuanyu.ceramics.AppConstant;
 import com.yuanyu.ceramics.R;
 import com.yuanyu.ceramics.address_manage.AddOrEditAddressActivity;
 import com.yuanyu.ceramics.address_manage.AddressManageActivity;
+import com.yuanyu.ceramics.address_manage.AddressManageBean;
 import com.yuanyu.ceramics.base.BaseActivity;
 import com.yuanyu.ceramics.common.DeleteDialog;
 import com.yuanyu.ceramics.common.LoadingDialog;
@@ -162,6 +163,17 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         dialog.show();
         enable = false;
         presenter.getDeliveryMsg(deliveryBean.getOrdernum(), Sp.getString(this, AppConstant.SHOP_ID));
+//        暂时没有上门取件开始
+        unbookingCourier.setVisibility(View.VISIBLE);
+        bookingCourier.setVisibility(View.GONE);
+        booking.setVisibility(View.GONE);
+        bookingTxt.setTextColor(getResources().getColor(R.color.gray));
+        bookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_gray));
+        unbookingTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
+        unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_blue));
+        deliveryType = false;
+        //        暂时没有上门取件结束
+        L.e("statusis" + deliveryType + "");
     }
 
     @Override
@@ -256,7 +268,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         if (enable) {
             Intent intent = new Intent(this, AddOrEditAddressActivity.class);
             intent.putExtra("type", "2");
-            AddressBean addressBean = new AddressBean
+            AddressManageBean addressBean = new AddressManageBean
                     (deliveryBean.getReceive_name(),
                             deliveryBean.getReceive_tel(),
                             deliveryBean.getReceive_province(),
@@ -464,7 +476,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         bookingCourier.setVisibility(View.VISIBLE);
         booking.setVisibility(View.VISIBLE);
         bookingTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
-        bookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_red));
+        bookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_blue));
         unbookingTxt.setTextColor(getResources().getColor(R.color.gray));
         unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_gray));
         deliveryType = true;
@@ -479,7 +491,7 @@ public class DeliveryActivity extends BaseActivity<DeliveryPresenter> implements
         bookingTxt.setTextColor(getResources().getColor(R.color.gray));
         bookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_gray));
         unbookingTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
-        unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_red));
+        unbookingImg.setBackground(getResources().getDrawable(R.drawable.triangle_right_blue));
         deliveryType = false;
         L.e("statusis" + deliveryType + "");
     }

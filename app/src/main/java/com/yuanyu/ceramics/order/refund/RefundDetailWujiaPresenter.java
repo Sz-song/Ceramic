@@ -4,6 +4,7 @@ package com.yuanyu.ceramics.order.refund;
 
 import com.yuanyu.ceramics.base.BaseObserver;
 import com.yuanyu.ceramics.base.BasePresenter;
+import com.yuanyu.ceramics.logistics.LogisticsBean;
 import com.yuanyu.ceramics.utils.ExceptionHandler;
 import com.yuanyu.ceramics.utils.HttpServiceInstance;
 
@@ -31,19 +32,19 @@ public class RefundDetailWujiaPresenter extends BasePresenter<RefundDetailWujiaC
                 });
     }
 
-//    @Override
-//    public void getLogisticsTracing(String couriernum, String courierid) {
-//        model.getLogisticsTracing(couriernum,courierid)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .compose(new HttpServiceInstance.ErrorTransformer<LogisticsBean>())
-//                .subscribe(new BaseObserver<LogisticsBean>() {
-//                    @Override
-//                    public void onNext(LogisticsBean logisticsBean) { if(view!=null){view.getLogisticsTracingSuccess(logisticsBean);} }
-//                    @Override
-//                    public void onError(ExceptionHandler.ResponeThrowable e) { if(view!=null){view.getLogisticsTracingFail(e);}}
-//                });
-//    }
+    @Override
+    public void getLogisticsTracing(String couriernum, String courierid) {
+        model.getLogisticsTracing(couriernum,courierid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(new HttpServiceInstance.ErrorTransformer<LogisticsBean>())
+                .subscribe(new BaseObserver<LogisticsBean>() {
+                    @Override
+                    public void onNext(LogisticsBean logisticsBean) { if(view!=null){view.getLogisticsTracingSuccess(logisticsBean);} }
+                    @Override
+                    public void onError(ExceptionHandler.ResponeThrowable e) { if(view!=null){view.getLogisticsTracingFail(e);}}
+                });
+    }
 
     @Override
     public void CancelRefund(String useraccountid, String ordernum) {
@@ -51,9 +52,9 @@ public class RefundDetailWujiaPresenter extends BasePresenter<RefundDetailWujiaC
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(new HttpServiceInstance.ErrorTransformer<String[]>())
-                .subscribe(new BaseObserver<String[]>() {
+                .subscribe(new BaseObserver<Boolean>() {
                     @Override
-                    public void onNext(String[] strings) { if(view!=null){view.CancelRefundSuccess();} }
+                    public void onNext(Boolean strings) { if(view!=null){view.CancelRefundSuccess();} }
                     @Override
                     public void onError(ExceptionHandler.ResponeThrowable e) { if(view!=null){view.CancelRefundFail(e);}}
                 });
