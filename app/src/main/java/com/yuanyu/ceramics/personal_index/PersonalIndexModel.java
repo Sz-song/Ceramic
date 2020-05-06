@@ -82,6 +82,7 @@ public class PersonalIndexModel implements PersonalIndexConstract.IPersonalIndex
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),str);
         return httpService.addBlacklist(body);
     }
+
     public Observable<BaseResponse> changeImage(String useraccountid,int type,String url){
         String timestamp = Md5Utils.getTimeStamp();
         String randomstr = Md5Utils.getRandomString(10);
@@ -115,21 +116,15 @@ public class PersonalIndexModel implements PersonalIndexConstract.IPersonalIndex
         data.put("type", "2");
         data.put("postfix", "jpg");
         map.put("data", data);
-
-
         Gson gson = new Gson();
         String str = gson.toJson(map);
-
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), str);
-
         MultipartBody.Part[] part = new MultipartBody.Part[images.size()];
         for (int i = 0; i < images.size(); i++) {
             RequestBody photoBody = RequestBody.create(MediaType.parse("image/jpg"), images.get(i));
             part[i] = MultipartBody.Part.createFormData("files[]", images.get(i).getName(), photoBody);
         }
         L.e("str is "+str);
-
         return httpService.uploadImage(body,part);
-
     }
 }

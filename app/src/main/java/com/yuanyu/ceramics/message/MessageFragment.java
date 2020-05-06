@@ -90,6 +90,7 @@ public class MessageFragment extends BaseFragment<MessagePresenter> implements M
 
     @Override
     public void receiveMessageSuccess(String msg,String sender) {
+
         presenter.initData();
     }
 

@@ -39,7 +39,7 @@ public class MessagePresenter extends BasePresenter<MessageConstract.IMessageVie
                         TIMTextElem textElem = (TIMTextElem) elem;
                         if(view!=null){view.receiveMessageSuccess(textElem.getText(),senter);}
                     } else if (elemType == TIMElemType.Image) {
-                        //处理图片消息
+                        if(view!=null){view.receiveMessageSuccess("[图片]",senter);}
                     }
 
                 }
