@@ -30,7 +30,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         android:requestLegacyExternalStorage="true">
-        <activity android:name=".common.NewerGuideActivity"></activity>
+        <activity android:name=".common.NewerGuideActivity"/>
         <activity android:name=".invite_newer.InviteNewerActivity" />
         <activity android:name=".mycoins.MyCoinsDetailActivity" />
         <activity android:name=".mycoins.MyCoinsActivity" />
@@ -86,7 +86,8 @@
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="behind"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" /> <!-- //微信返回结果类 -->
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- //微信返回结果类 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
